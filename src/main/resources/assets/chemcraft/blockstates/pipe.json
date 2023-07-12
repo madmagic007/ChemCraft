@@ -1,0 +1,86 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "north": "connected"
+      },
+      "apply": {
+        "model": "chemcraft:block/pipe_segment"
+      }
+    },
+    {
+      "when": {
+        "south": "connected"
+      },
+      "apply": {
+        "model": "chemcraft:block/pipe_segment",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "east": "connected"
+      },
+      "apply": {
+        "model": "chemcraft:block/pipe_segment",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "west": "connected"
+      },
+      "apply": {
+        "model": "chemcraft:block/pipe_segment",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "up": "connected"
+      },
+      "apply": {
+        "model": "chemcraft:block/pipe_segment",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "down": "connected"
+      },
+      "apply": {
+        "model": "chemcraft:block/pipe_segment",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "north": "none|disconnected",
+        "east": "none|disconnected",
+        "south": "none|disconnected",
+        "west": "none|disconnected",
+        "up": "none|disconnected",
+        "down": "none|disconnected",
+        "facing": "north|south"
+      },
+      "apply": {
+        "model": "chemcraft:block/pipe_straight"
+      }
+    },
+    {
+      "when": {
+        "north": "none|disconnected",
+        "east": "none|disconnected",
+        "south": "none|disconnected",
+        "west": "none|disconnected",
+        "up": "none|disconnected",
+        "down": "none|disconnected",
+        "facing": "east|west"
+      },
+      "apply": {
+        "model": "chemcraft:block/pipe_straight",
+        "y": 90
+      }
+    }
+  ]
+}

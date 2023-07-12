@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "chemcraft:block/centrifugal_pump"
+    },
+    "facing=east": {
+      "model": "chemcraft:block/centrifugal_pump",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "chemcraft:block/centrifugal_pump",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "chemcraft:block/centrifugal_pump",
+      "y": 270
+    }
+  }
+}
