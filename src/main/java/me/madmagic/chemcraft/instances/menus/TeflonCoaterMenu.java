@@ -31,9 +31,8 @@ public class TeflonCoaterMenu extends BaseMenu<TeflonCoaterBlockEntity> {
     }
 
     public TeflonCoaterMenu(int id, Inventory inv, BlockEntity ent, ContainerData data) {
-        super(id, CustomMenus.fluoriteCoaterMenu.get(), (TeflonCoaterBlockEntity) ent, 5);
+        super(id, CustomMenus.fluoriteCoaterMenu.get(), (TeflonCoaterBlockEntity) ent, 5, data);
 
-        this.data = data;
         checkContainerSize(inv, data.getCount());
 
         addPlayerInventory(inv);
@@ -78,7 +77,7 @@ public class TeflonCoaterMenu extends BaseMenu<TeflonCoaterBlockEntity> {
             addContainerDataVerticalWidget(62, 17, 8, 52, "Coal", "", menu.data, 3, maxItemCount, 0x111111, 0x1c1c1c);
             addContainerDataVerticalWidget(114, 17, 8, 52, "Calcium waste", "", menu.data, 4, maxBoneCount, 0xfcfbed, 0x7b7e6b);
 
-            addContainerDataVerticalWidget(160, 17, 8, 52, "Energy", "RF", menu.data, 5, menu.entity.getEnergyStorage().getMaxEnergyStored(), 0xb51500, 0x600b00);
+            addContainerDataVerticalWidget(160, 17, 8, 52, "Energy", "FE", menu.data, 5, menu.entity.getEnergyStorage().getMaxEnergyStored(), 0xb51500, 0x600b00);
         }
 
         @Override

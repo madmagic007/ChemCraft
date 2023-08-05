@@ -16,14 +16,15 @@ public abstract class BaseMenu<T extends BlockEntity> extends AbstractContainerM
     protected ContainerData data;
 
     public BaseMenu(int id, Inventory inv, MenuType menuType, FriendlyByteBuf extraData, int slotCount) {
-        this(id, menuType, (T) inv.player.level().getBlockEntity(extraData.readBlockPos()), slotCount);
+        this(id, menuType, (T) inv.player.level().getBlockEntity(extraData.readBlockPos()), slotCount, new SimpleContainerData(0));
     }
 
-    public BaseMenu(int id, MenuType menu, T ent, int slotCount) {
+    public BaseMenu(int id, MenuType menu, T ent, int slotCount, ContainerData data) {
         super(menu, id);
         entity = ent;
         level = ent.getLevel();
         this.slotCount = slotCount;
+        this.data = data;
     }
 
     private static final int HOTBAR_SLOT_COUNT = 9;

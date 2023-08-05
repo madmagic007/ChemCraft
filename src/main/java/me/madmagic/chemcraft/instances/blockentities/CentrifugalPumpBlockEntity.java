@@ -1,5 +1,6 @@
 package me.madmagic.chemcraft.instances.blockentities;
 
+import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.blocks.MotorBlock;
 import me.madmagic.chemcraft.instances.blocks.PipeBlock;
@@ -28,7 +29,8 @@ import java.util.List;
 
 public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuProvider {
 
-    public int flowRate = 100;
+    public static final int maxFlowRate = 100;
+    public int flowRate = 50;
 
     public CentrifugalPumpBlockEntity(BlockPos pos, BlockState state) {
         super(CustomBlockEntities.centrifugalPump.get(), pos, state);
@@ -36,12 +38,12 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
 
     @Override
     public void loadFromNBT(CompoundTag nbt) {
-        flowRate = nbt.getInt("pump.flowrate");
+        flowRate = nbt.getInt("chemcraft.flowrate");
     }
 
     @Override
     public void saveToNbt(CompoundTag nbt) {
-        nbt.putInt("pump.flowrate", flowRate);
+        nbt.putInt("chemcraft.flowrate", flowRate);
     }
 
     @Override
@@ -74,13 +76,25 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
         return PipelineHandler.findPipeline(pipePos, level, IPipeConnectable.PipeConnectionType.INPUT);
     }
 
-    // TODO VERY IMPORTANT, UNCOMMENT WHEN POWER IS ACTUALLY IMPLEMENTED
-    private boolean hasWorkingMotor(Direction motorDir) {
+    public boolean hasMotor() {
+        Direction motorDir = getBlockState().getValue(RotatableBlock.facing).getOpposite();
         BlockPos motorPos = getBlockPos().relative(motorDir);
-        BlockState motorState = level.getBlockState(motorPos);
+        BlockState motorSate = level.getBlockState(motorPos);
 
-        if (!ConnectionHandler.isStateOfType(motorState, MotorBlock.class)) return false;
-        return true;
+        return ConnectionHandler.isStateOfType(motorSate, MotorBlock.class);
+    }
+
+    private boolean motorWasPresent = false;
+    // TODO VERY IMPORTANT, UNCOMMENT WHEN POWER IS ACTUALLY IMPLEMENTED
+    private boolean hasWorkingMotor() {
+        boolean motorPresent = hasMotor();
+
+        if (motorPresent != motorWasPresent) {
+            ChemCraft.info("motor changed");
+            motorWasPresent = motorPresent;
+        }
+
+        return motorPresent;
 
 //        BlockEntity bEnt = level.getBlockEntity(motorPos);
 //        if (!(bEnt instanceof MotorBlockEntity motorEnt)) return false;
@@ -103,9 +117,7 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
 
     @Override
     public void tick() {
-        Direction facing = getBlockState().getValue(RotatableBlock.facing);
-
-        if (!hasWorkingMotor(facing.getOpposite())) return;
+        if (!hasWorkingMotor()) return;
 
         PipeLine originLine = getSuckPipeline();
         PipeLine destinationLine = getPressPipeline();

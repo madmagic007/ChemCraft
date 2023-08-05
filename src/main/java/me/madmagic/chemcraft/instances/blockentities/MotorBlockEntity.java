@@ -32,8 +32,8 @@ public class MotorBlockEntity extends BaseEnergyStorageBlockEntity implements Me
         return null;
     }
 
-    public boolean hasEnoughPower(int flowSetting) {
-        return flowSetting / 10 > energyStorage.getEnergyStored();
+    public boolean hasEnoughPower(int power) {
+        return power > energyStorage.getEnergyStored();
     }
 
     @Override

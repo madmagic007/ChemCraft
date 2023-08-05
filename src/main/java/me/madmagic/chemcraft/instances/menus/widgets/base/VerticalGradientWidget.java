@@ -1,17 +1,14 @@
 package me.madmagic.chemcraft.instances.menus.widgets.base;
 
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.network.chat.Component;
 
-public abstract class VerticalGradientWidget extends AbstractWidget implements ITooltipHolder {
+public abstract class VerticalGradientWidget extends BaseToolTippedWidget {
 
     private final int colorFrom, colorTo;
     protected final int max;
 
     protected VerticalGradientWidget(int x, int y, int width, int height, int max, int colorFrom, int colorTo) {
-        super(x, y, width, height, Component.literal(""));
+        super(x, y, width, height);
         this.max = max;
         this.colorFrom = prependFF(colorFrom);
         this.colorTo = prependFF(colorTo);
@@ -27,16 +24,6 @@ public abstract class VerticalGradientWidget extends AbstractWidget implements I
                 getX() + width, getY() + height,
                 colorFrom, colorTo
         );
-    }
-
-    @Override
-    public boolean iIsHovered() {
-        return isHovered();
-    }
-
-    @Override
-    protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
-        defaultButtonNarrationText(pNarrationElementOutput);
     }
 
     private static int prependFF(int value) {

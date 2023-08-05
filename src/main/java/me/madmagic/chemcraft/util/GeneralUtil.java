@@ -8,4 +8,11 @@ public class GeneralUtil {
         }
         return false;
     }
+
+    public static boolean isAny(Object toCheck, Object... possibleValues) {
+        for (Object possibleValue : possibleValues) {
+            if (toCheck.equals(possibleValue)) return true;
+        }
+        return false;
+    }
 }

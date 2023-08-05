@@ -4,6 +4,7 @@ import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.menus.widgets.ContainerDataVerticalGradientWidget;
 import me.madmagic.chemcraft.instances.menus.widgets.ToolTippedEditBox;
 import me.madmagic.chemcraft.instances.menus.widgets.ToolTippedImageButton;
+import me.madmagic.chemcraft.instances.menus.widgets.ToolTippedItem;
 import me.madmagic.chemcraft.instances.menus.widgets.base.ITooltipHolder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -14,12 +15,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
 
 public class BaseScreen<T extends AbstractContainerMenu> extends AbstractContainerScreen<T> {
 
-    protected final ResourceLocation texture;
+
+    protected static final ResourceLocation cross = defineTexture("cross");
     protected static final ResourceLocation buttonUp = defineTexture("button_up");
     protected static final ResourceLocation buttonDown = defineTexture("button_down");
+
+    protected final ResourceLocation texture;
     protected int x, y;
 
     public BaseScreen(T pMenu, Inventory pPlayerInventory, Component pTitle, ResourceLocation texture, int width, int height) {
@@ -43,7 +48,7 @@ public class BaseScreen<T extends AbstractContainerMenu> extends AbstractContain
     }
 
     protected void addImageButton(int x, int y, int width, int height, ResourceLocation texture, Button.OnPress onPress, String toolTip) {
-        addRenderableWidget(new ToolTippedImageButton(x, y, width, height, texture , onPress, toolTip));
+        addRenderableWidget(new ToolTippedImageButton(x, y, width, height, texture, onPress, toolTip));
     }
 
     protected void addContainerDataVerticalWidget(int x, int y, int width, int height, String itemName, String suffix, ContainerData data, int valuePos, int maxValue, int colorFrom, int colorTo) {
@@ -56,6 +61,11 @@ public class BaseScreen<T extends AbstractContainerMenu> extends AbstractContain
         return toolTippedEditBox;
     }
 
+    protected ToolTippedItem addItem(int x, int y, Item item, String defaultToolTip) {
+        ToolTippedItem toolTippedItem = new ToolTippedItem(x, y, item, defaultToolTip);
+        addRenderableWidget(toolTippedItem);
+        return toolTippedItem;
+    }
 
     @Override
     protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
