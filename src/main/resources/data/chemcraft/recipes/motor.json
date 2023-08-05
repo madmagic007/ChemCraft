@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "I": {
+      "item": "chemcraft:teflon_coated_iron_ingot"
+    },
+    "A": {
+      "item": "chemcraft:axle"
+    }
+  },
+  "pattern": [
+    " II",
+    "ACI",
+    " II"
+  ],
+  "result": {
+    "item": "chemcraft:motor"
+  }
+}

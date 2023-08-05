@@ -1,11 +1,11 @@
 package me.madmagic.chemcraft.instances.blocks;
 
-
-
-import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.blocks.base.RotatableBlock;
 import me.madmagic.chemcraft.instances.items.PipeWrenchItem;
-import me.madmagic.chemcraft.util.pipes.*;
+import me.madmagic.chemcraft.util.pipes.IPipeConnectable;
+import me.madmagic.chemcraft.util.pipes.PipeConnectionHandler;
+import me.madmagic.chemcraft.util.pipes.PipeShapes;
+import me.madmagic.chemcraft.util.pipes.PipeWrenchHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -25,8 +25,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import java.util.Set;
-
 public class PipeBlock extends RotatableBlock implements IPipeConnectable {
 
     public static String blockName = "pipe";
@@ -36,16 +34,17 @@ public class PipeBlock extends RotatableBlock implements IPipeConnectable {
                 BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
                         .noOcclusion()
                         .dynamicShape()
+                        .forceSolidOn()
         );
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockState state = super.getStateForPlacement(context);
+        Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
-        Level world = context.getLevel();
 
-        BlockState state = PipeConnectionHandler.checkAndUpdateConnectionState(super.getStateForPlacement(context), pos, world);
-        return state;
+        return PipeConnectionHandler.updateAllConnectionStates(state, pos, level);
     }
 
     @Override
@@ -53,11 +52,9 @@ public class PipeBlock extends RotatableBlock implements IPipeConnectable {
         super.createBlockStateDefinition(pBuilder);
         PipeConnectionHandler.connectionProperties.values().forEach(pBuilder::add);
     }
-
     @Override
-    public void updateIndirectNeighbourShapes(BlockState pState, LevelAccessor pLevel, BlockPos pPos, int pFlags, int pRecursionLeft) {
-        if (!(pLevel instanceof Level level)) return;
-        PipeConnectionHandler.updateNeighbours(pPos, level);
+    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
+        return PipeConnectionHandler.updateConnectionStateAtDir(pState, pNeighborState, pDirection);
     }
 
     @Override
@@ -67,6 +64,8 @@ public class PipeBlock extends RotatableBlock implements IPipeConnectable {
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+        if (pLevel.isClientSide) return InteractionResult.PASS;
+
         ItemStack itemInHand = pPlayer.getItemInHand(pHand);
         if (!(itemInHand.getItem() instanceof PipeWrenchItem)) return InteractionResult.FAIL;
 
@@ -79,10 +78,5 @@ public class PipeBlock extends RotatableBlock implements IPipeConnectable {
     @Override
     public PipeConnectionType connectionType(BlockState state, Direction direction) {
         return PipeConnectionType.PIPE;
-    }
-
-    @Override
-    public void onPipeConnected(BlockState ownState, BlockPos ownPos, BlockState pipeState, BlockPos pipePos, Direction pipeDir) {
-
     }
 }

@@ -1,7 +1,6 @@
 package me.madmagic.chemcraft.util.networking;
 
-import me.madmagic.chemcraft.ChemCraft;
-import me.madmagic.chemcraft.instances.blocks.entity.CentrifugalPumpBlockEntity;
+import me.madmagic.chemcraft.instances.blockentities.CentrifugalPumpBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -37,7 +36,7 @@ public class UpdateCentrifugalPumpMessage {
             BlockEntity entity = context.getSender().level().getBlockEntity(pos);
             if (!(entity instanceof CentrifugalPumpBlockEntity ent)) return;
 
-            ent.pressureSetting = value;
+            ent.flowRate = value;
             ent.setChanged();
         });
         return true;

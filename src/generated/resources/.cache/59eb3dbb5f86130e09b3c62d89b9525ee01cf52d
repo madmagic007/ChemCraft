@@ -1,0 +1,11 @@
+// 1.20.1	2023-08-05T02:54:16.3854428	Loot Tables
+f5b03fd4172ca0797272a857247a98b6e544fd47 data/chemcraft/loot_tables/blocks/centrifugal_pump.json
+2ea5a16ae89c7ea68557810b64ee0edeb3c699be data/chemcraft/loot_tables/blocks/fluorite_ore.json
+58b55f5913255020a31915bcd8bcc11761d22b69 data/chemcraft/loot_tables/blocks/glass_wool.json
+48a779456bc738c531efcaa43caac8b4aad99836 data/chemcraft/loot_tables/blocks/insulated_block.json
+20efd4c4cd1eeffcbd2d8ee7cfad08d3ea14bc95 data/chemcraft/loot_tables/blocks/motor.json
+16110f4b378177df872b6410f695667bb1a9d53f data/chemcraft/loot_tables/blocks/pipe.json
+20bf0ed8598dce9718e17cfbcf0be58d50590d3a data/chemcraft/loot_tables/blocks/tank_controller.json
+b469810f87a9b0819e0e73adec543fe3fff14777 data/chemcraft/loot_tables/blocks/teflon_coated_iron_block.json
+a687cef9f865480768b12ae9e8f6b4ebca0397f7 data/chemcraft/loot_tables/blocks/teflon_coater.json
+1ad9372d967821379ddb061d98120a2c173250b3 data/chemcraft/loot_tables/blocks/water_extractor.json

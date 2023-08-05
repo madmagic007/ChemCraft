@@ -1,0 +1,14 @@
+{
+  "values": [
+    "chemcraft:pipe",
+    "chemcraft:teflon_coater",
+    "chemcraft:centrifugal_pump",
+    "chemcraft:motor",
+    "chemcraft:water_extractor",
+    "chemcraft:tank_controller",
+    "chemcraft:insulated_block",
+    "chemcraft:fluorite_ore",
+    "chemcraft:glass_wool",
+    "chemcraft:teflon_coated_iron_block"
+  ]
+}

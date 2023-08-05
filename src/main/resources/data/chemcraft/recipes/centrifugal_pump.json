@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {
+      "item": "chemcraft:pipe"
+    },
+    "I": {
+      "item": "chemcraft:teflon_coated_iron_ingot"
+    },
+    "A": {
+      "item": "chemcraft:axle"
+    },
+    "M": {
+      "item": "chemcraft:impeller"
+    },
+    "G": {
+      "item": "chemcraft:glass_wool_sheet"
+    }
+  },
+  "pattern": [
+    "GPG",
+    "PMA",
+    "III"
+  ],
+  "result": {
+    "item": "chemcraft:centrifugal_pump"
+  }
+}

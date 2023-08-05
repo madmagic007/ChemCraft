@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "chemcraft:block/teflon_coater",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "chemcraft:block/teflon_coater",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "chemcraft:block/teflon_coater"
+    },
+    "facing=west": {
+      "model": "chemcraft:block/teflon_coater",
+      "y": 90
+    }
+  }
+}

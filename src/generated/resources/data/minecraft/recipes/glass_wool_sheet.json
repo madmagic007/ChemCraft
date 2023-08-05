@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "chemcraft:glass_wool"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "chemcraft:glass_wool_sheet"
+  }
+}

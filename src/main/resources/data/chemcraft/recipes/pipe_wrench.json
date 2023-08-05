@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "chemcraft:teflon_coated_iron_ingot"
+    }
+  },
+  "pattern": [
+    "II",
+    "II",
+    " I"
+  ],
+  "result": {
+    "item": "chemcraft:pipe_wrench"
+  }
+}

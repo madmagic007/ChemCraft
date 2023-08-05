@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "chemcraft:teflon_coated_iron_ingot"
+    },
+    "G": {
+      "item": "chemcraft:glass_wool_sheet"
+    }
+  },
+  "pattern": [
+    " G ",
+    "III",
+    " G "
+  ],
+  "result": {
+    "item": "chemcraft:pipe",
+    "count": 3
+  }
+}

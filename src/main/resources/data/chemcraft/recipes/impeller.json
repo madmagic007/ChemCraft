@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "chemcraft:teflon_coated_iron_ingot"
+    },
+    "A": {
+      "item": "chemcraft:axle"
+    }
+  },
+  "pattern": [
+    " I ",
+    "IAI",
+    " I "
+  ],
+  "result": {
+    "item": "chemcraft:impeller"
+  }
+}

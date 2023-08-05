@@ -1,7 +1,20 @@
 {
-  "item.chemcraft.pipewrench": "Pipe Wrench",
+  "item.chemcraft.pipe_wrench": "Pipe Wrench",
+  "item.chemcraft.glass_wool_sheet": "Glass Wool Sheet",
+  "item.chemcraft.fluorite_piece": "Fluorite",
+  "item.chemcraft.teflon_coated_iron_ingot": "Teflon Coated Iron Ingot",
+  "item.chemcraft.impeller": "Centrifugal Impeller",
+  "item.chemcraft.axle": "Axle",
 
   "block.chemcraft.pipe": "Pipe",
   "block.chemcraft.motor": "Motor",
-  "block.chemcraft.centrifugal_pump": "Centrifugal Pump"
+  "block.chemcraft.centrifugal_pump": "Centrifugal Pump",
+  "block.chemcraft.tank_controller": "Liquid Storage Tank Controller",
+  "block.chemcraft.insulated_block": "Insulated Block",
+  "block.chemcraft.water_extractor": "Water Extractor",
+  "block.chemcraft.glass_wool": "Glass Wool Block",
+  "block.chemcraft.teflon_coated_iron_block": "Teflon Coated Iron Block",
+  "block.chemcraft.teflon_coater": "Teflon Coater",
+
+  "block.chemcraft.fluorite_ore": "Fluorite Ore"
 }

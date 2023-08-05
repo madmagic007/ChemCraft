@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "G": {
+      "item": "chemcraft:glass_wool_sheet"
+    },
+    "B": {
+      "item": "chemcraft:teflon_coated_iron_block"
+    }
+  },
+  "pattern": [
+    " G ",
+    "GBG",
+    " G "
+  ],
+  "result": {
+    "item": "chemcraft:insulated_block",
+    "count": 4
+  }
+}

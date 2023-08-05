@@ -64,7 +64,7 @@
         "facing": "north|south"
       },
       "apply": {
-        "model": "chemcraft:block/pipe_straight"
+        "model": "chemcraft:block/pipe"
       }
     },
     {
@@ -78,7 +78,7 @@
         "facing": "east|west"
       },
       "apply": {
-        "model": "chemcraft:block/pipe_straight",
+        "model": "chemcraft:block/pipe",
         "y": 90
       }
     }

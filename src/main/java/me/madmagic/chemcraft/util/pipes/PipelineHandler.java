@@ -1,44 +1,59 @@
 package me.madmagic.chemcraft.util.pipes;
 
+import me.madmagic.chemcraft.util.fluids.IFluidContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class PipelineHandler {
 
-    public static Set<BlockPos> getPipesWithDevices(BlockPos pipePos, Level world) {
-        Set<BlockPos> possibleEndings = new HashSet<>();
+    public static PipeLine findPipeline(BlockPos origin, Level level, IPipeConnectable.PipeConnectionType connectionType) {
+        PipeLine pipeline = new PipeLine();
+        Set<BlockPos> pipes = new HashSet<>();
+        pipes.add(origin);
 
-        List<BlockPos> connectedPipes = PipeConnectionHandler.getAllConnectedPipes(pipePos, world);
-        connectedPipes.forEach(pos -> {
-            BlockState stateOfPos = world.getBlockState(pos);
-            if (PipeConnectionHandler.isConnectedToDevice(pos, world, stateOfPos))
-                possibleEndings.add(pos);
-        });
+        Queue<BlockPos> queue = new LinkedList<>();
+        queue.add(origin);
 
-        return possibleEndings;
-    }
+        while (!queue.isEmpty()) {
+            BlockPos currentPos = queue.poll();
+            BlockState currentState = level.getBlockState(currentPos);
 
-    public static Set<BlockPos> getDestinationsIfCanFlow(Set<BlockPos> deviceConnections, Level world) {
-        boolean hasInput = false;
-
-        Set<BlockPos> destinations = new HashSet<>();
-
-        for (BlockPos pos : deviceConnections) {
+            // Check all 6 directions around the current position
             for (Direction direction : Direction.values()) {
-                switch (PipeConnectionHandler.getConnectionType(pos, world, direction)) {
-                    case INPUT -> hasInput = true;
-                    case OUTPUT -> destinations.add(pos.relative(direction));
+                BlockPos neighbor = currentPos.relative(direction);
+
+                if (!PipeConnectionHandler.isDirConnected(currentState, direction) ||
+                        !PipeConnectionHandler.isPipeAt(currentPos, level, direction) ||
+                        pipes.contains(neighbor)) continue;
+
+                queue.add(neighbor);
+                pipes.add(neighbor);
+            }
+        }
+
+        for (BlockPos pos : pipes) {
+            for (Direction dir : Direction.values()) {
+                BlockPos neighborPos = pos.relative(dir);
+
+                if (isDesiredPos(pos, level, dir, connectionType)) {
+                    BlockEntity ent = level.getBlockEntity(neighborPos);
+
+                    if (ent instanceof IFluidContainer container) {
+                        pipeline.addSet(new PipeConnectionSet(pos, neighborPos, dir, container, level));
+                    }
                 }
             }
         }
 
-        if (hasInput && !destinations.isEmpty()) return destinations;
-        return null;
+        return pipeline;
+    }
+
+    private static boolean isDesiredPos(BlockPos pos, Level level, Direction dir, IPipeConnectable.PipeConnectionType connectionType) {
+        return PipeConnectionHandler.getConnectionTypeAtDir(pos, dir, level).equals(connectionType);
     }
 }

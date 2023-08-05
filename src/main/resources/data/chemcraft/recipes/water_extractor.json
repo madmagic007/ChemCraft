@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {
+      "item": "chemcraft:pipe"
+    },
+    "I": {
+      "item": "chemcraft:teflon_coated_iron_ingot"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "pattern": [
+    " P ",
+    "IBI",
+    "III"
+  ],
+  "result": {
+    "item": "chemcraft:water_extractor"
+  }
+}

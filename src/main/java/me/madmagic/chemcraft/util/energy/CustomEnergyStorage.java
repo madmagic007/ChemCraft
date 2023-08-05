@@ -30,5 +30,10 @@ public abstract class CustomEnergyStorage extends EnergyStorage {
         this.energy = energy;
     }
 
+    @Override
+    public int getEnergyStored() {
+        return super.getEnergyStored();
+    }
+
     public abstract void energyChanged(int energy);
 }

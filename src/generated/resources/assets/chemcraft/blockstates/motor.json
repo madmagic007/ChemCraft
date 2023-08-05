@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "chemcraft:block/motor",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "chemcraft:block/motor",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "chemcraft:block/motor"
+    },
+    "facing=west": {
+      "model": "chemcraft:block/motor",
+      "y": 90
+    }
+  }
+}

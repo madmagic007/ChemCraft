@@ -49,7 +49,7 @@ public class PipeShapes {
         List<Direction> connectedDirections = new ArrayList<>();
 
         for (Direction direction : Direction.values()) {
-            if (PipeConnectionHandler.isConnectedTo(state, direction)) connectedDirections.add(direction);
+            if (PipeConnectionHandler.isDirConnected(state, direction)) connectedDirections.add(direction);
         }
 
         if (connectedDirections.isEmpty()) {

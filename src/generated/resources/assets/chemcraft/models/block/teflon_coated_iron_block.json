@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "chemcraft:block/teflon_coated_iron_block"
+  }
+}

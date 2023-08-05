@@ -1,8 +1,8 @@
 package me.madmagic.chemcraft.instances.blocks;
 
-import me.madmagic.chemcraft.instances.blocks.base.RotatableEntityBlock;
-import me.madmagic.chemcraft.instances.blocks.entity.MotorBlockEntity;
-import me.madmagic.chemcraft.instances.blocks.entity.base.BlockEntityHandler;
+import me.madmagic.chemcraft.instances.blocks.base.AutoEntityTickerBlock;
+import me.madmagic.chemcraft.instances.blocks.base.RotatableBlock;
+import me.madmagic.chemcraft.instances.blockentities.MotorBlockEntity;
 import me.madmagic.chemcraft.util.ConnectionHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -10,10 +10,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -23,9 +20,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
 
-public class MotorBlock extends RotatableEntityBlock {
+public class MotorBlock extends RotatableBlock implements AutoEntityTickerBlock {
 
-    public static String blockName = "motor";
     private static final VoxelShape shapeNorth = Stream.of(
             Block.box(7, 7, 0, 9, 9, 3),
             Block.box(2, 0, 3, 14, 4, 13),
@@ -36,6 +32,7 @@ public class MotorBlock extends RotatableEntityBlock {
         super(
                 BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
                         .noOcclusion()
+                        .forceSolidOn()
                         .dynamicShape(),
                 shapeNorth
         );
@@ -61,40 +58,9 @@ public class MotorBlock extends RotatableEntityBlock {
         return state;
     }
 
-//    @Override
-//    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-//        if (!pLevel.isClientSide) {
-//            BlockEntity ent = pLevel.getBlockEntity(pPos);
-//            if (ent instanceof MotorBlockEntity motorBlockEntity)
-//                NetworkHooks.openScreen((ServerPlayer) pPlayer, motorBlockEntity, pPos);
-//        }
-//
-//        return InteractionResult.sidedSuccess(pLevel.isClientSide);
-//    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
-    }
-
-//    @Override
-//    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-//        if (pState.getBlock() != pNewState.getBlock()) {
-//            BlockEntity entity = pLevel.getBlockEntity(pPos);
-//            if (entity instanceof MotorBlockEntity motorBlockEntity)
-//        }
-//        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
-//    }
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new MotorBlockEntity(pPos, pState);
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityHandler.motorBlockEntity.get(), MotorBlockEntity::tick);
     }
 }

@@ -1,5 +1,6 @@
 package me.madmagic.chemcraft.util.pipes;
 
+import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.blocks.PipeBlock;
 import me.madmagic.chemcraft.util.ConnectionHandler;
 import net.minecraft.core.BlockPos;
@@ -9,6 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
+import javax.swing.*;
 import java.util.*;
 
 public class PipeConnectionHandler {
@@ -21,116 +23,86 @@ public class PipeConnectionHandler {
         }
     }
 
-    public static BlockState checkAndUpdateConnectionState(BlockState state, BlockPos pos, Level level) {
+    public static BlockState updateAllConnectionStates(BlockState state, BlockPos pos, Level level) {
         for (Direction direction : Direction.values()) {
-            EnumProperty<PipeConnection> property = connectionProperties.get(direction);
-
-            //todo add check if same fluid?
-            boolean canConnect = canConnectTo(pos, level, direction);
-            boolean recipientNotDisconnected = !isDisconnectedTo(level.getBlockState(pos.relative(direction)), direction.getOpposite());
-            boolean curSideIsDisconnected = state.getValue(property).isDisconnected();
-
-            if (canConnect && recipientNotDisconnected)
-                state = state.setValue(property, PipeConnection.CONNECTED);
-            else if (canConnect)
-                state = state.setValue(property, PipeConnection.DISCONNECTED);
-            else if (!curSideIsDisconnected)
-                state = state.setValue(property, PipeConnection.NONE);
+            BlockState thatState = level.getBlockState(pos.relative(direction));
+            state = updateConnectionStateAtDir(state, thatState, direction);
         }
         return state;
     }
 
-    public static boolean isConnectedTo(BlockState state, Direction direction) {
-        EnumProperty<PipeConnection> property = connectionProperties.get(direction);
-        PipeConnection connection = state.getValue(property);
-        return connection.isConnected();
+    public static BlockState updateConnectionStateAtDir(BlockState state, BlockState neighborState, Direction direction) {
+        boolean canConnectToDir = canDirConnect(neighborState, direction);
+        boolean otherIsDisconnected = isDirDisconnected(neighborState, direction.getOpposite());
+        boolean selfDisconnected = isDirDisconnected(state, direction);
+        boolean isPipe = ConnectionHandler.isStateOfType(neighborState, PipeBlock.class);
+
+        if (canConnectToDir && otherIsDisconnected || (!isPipe && selfDisconnected)) state = setDisConnected(state, direction);
+        else if (canConnectToDir) state = setConnected(state, direction);
+        else if (!selfDisconnected) state = setNone(state, direction);
+
+        return state;
     }
 
-    private static boolean isDisconnectedTo(BlockState state, Direction direction) {
+    public static boolean isDirConnected(BlockState state, Direction direction) {
+        EnumProperty<PipeConnection> property = connectionProperties.get(direction);
+        if (!state.hasProperty(property)) return false;
+        return state.getValue(property).isConnected();
+    }
+
+    public static boolean isDirDisconnected(BlockState state, Direction direction) {
         EnumProperty<PipeConnection> property = connectionProperties.get(direction);
         if (!state.hasProperty(property)) return false;
         return state.getValue(property).isDisconnected();
     }
 
-    private static boolean canConnectTo(BlockPos ownPos, Level level, Direction connectTo) {
-        BlockState state = level.getBlockState(ownPos.relative(connectTo));
-        Block block = state.getBlock();
-        return block instanceof IPipeConnectable && ((IPipeConnectable) block).connectionType(state, connectTo.getOpposite()).canConnect;
+    public static boolean canDirConnect(BlockState state, Direction dir) {
+        return getConnectionTypeOfBlock(state, dir).canConnect;
     }
 
-    private static boolean isPipeAt(BlockPos ownPos, Level level, Direction connectTo) {
+    public static boolean isPipeAt(BlockPos ownPos, Level level, Direction connectTo) {
         BlockState state = level.getBlockState(ownPos.relative(connectTo));
         return ConnectionHandler.isStateOfType(state, PipeBlock.class);
     }
 
-    public static boolean isConnectedToDevice(BlockPos pos, Level level, BlockState ownState) {
-        for (Direction direction : Direction.values()) {
-            if (isConnectedTo(ownState, direction) && !isPipeAt(pos, level, direction)) return true;
-        }
-        return false;
+    public static IPipeConnectable.PipeConnectionType getConnectionTypeAtDir(BlockPos ownPos, Direction dir, Level level) {
+        BlockState thatState = level.getBlockState(ownPos.relative(dir));
+        return getConnectionTypeOfBlock(thatState, dir);
     }
 
-    public static IPipeConnectable.PipeConnectionType getConnectionType(BlockPos ownPos, Level level, Direction connectionDir) {
-        BlockPos thatPos = ownPos.relative(connectionDir);
-        BlockState thatState = level.getBlockState(thatPos);
+    public static IPipeConnectable.PipeConnectionType getConnectionTypeOfBlock(BlockState thatState, Direction dirToThat) {
         Block thatBlock = thatState.getBlock();
-        Direction relativeDir = connectionDir.getOpposite();
+        Direction fromThat = dirToThat.getOpposite();
 
-        if (!(thatBlock instanceof IPipeConnectable)) return IPipeConnectable.PipeConnectionType.NONE;
-        return ((IPipeConnectable) thatBlock).connectionType(thatState, relativeDir);
+        if (!(thatBlock instanceof IPipeConnectable connectable)) return IPipeConnectable.PipeConnectionType.NONE;
+        return connectable.connectionType(thatState, fromThat);
     }
 
-    public static void updateNeighbours(BlockPos ownPos, Level level) {
-        for (Direction direction : Direction.values()) {
-            BlockPos neighborPos = ownPos.relative(direction);
-            BlockState neighborState = level.getBlockState(neighborPos);
-
-            if (!(neighborState.getBlock() instanceof PipeBlock)) continue;
-
-            neighborState = checkAndUpdateConnectionState(neighborState, neighborPos, level);
-            level.setBlockAndUpdate(neighborPos, neighborState);
-        }
-    }
 
     public static void updateConnection(BlockState state, BlockPos pos, Direction clickedDir, Level level) {
-        EnumProperty<PipeConnection> clickedDirProperty = connectionProperties.get(clickedDir);
-        boolean disconnectOther = false;
-        BlockPos affectedBlockPos = pos.relative(clickedDir);
-        BlockState affectedBlockState = level.getBlockState(affectedBlockPos);
+        BlockState neighborState = level.getBlockState(pos.relative(clickedDir));
 
-        if (isConnectedTo(state, clickedDir)) {
-            state = state.setValue(clickedDirProperty, PipeConnection.DISCONNECTED);
-            disconnectOther = true;
-        } else if (state.getValue(clickedDirProperty).isDisconnected())
-            state = state.setValue(clickedDirProperty, PipeConnection.CONNECTED);
+        boolean canConnectToDir = canDirConnect(neighborState, clickedDir);
+        boolean otherIsDisconnected = isDirDisconnected(neighborState, clickedDir.getOpposite());
 
-        if (isPipeAt(pos, level, clickedDir))
-            level.setBlockAndUpdate(pos, state);
+        if (otherIsDisconnected) state = setConnected(state, clickedDir);
+        if (!otherIsDisconnected && canConnectToDir) state = setDisConnected(state, clickedDir);
 
-        if (affectedBlockState.getBlock() instanceof PipeBlock) {
-            Direction opposite = clickedDir.getOpposite();
-            EnumProperty<PipeConnection> affectedProperty = connectionProperties.get(opposite);
-
-            affectedBlockState = affectedBlockState.setValue(affectedProperty, disconnectOther ? PipeConnection.DISCONNECTED : PipeConnection.CONNECTED);
-            level.setBlockAndUpdate(affectedBlockPos, affectedBlockState);
-        }
+        level.setBlockAndUpdate(pos, state);
     }
 
-    public static List<BlockPos> getAllConnectedPipes(BlockPos selfPos, Level level) {
-        Set<BlockPos> connected = new HashSet<>();
-        getConnectedPipesRecursive(selfPos, level, connected);
-        return new ArrayList<>(connected);
+    public static BlockState setConnected(BlockState state, Direction direction) {
+        EnumProperty<PipeConnection> property = connectionProperties.get(direction);
+        return state.setValue(property, PipeConnection.CONNECTED);
     }
 
-    private static void getConnectedPipesRecursive(BlockPos pos, Level level, Set<BlockPos> connectedPositions) {
-        connectedPositions.add(pos);
-        BlockState state = level.getBlockState(pos);
+    public static BlockState setDisConnected(BlockState state, Direction direction) {
+        EnumProperty<PipeConnection> property = connectionProperties.get(direction);
+        return state.setValue(property, PipeConnection.DISCONNECTED);
+    }
 
-        List<Direction> touchingPipes = ConnectionHandler.getTouchingDirectionsWhereType(pos, level, PipeBlock.class);
-        for (Direction touchingPipeDir : touchingPipes) {
-            BlockPos relativePos = pos.relative(touchingPipeDir);
-            if (!isConnectedTo(state, touchingPipeDir) || connectedPositions.contains(relativePos)) continue;
-            getConnectedPipesRecursive(relativePos, level, connectedPositions);
-        }
+    public static BlockState setNone(BlockState state, Direction direction) {
+        EnumProperty<PipeConnection> property = connectionProperties.get(direction);
+        return state.setValue(property, PipeConnection.NONE);
     }
 }

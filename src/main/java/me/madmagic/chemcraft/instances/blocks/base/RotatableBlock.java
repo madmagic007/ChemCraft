@@ -15,12 +15,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class RotatableBlock extends Block {
+public class RotatableBlock extends BaseBlock {
 
     public static final DirectionProperty facing = BlockStateProperties.HORIZONTAL_FACING;
     protected Map<Direction, VoxelShape> shapes = new HashMap<>();

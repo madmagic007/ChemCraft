@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "chemcraft:teflon_coated_iron_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "chemcraft:teflon_coated_iron_ingot"
+  }
+}
