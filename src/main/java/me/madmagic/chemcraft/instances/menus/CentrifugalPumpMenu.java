@@ -16,16 +16,16 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class CentrifugalPumpMenu extends BaseMenu<CentrifugalPumpBlockEntity> {
 
     public CentrifugalPumpMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        super(id, inv, CustomMenus.centrifugalPumpMenu.get(), extraData, 0);
+        this(id, getEnt(inv, extraData));
     }
 
-    public CentrifugalPumpMenu(int id, CentrifugalPumpBlockEntity ent) {
-        super(id, CustomMenus.centrifugalPumpMenu.get(), ent, 0, new SimpleContainerData(0));
+    public CentrifugalPumpMenu(int id, BlockEntity ent) {
+        super(id, CustomMenus.centrifugalPumpMenu.get(), ent);
     }
 
     public static class Screen extends BaseScreen<CentrifugalPumpMenu> {
@@ -63,7 +63,7 @@ public class CentrifugalPumpMenu extends BaseMenu<CentrifugalPumpBlockEntity> {
 
             flowBox = addEditorBox(flowBoxX, flowBoxY, flowBoxWidth, flowBoxHeight, "Flowrate (mb/tick)");
             flowBox.setValue(String.valueOf(menu.entity.flowRate));
-            flowBox.setMaxLength(4);
+            flowBox.setMaxLength(3);
 
             boolean motorDetected = menu.entity.hasMotor();
             motorDisplay = addItem(x + imageWidth - 20, y + titleLabelY - 2, CustomItems.blockItems.get("motor").get(), motorDetected ? "Motor Detected" : "Motor Not Detected");

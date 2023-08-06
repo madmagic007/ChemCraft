@@ -1,64 +1,30 @@
 package me.madmagic.chemcraft.instances.menus;
 
-import me.madmagic.chemcraft.instances.CustomBlocks;
-import me.madmagic.chemcraft.instances.CustomItems;
 import me.madmagic.chemcraft.instances.CustomMenus;
 import me.madmagic.chemcraft.instances.blockentities.TeflonCoaterBlockEntity;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenu;
 import me.madmagic.chemcraft.instances.menus.base.BaseScreen;
-import me.madmagic.chemcraft.instances.menus.base.CustomItemSlot;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.SimpleContainerData;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 
 public class TeflonCoaterMenu extends BaseMenu<TeflonCoaterBlockEntity> {
 
-    public static final int maxItemCount = 500;
+    public static final int maxItemCount = 640;
     public static final int countPerItem = 10;
     public static final int maxBoneCount = 16;
 
     public TeflonCoaterMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(6));
+        this(id, inv, getEnt(inv, extraData), new SimpleContainerData(6));
     }
 
     public TeflonCoaterMenu(int id, Inventory inv, BlockEntity ent, ContainerData data) {
-        super(id, CustomMenus.fluoriteCoaterMenu.get(), (TeflonCoaterBlockEntity) ent, 5, data);
-
-        checkContainerSize(inv, data.getCount());
-
-        addPlayerInventory(inv);
-
-        entity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            CustomItemSlot fluoriteSlot = new CustomItemSlot(handler, 0, 8, 17, CustomItems.fluorite.get());
-            CustomItemSlot coalSlot = new CustomItemSlot(handler, 1, 42, 17, Items.COAL, Items.COAL_BLOCK);
-            CustomItemSlot inputSlot = new CustomItemSlot(handler, 2, 80, 17, Items.IRON_INGOT, Items.IRON_BLOCK);
-            CustomItemSlot outputSlot = new CustomItemSlot(handler, 3, 80, 53, true);
-            CustomItemSlot boneSlot = new CustomItemSlot(handler, 4, 126, 53, true);
-
-            addSlot(fluoriteSlot);
-            addSlot(coalSlot);
-            addSlot(inputSlot);
-            addSlot(outputSlot);
-            addSlot(boneSlot);
-
-        });
-
-        addDataSlots(data);
-    }
-
-    @Override
-    public boolean stillValid(Player pPlayer) {
-        return stillValid(ContainerLevelAccess.create(entity.getLevel(), entity.getBlockPos()),
-                pPlayer, CustomBlocks.fluoriteCoater.get());
+        super(id, inv, CustomMenus.teflonCoaterMenu.get(), ent, 5, data);
     }
 
     public static class Screen extends BaseScreen<TeflonCoaterMenu> {

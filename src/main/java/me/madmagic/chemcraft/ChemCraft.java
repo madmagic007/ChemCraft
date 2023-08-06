@@ -23,7 +23,7 @@ public class ChemCraft {
 
     public static void info(Object info) {
         if (info == null) return;
-        logger.info("MadCraft: " + info);
+        logger.info("ChemCraft: " + info);
     }
 
     public static void info(Object... info) {

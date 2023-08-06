@@ -1,11 +1,10 @@
 package me.madmagic.chemcraft.instances.blockentities;
 
-import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
+import me.madmagic.chemcraft.instances.blockentities.base.BaseBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.MotorBlock;
 import me.madmagic.chemcraft.instances.blocks.PipeBlock;
 import me.madmagic.chemcraft.instances.blocks.base.RotatableBlock;
-import me.madmagic.chemcraft.instances.blockentities.base.BaseBlockEntity;
 import me.madmagic.chemcraft.instances.menus.CentrifugalPumpMenu;
 import me.madmagic.chemcraft.util.ConnectionHandler;
 import me.madmagic.chemcraft.util.GeneralUtil;
@@ -76,29 +75,22 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
         return PipelineHandler.findPipeline(pipePos, level, IPipeConnectable.PipeConnectionType.INPUT);
     }
 
-    public boolean hasMotor() {
+    private BlockPos motorPos() {
         Direction motorDir = getBlockState().getValue(RotatableBlock.facing).getOpposite();
-        BlockPos motorPos = getBlockPos().relative(motorDir);
-        BlockState motorSate = level.getBlockState(motorPos);
+        return worldPosition.relative(motorDir);
+    }
 
+    private MotorBlockEntity getMotorEnt() {
+        return (MotorBlockEntity) level.getBlockEntity(motorPos());
+    }
+
+    public boolean hasMotor() {
+        BlockState motorSate = level.getBlockState(motorPos());
         return ConnectionHandler.isStateOfType(motorSate, MotorBlock.class);
     }
 
-    private boolean motorWasPresent = false;
-    // TODO VERY IMPORTANT, UNCOMMENT WHEN POWER IS ACTUALLY IMPLEMENTED
     private boolean hasWorkingMotor() {
-        boolean motorPresent = hasMotor();
-
-        if (motorPresent != motorWasPresent) {
-            ChemCraft.info("motor changed");
-            motorWasPresent = motorPresent;
-        }
-
-        return motorPresent;
-
-//        BlockEntity bEnt = level.getBlockEntity(motorPos);
-//        if (!(bEnt instanceof MotorBlockEntity motorEnt)) return false;
-//        return (motorEnt.hasEnoughPower(pressureSetting));
+        return (hasMotor() && getMotorEnt().hasEnoughEnergy(flowRate));
     }
 
     private void performPump(PipeLine origin, PipeLine destination) {
@@ -113,6 +105,7 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
         List<Fluid> extracted = DisplacementHandler.extract(availableOrigin, toExtract);
 
         DisplacementHandler.feed(availableDestination, extracted);
+        getMotorEnt().useEnergy(flowRate);
     }
 
     @Override

@@ -4,6 +4,7 @@ import me.madmagic.chemcraft.util.energy.CustomEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -16,6 +17,7 @@ public abstract class BaseEnergyStorageBlockEntity extends BaseBlockEntity {
 
     protected LazyOptional<IEnergyStorage> lazyEnergyHandler;
     protected final CustomEnergyStorage energyStorage;
+    protected ContainerData containerData;
 
     public BaseEnergyStorageBlockEntity(BlockEntityType<?> pType, BlockPos pos, BlockState state, int energyCapacity) {
         this(pType, pos, state, energyCapacity, 100);

@@ -9,13 +9,13 @@ import java.util.List;
 
 public class ContainerDataVerticalGradientWidget extends VerticalGradientWidget {
 
-    private final ContainerData itemStorage;
+    private final ContainerData data;
     private final int valuePos;
     private final String itemName, suffix;
 
-    public ContainerDataVerticalGradientWidget(int x, int y, int width, int height, String itemName, String suffix, ContainerData itemStorage, int valueIndex, int maxValue, int colorFrom, int colorTo) {
+    public ContainerDataVerticalGradientWidget(int x, int y, int width, int height, String itemName, String suffix, ContainerData data, int valueIndex, int maxValue, int colorFrom, int colorTo) {
         super(x, y, width, height, maxValue, colorFrom, colorTo);
-        this.itemStorage = itemStorage;
+        this.data = data;
         this.valuePos = valueIndex;
         this.itemName = itemName;
         this.suffix = suffix;
@@ -23,7 +23,7 @@ public class ContainerDataVerticalGradientWidget extends VerticalGradientWidget 
 
     @Override
     protected int getValue() {
-        return itemStorage.get(valuePos);
+        return data.get(valuePos);
     }
 
     @Override

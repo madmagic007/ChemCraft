@@ -1,5 +1,7 @@
 package me.madmagic.chemcraft.instances.menus.base;
 
+import me.madmagic.chemcraft.instances.blockentities.base.BaseEnergyItemStorageBlockEntity;
+import me.madmagic.chemcraft.util.GeneralUtil;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -7,24 +9,34 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 
 public abstract class BaseMenu<T extends BlockEntity> extends AbstractContainerMenu {
 
-    public final T entity;
+    protected final T entity;
     private final Level level;
-    private final int slotCount;
+    private int slotCount;
     protected ContainerData data;
 
-    public BaseMenu(int id, Inventory inv, MenuType menuType, FriendlyByteBuf extraData, int slotCount) {
-        this(id, menuType, (T) inv.player.level().getBlockEntity(extraData.readBlockPos()), slotCount, new SimpleContainerData(0));
-    }
-
-    public BaseMenu(int id, MenuType menu, T ent, int slotCount, ContainerData data) {
-        super(menu, id);
-        entity = ent;
-        level = ent.getLevel();
+    public BaseMenu(int id, Inventory inventory, MenuType menu, BlockEntity ent, int slotCount, ContainerData data) {
+        this(id, menu, ent);
         this.slotCount = slotCount;
         this.data = data;
+
+        addPlayerInventory(inventory);
+        addDataSlots(data);
+
+        entity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
+            GeneralUtil.forEachIndexed(((BaseEnergyItemStorageBlockEntity) entity).slotTemplates, (template, index) ->
+                    addSlot(new CustomItemSlot(handler, template, index))
+            );
+        });
+    }
+
+    public BaseMenu(int id, MenuType menu, BlockEntity ent) {
+        super(menu, id);
+        entity = (T) ent;
+        level = ent.getLevel();
     }
 
     private static final int HOTBAR_SLOT_COUNT = 9;
@@ -69,7 +81,7 @@ public abstract class BaseMenu<T extends BlockEntity> extends AbstractContainerM
     }
 
     protected boolean isCrafting() {
-        return data != null && data.get(0) > 0;
+        return data != null && data.getCount() > 0 && data.get(0) > 0;
     }
 
     protected int getScaledProgress(int maxScale) {
@@ -86,7 +98,7 @@ public abstract class BaseMenu<T extends BlockEntity> extends AbstractContainerM
         return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), pPlayer, entity.getBlockState().getBlock());
     }
 
-    protected void addPlayerInventory(Inventory playerInv) {
+    private void addPlayerInventory(Inventory playerInv) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
                 addSlot(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
@@ -96,9 +108,13 @@ public abstract class BaseMenu<T extends BlockEntity> extends AbstractContainerM
         addPlayerHotBar(playerInv);
     }
 
-    protected void addPlayerHotBar(Inventory playerInv) {
+    private void addPlayerHotBar(Inventory playerInv) {
         for (int i = 0; i < 9; i++) {
             addSlot(new Slot(playerInv, i, 8 + i * 18, 142));
         }
+    }
+
+    protected static BlockEntity getEnt(Inventory inv, FriendlyByteBuf extraData) {
+        return inv.player.level().getBlockEntity(extraData.readBlockPos());
     }
 }

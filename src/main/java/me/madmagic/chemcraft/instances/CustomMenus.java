@@ -19,7 +19,7 @@ public class CustomMenus {
     private static final DeferredRegister<MenuType<?>> menus = DeferredRegister.create(ForgeRegistries.MENU_TYPES, ChemCraft.modId);
 
     public static final RegistryObject<MenuType<CentrifugalPumpMenu>> centrifugalPumpMenu = register("centrifugal_pump", CentrifugalPumpMenu::new);
-    public static final RegistryObject<MenuType<TeflonCoaterMenu>> fluoriteCoaterMenu = register("teflon_coater", TeflonCoaterMenu::new);
+    public static final RegistryObject<MenuType<TeflonCoaterMenu>> teflonCoaterMenu = register("teflon_coater", TeflonCoaterMenu::new);
     public static final RegistryObject<MenuType<MotorMenu>> motorMenu = register("motor", MotorMenu::new);
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> register(String name, IContainerFactory<T> factory) {
@@ -31,7 +31,7 @@ public class CustomMenus {
     }
 
     public static void setupScreens() {
-        MenuScreens.register(fluoriteCoaterMenu.get(), TeflonCoaterMenu.Screen::new);
+        MenuScreens.register(teflonCoaterMenu.get(), TeflonCoaterMenu.Screen::new);
         MenuScreens.register(centrifugalPumpMenu.get(), CentrifugalPumpMenu.Screen::new);
         MenuScreens.register(motorMenu.get(), MotorMenu.Screen::new);
     }

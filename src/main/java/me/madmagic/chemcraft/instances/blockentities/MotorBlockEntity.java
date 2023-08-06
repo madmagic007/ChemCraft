@@ -2,6 +2,7 @@ package me.madmagic.chemcraft.instances.blockentities;
 
 import me.madmagic.chemcraft.instances.blockentities.base.BaseEnergyStorageBlockEntity;
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
+import me.madmagic.chemcraft.instances.menus.MotorMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -9,6 +10,7 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -19,6 +21,28 @@ public class MotorBlockEntity extends BaseEnergyStorageBlockEntity implements Me
 
     public MotorBlockEntity(BlockPos pos, BlockState state) {
         super(CustomBlockEntities.motor.get(), pos, state, 10000, 1000);
+
+        containerData = new ContainerData() {
+            @Override
+            public int get(int pIndex) {
+                return switch (pIndex) {
+                    case 0 -> energyStorage.getEnergyStored();
+                    default -> 0;
+                };
+            }
+
+            @Override
+            public void set(int pIndex, int pValue) {
+                if (pIndex == 0) {
+                    energyStorage.setEnergyStored(pValue);
+                }
+            }
+
+            @Override
+            public int getCount() {
+                return 1;
+            }
+        };
     }
 
     @Override
@@ -29,11 +53,7 @@ public class MotorBlockEntity extends BaseEnergyStorageBlockEntity implements Me
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-        return null;
-    }
-
-    public boolean hasEnoughPower(int power) {
-        return power > energyStorage.getEnergyStored();
+        return new MotorMenu(pContainerId, this, containerData);
     }
 
     @Override

@@ -69,6 +69,7 @@ dependencies {
     implementation fg.deobf("jei:jei:1")
     implementation fg.deobf("titanium:titanium:1")
     implementation fg.deobf("if:if:1")
+    implementation fg.deobf("nec:nec:1")
 }
 
 tasks.named('processResources', ProcessResources).configure {

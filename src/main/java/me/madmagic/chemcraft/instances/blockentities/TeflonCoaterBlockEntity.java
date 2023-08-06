@@ -4,6 +4,7 @@ import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.CustomItems;
 import me.madmagic.chemcraft.instances.blockentities.base.BaseEnergyItemStorageBlockEntity;
 import me.madmagic.chemcraft.instances.menus.TeflonCoaterMenu;
+import me.madmagic.chemcraft.instances.menus.base.CustomItemSlotTemplate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -18,19 +19,28 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public class TeflonCoaterBlockEntity extends BaseEnergyItemStorageBlockEntity implements MenuProvider {
 
-    private final ContainerData containerData;
+    private static final List<CustomItemSlotTemplate> slotTemplates = List.of(
+            new CustomItemSlotTemplate(8, 17, CustomItems.fluorite.get()),
+            new CustomItemSlotTemplate(42, 17, Items.COAL, Items.COAL_BLOCK),
+            new CustomItemSlotTemplate(80, 17, Items.IRON_INGOT, Items.IRON_BLOCK),
+            new CustomItemSlotTemplate(80, 53, true),
+            new CustomItemSlotTemplate(126, 53, true)
+    );
 
     private int progress = 0;
-    private final int defaultMaxProgress = 56;
+    private final int defaultMaxProgress = 150;
     private int maxProgress = defaultMaxProgress;
+    private final int powerConsumptionPerTick = 15;
     private int fluoriteCount = 0;
     private int coalCount = 0;
     private int boneCount = 0;
 
     public TeflonCoaterBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(CustomBlockEntities.fluoriteCoater.get(), pPos, pBlockState, 10000, 5);
+        super(CustomBlockEntities.fluoriteCoater.get(), pPos, pBlockState, 10000, slotTemplates);
 
         containerData = new ContainerData() {
             @Override
@@ -99,11 +109,10 @@ public class TeflonCoaterBlockEntity extends BaseEnergyItemStorageBlockEntity im
         if (stateValid()) {
             lastWasValid = true;
             progress ++;
+            useEnergy(powerConsumptionPerTick);
             setChanged();
 
-            if (progress >= maxProgress) {
-                coat();
-            }
+            if (progress >= maxProgress) coat();
         } else if (lastWasValid) {
             lastWasValid = false;
             progress = 0;
@@ -132,7 +141,7 @@ public class TeflonCoaterBlockEntity extends BaseEnergyItemStorageBlockEntity im
         boolean canProcessBlock = inputIsBlock && (outputIsBlock || outputEmpty);
 
         boolean outputSpaceLeft = hasSpaceInSlot(3);
-        boolean hasEnergy = hasEnoughEnergy(inputIsIngot ? 10 : 90);
+        boolean hasEnergy = hasEnoughEnergy(powerConsumptionPerTick);
 
         boolean boneSpaceLeft = hasBoneProductSpaceLeft(inputIsIngot);
 
@@ -143,8 +152,7 @@ public class TeflonCoaterBlockEntity extends BaseEnergyItemStorageBlockEntity im
     }
 
     private void coat() {
-        boolean isIngot = itemHandler.extractItem(2, 1, false)
-                        .getItem().equals(Items.IRON_INGOT);
+        boolean isIngot = itemHandler.extractItem(2, 1, false).getItem().equals(Items.IRON_INGOT);
 
         Item toSet = isIngot ? CustomItems.teflonCoatedIronIngot.get() : coatedBlockItem;
         itemHandler.insertItem(3, new ItemStack(toSet), false);
@@ -158,8 +166,6 @@ public class TeflonCoaterBlockEntity extends BaseEnergyItemStorageBlockEntity im
         coalCount -= isIngot ? 1 : 9;
         fluoriteCount -= isIngot ? 1 : 9;
 
-        useEnergy(isIngot ? 10 : 90);
-
         progress = 0;
         setChanged();
     }
@@ -167,7 +173,8 @@ public class TeflonCoaterBlockEntity extends BaseEnergyItemStorageBlockEntity im
     private void checkItemStorageSlots() {
         boolean change = false;
 
-        maxProgress = defaultMaxProgress * (isItemInSlot(2, Items.IRON_BLOCK) ? 5 : 1);
+        int factor = (isItemInSlot(2, Items.IRON_BLOCK) ? 5 : 1);
+        maxProgress = defaultMaxProgress * factor;
 
         if (isItemInSlot(0, CustomItems.fluorite.get()) && hasItemProductSpaceLeft(fluoriteCount, true)) {
             fluoriteCount += TeflonCoaterMenu.countPerItem;
