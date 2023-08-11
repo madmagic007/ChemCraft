@@ -1,8 +1,11 @@
 package me.madmagic.chemcraft.instances.blockentities;
 
-import me.madmagic.chemcraft.instances.blockentities.base.BaseEnergyStorageBlockEntity;
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
+import me.madmagic.chemcraft.instances.blockentities.base.BaseEnergyStorageBlockEntity;
+import me.madmagic.chemcraft.instances.blocks.CentrifugalPumpBlock;
+import me.madmagic.chemcraft.instances.blocks.base.RotatableBlock;
 import me.madmagic.chemcraft.instances.menus.MotorMenu;
+import me.madmagic.chemcraft.util.ConnectionHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -60,6 +63,13 @@ public class MotorBlockEntity extends BaseEnergyStorageBlockEntity implements Me
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, Direction side) {
         if (side == Direction.UP) return lazyEnergyHandler.cast();
         return LazyOptional.empty();
+    }
+
+    public boolean hasPump() {
+        Direction facingDir = getBlockState().getValue(RotatableBlock.facing);
+        BlockPos pumpPos = worldPosition.relative(facingDir);
+        BlockState pumpState = level.getBlockState(pumpPos);
+        return ConnectionHandler.isStateOfType(pumpState, CentrifugalPumpBlock.class);
     }
 
     @Override

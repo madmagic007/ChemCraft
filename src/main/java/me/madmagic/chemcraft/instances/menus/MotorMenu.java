@@ -1,9 +1,13 @@
 package me.madmagic.chemcraft.instances.menus;
 
+import me.madmagic.chemcraft.instances.CustomItems;
 import me.madmagic.chemcraft.instances.CustomMenus;
 import me.madmagic.chemcraft.instances.blockentities.MotorBlockEntity;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenu;
-import me.madmagic.chemcraft.instances.menus.base.BaseScreen;
+import me.madmagic.chemcraft.instances.menus.base.BaseMenuScreen;
+import me.madmagic.chemcraft.instances.menus.widgets.CustomLabel;
+import me.madmagic.chemcraft.instances.menus.widgets.ToolTippedItem;
+import me.madmagic.chemcraft.util.ScreenHelper;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -25,23 +29,43 @@ public class MotorMenu extends BaseMenu<MotorBlockEntity> {
         addDataSlots(data);
     }
 
-    public static class Screen extends BaseScreen<MotorMenu> {
+    public static class Screen extends BaseMenuScreen<MotorMenu> {
 
-        private static final ResourceLocation texture = defineTexture("no_inv_power");
+        private static final ResourceLocation texture = ScreenHelper.getTexture("no_inv_power");
+        private ToolTippedItem pumpDisplay;
 
         public Screen(MotorMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
-            super(pMenu, pPlayerInventory, pTitle, texture, 175, 85);
+            super(pMenu, pPlayerInventory, pTitle, texture, 176, 86);
         }
 
         @Override
         protected void init() {
             super.init();
-            addContainerDataVerticalWidget(160, 17, 8, 52, "Energy", "FE", menu.data, 0, menu.entity.getEnergyStorage().getMaxEnergyStored(), 0xb51500, 0x600b00);
+            screenHelper.addContainerDataVerticalWidget(159, 17, 8, 52, "Energy", "FE", menu.data, 0, menu.entity.getEnergyStorage().getMaxEnergyStored(), 0xb51500, 0x600b00);
+
+            boolean pumpDetected = menu.entity.hasPump();
+            pumpDisplay = screenHelper.addItem(4, imageHeight - 20, CustomItems.blockItems.get("centrifugal_pump").get(), pumpDetected ? "Pump Detected" : "Pump Not Detected");
+            if (!pumpDetected) pumpDisplay.setOverLay(ScreenHelper.cross);
+
+            new CustomLabel(titleLabelX, titleLabelY + 23, "Put behind a centrifugal pump").setScale(.8f).addTo(screenHelper);
+            new CustomLabel(titleLabelX, titleLabelY + 33, "Accepts any power from the top").setScale(.8f).addTo(screenHelper);
+            new CustomLabel(titleLabelX, titleLabelY + 43, "Uses (flowrate in mb/t of the pump) FE/t").setScale(.7f).addTo(screenHelper);
         }
 
         @Override
         protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
             renderOnlyTitle(pGuiGraphics);
+        }
+
+        @Override
+        protected void containerTick() {
+            if (menu.entity.hasPump()) {
+                pumpDisplay.setToolTips("Pump Detected");
+                pumpDisplay.setOverLay(null);
+            } else {
+                pumpDisplay.setToolTips("Pump Not Detected");
+                pumpDisplay.setOverLay(ScreenHelper.cross);
+            }
         }
     }
 }

@@ -2,13 +2,15 @@ package me.madmagic.chemcraft.instances.menus.widgets.base;
 
 import net.minecraft.client.gui.GuiGraphics;
 
-public abstract class VerticalGradientWidget extends BaseToolTippedWidget {
+public abstract class VerticalGradientWidget<T extends VerticalGradientWidget<T>> extends CustomWidget<VerticalGradientWidget<T>> {
 
     private final int colorFrom, colorTo;
     protected final int max;
 
     protected VerticalGradientWidget(int x, int y, int width, int height, int max, int colorFrom, int colorTo) {
-        super(x, y, width, height);
+        super(x, y);
+        this.width = width;
+        this.height = height;
         this.max = max;
         this.colorFrom = prependFF(colorFrom);
         this.colorTo = prependFF(colorTo);
@@ -17,11 +19,12 @@ public abstract class VerticalGradientWidget extends BaseToolTippedWidget {
     protected abstract int getValue();
 
     @Override
-    protected void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+        checkHovered(pMouseX, pMouseY);
         int scaledValue = (int) (height * (getValue() / (float) max));
         pGuiGraphics.fillGradient(
-                getX(), getY() + (height - scaledValue),
-                getX() + width, getY() + height,
+                x, y + (height - scaledValue),
+                x + width, y + height,
                 colorFrom, colorTo
         );
     }

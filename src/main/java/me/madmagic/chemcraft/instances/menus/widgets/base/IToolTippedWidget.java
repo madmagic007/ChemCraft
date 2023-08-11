@@ -7,13 +7,13 @@ import net.minecraft.network.chat.Component;
 import java.util.List;
 import java.util.Optional;
 
-public interface ITooltipHolder {
+public interface IToolTippedWidget {
 
-    List<Component> getTooltips();
+    List<Component> getToolTips();
 
     default void renderToolTip(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        guiGraphics.renderTooltip(Minecraft.getInstance().font, getTooltips(), Optional.empty(), mouseX, mouseY);
+        guiGraphics.renderTooltip(Minecraft.getInstance().font, getToolTips(), Optional.empty(), mouseX, mouseY);
     }
 
-    boolean iIsHovered();
+    boolean isHovered();
 }

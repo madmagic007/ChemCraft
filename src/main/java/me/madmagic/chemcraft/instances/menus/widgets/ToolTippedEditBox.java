@@ -1,13 +1,14 @@
 package me.madmagic.chemcraft.instances.menus.widgets;
 
-import me.madmagic.chemcraft.instances.menus.widgets.base.ITooltipHolder;
+import me.madmagic.chemcraft.instances.menus.widgets.base.IToolTippedWidget;
+import me.madmagic.chemcraft.util.ScreenHelper;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
-public class ToolTippedEditBox extends EditBox implements ITooltipHolder {
+public class ToolTippedEditBox extends EditBox implements IToolTippedWidget {
 
     private final String toolTip;
 
@@ -17,12 +18,23 @@ public class ToolTippedEditBox extends EditBox implements ITooltipHolder {
     }
 
     @Override
-    public List<Component> getTooltips() {
+    public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
+        return super.mouseClicked(pMouseX, pMouseY, pButton);
+    }
+
+    public void addTo(ScreenHelper screenHelper) {
+        setX(getX() + screenHelper.x);
+        setY(getY() + screenHelper.y);
+        screenHelper.addWidget(this);
+    }
+
+    @Override
+    public List<Component> getToolTips() {
         return List.of(Component.literal(toolTip));
     }
 
     @Override
-    public boolean iIsHovered() {
-        return isHovered();
+    public boolean isHovered() {
+        return super.isHovered();
     }
 }

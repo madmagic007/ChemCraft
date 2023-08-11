@@ -2,8 +2,9 @@ package me.madmagic.chemcraft.instances;
 
 import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.datagen.CustomItemModelProvider;
+import me.madmagic.chemcraft.instances.items.ChemistsManual;
 import me.madmagic.chemcraft.instances.items.PipeWrenchItem;
-import me.madmagic.chemcraft.instances.items.base.BasicItem;
+import me.madmagic.chemcraft.instances.items.base.BaseItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
@@ -27,12 +28,13 @@ public class CustomItems {
 
     //tools
     public static final RegistryObject<Item> pipeWrench = register("pipe_wrench", PipeWrenchItem::new);
+    public static final RegistryObject<Item> chemistsManual = register("chemists_manual", ChemistsManual::new);
 
     //reagents
-    public static final RegistryObject<Item> fluorite = register("fluorite_piece", BasicItem::new);
+    public static final RegistryObject<Item> fluorite = register("fluorite_piece", BaseItem::new);
 
     //mainly for crafting
-    public static final RegistryObject<Item> glassWoolSheet = items.register("glass_wool_sheet", BasicItem::new);
+    public static final RegistryObject<Item> glassWoolSheet = items.register("glass_wool_sheet", BaseItem::new);
     public static final RegistryObject<Item> teflonCoatedIronIngot = registerCraftingOnlyItem("teflon_coated_iron_ingot");
     public static final RegistryObject<Item> axle = registerCraftingOnlyCustomModelItem("axle");
     public static final RegistryObject<Item> impeller = registerCraftingOnlyCustomModelItem("impeller");
@@ -41,12 +43,12 @@ public class CustomItems {
     private static final DeferredRegister<CreativeModeTab> customTabs = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ChemCraft.modId);
 
     private static RegistryObject<Item> registerCraftingOnlyItem(String name) {
-        Supplier<Item> sup = BasicItem::new;
+        Supplier<Item> sup = BaseItem::new;
         return register(name, sup);
     }
 
     private static RegistryObject<Item> registerCraftingOnlyCustomModelItem(String name) {
-        Supplier<Item> sup = BasicItem::new;
+        Supplier<Item> sup = BaseItem::new;
         return items.register(name, sup);
     }
 

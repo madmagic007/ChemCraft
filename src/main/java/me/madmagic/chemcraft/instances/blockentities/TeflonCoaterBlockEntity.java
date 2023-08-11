@@ -24,8 +24,8 @@ import java.util.List;
 public class TeflonCoaterBlockEntity extends BaseEnergyItemStorageBlockEntity implements MenuProvider {
 
     private static final List<CustomItemSlotTemplate> slotTemplates = List.of(
-            new CustomItemSlotTemplate(8, 17, CustomItems.fluorite.get()),
-            new CustomItemSlotTemplate(42, 17, Items.COAL, Items.COAL_BLOCK),
+            new CustomItemSlotTemplate(9, 17, CustomItems.fluorite.get()),
+            new CustomItemSlotTemplate(44, 17, Items.COAL, Items.COAL_BLOCK),
             new CustomItemSlotTemplate(80, 17, Items.IRON_INGOT, Items.IRON_BLOCK),
             new CustomItemSlotTemplate(80, 53, true),
             new CustomItemSlotTemplate(126, 53, true)
@@ -145,8 +145,9 @@ public class TeflonCoaterBlockEntity extends BaseEnergyItemStorageBlockEntity im
 
         boolean boneSpaceLeft = hasBoneProductSpaceLeft(inputIsIngot);
 
-        boolean hasFluorite = fluoriteCount > (inputIsBlock ? 9 : 0);
-        boolean hasCoal = coalCount > (inputIsBlock ? 9 : 0);
+        int subtractCount = (inputIsIngot ? 1 : 11) * TeflonCoaterMenu.usagePerIngot;
+        boolean hasFluorite = fluoriteCount > subtractCount;
+        boolean hasCoal = coalCount > subtractCount;
 
         return boneSpaceLeft && hasFluorite && hasCoal && outputSpaceLeft && hasEnergy && (canProcessIngot || canProcessBlock);
     }
@@ -157,14 +158,15 @@ public class TeflonCoaterBlockEntity extends BaseEnergyItemStorageBlockEntity im
         Item toSet = isIngot ? CustomItems.teflonCoatedIronIngot.get() : coatedBlockItem;
         itemHandler.insertItem(3, new ItemStack(toSet), false);
 
-        boneCount += isIngot ? 1 : 9;
+        boneCount += isIngot ? 1 : 10;
         if (boneCount >= TeflonCoaterMenu.maxBoneCount && hasSpaceInSlot(4)) {
             boneCount -= TeflonCoaterMenu.maxBoneCount;
             itemHandler.insertItem(4, new ItemStack(Items.BONE), false);
         }
 
-        coalCount -= isIngot ? 1 : 9;
-        fluoriteCount -= isIngot ? 1 : 9;
+        int subtractCount = (isIngot ? 1 : 11) * TeflonCoaterMenu.usagePerIngot;
+        coalCount -= subtractCount;
+        fluoriteCount -= subtractCount;
 
         progress = 0;
         setChanged();
@@ -197,13 +199,13 @@ public class TeflonCoaterBlockEntity extends BaseEnergyItemStorageBlockEntity im
         if (change) setChanged();
     }
 
-    private boolean hasItemProductSpaceLeft(int count, boolean isIngot) {
-        return count + (isIngot ? 1 : 9) * TeflonCoaterMenu.countPerItem <= TeflonCoaterMenu.maxItemCount;
+    private boolean hasItemProductSpaceLeft(int count, boolean isBLock) {
+        return count + (isBLock ? 9 : 1) * TeflonCoaterMenu.countPerItem <= TeflonCoaterMenu.maxItemCount;
     }
 
     int maxTotalBoneCount = 65 * TeflonCoaterMenu.maxBoneCount;
     private boolean hasBoneProductSpaceLeft(boolean isIngot) {
         int curTotalBoneCount = itemHandler.getStackInSlot(4).getCount() * TeflonCoaterMenu.maxBoneCount + boneCount;
-        return curTotalBoneCount + (isIngot ? 1 : 9) <= maxTotalBoneCount;
+        return curTotalBoneCount + (isIngot ? 1 : 10) <= maxTotalBoneCount;
     }
 }

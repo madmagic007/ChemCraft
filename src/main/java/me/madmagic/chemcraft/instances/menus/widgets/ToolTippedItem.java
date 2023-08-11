@@ -1,23 +1,34 @@
 package me.madmagic.chemcraft.instances.menus.widgets;
 
-import me.madmagic.chemcraft.instances.menus.widgets.base.BaseToolTippedWidget;
+import me.madmagic.chemcraft.instances.menus.widgets.base.CustomWidget;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public class ToolTippedItem extends BaseToolTippedWidget {
+public class ToolTippedItem extends CustomWidget<ToolTippedItem> {
 
-    private final ItemStack itemStack;
+    private ItemStack itemStack;
     private ResourceLocation overlay;
 
-    public ToolTippedItem(int pX, int pY, int size, Item item, String toolTip) {
-        super(pX, pY, size, size, toolTip);
-        itemStack = new ItemStack(item, 1);
+    public ToolTippedItem(int x, int y, Item item, String toolTip) {
+        this(x, y, 16, item, toolTip);
     }
 
-    public ToolTippedItem(int pX, int pY, Item item, String toolTip) {
-        super(pX, pY, 16, 16, toolTip);
+    public ToolTippedItem(int x, int y, int size, Item item, String toolTip) {
+        super(x, y);
+        width = size;
+        height = size;
+        itemStack = new ItemStack(item, 1);
+        addToolTip(Component.translatable(toolTip));
+    }
+
+    public boolean isItem(Item item) {
+        return itemStack.getItem().equals(item);
+    }
+
+    public void setItem(Item item) {
         itemStack = new ItemStack(item, 1);
     }
 
@@ -26,16 +37,11 @@ public class ToolTippedItem extends BaseToolTippedWidget {
     }
 
     @Override
-    public void renderTexture(GuiGraphics pGuiGraphics, ResourceLocation pTexture, int pX, int pY, int pUOffset, int pVOffset, int p_283472_, int pWidth, int pHeight, int pTextureWidth, int pTextureHeight) {
-        super.renderTexture(pGuiGraphics, pTexture, pX, pY, pUOffset, pVOffset, p_283472_, pWidth, pHeight, pTextureWidth, pTextureHeight);
-
-    }
-
-    @Override
-    protected void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        pGuiGraphics.renderItem(itemStack, getX(), getY());
+    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+        checkHovered(pMouseX, pMouseY);
+        pGuiGraphics.renderItem(itemStack, x, y);
 
         if (overlay != null)
-            pGuiGraphics.blit(overlay, getX() + 4, getY() + 4, 200, 0, 0, 10, 10, 10, 10);
+            pGuiGraphics.blit(overlay, x + 4, y + 4, 200, 0, 0, 10, 10, 10, 10);
     }
 }

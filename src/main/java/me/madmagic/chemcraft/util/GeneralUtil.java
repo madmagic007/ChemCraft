@@ -2,6 +2,7 @@ package me.madmagic.chemcraft.util;
 
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 
 public class GeneralUtil {
 
@@ -23,5 +24,9 @@ public class GeneralUtil {
         for (int i = 0; i < list.size(); i++) {
             consumer.accept(list.get(i), i);
         }
+    }
+
+    public static <T> boolean notNullAnd(T toCheck, Predicate<T> predicate) {
+        return toCheck != null && predicate.test(toCheck);
     }
 }

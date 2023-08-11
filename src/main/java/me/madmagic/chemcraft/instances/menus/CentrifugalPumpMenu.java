@@ -5,9 +5,11 @@ import me.madmagic.chemcraft.instances.CustomItems;
 import me.madmagic.chemcraft.instances.CustomMenus;
 import me.madmagic.chemcraft.instances.blockentities.CentrifugalPumpBlockEntity;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenu;
-import me.madmagic.chemcraft.instances.menus.base.BaseScreen;
+import me.madmagic.chemcraft.instances.menus.base.BaseMenuScreen;
+import me.madmagic.chemcraft.instances.menus.widgets.CustomLabel;
 import me.madmagic.chemcraft.instances.menus.widgets.ToolTippedItem;
 import me.madmagic.chemcraft.util.GeneralUtil;
+import me.madmagic.chemcraft.util.ScreenHelper;
 import me.madmagic.chemcraft.util.networking.NetworkSender;
 import me.madmagic.chemcraft.util.networking.UpdateCentrifugalPumpMessage;
 import net.minecraft.client.gui.GuiGraphics;
@@ -28,18 +30,16 @@ public class CentrifugalPumpMenu extends BaseMenu<CentrifugalPumpBlockEntity> {
         super(id, CustomMenus.centrifugalPumpMenu.get(), ent);
     }
 
-    public static class Screen extends BaseScreen<CentrifugalPumpMenu> {
+    public static class Screen extends BaseMenuScreen<CentrifugalPumpMenu> {
 
-        private static final ResourceLocation texture = defineTexture("no_inv");
+        private static final ResourceLocation texture = ScreenHelper.getTexture("no_inv");
 
         private EditBox flowBox;
         private ToolTippedItem motorDisplay;
 
         public Screen(CentrifugalPumpMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
-            super(pMenu, pPlayerInventory, pTitle, texture, 175, 85);
+            super(pMenu, pPlayerInventory, pTitle, texture, 176, 86);
         }
-
-        private int flowBoxY;
 
         @Override
         protected void init() {
@@ -47,27 +47,32 @@ public class CentrifugalPumpMenu extends BaseMenu<CentrifugalPumpBlockEntity> {
 
             int flowBoxWidth = 41;
             int flowBoxHeight = 12;
+            int halfWidth = imageWidth / 2;
+            int halfHeight = imageHeight / 2;
 
-            int flowBoxX = x + imageWidth / 2 - flowBoxWidth / 2;
-            flowBoxY = y + imageHeight / 2 - flowBoxHeight / 2;
+            int flowBoxX = halfWidth - flowBoxWidth / 2;
+            int flowBoxY = halfHeight - flowBoxHeight / 2;
 
             int bY = flowBoxY + flowBoxHeight + 3;
 
-            addImageButton(flowBoxX + 2, bY, 16, 16, buttonUp, p -> {
+            screenHelper.addImageButton(flowBoxX + 2, bY, 16, 16, ScreenHelper.buttonUp, () -> {
                 NetworkSender.sendToServer(new UpdateCentrifugalPumpMessage(menu.entity.getBlockPos(), getNewFlowVal(true)));
             }, "Add 10");
 
-            addImageButton(flowBoxX + 23, bY, 16, 16, buttonDown, p -> {
+            screenHelper.addImageButton(flowBoxX + 23, bY, 16, 16, ScreenHelper.buttonDown, () -> {
                 NetworkSender.sendToServer(new UpdateCentrifugalPumpMessage(menu.entity.getBlockPos(), getNewFlowVal(false)));
             }, "Subtract 10");
 
-            flowBox = addEditorBox(flowBoxX, flowBoxY, flowBoxWidth, flowBoxHeight, "Flowrate (mb/tick)");
+            flowBox = screenHelper.addEditorBox(flowBoxX, flowBoxY, flowBoxWidth, flowBoxHeight, "Flowrate (mb/tick)");
             flowBox.setValue(String.valueOf(menu.entity.flowRate));
             flowBox.setMaxLength(3);
 
             boolean motorDetected = menu.entity.hasMotor();
-            motorDisplay = addItem(x + imageWidth - 20, y + titleLabelY - 2, CustomItems.blockItems.get("motor").get(), motorDetected ? "Motor Detected" : "Motor Not Detected");
-            if (!motorDetected) motorDisplay.setOverLay(cross);
+            motorDisplay = screenHelper.addItem(imageWidth - 20, titleLabelY - 2, CustomItems.blockItems.get("motor").get(), motorDetected ? "Motor Detected" : "Motor Not Detected");
+            if (!motorDetected) motorDisplay.setOverLay(ScreenHelper.cross);
+
+            new CustomLabel(halfWidth, flowBoxY - 12, "Flowrate:").center().addTo(screenHelper);
+            new CustomLabel(halfWidth, imageHeight - 12, "Motor Power Consumption: " + menu.entity.flowRate + " FE/t").setScale(.9f).center().addTo(screenHelper);
         }
 
         private static final int buttonVal = 10;
@@ -86,33 +91,19 @@ public class CentrifugalPumpMenu extends BaseMenu<CentrifugalPumpBlockEntity> {
         @Override
         protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
             renderOnlyTitle(pGuiGraphics);
-
-            String flowStr = "Flowrate:";
-            int flowStrWidth = font.width(flowStr);
-            int flowTextX = imageWidth / 2 - flowStrWidth / 2;
-
-            pGuiGraphics.drawString(font, flowStr, flowTextX, flowBoxY - y - 12, 0x545454, false);
-
-            String powerUsageStr = "Motor Power Consumption: " + menu.entity.flowRate + " FE";
-            int powerUsageWidth = font.width(powerUsageStr);
-            int powerTextX = imageWidth / 2 - powerUsageWidth / 2;
-
-            pGuiGraphics.drawString(font, powerUsageStr, powerTextX, imageHeight - 12, 0x545454, false);
         }
 
         @Override
         protected void containerTick() {
-            super.containerTick();
-
             int flowVal = menu.entity.flowRate;
             if (!flowBox.isFocused()) flowBox.setValue(String.valueOf(flowVal));
 
             if (menu.entity.hasMotor()) {
-                motorDisplay.setToolTip("Motor Detected");
+                motorDisplay.setToolTips("Motor Detected");
                 motorDisplay.setOverLay(null);
             } else {
-                motorDisplay.setToolTip("Motor Not Detected");
-                motorDisplay.setOverLay(cross);
+                motorDisplay.setToolTips("Motor Not Detected");
+                motorDisplay.setOverLay(ScreenHelper.cross);
             }
         }
 

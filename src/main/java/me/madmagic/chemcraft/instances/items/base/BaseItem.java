@@ -2,9 +2,9 @@ package me.madmagic.chemcraft.instances.items.base;
 
 import net.minecraft.world.item.Item;
 
-public class BasicItem extends Item {
+public class BaseItem extends Item {
 
-    public BasicItem() {
+    public BaseItem() {
         super(new Item.Properties());
     }
 }
