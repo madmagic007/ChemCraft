@@ -1,16 +1,20 @@
 package me.madmagic.chemcraft.instances.menus;
 
-import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.menus.widgets.HoverAbleImageButton;
 import me.madmagic.chemcraft.instances.menus.widgets.base.CustomWidget;
 import me.madmagic.chemcraft.util.GeneralUtil;
 import me.madmagic.chemcraft.util.ScreenHelper;
 import me.madmagic.chemcraft.util.chemistsmanual.Page;
-import me.madmagic.chemcraft.util.chemistsmanual.pages.*;
+import me.madmagic.chemcraft.util.chemistsmanual.pages.IntroductionPage;
+import me.madmagic.chemcraft.util.chemistsmanual.pages.MainPage;
 import me.madmagic.chemcraft.util.chemistsmanual.pages.gettingstarted.GettingStartedPage;
 import me.madmagic.chemcraft.util.chemistsmanual.pages.gettingstarted.GettingStartedPage1;
 import me.madmagic.chemcraft.util.chemistsmanual.pages.liquids.LiquidsPage;
-import me.madmagic.chemcraft.util.chemistsmanual.pages.liquids.pipes.PipesPage;
+import me.madmagic.chemcraft.util.chemistsmanual.pages.liquids.PipesPage;
+import me.madmagic.chemcraft.util.chemistsmanual.pages.liquids.pumping.PumpingPage;
+import me.madmagic.chemcraft.util.chemistsmanual.pages.liquids.pumping.PumpingPage1;
+import me.madmagic.chemcraft.util.chemistsmanual.pages.liquids.storage.StoragePage;
+import me.madmagic.chemcraft.util.chemistsmanual.pages.liquids.storage.StoragePage1;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -50,7 +54,6 @@ public class ChemistsManualScreen extends Screen {
     public void pageInited() {
         if (!pageHistory.isEmpty()) {
             prevArrow = new HoverAbleImageButton(x + 2, y + imageHeight + 3, 18, 10, arrowBack, arrowBackHovered, () -> {
-                ChemCraft.info("pressed");
                 String lastPageName = pageHistory.remove(pageHistory.size() - 1);
                 setNewPage(lastPageName, false);
             }).addToolTip("Go to previous page");
@@ -61,7 +64,7 @@ public class ChemistsManualScreen extends Screen {
 
     public void setNewPage(String name, boolean addToHistory) {
         if (addToHistory) pageHistory.add(activePage.name);
-        activePage = pages.get(name);
+        activePage = pages.getOrDefault(name, activePage);
         activePage.init(x, y, imageWidth, imageHeight, this);
     }
 
@@ -96,7 +99,9 @@ public class ChemistsManualScreen extends Screen {
                 new MainPage(),
                 new IntroductionPage(),
                 new GettingStartedPage(), new GettingStartedPage1(),
-                new LiquidsPage(), new PipesPage()
+                new LiquidsPage(), new PipesPage(),
+                new PumpingPage(), new PumpingPage1(),
+                new StoragePage(), new StoragePage1()
         );
     }
 

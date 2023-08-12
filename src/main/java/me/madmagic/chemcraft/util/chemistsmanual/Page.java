@@ -1,13 +1,16 @@
 package me.madmagic.chemcraft.util.chemistsmanual;
 
+import me.madmagic.chemcraft.instances.CustomItems;
 import me.madmagic.chemcraft.instances.menus.ChemistsManualScreen;
 import me.madmagic.chemcraft.instances.menus.widgets.CraftingVisualWidget;
 import me.madmagic.chemcraft.instances.menus.widgets.CustomLabel;
 import me.madmagic.chemcraft.instances.menus.widgets.HoverAbleImageButton;
 import me.madmagic.chemcraft.util.ScreenHelper;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Supplier;
 
 public abstract class Page {
 
@@ -46,7 +49,18 @@ public abstract class Page {
                 .addToolTip("Go to next page").addTo(screenHelper);
     }
 
-    protected void addCraftingGrid(int y, CraftingVisual visual) {
-        new CraftingVisualWidget(screenHelper.halfImageWidth, y, visual).center().addTo(screenHelper);
+    protected void addCraftingGrid(int x, int y, CraftingVisual visual) {
+        new CraftingVisualWidget(x, y, visual).center().addTo(screenHelper);
     }
+
+    protected void addCraftingGrid(int y, CraftingVisual visual) {
+        addCraftingGrid(screenHelper.halfImageWidth, y, visual);
+    }
+
+    //common visuals
+    protected final Supplier<CraftingVisual> insulatedBlockVisual = () -> new CraftingVisual(CustomItems.blockItems.get("insulated_block").get(),
+            Items.AIR, CustomItems.glassWoolSheet.get(), Items.AIR,
+            CustomItems.glassWoolSheet.get(), CustomItems.blockItems.get("teflon_coated_iron_block").get(), CustomItems.glassWoolSheet.get(),
+            Items.AIR, CustomItems.glassWoolSheet.get(), Items.AIR
+    );
 }

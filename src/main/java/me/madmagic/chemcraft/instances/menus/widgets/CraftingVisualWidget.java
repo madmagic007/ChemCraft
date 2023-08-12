@@ -26,8 +26,8 @@ public class CraftingVisualWidget extends CustomWidget<CraftingVisualWidget> {
     }
 
     private void addItem(int i, Item item) {
-        int row = i / 3;
-        int column = i % 3;
+        int row = i % 3;
+        int column = i / 3;
 
         int x = 1 + row * 18;
         int y = 22 + column * 18;

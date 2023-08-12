@@ -7,6 +7,8 @@ import me.madmagic.chemcraft.util.chemistsmanual.CraftingVisual;
 import me.madmagic.chemcraft.util.chemistsmanual.Page;
 import net.minecraft.world.item.Items;
 
+import java.util.function.Supplier;
+
 public class GettingStartedPage1 extends Page {
 
     public GettingStartedPage1() {
@@ -21,7 +23,7 @@ public class GettingStartedPage1 extends Page {
         int fontHeight = (int) (ScreenHelper.font.lineHeight * scale);
         int yInc = this.yInc + fontHeight -2;
 
-        addCraftingGrid(yPos.addAndGet(25), visual);
+        addCraftingGrid(yPos.addAndGet(25), visual.get());
 
         screenHelper.addString(xStart, yPos.addAndGet(80), "The teflon coater is the starter way", scale);
         screenHelper.addString(xStart, yPos.addAndGet(yInc), "to get teflon coated iron ingots and", scale);
@@ -35,7 +37,7 @@ public class GettingStartedPage1 extends Page {
         screenHelper.addString(xStart, yPos.addAndGet(yInc), "extracted with pipes or hoppers.", scale);
     }
 
-    private final CraftingVisual visual = new CraftingVisual(
+    private final Supplier<CraftingVisual> visual = () -> new CraftingVisual(
             CustomItems.blockItems.get("teflon_coater").get(),
             CustomItems.glassWoolSheet.get(), Items.IRON_INGOT,  CustomItems.glassWoolSheet.get(),
             Items.IRON_INGOT, CustomItems.fluorite.get(), Items.IRON_INGOT,

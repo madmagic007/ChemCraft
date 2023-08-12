@@ -25,7 +25,8 @@ public class LiquidsPage extends Page {
         screenHelper.addString(xStart, yPos.addAndGet(yInc), "information about the specifics:", scale);
 
         addLink(xStart, ScreenHelper.incFontY(yPos, 10), "1. Pipes", "pipes");
-        addLink(xStart, ScreenHelper.incFontY(yPos, this.yInc), "2. Centrifugal pump", "centrifugalPump");
-        addLink(xStart, ScreenHelper.incFontY(yPos, this.yInc), "3. Storage", "centrifugalPump");
+        addLink(xStart, ScreenHelper.incFontY(yPos, this.yInc), "2. Pumping liquids", "pumping");
+        addLink(xStart, ScreenHelper.incFontY(yPos, this.yInc), "3. Storage", "storage");
+        addLink(xStart, ScreenHelper.incFontY(yPos, this.yInc), "4. Temperature", "temperature");
     }
 }

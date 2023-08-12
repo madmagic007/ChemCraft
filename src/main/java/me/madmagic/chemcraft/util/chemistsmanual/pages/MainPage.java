@@ -19,9 +19,8 @@ public class MainPage extends Page {
         addLink(xStart, ScreenHelper.incFontY(yPos, 30), "1. Introduction", "introduction");
         addLink(xStart, ScreenHelper.incFontY(yPos, yInc), "2. Getting started", "starting");
         addLink(xStart, ScreenHelper.incFontY(yPos, yInc), "3. Liquids and pipes", "liquids");
-        addLink(xStart, ScreenHelper.incFontY(yPos, yInc), "4. Liquid storage", "liquidStorage");
+        addLink(xStart, ScreenHelper.incFontY(yPos, yInc), "4. Gasses", "gasses");
         addLink(xStart, ScreenHelper.incFontY(yPos, yInc), "5. Reactors", "reactors");
-        addLink(xStart, ScreenHelper.incFontY(yPos, yInc), "6. Distillation", "distillation");
-        addLink(xStart, ScreenHelper.incFontY(yPos, yInc), "7. Crystallisation", "crystallisation");
+        addLink(xStart, ScreenHelper.incFontY(yPos, yInc), "6. Separation", "separation");
     }
 }
