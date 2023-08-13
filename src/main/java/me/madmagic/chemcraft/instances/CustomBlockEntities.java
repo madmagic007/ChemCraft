@@ -19,6 +19,7 @@ public class CustomBlockEntities {
     public static final RegistryObject<BlockEntityType<BlockEntity>> tankController = register(TankControllerBlockEntity::new, CustomBlocks.tankController);
     public static final RegistryObject<BlockEntityType<BlockEntity>> waterExtractor = register(WaterExtractorBlockEntity::new, CustomBlocks.waterExtractor);
     public static final RegistryObject<BlockEntityType<BlockEntity>> fluoriteCoater = register(TeflonCoaterBlockEntity::new, CustomBlocks.fluoriteCoater);
+    public static final RegistryObject<BlockEntityType<BlockEntity>> airCooler = register(AirCoolerBlockEntity::new, CustomBlocks.airCoolerBlock);
 
     private static RegistryObject<BlockEntityType<BlockEntity>> register(BlockEntityType.BlockEntitySupplier<BlockEntity> sup, RegistryObject<Block> blockReg) {
         String name = blockReg.getId().getPath();

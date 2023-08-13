@@ -5,6 +5,7 @@
   "item.chemcraft.teflon_coated_iron_ingot": "Teflon Coated Iron Ingot",
   "item.chemcraft.impeller": "Centrifugal Impeller",
   "item.chemcraft.axle": "Axle",
+  "item.chemcraft.chemists_manual": "Chemists Manual",
 
   "block.chemcraft.pipe": "Pipe",
   "block.chemcraft.motor": "Motor",
@@ -15,6 +16,6 @@
   "block.chemcraft.glass_wool": "Glass Wool Block",
   "block.chemcraft.teflon_coated_iron_block": "Teflon Coated Iron Block",
   "block.chemcraft.teflon_coater": "Teflon Coater",
-
+  "block.chemcraft.air_cooler": "Air Cooler",
   "block.chemcraft.fluorite_ore": "Fluorite Ore"
 }

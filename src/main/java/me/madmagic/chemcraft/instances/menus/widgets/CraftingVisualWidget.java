@@ -6,6 +6,7 @@ import me.madmagic.chemcraft.util.ScreenHelper;
 import me.madmagic.chemcraft.util.chemistsmanual.CraftingVisual;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,8 @@ public class CraftingVisualWidget extends CustomWidget<CraftingVisualWidget> {
     }
 
     private void addItem(int i, Item item) {
+        if (item == Items.AIR) return;
+
         int row = i % 3;
         int column = i / 3;
 

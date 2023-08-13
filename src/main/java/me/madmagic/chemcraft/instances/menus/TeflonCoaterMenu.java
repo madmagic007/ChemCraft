@@ -45,11 +45,11 @@ public class TeflonCoaterMenu extends BaseMenu<TeflonCoaterBlockEntity> {
         protected void init() {
             super.init();
 
-            screenHelper.addContainerDataVerticalWidget(29, 17, 8, 52, "Fluorite", "", menu.data, 2, maxItemCount, 0x3a685a, 0x4fba98);
-            screenHelper.addContainerDataVerticalWidget(64, 17, 8, 52, "Coal", "", menu.data, 3, maxItemCount, 0x111111, 0x1c1c1c);
-            screenHelper.addContainerDataVerticalWidget(114, 17, 8, 52, "Calcium waste", "", menu.data, 4, maxBoneCount, 0xfcfbed, 0x7b7e6b);
+            screenHelper.addContainerDataVerticalWidget(29, 17, 8, 52, "Fluorite", "", menu.data, 3, maxItemCount, 0x3a685a, 0x4fba98);
+            screenHelper.addContainerDataVerticalWidget(64, 17, 8, 52, "Coal", "", menu.data, 4, maxItemCount, 0x111111, 0x1c1c1c);
+            screenHelper.addContainerDataVerticalWidget(114, 17, 8, 52, "Calcium waste", "", menu.data, 5, maxBoneCount, 0xfcfbed, 0x7b7e6b);
 
-            screenHelper.addContainerDataVerticalWidget(159, 17, 8, 52, "Energy", "FE", menu.data, 5, menu.entity.getEnergyStorage().getMaxEnergyStored(), 0xb51500, 0x600b00);
+            screenHelper.addContainerDataVerticalWidget(159, 17, 8, 52, "Energy", "FE", menu.data, 0, menu.entity.getEnergyStorage().getMaxEnergyStored(), 0xb51500, 0x600b00);
 
             screenHelper.addItem(9, 35, CustomItems.fluorite.get(), "Accepts: Fluorite");
             coalDisplay = screenHelper.addItem(44, 35, Items.COAL, "Accepts: Coal / Block of Coal");

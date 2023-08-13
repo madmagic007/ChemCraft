@@ -19,6 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ScreenHelper {
 
+    public static final ResourceLocation noInvPower = getTexture("no_inv_power");
     public static final ResourceLocation cross = getTexture("cross");
     public static final ResourceLocation buttonUp = getTexture("button_up");
     public static final ResourceLocation buttonDown = getTexture("button_down");

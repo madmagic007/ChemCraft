@@ -11,7 +11,6 @@ import me.madmagic.chemcraft.util.ScreenHelper;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
@@ -31,11 +30,10 @@ public class MotorMenu extends BaseMenu<MotorBlockEntity> {
 
     public static class Screen extends BaseMenuScreen<MotorMenu> {
 
-        private static final ResourceLocation texture = ScreenHelper.getTexture("no_inv_power");
         private ToolTippedItem pumpDisplay;
 
         public Screen(MotorMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
-            super(pMenu, pPlayerInventory, pTitle, texture, 176, 86);
+            super(pMenu, pPlayerInventory, pTitle, ScreenHelper.noInvPower, 176, 86);
         }
 
         @Override

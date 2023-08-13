@@ -12,7 +12,6 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -41,38 +40,34 @@ public class TeflonCoaterBlockEntity extends BaseEnergyItemStorageBlockEntity im
 
     public TeflonCoaterBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(CustomBlockEntities.fluoriteCoater.get(), pPos, pBlockState, 10000, slotTemplates);
+    }
 
-        containerData = new ContainerData() {
-            @Override
-            public int get(int pIndex) {
-                return switch (pIndex) {
-                    case 0 -> progress;
-                    case 1 -> maxProgress;
-                    case 2 -> fluoriteCount;
-                    case 3 -> coalCount;
-                    case 4 -> boneCount;
-                    case 5 -> energyStorage.getEnergyStored();
-                    default -> 0;
-                };
-            }
-
-            @Override
-            public void set(int pIndex, int pValue) {
-                switch (pIndex) {
-                    case 0 -> progress = pValue;
-                    case 1 -> maxProgress = pValue;
-                    case 2 -> fluoriteCount = pValue;
-                    case 3 -> coalCount = pValue;
-                    case 4 -> boneCount = pValue;
-                    case 5 -> energyStorage.setEnergyStored(pValue);
-                };
-            }
-
-            @Override
-            public int getCount() {
-                return 6;
-            }
+    @Override
+    protected int getDataValue(int index) {
+        return switch (index) {
+            case 1 -> progress;
+            case 2 -> maxProgress;
+            case 3 -> fluoriteCount;
+            case 4 -> coalCount;
+            case 5 -> boneCount;
+            default -> super.getDataValue(index);
         };
+    }
+
+    @Override
+    protected void setDataValue(int index, int value) {
+        switch (index) {
+            case 2 -> maxProgress = value;
+            case 3 -> fluoriteCount = value;
+            case 4 -> coalCount = value;
+            case 5 -> boneCount = value;
+            default -> super.setDataValue(index, value);
+        }
+    }
+
+    @Override
+    protected int getDataCount() {
+        return 6;
     }
 
     @Override

@@ -13,7 +13,6 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -24,28 +23,6 @@ public class MotorBlockEntity extends BaseEnergyStorageBlockEntity implements Me
 
     public MotorBlockEntity(BlockPos pos, BlockState state) {
         super(CustomBlockEntities.motor.get(), pos, state, 10000, 1000);
-
-        containerData = new ContainerData() {
-            @Override
-            public int get(int pIndex) {
-                return switch (pIndex) {
-                    case 0 -> energyStorage.getEnergyStored();
-                    default -> 0;
-                };
-            }
-
-            @Override
-            public void set(int pIndex, int pValue) {
-                if (pIndex == 0) {
-                    energyStorage.setEnergyStored(pValue);
-                }
-            }
-
-            @Override
-            public int getCount() {
-                return 1;
-            }
-        };
     }
 
     @Override

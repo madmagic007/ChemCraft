@@ -21,6 +21,23 @@ public abstract class BaseEnergyStorageBlockEntity extends BaseBlockEntity {
 
     public BaseEnergyStorageBlockEntity(BlockEntityType<?> pType, BlockPos pos, BlockState state, int energyCapacity) {
         this(pType, pos, state, energyCapacity, 100);
+
+        containerData = new ContainerData() {
+            @Override
+            public int get(int pIndex) {
+                return getDataValue(pIndex);
+            }
+
+            @Override
+            public void set(int pIndex, int pValue) {
+                setDataValue(pIndex, pValue);
+            }
+
+            @Override
+            public int getCount() {
+                return getDataCount();
+            }
+        };
     }
 
     public BaseEnergyStorageBlockEntity(BlockEntityType<?> pType, BlockPos pos, BlockState state, int energyCapacity, int energyTransferRate) {
@@ -44,6 +61,19 @@ public abstract class BaseEnergyStorageBlockEntity extends BaseBlockEntity {
     public void invalidateCaps() {
         super.invalidateCaps();
         lazyEnergyHandler.invalidate();
+    }
+
+    protected int getDataValue(int index) {
+        if (index == 0) return energyStorage.getEnergyStored();
+        return 0;
+    }
+
+    protected void setDataValue(int index, int value) {
+        if (index == 1) energyStorage.setEnergyStored(value);
+    }
+
+    protected int getDataCount() {
+        return 1;
     }
 
     @Override

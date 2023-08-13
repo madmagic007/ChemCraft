@@ -34,6 +34,7 @@ public class CustomBlocks {
     //process apparatus
     public static final RegistryObject<Block> tankController = customModel("tank_controller", TankControllerBlock::new);
     public static final RegistryObject<Block> insulatedBlock = basicBlock("insulated_block", InsulatedBlock::new);
+    public static final RegistryObject<Block> airCoolerBlock = rotateAbleCustomModel("air_cooler", AirCoolerBlock::new);
 
     //ores
     public static final RegistryObject<Block> fluorite_ore = ore("fluorite_ore", FluoriteOre::new, CustomItems.fluorite);

@@ -80,15 +80,16 @@ public abstract class BaseMenu<T extends BlockEntity> extends AbstractContainerM
         return copyOfSourceStack;
     }
 
+    //assuming progress = 1, maxProgress = 2
     protected boolean isCrafting() {
-        return data != null && data.getCount() > 0 && data.get(0) > 0;
+        return data != null && data.getCount() > 0 && data.get(1) > 0;
     }
 
     protected int getScaledProgress(int maxScale) {
         if (data == null) return 0;
 
-        int progress = data.get(0);
-        int maxProgress = data.get(1);
+        int progress = data.get(1);
+        int maxProgress = data.get(2);
 
         return progress * maxScale / maxProgress + 1;
     }
