@@ -22,17 +22,39 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
 public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuProvider {
 
-    public static final int maxFlowRate = 100;
-    public int flowRate = 50;
+    public static final int maxFlowRate = 50000;
+    public int flowRate = 25000;
+    private final double tickFactor = 1. / 60. / 60. / 20.;
+    public static final int powerUsageFactor = 200;
+    private final ContainerData data;
 
     public CentrifugalPumpBlockEntity(BlockPos pos, BlockState state) {
         super(CustomBlockEntities.centrifugalPump.get(), pos, state);
+
+        data = new ContainerData() {
+            @Override
+            public int get(int pIndex) {
+                if (pIndex == 0) return flowRate;
+                return 0;
+            }
+
+            @Override
+            public void set(int pIndex, int pValue) {
+                if (pIndex == 0) flowRate = pValue;
+            }
+
+            @Override
+            public int getCount() {
+                return 1;
+            }
+        };
     }
 
     @Override
@@ -41,7 +63,7 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
     }
 
     @Override
-    public void saveToNbt(CompoundTag nbt) {
+    public void saveToNBT(CompoundTag nbt) {
         nbt.putInt("chemcraft.flowrate", flowRate);
     }
 
@@ -52,7 +74,7 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
 
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-        return new CentrifugalPumpMenu(pContainerId, this);
+        return new CentrifugalPumpMenu(pContainerId, this, data);
     }
 
     public PipeLine getSuckPipeline() {
@@ -90,7 +112,7 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
     }
 
     private boolean hasWorkingMotor() {
-        return (hasMotor() && getMotorEnt().hasEnoughEnergy(flowRate));
+        return (hasMotor() && getMotorEnt().hasEnoughEnergy(flowRate / powerUsageFactor));
     }
 
     private void performPump(PipeLine origin, PipeLine destination) {
@@ -100,12 +122,12 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
         PipeLine availableDestination = new PipeLine();
         double availableSpace = DisplacementHandler.calculateSpaceAvailable(destination, availableDestination);
 
-        double toExtract = Math.min(flowRate, Math.min(fluidAvailable, availableSpace));
+        double toExtract = Math.min(flowRate * tickFactor, Math.min(fluidAvailable, availableSpace));
 
         List<Fluid> extracted = DisplacementHandler.extract(availableOrigin, toExtract);
 
         DisplacementHandler.feed(availableDestination, extracted);
-        getMotorEnt().useEnergy(flowRate);
+        getMotorEnt().useEnergy(flowRate / powerUsageFactor);
     }
 
     @Override

@@ -74,9 +74,9 @@ public abstract class BaseEnergyItemStorageBlockEntity extends BaseEnergyStorage
     }
 
     @Override
-    public void saveToNbt(CompoundTag nbt) {
+    public void saveToNBT(CompoundTag nbt) {
         nbt.put("chemcraft.inventory", itemHandler.serializeNBT());
-        super.saveToNbt(nbt);
+        super.saveToNBT(nbt);
     }
 
     protected void onItemContentsChanged(int slot) {}

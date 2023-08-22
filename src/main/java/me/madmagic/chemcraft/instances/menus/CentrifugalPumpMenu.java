@@ -7,6 +7,7 @@ import me.madmagic.chemcraft.instances.blockentities.CentrifugalPumpBlockEntity;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenu;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenuScreen;
 import me.madmagic.chemcraft.instances.menus.widgets.CustomLabel;
+import me.madmagic.chemcraft.instances.menus.widgets.ToolTippedEditBox;
 import me.madmagic.chemcraft.instances.menus.widgets.ToolTippedItem;
 import me.madmagic.chemcraft.util.GeneralUtil;
 import me.madmagic.chemcraft.util.ScreenHelper;
@@ -18,16 +19,18 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class CentrifugalPumpMenu extends BaseMenu<CentrifugalPumpBlockEntity> {
 
     public CentrifugalPumpMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, getEnt(inv, extraData));
+        this(id, getEnt(inv, extraData), new SimpleContainerData(1));
     }
 
-    public CentrifugalPumpMenu(int id, BlockEntity ent) {
-        super(id, CustomMenus.centrifugalPumpMenu.get(), ent);
+    public CentrifugalPumpMenu(int id, BlockEntity ent, ContainerData data) {
+        super(id, CustomMenus.centrifugalPumpMenu.get(), ent, data);
     }
 
     public static class Screen extends BaseMenuScreen<CentrifugalPumpMenu> {
@@ -36,6 +39,7 @@ public class CentrifugalPumpMenu extends BaseMenu<CentrifugalPumpBlockEntity> {
 
         private EditBox flowBox;
         private ToolTippedItem motorDisplay;
+        private static final int buttonVal = 1000;
 
         public Screen(CentrifugalPumpMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
             super(pMenu, pPlayerInventory, pTitle, texture, 176, 86);
@@ -63,29 +67,30 @@ public class CentrifugalPumpMenu extends BaseMenu<CentrifugalPumpBlockEntity> {
                 NetworkSender.sendToServer(new UpdateCentrifugalPumpMessage(menu.entity.getBlockPos(), getNewFlowVal(false)));
             }, "Subtract 10");
 
-            flowBox = screenHelper.addEditorBox(flowBoxX, flowBoxY, flowBoxWidth, flowBoxHeight, "Flowrate (mb/tick)");
-            flowBox.setValue(String.valueOf(menu.entity.flowRate));
-            flowBox.setMaxLength(3);
+            flowBox = screenHelper.addEditorBox(flowBoxX, flowBoxY, flowBoxWidth, flowBoxHeight, "Flowrate (l/hr)")
+                            .setValue(() -> menu.data.get(0));
+            flowBox.setMaxLength(5);
+            addRenderableWidget(flowBox); //ugh
 
             boolean motorDetected = menu.entity.hasMotor();
             motorDisplay = screenHelper.addItem(imageWidth - 20, titleLabelY - 2, CustomItems.blockItems.get("motor").get(), motorDetected ? "Motor Detected" : "Motor Not Detected");
             if (!motorDetected) motorDisplay.setOverLay(ScreenHelper.cross);
 
             new CustomLabel(halfWidth, flowBoxY - 12, "Flowrate:").center().addTo(screenHelper);
-            new CustomLabel(halfWidth, imageHeight - 12, "Motor Power Consumption: " + menu.entity.flowRate + " FE/t").setScale(.9f).center().addTo(screenHelper);
+            new CustomLabel(halfWidth, imageHeight - 12, "")
+                    .setScale(.9f)
+                    .lateCenter()
+                    .setValue(() -> "Motor Power Consumption: " + menu.data.get(0) / CentrifugalPumpBlockEntity.powerUsageFactor + " FE/t")
+                    .addTo(screenHelper);
         }
 
-        private static final int buttonVal = 10;
         private int getNewFlowVal(boolean increase) {
-            int val = menu.entity.flowRate;
+            int val = menu.data.get(0);
 
             if (increase) val += buttonVal;
             else val -= buttonVal;
 
-            val = clamp(val);
-
-            menu.entity.flowRate = val;
-            return val;
+            return clamp(val);
         }
 
         @Override
@@ -95,9 +100,6 @@ public class CentrifugalPumpMenu extends BaseMenu<CentrifugalPumpBlockEntity> {
 
         @Override
         protected void containerTick() {
-            int flowVal = menu.entity.flowRate;
-            if (!flowBox.isFocused()) flowBox.setValue(String.valueOf(flowVal));
-
             if (menu.entity.hasMotor()) {
                 motorDisplay.setToolTips("Motor Detected");
                 motorDisplay.setOverLay(null);
@@ -110,30 +112,28 @@ public class CentrifugalPumpMenu extends BaseMenu<CentrifugalPumpBlockEntity> {
         @Override
         public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
             if (flowBox.isFocused()) {
-                ChemCraft.info(pKeyCode);
+                boolean toReturn = flowBox.keyPressed(pKeyCode, pScanCode, pModifiers);
                 if (GeneralUtil.isAny(pKeyCode, 257, 335, 256)) {
                     flowBox.setFocused(false);
 
-                    int val;
+                    int val = menu.data.get(0);
 
                     try {
                         val = clamp(Integer.parseInt(flowBox.getValue()));
-                    } catch (Exception ignored) {
-                        val = menu.entity.flowRate;
-                    }
+                    } catch (Exception ignored) {}
 
-                    menu.entity.flowRate = val;
                     NetworkSender.sendToServer(new UpdateCentrifugalPumpMessage(menu.entity.getBlockPos(), val));
                     return false;
                 }
 
-                return flowBox.keyPressed(pKeyCode, pScanCode, pModifiers);
+                return toReturn;
             }
             return super.keyPressed(pKeyCode, pScanCode, pModifiers);
         }
 
         @Override
         public boolean charTyped(char pCodePoint, int pModifiers) {
+            ChemCraft.info(getFocused() instanceof ToolTippedEditBox);
             if (flowBox.isFocused() && !Character.isDigit(pCodePoint)) return true;
             return super.charTyped(pCodePoint, pModifiers);
         }

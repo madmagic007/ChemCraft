@@ -19,18 +19,22 @@ public abstract class BaseMenu<T extends BlockEntity> extends AbstractContainerM
     protected ContainerData data;
 
     public BaseMenu(int id, Inventory inventory, MenuType menu, BlockEntity ent, int slotCount, ContainerData data) {
-        this(id, menu, ent);
+        this(id, menu, ent, data);
         this.slotCount = slotCount;
-        this.data = data;
 
         addPlayerInventory(inventory);
-        addDataSlots(data);
 
         entity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
             GeneralUtil.forEachIndexed(((BaseEnergyItemStorageBlockEntity) entity).slotTemplates, (template, index) ->
                     addSlot(new CustomItemSlot(handler, template, index))
             );
         });
+    }
+
+    public BaseMenu(int id, MenuType menu, BlockEntity ent, ContainerData data) {
+        this(id, menu, ent);
+        this.data = data;
+        addDataSlots(data);
     }
 
     public BaseMenu(int id, MenuType menu, BlockEntity ent) {

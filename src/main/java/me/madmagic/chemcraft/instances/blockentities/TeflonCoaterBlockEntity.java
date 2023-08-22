@@ -82,11 +82,11 @@ public class TeflonCoaterBlockEntity extends BaseEnergyItemStorageBlockEntity im
     }
 
     @Override
-    public void saveToNbt(CompoundTag nbt) {
+    public void saveToNBT(CompoundTag nbt) {
         nbt.putInt("chemcraft.fluoriteCount", fluoriteCount);
         nbt.putInt("chemcraft.coalCount", coalCount);
         nbt.putInt("chemcraft.boneCount", boneCount);
-        super.saveToNbt(nbt);
+        super.saveToNBT(nbt);
     }
 
     @Override

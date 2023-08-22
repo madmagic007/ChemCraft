@@ -22,36 +22,15 @@ public class TankControllerBlockEntity extends BaseBlockEntity implements IFluid
 
     @Override
     public void loadFromNBT(CompoundTag nbt) {
-        CompoundTag fluids = (CompoundTag) nbt.get("chemcraft.fluids");
-        fluids.getAllKeys().forEach(fluidName -> {
-            CompoundTag fluidTag = fluids.getCompound(fluidName);
-
-            Fluid fluid = new Fluid(
-                    fluidName,
-                    fluidTag.getInt("amount"),
-                    fluidTag.getInt("temperature")
-            );
-
-            fluidStorage.fluids.add(fluid);
-        });
+        fluidStorage.loadFromNBT(nbt);
     }
 
     @Override
-    public void saveToNbt(CompoundTag nbt) {
-        CompoundTag fluids = new CompoundTag();
-
-        fluidStorage.fluids.forEach(fluid -> {
-            CompoundTag fluidTag = new CompoundTag();
-            fluidTag.putInt("amount", (int) Math.round(fluid.amount));
-            fluidTag.putInt("temperature", (int) Math.round(fluid.temperature));
-
-            fluids.put(fluid.name, fluidTag);
-        });
-
-        nbt.put("chemcraft.fluids", fluids);
+    public void saveToNBT(CompoundTag nbt) {
+        fluidStorage.saveToNBT(nbt);
     }
 
-    public static final int capacityPerTank = 100000;
+    public static final int capacityPerTank = 1000;
     public final MultiFluidStorage fluidStorage = new MultiFluidStorage(capacityPerTank) {};
 
     @Override

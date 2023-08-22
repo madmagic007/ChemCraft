@@ -21,6 +21,17 @@ public abstract class BaseEnergyStorageBlockEntity extends BaseBlockEntity {
 
     public BaseEnergyStorageBlockEntity(BlockEntityType<?> pType, BlockPos pos, BlockState state, int energyCapacity) {
         this(pType, pos, state, energyCapacity, 100);
+    }
+
+    public BaseEnergyStorageBlockEntity(BlockEntityType<?> pType, BlockPos pos, BlockState state, int energyCapacity, int energyTransferRate) {
+        super(pType, pos, state);
+
+        energyStorage = new CustomEnergyStorage(energyCapacity, energyTransferRate) {
+            @Override
+            public void energyChanged(int energy) {
+                BaseEnergyStorageBlockEntity.this.energyChanged(energy);
+            }
+        };
 
         containerData = new ContainerData() {
             @Override
@@ -36,17 +47,6 @@ public abstract class BaseEnergyStorageBlockEntity extends BaseBlockEntity {
             @Override
             public int getCount() {
                 return getDataCount();
-            }
-        };
-    }
-
-    public BaseEnergyStorageBlockEntity(BlockEntityType<?> pType, BlockPos pos, BlockState state, int energyCapacity, int energyTransferRate) {
-        super(pType, pos, state);
-
-        energyStorage = new CustomEnergyStorage(energyCapacity, energyTransferRate) {
-            @Override
-            public void energyChanged(int energy) {
-                BaseEnergyStorageBlockEntity.this.energyChanged(energy);
             }
         };
     }
@@ -82,7 +82,7 @@ public abstract class BaseEnergyStorageBlockEntity extends BaseBlockEntity {
     }
 
     @Override
-    public void saveToNbt(CompoundTag nbt) {
+    public void saveToNBT(CompoundTag nbt) {
         nbt.putInt("chemcraft.energy", energyStorage.getEnergyStored());
     }
 

@@ -62,9 +62,7 @@ public class ScreenHelper {
     }
 
     public ToolTippedEditBox addEditorBox(int x, int y, int width, int height, String toolTip) {
-        ToolTippedEditBox widget = new ToolTippedEditBox(font, x, y, width, height, toolTip);
-        widget.addTo(this);
-        return widget;
+        return new ToolTippedEditBox(font, x + this.x, y + this.y, width, height, toolTip);
     }
 
     public ToolTippedItem addItem(int x, int y, Item item, String defaultToolTip) {
@@ -99,9 +97,9 @@ public class ScreenHelper {
         });
     }
 
-    public boolean handleClicked() {
+    public boolean handleClicked(double pMouseX, double pMouseY, int pButton) {
         for (Renderable widget : widgets) {
-            if (widget instanceof CustomWidget customWidget && customWidget.isHovered())
+            if (widget instanceof CustomWidget<?> customWidget && customWidget.isHovered())
                 return customWidget.onClicked();
         }
         return false;

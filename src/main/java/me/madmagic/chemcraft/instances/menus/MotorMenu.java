@@ -2,6 +2,7 @@ package me.madmagic.chemcraft.instances.menus;
 
 import me.madmagic.chemcraft.instances.CustomItems;
 import me.madmagic.chemcraft.instances.CustomMenus;
+import me.madmagic.chemcraft.instances.blockentities.CentrifugalPumpBlockEntity;
 import me.madmagic.chemcraft.instances.blockentities.MotorBlockEntity;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenu;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenuScreen;
@@ -23,9 +24,7 @@ public class MotorMenu extends BaseMenu<MotorBlockEntity> {
     }
 
     public MotorMenu(int id, BlockEntity ent, ContainerData data) {
-        super(id, CustomMenus.motorMenu.get(), ent);
-        this.data = data;
-        addDataSlots(data);
+        super(id, CustomMenus.motorMenu.get(), ent, data);
     }
 
     public static class Screen extends BaseMenuScreen<MotorMenu> {
@@ -47,7 +46,7 @@ public class MotorMenu extends BaseMenu<MotorBlockEntity> {
 
             new CustomLabel(titleLabelX, titleLabelY + 23, "Put behind a centrifugal pump").setScale(.8f).addTo(screenHelper);
             new CustomLabel(titleLabelX, titleLabelY + 33, "Accepts any power from the top").setScale(.8f).addTo(screenHelper);
-            new CustomLabel(titleLabelX, titleLabelY + 43, "Uses (flowrate in mb/t of the pump) FE/t").setScale(.7f).addTo(screenHelper);
+            new CustomLabel(titleLabelX, titleLabelY + 43, "Uses (flowrate of the pump) / " + CentrifugalPumpBlockEntity.powerUsageFactor + " FE/t").setScale(.6f).addTo(screenHelper);
         }
 
         @Override

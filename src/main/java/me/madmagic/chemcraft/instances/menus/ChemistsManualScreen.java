@@ -84,7 +84,7 @@ public class ChemistsManualScreen extends Screen {
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
         if (GeneralUtil.notNullAnd(prevArrow, CustomWidget::isHovered)) return prevArrow.onClicked();
-        return activePage.screenHelper.handleClicked();
+        return activePage.screenHelper.handleClicked(pMouseX, pMouseY, pButton);
     }
 
     @Override

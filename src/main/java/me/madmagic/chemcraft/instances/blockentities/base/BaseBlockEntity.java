@@ -13,7 +13,7 @@ public abstract class BaseBlockEntity extends BlockEntity {
     }
 
     public abstract void loadFromNBT(CompoundTag nbt);
-    public abstract void saveToNbt(CompoundTag nbt);
+    public abstract void saveToNBT(CompoundTag nbt);
 
     @Override
     public void load(CompoundTag nbt) {
@@ -23,14 +23,14 @@ public abstract class BaseBlockEntity extends BlockEntity {
 
     @Override
     protected void saveAdditional(CompoundTag nbt) {
-        saveToNbt(nbt);
+        saveToNBT(nbt);
         super.saveAdditional(nbt);
     }
 
     @Override
     public CompoundTag getUpdateTag() {
         CompoundTag nbt = super.getUpdateTag();
-        saveToNbt(nbt);
+        saveToNBT(nbt);
         return nbt;
     }
 

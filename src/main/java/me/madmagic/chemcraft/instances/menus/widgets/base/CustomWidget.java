@@ -18,6 +18,7 @@ public class CustomWidget<T extends CustomWidget<T>> implements Renderable, IToo
     protected int x, y, width, height;
     protected boolean isHovered;
     protected Runnable onPress;
+    protected boolean lateCenter = false;
 
     public CustomWidget(int x, int y, int width, int height, ResourceLocation defaultTexture) {
         this(x, y);
@@ -33,6 +34,11 @@ public class CustomWidget<T extends CustomWidget<T>> implements Renderable, IToo
 
     public T center() {
         x -= width / 2;
+        return (T) this;
+    }
+
+    public T lateCenter() {
+        lateCenter = true;
         return (T) this;
     }
 

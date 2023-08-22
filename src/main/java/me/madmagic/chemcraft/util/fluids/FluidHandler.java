@@ -23,6 +23,7 @@ public class FluidHandler {
     }
 
     public static double calculateTemperature(double amtA, double tempA, double amtB, double tempB) {
+        if (amtA == 0) return tempB;
        return (amtA * tempA + amtB * tempB) / (amtA + amtB);
     }
 }

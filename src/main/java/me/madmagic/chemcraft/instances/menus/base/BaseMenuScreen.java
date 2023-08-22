@@ -46,7 +46,7 @@ public class BaseMenuScreen<T extends AbstractContainerMenu> extends AbstractCon
 
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
-        if (screenHelper.handleClicked()) return true;
+        if (screenHelper.handleClicked(pMouseX, pMouseY, pButton)) return true;
         return super.mouseClicked(pMouseX, pMouseY, pButton);
     }
 }

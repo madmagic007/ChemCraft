@@ -28,7 +28,7 @@ public class CentrifugalPumpBlock extends RotatableBlock implements AutoEntityTi
             Block.box(1, 0, 6, 15, 4, 10),
             Block.box(3, 3, 5, 13, 13, 11),
             Block.box(4, 13, 4, 12, 16, 12),
-            Block.box(4, 4, -1, 12, 12, 5)
+            Block.box(4, 4, 1, 12, 12, 5)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public CentrifugalPumpBlock() {

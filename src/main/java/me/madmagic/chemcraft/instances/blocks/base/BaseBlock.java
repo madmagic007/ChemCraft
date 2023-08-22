@@ -48,7 +48,7 @@ public class BaseBlock extends Block {
             ItemStack stack = new ItemStack(this);
 
             CompoundTag nbt = new CompoundTag();
-            blockEnt.saveToNbt(nbt);
+            blockEnt.saveToNBT(nbt);
             nbt.remove("chemcraft.inventory");
             stack.addTagElement("BlockEntityTag", nbt);
 

@@ -1,5 +1,7 @@
 package me.madmagic.chemcraft.util.fluids;
 
+import net.minecraft.nbt.CompoundTag;
+
 import java.util.*;
 
 public abstract class MultiFluidStorage {
@@ -93,5 +95,34 @@ public abstract class MultiFluidStorage {
             }
         }
         fluids.add(new Fluid(name, amount, newTemperature));
+    }
+
+    public void saveToNBT(CompoundTag nbt) {
+        CompoundTag fluidsTag = new CompoundTag();
+
+        fluids.forEach(fluid -> {
+            CompoundTag fluidTag = new CompoundTag();
+            fluidTag.putDouble("amount", (int) Math.round(fluid.amount));
+            fluidTag.putDouble("temperature", (int) Math.round(fluid.temperature));
+
+            fluidsTag.put(fluid.name, fluidTag);
+        });
+
+        nbt.put("chemcraft.fluids", fluidsTag);
+    }
+
+    public void loadFromNBT(CompoundTag nbt) {
+        CompoundTag fluidsTag = (CompoundTag) nbt.get("chemcraft.fluids");
+        fluidsTag.getAllKeys().forEach(fluidName -> {
+            CompoundTag fluidTag = fluidsTag.getCompound(fluidName);
+
+            Fluid fluid = new Fluid(
+                    fluidName,
+                    fluidTag.getDouble("amount"),
+                    fluidTag.getDouble("temperature")
+            );
+
+            fluids.add(fluid);
+        });
     }
 }

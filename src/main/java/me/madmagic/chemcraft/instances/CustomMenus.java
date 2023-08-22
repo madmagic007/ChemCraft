@@ -35,6 +35,7 @@ public class CustomMenus {
     public static void setupScreens() {
         MenuScreens.register(teflonCoaterMenu.get(), TeflonCoaterMenu.Screen::new);
         MenuScreens.register(centrifugalPumpMenu.get(), CentrifugalPumpMenu.Screen::new);
+        MenuScreens.register(motorMenu.get(), MotorMenu.Screen::new);
         MenuScreens.register(airCoolerMenu.get(), AirCoolerMenu.Screen::new);
     }
 }

@@ -1,4 +1,5 @@
-// 1.20.1	2023-08-05T02:54:16.3854428	Loot Tables
+// 1.20.1	2023-08-22T23:01:43.4484159	Loot Tables
+c60c9b76cbc1a5831079a3bf3385cdc66777b6ed data/chemcraft/loot_tables/blocks/air_cooler.json
 f5b03fd4172ca0797272a857247a98b6e544fd47 data/chemcraft/loot_tables/blocks/centrifugal_pump.json
 2ea5a16ae89c7ea68557810b64ee0edeb3c699be data/chemcraft/loot_tables/blocks/fluorite_ore.json
 58b55f5913255020a31915bcd8bcc11761d22b69 data/chemcraft/loot_tables/blocks/glass_wool.json

@@ -9,11 +9,14 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
+import java.util.function.Supplier;
+
 public class CustomLabel extends CustomWidget<CustomLabel> {
 
     private static final Font font = Minecraft.getInstance().font;
     private float scale = 1;
-    private final MutableComponent component;
+    private MutableComponent component;
+    private Supplier<?> lateValue;
 
     public CustomLabel(int x, int y, String text) {
         this(x, y, Component.literal(text));
@@ -31,6 +34,11 @@ public class CustomLabel extends CustomWidget<CustomLabel> {
         return this;
     }
 
+    public CustomLabel setValue(Supplier<?> supplier) {
+        lateValue = supplier;
+        return this;
+    }
+
     public CustomLabel underline() {
         component.withStyle(ChatFormatting.UNDERLINE);
         return this;
@@ -38,6 +46,8 @@ public class CustomLabel extends CustomWidget<CustomLabel> {
 
     @Override
     public void render(GuiGraphics guiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+        if (lateValue != null) component = Component.literal(String.valueOf(lateValue.get()));
+
         int width = (int) (font.width(component.getString()) * scale);
         int height = (int) (font.lineHeight * scale);
 
@@ -45,6 +55,8 @@ public class CustomLabel extends CustomWidget<CustomLabel> {
 
         int renderX = x;
         int renderY = y;
+
+        if (lateCenter) x -= width / 2;
 
         if (scale != 1) { // only scale when necessary
             guiGraphics.pose().pushPose();
