@@ -29,4 +29,8 @@ public class GeneralUtil {
     public static <T> boolean notNullAnd(T toCheck, Predicate<T> predicate) {
         return toCheck != null && predicate.test(toCheck);
     }
+
+    public static int clamp(int val, int max) {
+        return Math.max(0, Math.min(max, val));
+    }
 }

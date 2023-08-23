@@ -1,8 +1,8 @@
 package me.madmagic.chemcraft.util.pipes;
 
 import me.madmagic.chemcraft.util.fluids.Fluid;
-import me.madmagic.chemcraft.util.fluids.MultiFluidStorage;
 import me.madmagic.chemcraft.util.fluids.IFluidContainer;
+import me.madmagic.chemcraft.util.fluids.MultiFluidStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;

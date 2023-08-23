@@ -39,6 +39,11 @@ public abstract class Page {
 
     protected abstract void pageInit();
 
+    protected void addTitle(String text, float scale) {
+        new CustomLabel(screenHelper.halfImageWidth, 10, text).setScale(scale)
+                .centerHorizontally(screenHelper).addTo(screenHelper);
+    }
+
     protected void addLink(int x, int y, String text, String changeToPage) {
         new CustomLabel(x, y, text).underline().setOnClick(() -> masterScreen.setNewPage(changeToPage, true))
                 .addTo(screenHelper);
@@ -50,7 +55,7 @@ public abstract class Page {
     }
 
     protected void addCraftingGrid(int x, int y, CraftingVisual visual) {
-        new CraftingVisualWidget(x, y, visual).center().addTo(screenHelper);
+        new CraftingVisualWidget(x, y, visual).centerHorizontally(screenHelper).addTo(screenHelper);
     }
 
     protected void addCraftingGrid(int y, CraftingVisual visual) {

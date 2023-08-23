@@ -50,19 +50,20 @@ public class ScreenHelper {
     }
 
     //region widgets
-    public CustomWidget addImageButton(int x, int y, int width, int height, ResourceLocation texture, Runnable onPress, String toolTip) {
-        CustomWidget widget = new CustomWidget(x, y, width, height, texture).setOnClick(onPress).addToolTip(toolTip);
+    public CustomWidget<?> addImageButton(int x, int y, int width, int height, ResourceLocation texture, Runnable onPress, String toolTip) {
+        CustomWidget<?> widget = new CustomWidget(x, y, width, height, texture).setOnClick(onPress).addToolTip(toolTip);
         widget.addTo(this);
         return widget;
     }
 
-    public void addContainerDataVerticalWidget(int x, int y, int width, int height, String itemName, String suffix, ContainerData data, int valuePos, int maxValue, int colorFrom, int colorTo) {
+    public ContainerDataVerticalGradientWidget addContainerDataVerticalWidget(int x, int y, int width, int height, String itemName, String suffix, ContainerData data, int valuePos, int maxValue, int colorFrom, int colorTo) {
         ContainerDataVerticalGradientWidget widget = new ContainerDataVerticalGradientWidget(x, y, width, height, itemName, suffix, data, valuePos, maxValue, colorFrom, colorTo);
         widget.addTo(this);
+        return widget;
     }
 
-    public ToolTippedEditBox addEditorBox(int x, int y, int width, int height, String toolTip) {
-        return new ToolTippedEditBox(font, x + this.x, y + this.y, width, height, toolTip);
+    public CustomEditBox createEditorBox(int x, int y, int width, int height) {
+        return new CustomEditBox(font, x + this.x, y + this.y, width, height);
     }
 
     public ToolTippedItem addItem(int x, int y, Item item, String defaultToolTip) {

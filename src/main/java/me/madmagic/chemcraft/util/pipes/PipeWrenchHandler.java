@@ -1,12 +1,8 @@
 package me.madmagic.chemcraft.util.pipes;
 
-import me.madmagic.chemcraft.ChemCraft;
 import net.minecraft.core.Direction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Vector3d;
-
-import java.awt.event.MouseAdapter;
 
 public class PipeWrenchHandler {
 

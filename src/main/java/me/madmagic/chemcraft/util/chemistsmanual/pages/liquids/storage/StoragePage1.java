@@ -1,7 +1,6 @@
 package me.madmagic.chemcraft.util.chemistsmanual.pages.liquids.storage;
 
 import me.madmagic.chemcraft.instances.CustomItems;
-import me.madmagic.chemcraft.instances.menus.widgets.CustomLabel;
 import me.madmagic.chemcraft.util.ScreenHelper;
 import me.madmagic.chemcraft.util.chemistsmanual.CraftingVisual;
 import me.madmagic.chemcraft.util.chemistsmanual.Page;
@@ -17,7 +16,7 @@ public class StoragePage1 extends Page {
 
     @Override
     protected void pageInit() {
-        new CustomLabel(screenHelper.halfImageWidth, 10, "Storage").setScale(1.2f).center().addTo(screenHelper);
+        addTitle("Storage", 1.2f);
 
         float scale = .6f;
         int fontHeight = (int) (ScreenHelper.font.lineHeight * scale);

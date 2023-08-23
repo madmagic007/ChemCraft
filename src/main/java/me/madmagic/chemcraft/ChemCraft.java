@@ -1,8 +1,8 @@
 package me.madmagic.chemcraft;
 
 import com.mojang.logging.LogUtils;
-import me.madmagic.chemcraft.instances.CustomBlocks;
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
+import me.madmagic.chemcraft.instances.CustomBlocks;
 import me.madmagic.chemcraft.instances.CustomItems;
 import me.madmagic.chemcraft.instances.CustomMenus;
 import me.madmagic.chemcraft.util.networking.NetworkSender;

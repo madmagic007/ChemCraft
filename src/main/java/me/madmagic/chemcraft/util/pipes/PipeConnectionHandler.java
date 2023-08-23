@@ -1,6 +1,5 @@
 package me.madmagic.chemcraft.util.pipes;
 
-import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.blocks.PipeBlock;
 import me.madmagic.chemcraft.util.ConnectionHandler;
 import net.minecraft.core.BlockPos;
@@ -10,8 +9,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
-import javax.swing.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PipeConnectionHandler {
 

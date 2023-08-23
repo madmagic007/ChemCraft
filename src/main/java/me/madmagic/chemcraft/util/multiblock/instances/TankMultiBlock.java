@@ -1,8 +1,8 @@
 package me.madmagic.chemcraft.util.multiblock.instances;
 
+import me.madmagic.chemcraft.instances.blockentities.TankControllerBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.InsulatedBlock;
 import me.madmagic.chemcraft.instances.blocks.TankControllerBlock;
-import me.madmagic.chemcraft.instances.blockentities.TankControllerBlockEntity;
 import me.madmagic.chemcraft.util.fluids.IFluidContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;

@@ -1,5 +1,6 @@
 package me.madmagic.chemcraft.instances.blockentities;
 
+import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.blockentities.base.BaseEnergyStorageBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.PipeBlock;
@@ -9,6 +10,7 @@ import me.madmagic.chemcraft.util.fluids.DisplacementHandler;
 import me.madmagic.chemcraft.util.fluids.Fluid;
 import me.madmagic.chemcraft.util.fluids.IFluidContainer;
 import me.madmagic.chemcraft.util.fluids.MultiFluidStorage;
+import me.madmagic.chemcraft.util.networking.INetworkUpdateAble;
 import me.madmagic.chemcraft.util.pipes.IPipeConnectable;
 import me.madmagic.chemcraft.util.pipes.PipeConnectionHandler;
 import me.madmagic.chemcraft.util.pipes.PipeLine;
@@ -27,9 +29,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implements MenuProvider, IFluidContainer {
+public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implements MenuProvider, IFluidContainer, INetworkUpdateAble {
 
-    private static int maxCoolingSpt = 25;
+    public static int maxCoolingSpt = 25;
     private static final int airTemp = 25;
     public static final int powerFactor = 3;
 
@@ -52,6 +54,11 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
     }
 
     @Override
+    public void updateFromNetworking(int value) {
+        coolingSpt = value;
+    }
+
+    @Override
     protected int getDataValue(int index) {
         if (index == 1) return coolingSpt;
         return super.getDataValue(index);
@@ -65,6 +72,7 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
 
     @Override
     protected int getDataCount() {
+        ChemCraft.info("data count set");
         return 2;
     }
 
@@ -116,7 +124,6 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
             fluidStorage.add(fluids, amount);
             return;
         }
-
 
         DisplacementHandler.feed(destinationLine, fluids);
     }

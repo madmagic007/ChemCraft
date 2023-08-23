@@ -32,8 +32,35 @@ public class CustomWidget<T extends CustomWidget<T>> implements Renderable, IToo
         this.y = y;
     }
 
-    public T center() {
-        x -= width / 2;
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public T centerHorizontally(ScreenHelper screenHelper) {
+        x = (int) (screenHelper.x + (screenHelper.imageWidth / 2.) - (width / 2.));
+        return (T) this;
+    }
+
+    public T centerVertically(ScreenHelper screenHelper) {
+        y = screenHelper.y + screenHelper.imageHeight / 2 - height / 2;
+        return (T) this;
+    }
+
+    public T center(ScreenHelper screenHelper) {
+        centerHorizontally(screenHelper);
+        centerVertically(screenHelper);
         return (T) this;
     }
 
@@ -66,10 +93,11 @@ public class CustomWidget<T extends CustomWidget<T>> implements Renderable, IToo
         return (T) this;
     }
 
-    public void addTo(ScreenHelper screenHelper) {
+    public T addTo(ScreenHelper screenHelper) {
         x += screenHelper.x;
         y += screenHelper.y;
         screenHelper.addWidget(this);
+        return (T) this;
     }
 
     @Override

@@ -56,7 +56,7 @@ public class CustomLabel extends CustomWidget<CustomLabel> {
         int renderX = x;
         int renderY = y;
 
-        if (lateCenter) x -= width / 2;
+        if (lateCenter) renderX -= width / 2;
 
         if (scale != 1) { // only scale when necessary
             guiGraphics.pose().pushPose();

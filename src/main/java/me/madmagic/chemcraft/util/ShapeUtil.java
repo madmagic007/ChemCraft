@@ -2,7 +2,6 @@ package me.madmagic.chemcraft.util;
 
 
 import net.minecraft.core.Direction;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 

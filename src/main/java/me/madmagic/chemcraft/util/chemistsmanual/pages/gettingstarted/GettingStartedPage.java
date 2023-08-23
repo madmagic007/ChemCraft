@@ -1,6 +1,5 @@
 package me.madmagic.chemcraft.util.chemistsmanual.pages.gettingstarted;
 
-import me.madmagic.chemcraft.instances.menus.widgets.CustomLabel;
 import me.madmagic.chemcraft.util.ScreenHelper;
 import me.madmagic.chemcraft.util.chemistsmanual.Page;
 
@@ -12,7 +11,7 @@ public class GettingStartedPage extends Page {
 
     @Override
     protected void pageInit() {
-        new CustomLabel(screenHelper.halfImageWidth, 10, "Getting Started").setScale(1.2f).center().addTo(screenHelper);
+        addTitle("Getting Started", 1.2f);
 
         float scale = .6f;
         int fontHeight = (int) (ScreenHelper.font.lineHeight * scale);

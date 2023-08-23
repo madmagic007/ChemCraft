@@ -31,6 +31,6 @@ public class NetworkSender {
     }
 
     public static void defineMessages() {
-        UpdateCentrifugalPumpMessage.define(channel, getId());
+        UpdateEntMessage.define(channel, getId());
     }
 }

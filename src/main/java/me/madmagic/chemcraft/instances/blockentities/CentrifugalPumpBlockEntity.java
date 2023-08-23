@@ -10,6 +10,7 @@ import me.madmagic.chemcraft.util.ConnectionHandler;
 import me.madmagic.chemcraft.util.GeneralUtil;
 import me.madmagic.chemcraft.util.fluids.DisplacementHandler;
 import me.madmagic.chemcraft.util.fluids.Fluid;
+import me.madmagic.chemcraft.util.networking.INetworkUpdateAble;
 import me.madmagic.chemcraft.util.pipes.IPipeConnectable;
 import me.madmagic.chemcraft.util.pipes.PipeConnectionHandler;
 import me.madmagic.chemcraft.util.pipes.PipeLine;
@@ -27,7 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
-public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuProvider {
+public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuProvider, INetworkUpdateAble {
 
     public static final int maxFlowRate = 50000;
     public int flowRate = 25000;
@@ -75,6 +76,11 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
         return new CentrifugalPumpMenu(pContainerId, this, data);
+    }
+
+    @Override
+    public void updateFromNetworking(int value) {
+        flowRate = value;
     }
 
     public PipeLine getSuckPipeline() {
@@ -137,6 +143,7 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
         PipeLine originLine = getSuckPipeline();
         PipeLine destinationLine = getPressPipeline();
 
+        //todo fix air cooler not detected as set
         if (GeneralUtil.anyNull(originLine, destinationLine) ||
             !originLine.hasContainers() || !destinationLine.hasContainers()) return;
 

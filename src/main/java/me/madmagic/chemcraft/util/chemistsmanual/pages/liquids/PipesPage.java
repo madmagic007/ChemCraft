@@ -1,7 +1,6 @@
 package me.madmagic.chemcraft.util.chemistsmanual.pages.liquids;
 
 import me.madmagic.chemcraft.instances.CustomItems;
-import me.madmagic.chemcraft.instances.menus.widgets.CustomLabel;
 import me.madmagic.chemcraft.util.ScreenHelper;
 import me.madmagic.chemcraft.util.chemistsmanual.CraftingVisual;
 import me.madmagic.chemcraft.util.chemistsmanual.Page;
@@ -17,7 +16,7 @@ public class PipesPage extends Page {
 
     @Override
     protected void pageInit() {
-        new CustomLabel(screenHelper.halfImageWidth, 10, "Pipes").setScale(1.2f).center().addTo(screenHelper);
+        addTitle("Pipes", 1.2f);
 
         float scale = .6f;
         int fontHeight = (int) (ScreenHelper.font.lineHeight * scale);

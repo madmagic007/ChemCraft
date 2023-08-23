@@ -56,6 +56,8 @@ public class AirCoolerBlock extends RotatableBlock implements AutoEntityTickerBl
 
     @Override
     public PipeConnectionType connectionType(BlockState state, Direction direction) {
+        if (direction.getAxis().isVertical()) return PipeConnectionType.NONE;
+
         Direction facing = state.getValue(RotatableBlock.facing);
         Direction relativeDir = Direction.from2DDataValue(
                 (direction.get2DDataValue() - facing.get2DDataValue()) % 4);

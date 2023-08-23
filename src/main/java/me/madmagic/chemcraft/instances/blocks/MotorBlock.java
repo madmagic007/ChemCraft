@@ -1,8 +1,8 @@
 package me.madmagic.chemcraft.instances.blocks;
 
+import me.madmagic.chemcraft.instances.blockentities.MotorBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.base.AutoEntityTickerBlock;
 import me.madmagic.chemcraft.instances.blocks.base.RotatableBlock;
-import me.madmagic.chemcraft.instances.blockentities.MotorBlockEntity;
 import me.madmagic.chemcraft.util.ConnectionHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

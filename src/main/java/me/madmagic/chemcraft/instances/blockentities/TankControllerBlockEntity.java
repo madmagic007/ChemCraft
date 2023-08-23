@@ -1,7 +1,7 @@
 package me.madmagic.chemcraft.instances.blockentities;
 
-import me.madmagic.chemcraft.instances.blockentities.base.BaseBlockEntity;
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
+import me.madmagic.chemcraft.instances.blockentities.base.BaseBlockEntity;
 import me.madmagic.chemcraft.util.fluids.Fluid;
 import me.madmagic.chemcraft.util.fluids.IFluidContainer;
 import me.madmagic.chemcraft.util.fluids.MultiFluidStorage;

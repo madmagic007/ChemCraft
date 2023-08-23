@@ -44,12 +44,13 @@ public class CraftingVisualWidget extends CustomWidget<CraftingVisualWidget> {
     }
 
     @Override
-    public void addTo(ScreenHelper screenHelper) {
+    public CraftingVisualWidget addTo(ScreenHelper screenHelper) {
         super.addTo(screenHelper);
         items.forEach(item -> item.addTo(screenHelper));
+        return this;
     }
 
-//    @Override
+    //    @Override
 //    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
 //        super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
 //        items.forEach(item -> item.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick));

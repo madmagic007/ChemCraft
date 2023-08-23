@@ -13,8 +13,9 @@ public class MainPage extends Page {
 
     @Override
     protected void pageInit() {
-        new CustomLabel(screenHelper.halfImageWidth, 10, "All inclusive manual for").setScale(.9f).center().addTo(screenHelper);
-        new CustomLabel(screenHelper.halfImageWidth, 19, ChemCraft.modName).setScale(1.2f).center().addTo(screenHelper);
+        addTitle("All inclusive manual for", .9f);
+        new CustomLabel(screenHelper.halfImageWidth, 19, ChemCraft.modName).setScale(1.2f)
+                .centerHorizontally(screenHelper).addTo(screenHelper);
 
         addLink(xStart, ScreenHelper.incFontY(yPos, 30), "1. Introduction", "introduction");
         addLink(xStart, ScreenHelper.incFontY(yPos, yInc), "2. Getting started", "starting");

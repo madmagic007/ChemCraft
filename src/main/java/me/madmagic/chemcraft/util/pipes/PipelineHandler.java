@@ -7,7 +7,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
 
 public class PipelineHandler {
 
@@ -54,6 +57,9 @@ public class PipelineHandler {
     }
 
     private static boolean isDesiredPos(BlockPos pos, Level level, Direction dir, IPipeConnectable.PipeConnectionType connectionType) {
-        return PipeConnectionHandler.getConnectionTypeAtDir(pos, dir, level).equals(connectionType);
+        BlockState pipeState = level.getBlockState(pos);
+
+        return PipeConnectionHandler.getConnectionTypeAtDir(pos, dir, level).equals(connectionType)
+                && PipeConnectionHandler.isDirConnected(pipeState, dir);
     }
 }

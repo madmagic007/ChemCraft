@@ -9,7 +9,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.*;
-import java.util.List;
 
 public class PipeShapes {
 

@@ -1,7 +1,6 @@
 package me.madmagic.chemcraft.util.pipes;
 
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.level.block.Blocks;
 
 public enum PipeConnection implements StringRepresentable {
 

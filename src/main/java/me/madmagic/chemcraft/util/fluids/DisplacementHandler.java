@@ -3,7 +3,10 @@ package me.madmagic.chemcraft.util.fluids;
 import me.madmagic.chemcraft.util.pipes.PipeConnectionSet;
 import me.madmagic.chemcraft.util.pipes.PipeLine;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DisplacementHandler {
 

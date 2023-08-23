@@ -1,6 +1,5 @@
 package me.madmagic.chemcraft.util.chemistsmanual.pages.liquids.pumping;
 
-import me.madmagic.chemcraft.instances.menus.widgets.CustomLabel;
 import me.madmagic.chemcraft.util.ScreenHelper;
 import me.madmagic.chemcraft.util.chemistsmanual.Page;
 
@@ -12,7 +11,7 @@ public class PumpingPage1 extends Page {
 
     @Override
     protected void pageInit() {
-        new CustomLabel(screenHelper.halfImageWidth, 10, "Pumping").setScale(1.2f).center().addTo(screenHelper);
+        addTitle("Pumping", 1.2f);
 
         float scale = .6f;
         int fontHeight = (int) (ScreenHelper.font.lineHeight * scale);
