@@ -1,6 +1,7 @@
 package me.madmagic.chemcraft.instances.blocks;
 
 import me.madmagic.chemcraft.instances.blockentities.TankControllerBlockEntity;
+import me.madmagic.chemcraft.instances.blocks.base.BaseBlock;
 import me.madmagic.chemcraft.instances.items.PipeWrenchItem;
 import me.madmagic.chemcraft.util.ConnectionHandler;
 import me.madmagic.chemcraft.util.multiblock.MultiBlockHandler;
@@ -25,7 +26,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
-public class TankControllerBlock extends Block implements IPipeConnectable, EntityBlock {
+public class TankControllerBlock extends BaseBlock implements IPipeConnectable, EntityBlock {
 
     public TankControllerBlock() {
         super(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK));

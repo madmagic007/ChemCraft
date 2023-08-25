@@ -33,4 +33,9 @@ public class GeneralUtil {
     public static int clamp(int val, int max) {
         return Math.max(0, Math.min(max, val));
     }
+
+    public static double mapValue(double factorValue, double factorMax, double theMax) {
+        double theFactor = factorValue / factorMax;
+        return theMax * theFactor;
+    }
 }

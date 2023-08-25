@@ -1,6 +1,6 @@
 package me.madmagic.chemcraft.util.pipes;
 
-import me.madmagic.chemcraft.instances.blocks.base.RotatableBlock;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -52,7 +52,7 @@ public class PipeShapes {
         }
 
         if (connectedDirections.isEmpty()) {
-            switch (state.getValue(RotatableBlock.facing)) {
+            switch (state.getValue(IRotateAble.facing)) {
                 case WEST:
                 case EAST:
                     return get(Direction.NORTH, Direction.SOUTH);

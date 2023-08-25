@@ -32,5 +32,6 @@ public class NetworkSender {
 
     public static void defineMessages() {
         UpdateEntMessage.define(channel, getId());
+        SetRedstoneModeMessage.define(channel, getId());
     }
 }

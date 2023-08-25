@@ -2,11 +2,11 @@ package me.madmagic.chemcraft.instances.blocks;
 
 import me.madmagic.chemcraft.instances.blockentities.WaterExtractorBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.base.AutoEntityTickerBlock;
+import me.madmagic.chemcraft.instances.blocks.base.BaseBlock;
 import me.madmagic.chemcraft.util.pipes.IPipeConnectable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -20,12 +20,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.BooleanOp;
-import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class WaterExtractorBlock extends Block implements AutoEntityTickerBlock, IPipeConnectable, SimpleWaterloggedBlock {
+public class WaterExtractorBlock extends BaseBlock implements AutoEntityTickerBlock, IPipeConnectable, SimpleWaterloggedBlock {
 
     private static final VoxelShape shape = Shapes.join(Block.box(3, 2, 3, 13, 12, 13),
             Block.box(4, 12, 4, 12, 16, 12), BooleanOp.OR);
@@ -35,7 +34,8 @@ public class WaterExtractorBlock extends Block implements AutoEntityTickerBlock,
                 BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
                         .noOcclusion()
                         .dynamicShape()
-                        .forceSolidOn()
+                        .forceSolidOn(),
+                shape
         );
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
     }
@@ -63,11 +63,6 @@ public class WaterExtractorBlock extends Block implements AutoEntityTickerBlock,
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new WaterExtractorBlockEntity(pPos, pState);
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return shape;
     }
 
     @Override

@@ -23,6 +23,7 @@ public class ScreenHelper {
     public static final ResourceLocation cross = getTexture("cross");
     public static final ResourceLocation buttonUp = getTexture("button_up");
     public static final ResourceLocation buttonDown = getTexture("button_down");
+    public static final ResourceLocation buttonBlank = getTexture("button_blank");
     public static final Font font = Minecraft.getInstance().font;
 
     private final ResourceLocation texture;
@@ -112,5 +113,13 @@ public class ScreenHelper {
 
     public static ResourceLocation getTexture(String name) {
         return new ResourceLocation(ChemCraft.modId, String.format("textures/gui/%s.png", name));
+    }
+
+    public static ResourceLocation getMinecraftBlockTexture(String name) {
+        return new ResourceLocation("minecraft", String.format("textures/block/%s.png", name));
+    }
+
+    public static ResourceLocation getMinecraftItemTexture(String name) {
+        return new ResourceLocation("minecraft", String.format("textures/item/%s.png", name));
     }
 }

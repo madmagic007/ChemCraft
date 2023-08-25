@@ -2,7 +2,8 @@ package me.madmagic.chemcraft.instances.blocks;
 
 import me.madmagic.chemcraft.instances.blockentities.TeflonCoaterBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.base.AutoEntityTickerBlock;
-import me.madmagic.chemcraft.instances.blocks.base.RotatableBlock;
+import me.madmagic.chemcraft.instances.blocks.base.BaseBlock;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -10,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class TeflonCoaterBlock extends RotatableBlock implements AutoEntityTickerBlock {
+public class TeflonCoaterBlock extends BaseBlock implements AutoEntityTickerBlock, IRotateAble {
 
     public TeflonCoaterBlock() {
         super(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK));

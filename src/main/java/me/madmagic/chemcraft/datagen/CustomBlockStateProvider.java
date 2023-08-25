@@ -1,7 +1,7 @@
 package me.madmagic.chemcraft.datagen;
 
 import me.madmagic.chemcraft.ChemCraft;
-import me.madmagic.chemcraft.instances.blocks.base.RotatableBlock;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -54,7 +54,7 @@ public class CustomBlockStateProvider extends BlockStateProvider {
                         .forAllStates(state ->
                                 ConfiguredModel.builder()
                                         .modelFile(getModelFile(blockReg.getId()))
-                                        .rotationY((int) state.getValue(RotatableBlock.facing).toYRot())
+                                        .rotationY((int) state.getValue(IRotateAble.facing).toYRot())
                                         .build()
                         ));
     }

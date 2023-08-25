@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class ShapeUtil {
 
-    public static VoxelShape rotate(VoxelShape shapeNorth, Direction to) {
-        final VoxelShape[] buffer = { shapeNorth, Shapes.empty() };
+    public static VoxelShape rotate(VoxelShape defaultShape, Direction to) {
+        final VoxelShape[] buffer = { defaultShape, Shapes.empty() };
 
         final int times = (to.get2DDataValue() - Direction.NORTH.get2DDataValue() + 4) % 4;
         for (int i = 0; i < times; i++) {
@@ -24,10 +24,10 @@ public class ShapeUtil {
         return buffer[0];
     }
 
-    public static Map<Direction, VoxelShape> createRotatedShapesMap(VoxelShape shapeNorth) {
+    public static Map<Direction, VoxelShape> createRotatedShapesMap(VoxelShape defaultShape) {
         Map<Direction, VoxelShape> map = new HashMap<>();
         for (Direction direction : Direction.values())
-            map.put(direction, rotate(shapeNorth, direction));
+            map.put(direction, rotate(defaultShape, direction));
         return map;
     }
 }

@@ -2,8 +2,10 @@ package me.madmagic.chemcraft.instances.blocks;
 
 import me.madmagic.chemcraft.instances.blockentities.CentrifugalPumpBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.base.AutoEntityTickerBlock;
-import me.madmagic.chemcraft.instances.blocks.base.RotatableBlock;
+import me.madmagic.chemcraft.instances.blocks.base.BaseBlock;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import me.madmagic.chemcraft.util.ConnectionHandler;
+import me.madmagic.chemcraft.util.ShapeUtil;
 import me.madmagic.chemcraft.util.pipes.IPipeConnectable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,9 +23,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
 
-public class CentrifugalPumpBlock extends RotatableBlock implements AutoEntityTickerBlock, IPipeConnectable {
+public class CentrifugalPumpBlock extends BaseBlock implements AutoEntityTickerBlock, IPipeConnectable, IRotateAble {
 
-    private static final VoxelShape shapeNorth = Stream.of(
+    private static final VoxelShape shape = Stream.of(
             Block.box(7, 7, 10, 9, 9, 16),
             Block.box(1, 0, 6, 15, 4, 10),
             Block.box(3, 3, 5, 13, 13, 11),
@@ -37,7 +39,7 @@ public class CentrifugalPumpBlock extends RotatableBlock implements AutoEntityTi
                         .noOcclusion()
                         .forceSolidOn()
                         .dynamicShape(),
-                shapeNorth
+                ShapeUtil.createRotatedShapesMap(shape)
         );
     }
 
@@ -46,7 +48,6 @@ public class CentrifugalPumpBlock extends RotatableBlock implements AutoEntityTi
         BlockState state =  super.getStateForPlacement(context);
         BlockPos selfPos = context.getClickedPos();
         Level world = context.getLevel();
-        assert state != null;
 
         Direction motorAtDir = ConnectionHandler.isTouching(selfPos, world, MotorBlock.class);
         if (motorAtDir == null) return state;

@@ -4,7 +4,7 @@ import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.blockentities.base.BaseBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.MotorBlock;
 import me.madmagic.chemcraft.instances.blocks.PipeBlock;
-import me.madmagic.chemcraft.instances.blocks.base.RotatableBlock;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import me.madmagic.chemcraft.instances.menus.CentrifugalPumpMenu;
 import me.madmagic.chemcraft.util.ConnectionHandler;
 import me.madmagic.chemcraft.util.GeneralUtil;
@@ -28,7 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
-public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuProvider, INetworkUpdateAble {
+public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuProvider, INetworkUpdateAble, IRotateAble {
 
     public static final int maxFlowRate = 50000;
     public int flowRate = 25000;
@@ -84,7 +84,7 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
     }
 
     public PipeLine getSuckPipeline() {
-        Direction facing = getBlockState().getValue(RotatableBlock.facing);
+        Direction facing = getFacing(getBlockState());
         BlockPos pipePos = getBlockPos().relative(facing);
         BlockState pipeState = level.getBlockState(pipePos);
 
@@ -104,7 +104,7 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
     }
 
     private BlockPos motorPos() {
-        Direction motorDir = getBlockState().getValue(RotatableBlock.facing).getOpposite();
+        Direction motorDir = getFacing(getBlockState()).getOpposite();
         return worldPosition.relative(motorDir);
     }
 
@@ -118,7 +118,11 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
     }
 
     private boolean hasWorkingMotor() {
-        return (hasMotor() && getMotorEnt().hasEnoughEnergy(flowRate / powerUsageFactor));
+        MotorBlockEntity motorEnt = getMotorEnt();
+        return (hasMotor() &&
+                motorEnt.hasEnoughEnergy(flowRate / powerUsageFactor) &&
+                !motorEnt.isPowered(motorEnt.getBlockState())
+        );
     }
 
     private void performPump(PipeLine origin, PipeLine destination) {

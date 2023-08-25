@@ -1,11 +1,14 @@
 package me.madmagic.chemcraft.instances.blockentities;
 
-import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.blockentities.base.BaseEnergyStorageBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.PipeBlock;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IActivateAble;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IHasRedstonePowerLevel;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRedstoneMode;
 import me.madmagic.chemcraft.instances.menus.AirCoolerMenu;
 import me.madmagic.chemcraft.util.ConnectionHandler;
+import me.madmagic.chemcraft.util.GeneralUtil;
 import me.madmagic.chemcraft.util.fluids.DisplacementHandler;
 import me.madmagic.chemcraft.util.fluids.Fluid;
 import me.madmagic.chemcraft.util.fluids.IFluidContainer;
@@ -24,17 +27,17 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implements MenuProvider, IFluidContainer, INetworkUpdateAble {
+public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implements MenuProvider, IFluidContainer, INetworkUpdateAble, IActivateAble, IHasRedstonePowerLevel, IRedstoneMode {
 
     public static int maxCoolingSpt = 25;
     private static final int airTemp = 25;
     public static final int powerFactor = 3;
 
+    private boolean usePower = false;
     private boolean active = false;
     private int coolingSpt = 15;
 
@@ -72,7 +75,6 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
 
     @Override
     protected int getDataCount() {
-        ChemCraft.info("data count set");
         return 2;
     }
 
@@ -82,24 +84,37 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
     public void tick() {
         int energyUsage = coolingSpt * powerFactor;
 
-        if (hasEnoughEnergy(energyUsage)) {
+        if (hasEnoughEnergy(energyUsage) && usePower) {
             useEnergy(energyUsage);
 
             if (!active) {
                 active = true;
-                level.setBlockAndUpdate(worldPosition, getBlockState().setValue(BlockStateProperties.POWERED, true));
+                level.setBlockAndUpdate(worldPosition, setActive(getBlockState(), true));
             }
         } else if (active) {
             active = false;
-            level.setBlockAndUpdate(worldPosition, getBlockState().setValue(BlockStateProperties.POWERED, false));
+            level.setBlockAndUpdate(worldPosition, setActive(getBlockState(), false));
         }
     }
 
     @Override
     public void receive(BlockPos pipePos, Direction pipeDir, List<Fluid> fluids, double amount) {
-        if (active) fluids.forEach(fluid ->
-            fluid.temperature = Math.max(airTemp, fluid.temperature - coolingSpt)
-        );
+        RedstoneMode mode = getRedstoneMode(getBlockState());
+        int redstoneLevel = getRedstoneLevel(getBlockState());
+        boolean isSame = redstoneLevel == 0 && mode.isWhenLow() || redstoneLevel > 0 && mode.isWhenHigh();
+
+        double spt = switch (isSame ? RedstoneMode.IGNORED : mode) {
+            case IGNORED -> coolingSpt;
+            case SPT_WHEN_HIGH -> GeneralUtil.mapValue(redstoneLevel, 15, coolingSpt);
+            case SPT_WHEN_LOW -> GeneralUtil.mapValue(15 - redstoneLevel, 15, coolingSpt);
+            default -> 0;
+        };
+
+        usePower = spt != 0;
+
+        if (active && usePower) fluids.forEach(fluid -> {
+            fluid.temperature = Math.max(airTemp, fluid.temperature - spt);
+        });
 
         BlockPos coldPipePos = worldPosition.relative(pipeDir.getOpposite());
         BlockState pipeState = level.getBlockState(coldPipePos);

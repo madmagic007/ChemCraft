@@ -1,32 +1,32 @@
 {
   "variants": {
-    "facing=east,powered=false": {
+    "facing=east,active=false": {
       "model": "chemcraft:block/air_cooler",
       "y": 90
     },
-    "facing=east,powered=true": {
+    "facing=east,active=true": {
       "model": "chemcraft:block/air_cooler_on",
       "y": 90
     },
-    "facing=north,powered=false": {
+    "facing=north,active=false": {
       "model": "chemcraft:block/air_cooler"
     },
-    "facing=north,powered=true": {
+    "facing=north,active=true": {
       "model": "chemcraft:block/air_cooler_on"
     },
-    "facing=south,powered=false": {
+    "facing=south,active=false": {
       "model": "chemcraft:block/air_cooler",
       "y": 180
     },
-    "facing=south,powered=true": {
+    "facing=south,active=true": {
       "model": "chemcraft:block/air_cooler_on",
       "y": 180
     },
-    "facing=west,powered=false": {
+    "facing=west,active=false": {
       "model": "chemcraft:block/air_cooler",
       "y": 270
     },
-    "facing=west,powered=true": {
+    "facing=west,active=true": {
       "model": "chemcraft:block/air_cooler_on",
       "y": 270
     }

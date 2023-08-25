@@ -6,6 +6,7 @@ import me.madmagic.chemcraft.instances.menus.base.BaseMenu;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenuScreen;
 import me.madmagic.chemcraft.instances.menus.widgets.ButtonedEditBox;
 import me.madmagic.chemcraft.instances.menus.widgets.CustomLabel;
+import me.madmagic.chemcraft.instances.menus.widgets.RedstoneModeWidget;
 import me.madmagic.chemcraft.util.ScreenHelper;
 import me.madmagic.chemcraft.util.networking.NetworkSender;
 import me.madmagic.chemcraft.util.networking.UpdateEntMessage;
@@ -61,6 +62,10 @@ public class AirCoolerMenu extends BaseMenu<AirCoolerBlockEntity> {
                     .setValue(() -> "Power Consumption: " + menu.data.get(1) * AirCoolerBlockEntity.powerFactor + " FE/t")
                     .addTo(screenHelper)
                     .centerHorizontally(screenHelper);
+
+            new RedstoneModeWidget(4, imageHeight - 35, 16, menu.entity,
+                    menu.entity.getRedstoneMode(menu.entity.getBlockState()))
+                    .addTo(screenHelper);
         }
 
         @Override

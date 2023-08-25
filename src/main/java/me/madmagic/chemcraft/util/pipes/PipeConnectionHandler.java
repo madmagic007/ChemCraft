@@ -81,11 +81,12 @@ public class PipeConnectionHandler {
     public static void updateConnection(BlockState state, BlockPos pos, Direction clickedDir, Level level) {
         BlockState neighborState = level.getBlockState(pos.relative(clickedDir));
 
+        boolean selfDisconnected = isDirDisconnected(state, clickedDir);
         boolean canConnectToDir = canDirConnect(neighborState, clickedDir);
         boolean otherIsDisconnected = isDirDisconnected(neighborState, clickedDir.getOpposite());
 
-        if (otherIsDisconnected) state = setConnected(state, clickedDir);
-        if (!otherIsDisconnected && canConnectToDir) state = setDisConnected(state, clickedDir);
+        if (otherIsDisconnected || selfDisconnected) state = setConnected(state, clickedDir);
+        else if (canConnectToDir) state = setDisConnected(state, clickedDir);
 
         level.setBlockAndUpdate(pos, state);
     }

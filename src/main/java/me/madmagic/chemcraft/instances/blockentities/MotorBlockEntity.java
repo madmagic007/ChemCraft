@@ -3,7 +3,9 @@ package me.madmagic.chemcraft.instances.blockentities;
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.blockentities.base.BaseEnergyStorageBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.CentrifugalPumpBlock;
-import me.madmagic.chemcraft.instances.blocks.base.RotatableBlock;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRedstoneMode;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRedstonePowerAble;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import me.madmagic.chemcraft.instances.menus.MotorMenu;
 import me.madmagic.chemcraft.util.ConnectionHandler;
 import net.minecraft.core.BlockPos;
@@ -19,7 +21,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class MotorBlockEntity extends BaseEnergyStorageBlockEntity implements MenuProvider {
+public class MotorBlockEntity extends BaseEnergyStorageBlockEntity implements MenuProvider, IRedstonePowerAble, IRotateAble, IRedstoneMode {
 
     public MotorBlockEntity(BlockPos pos, BlockState state) {
         super(CustomBlockEntities.motor.get(), pos, state, 10000, 1000);
@@ -43,7 +45,7 @@ public class MotorBlockEntity extends BaseEnergyStorageBlockEntity implements Me
     }
 
     public boolean hasPump() {
-        Direction facingDir = getBlockState().getValue(RotatableBlock.facing);
+        Direction facingDir = getFacing(getBlockState());
         BlockPos pumpPos = worldPosition.relative(facingDir);
         BlockState pumpState = level.getBlockState(pumpPos);
         return ConnectionHandler.isStateOfType(pumpState, CentrifugalPumpBlock.class);

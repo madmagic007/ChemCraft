@@ -2,11 +2,16 @@ package me.madmagic.chemcraft.instances.blocks;
 
 import me.madmagic.chemcraft.instances.blockentities.MotorBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.base.AutoEntityTickerBlock;
-import me.madmagic.chemcraft.instances.blocks.base.RotatableBlock;
+import me.madmagic.chemcraft.instances.blocks.base.BaseBlock;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRedstoneMode;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRedstonePowerAble;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import me.madmagic.chemcraft.util.ConnectionHandler;
+import me.madmagic.chemcraft.util.ShapeUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -20,9 +25,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
 
-public class MotorBlock extends RotatableBlock implements AutoEntityTickerBlock {
+public class MotorBlock extends BaseBlock implements AutoEntityTickerBlock, IRotateAble, IRedstonePowerAble, IRedstoneMode {
 
-    private static final VoxelShape shapeNorth = Stream.of(
+    private static final VoxelShape shape = Stream.of(
             Block.box(7, 7, 0, 9, 9, 3),
             Block.box(2, 0, 3, 14, 4, 13),
             Block.box(4, 4, 3, 12, 12, 15)
@@ -34,7 +39,7 @@ public class MotorBlock extends RotatableBlock implements AutoEntityTickerBlock 
                         .noOcclusion()
                         .forceSolidOn()
                         .dynamicShape(),
-                shapeNorth
+                ShapeUtil.createRotatedShapesMap(shape)
         );
     }
 
@@ -62,5 +67,10 @@ public class MotorBlock extends RotatableBlock implements AutoEntityTickerBlock 
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new MotorBlockEntity(pPos, pState);
+    }
+
+    @Override
+    public boolean canConnectRedstone(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction direction) {
+        return direction.getAxis().isHorizontal();
     }
 }

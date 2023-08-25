@@ -1,6 +1,7 @@
 package me.madmagic.chemcraft.instances.blocks;
 
-import me.madmagic.chemcraft.instances.blocks.base.RotatableBlock;
+import me.madmagic.chemcraft.instances.blocks.base.BaseBlock;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import me.madmagic.chemcraft.instances.items.PipeWrenchItem;
 import me.madmagic.chemcraft.util.pipes.IPipeConnectable;
 import me.madmagic.chemcraft.util.pipes.PipeConnectionHandler;
@@ -25,9 +26,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class PipeBlock extends RotatableBlock implements IPipeConnectable {
-
-    public static String blockName = "pipe";
+public class PipeBlock extends BaseBlock implements IPipeConnectable, IRotateAble {
 
     public PipeBlock() {
         super(
