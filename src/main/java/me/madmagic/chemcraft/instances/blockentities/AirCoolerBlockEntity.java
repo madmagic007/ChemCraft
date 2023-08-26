@@ -57,8 +57,8 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
     }
 
     @Override
-    public void updateFromNetworking(int value) {
-        coolingSpt = value;
+    public void updateFromNetworking(int... values) {
+        coolingSpt = values[0];
     }
 
     @Override

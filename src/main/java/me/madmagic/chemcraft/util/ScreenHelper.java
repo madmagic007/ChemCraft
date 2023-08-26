@@ -20,6 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ScreenHelper {
 
     public static final ResourceLocation noInvPower = getTexture("no_inv_power");
+    public static final ResourceLocation noInv = getTexture("no_inv");
     public static final ResourceLocation cross = getTexture("cross");
     public static final ResourceLocation buttonUp = getTexture("button_up");
     public static final ResourceLocation buttonDown = getTexture("button_down");
@@ -27,7 +28,7 @@ public class ScreenHelper {
     public static final Font font = Minecraft.getInstance().font;
 
     private final ResourceLocation texture;
-    public int x, y, imageWidth, imageHeight, halfImageWidth;
+    public int x, y, imageWidth, imageHeight, halfImageWidth, halfImageHeight;
     private final List<Renderable> widgets = new ArrayList<>();
     private Screen screen;
 
@@ -41,26 +42,24 @@ public class ScreenHelper {
         this.y = y;
         this.imageWidth = imageWidth;
         this.imageHeight = imageHeight;
-        this.halfImageWidth = imageWidth / 2;
+        halfImageWidth = imageWidth / 2;
+        halfImageHeight = imageHeight / 2;
 
         widgets.clear();
     }
 
-    public void addString(int x, int y, String text, float scale) {
-        new CustomLabel(x, y, text).setScale(scale).addTo(this);
+    public CustomLabel addString(int x, int y, String text, float scale) {
+        return new CustomLabel(x, y, text).setScale(scale).addTo(this);
     }
 
     //region widgets
     public CustomWidget<?> addImageButton(int x, int y, int width, int height, ResourceLocation texture, Runnable onPress, String toolTip) {
-        CustomWidget<?> widget = new CustomWidget(x, y, width, height, texture).setOnClick(onPress).addToolTip(toolTip);
-        widget.addTo(this);
-        return widget;
+        return new CustomWidget(x, y, width, height, texture).setOnClick(onPress)
+                .addToolTip(toolTip).addTo(this);
     }
 
     public ContainerDataVerticalGradientWidget addContainerDataVerticalWidget(int x, int y, int width, int height, String itemName, String suffix, ContainerData data, int valuePos, int maxValue, int colorFrom, int colorTo) {
-        ContainerDataVerticalGradientWidget widget = new ContainerDataVerticalGradientWidget(x, y, width, height, itemName, suffix, data, valuePos, maxValue, colorFrom, colorTo);
-        widget.addTo(this);
-        return widget;
+        return new ContainerDataVerticalGradientWidget(x, y, width, height, itemName, suffix, data, valuePos, maxValue, colorFrom, colorTo).addTo(this);
     }
 
     public CustomEditBox createEditorBox(int x, int y, int width, int height) {

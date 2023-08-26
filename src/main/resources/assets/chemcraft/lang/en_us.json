@@ -17,5 +17,7 @@
   "block.chemcraft.teflon_coated_iron_block": "Teflon Coated Iron Block",
   "block.chemcraft.teflon_coater": "Teflon Coater",
   "block.chemcraft.air_cooler": "Air Cooler",
+  "block.chemcraft.level_sensor": "Level Sensor",
+  "block.chemcraft.temperature_sensor": "Temperature Sensor",
   "block.chemcraft.fluorite_ore": "Fluorite Ore"
 }

@@ -98,7 +98,7 @@ public class BaseBlock extends Block {
         AtomicReference<VoxelShape> toReturn = new AtomicReference<>(shape);
 
         ifRotateAble(r ->
-                shapes.getOrDefault(r.getFacing(pState), shape)
+                toReturn.set(shapes.getOrDefault(r.getFacing(pState), shape))
         );
 
         return toReturn.get();

@@ -8,6 +8,8 @@
     "chemcraft:tank_controller",
     "chemcraft:insulated_block",
     "chemcraft:air_cooler",
+    "chemcraft:level_sensor",
+    "chemcraft:temperature_sensor",
     "chemcraft:fluorite_ore",
     "chemcraft:glass_wool",
     "chemcraft:teflon_coated_iron_block"

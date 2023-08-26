@@ -15,7 +15,10 @@ public class CustomWidget<T extends CustomWidget<T>> implements Renderable, IToo
     protected List<Component> toolTips = new ArrayList<>();
 
     protected ResourceLocation texture;
-    protected int x, y, width, height;
+    protected int x;
+    protected int y;
+    public int width;
+    public int height;
     protected boolean isHovered;
     protected Runnable onPress;
     protected boolean lateCenter = false;

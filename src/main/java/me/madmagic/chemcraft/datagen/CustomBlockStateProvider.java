@@ -31,7 +31,6 @@ public class CustomBlockStateProvider extends BlockStateProvider {
     public static void addRotatable(RegistryObject<? extends Block> blockReg) {
         rotatableRegs.add(blockReg);
     }
-
     private final ExistingFileHelper exFileHelper;
     public CustomBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, ChemCraft.modId, exFileHelper);
@@ -41,7 +40,7 @@ public class CustomBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         singleVariantRegs.forEach(blockReg ->
-            simpleBlockWithItem(blockReg.get(), getModelFile(blockReg.getId()))
+                simpleBlockWithItem(blockReg.get(), getModelFile(blockReg.getId()))
         );
 
         cubeAllRegs.forEach(blockReg -> {
@@ -50,13 +49,13 @@ public class CustomBlockStateProvider extends BlockStateProvider {
         });
 
         rotatableRegs.forEach(blockReg ->
-                getVariantBuilder(blockReg.get())
-                        .forAllStates(state ->
-                                ConfiguredModel.builder()
-                                        .modelFile(getModelFile(blockReg.getId()))
-                                        .rotationY((int) state.getValue(IRotateAble.facing).toYRot())
-                                        .build()
-                        ));
+                getVariantBuilder(blockReg.get()).forAllStates(state ->
+                        ConfiguredModel.builder()
+                                .modelFile(getModelFile(blockReg.getId()))
+                                .rotationY((int) state.getValue(IRotateAble.facing).toYRot())
+                                .build()
+                )
+        );
     }
 
     private ModelFile getModelFile(ResourceLocation oldLocation) {

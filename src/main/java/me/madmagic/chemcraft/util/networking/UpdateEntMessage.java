@@ -12,21 +12,21 @@ import java.util.function.Supplier;
 public class UpdateEntMessage {
 
     private final BlockPos pos;
-    private final int value;
+    private final int[] values;
 
-    public UpdateEntMessage(BlockPos pos, int value) {
+    public UpdateEntMessage(BlockPos pos, int... values) {
         this.pos = pos;
-        this.value = value;
+        this.values = values;
     }
 
     public UpdateEntMessage(FriendlyByteBuf buf) {
         pos = buf.readBlockPos();
-        value = buf.readInt();
+        values = buf.readVarIntArray();
     }
 
     public void encode(FriendlyByteBuf buf) {
         buf.writeBlockPos(pos);
-        buf.writeInt(value);
+        buf.writeVarIntArray(values);
     }
 
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
@@ -35,7 +35,7 @@ public class UpdateEntMessage {
             BlockEntity entity = context.getSender().level().getBlockEntity(pos);
             if (!(entity instanceof INetworkUpdateAble ent)) return;
 
-            ent.updateFromNetworking(value);
+            ent.updateFromNetworking(values);
             entity.setChanged();
         });
         return true;

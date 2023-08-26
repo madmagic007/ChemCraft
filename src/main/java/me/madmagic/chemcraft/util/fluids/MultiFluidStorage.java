@@ -9,7 +9,7 @@ import java.util.List;
 public abstract class MultiFluidStorage {
 
     public double capacity;
-    private double temperature = 25;
+    public double temperature = 25;
     public final List<Fluid> fluids = new ArrayList<>();
 
     public MultiFluidStorage(double capacity) {

@@ -14,7 +14,6 @@ import me.madmagic.chemcraft.util.networking.UpdateEntMessage;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
@@ -32,12 +31,10 @@ public class CentrifugalPumpMenu extends BaseMenu<CentrifugalPumpBlockEntity> {
 
     public static class Screen extends BaseMenuScreen<CentrifugalPumpMenu> {
 
-        private static final ResourceLocation texture = ScreenHelper.getTexture("no_inv");
-
         private ToolTippedItem motorDisplay;
 
         public Screen(CentrifugalPumpMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
-            super(pMenu, pPlayerInventory, pTitle, texture, 176, 86);
+            super(pMenu, pPlayerInventory, pTitle, ScreenHelper.noInv, 176, 86);
         }
 
         @Override

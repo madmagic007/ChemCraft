@@ -4,7 +4,6 @@ import me.madmagic.chemcraft.util.energy.CustomEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -17,7 +16,6 @@ public abstract class BaseEnergyStorageBlockEntity extends BaseBlockEntity {
 
     protected LazyOptional<IEnergyStorage> lazyEnergyHandler;
     protected final CustomEnergyStorage energyStorage;
-    protected ContainerData containerData;
 
     public BaseEnergyStorageBlockEntity(BlockEntityType<?> pType, BlockPos pos, BlockState state, int energyCapacity) {
         this(pType, pos, state, energyCapacity, 100);
@@ -30,23 +28,6 @@ public abstract class BaseEnergyStorageBlockEntity extends BaseBlockEntity {
             @Override
             public void energyChanged(int energy) {
                 BaseEnergyStorageBlockEntity.this.energyChanged(energy);
-            }
-        };
-
-        containerData = new ContainerData() {
-            @Override
-            public int get(int pIndex) {
-                return getDataValue(pIndex);
-            }
-
-            @Override
-            public void set(int pIndex, int pValue) {
-                setDataValue(pIndex, pValue);
-            }
-
-            @Override
-            public int getCount() {
-                return getDataCount();
             }
         };
     }
@@ -63,15 +44,18 @@ public abstract class BaseEnergyStorageBlockEntity extends BaseBlockEntity {
         lazyEnergyHandler.invalidate();
     }
 
+    @Override
     protected int getDataValue(int index) {
         if (index == 0) return energyStorage.getEnergyStored();
         return 0;
     }
 
+    @Override
     protected void setDataValue(int index, int value) {
         if (index == 1) energyStorage.setEnergyStored(value);
     }
 
+    @Override
     protected int getDataCount() {
         return 1;
     }

@@ -36,6 +36,10 @@ public class CustomBlocks {
     public static final RegistryObject<Block> insulatedBlock = basicBlock("insulated_block", InsulatedBlock::new);
     public static final RegistryObject<Block> airCoolerBlock = customModelNoVariant("air_cooler", AirCoolerBlock::new);
 
+    //controlling related
+    public static final RegistryObject<Block> levelController = rotateAbleCustomModel("level_sensor", LevelSensorBlock::new);
+    public static final RegistryObject<Block> temperatureSensor = rotateAbleCustomModel("temperature_sensor", TemperatureSensorBlock::new);
+
     //ores
     public static final RegistryObject<Block> fluorite_ore = ore("fluorite_ore", FluoriteOre::new, CustomItems.fluorite);
 

@@ -1,12 +1,14 @@
-// 1.20.1	2023-08-22T23:01:43.4444275	Block States: chemcraft
+// 1.20.1	2023-08-26T17:43:45.8929934	Block States: chemcraft
 5444ec8dce39c2411d1629a34dedda4adca71d0e assets/chemcraft/blockstates/centrifugal_pump.json
 6580ad0d8f1cfa9b358128d5b8f64de2dca7f85f assets/chemcraft/blockstates/fluorite_ore.json
 d25c82fb539290f6cd79e392f33dca511f6686c9 assets/chemcraft/blockstates/glass_wool.json
 dda2eb0cb75a45b5332e9b5171098135be3f9ac5 assets/chemcraft/blockstates/insulated_block.json
-f1f83010d37a4df3b6dbd01758d9569448ead079 assets/chemcraft/blockstates/motor.json
+34886383915ac21a8df569e43cf2ae42e646753b assets/chemcraft/blockstates/level_sensor.json
+a5389e4066dc43313986ebc3b280f061f96dbda2 assets/chemcraft/blockstates/motor.json
 6a3b73829e5fd156573d6fbda5ecf0b19cc7e701 assets/chemcraft/blockstates/tank_controller.json
 08f038a2f66b4db341c2ac41e6493965668596b9 assets/chemcraft/blockstates/teflon_coated_iron_block.json
 677d3677aecd57c6cd5b5422c1f8d10caead1cbd assets/chemcraft/blockstates/teflon_coater.json
+88f0fb3e381b1f4b83f669bcdd23da4c50e1e9be assets/chemcraft/blockstates/temperature_sensor.json
 7e04ea7dd193a447e65d37b317bd42d524750c16 assets/chemcraft/blockstates/water_extractor.json
 9a8bed137782d3c55709b19fc5f4beed3ea10369 assets/chemcraft/models/block/fluorite_ore.json
 ae6d2b8e8308965919d2628b195c9ce8b59e2cc4 assets/chemcraft/models/block/glass_wool.json

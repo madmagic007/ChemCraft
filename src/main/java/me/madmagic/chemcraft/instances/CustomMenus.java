@@ -1,10 +1,7 @@
 package me.madmagic.chemcraft.instances;
 
 import me.madmagic.chemcraft.ChemCraft;
-import me.madmagic.chemcraft.instances.menus.AirCoolerMenu;
-import me.madmagic.chemcraft.instances.menus.CentrifugalPumpMenu;
-import me.madmagic.chemcraft.instances.menus.MotorMenu;
-import me.madmagic.chemcraft.instances.menus.TeflonCoaterMenu;
+import me.madmagic.chemcraft.instances.menus.*;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -23,6 +20,7 @@ public class CustomMenus {
     public static final RegistryObject<MenuType<TeflonCoaterMenu>> teflonCoaterMenu = register("teflon_coater", TeflonCoaterMenu::new);
     public static final RegistryObject<MenuType<MotorMenu>> motorMenu = register("motor", MotorMenu::new);
     public static final RegistryObject<MenuType<AirCoolerMenu>> airCoolerMenu = register("air_cooler", AirCoolerMenu::new);
+    public static final RegistryObject<MenuType<TemperatureSensorMenu>> temperatureSensorMenu = register("temperature_sensor", TemperatureSensorMenu::new);
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> register(String name, IContainerFactory<T> factory) {
         return menus.register(name + "_menu", () -> IForgeMenuType.create(factory));
@@ -37,5 +35,6 @@ public class CustomMenus {
         MenuScreens.register(centrifugalPumpMenu.get(), CentrifugalPumpMenu.Screen::new);
         MenuScreens.register(motorMenu.get(), MotorMenu.Screen::new);
         MenuScreens.register(airCoolerMenu.get(), AirCoolerMenu.Screen::new);
+        MenuScreens.register(temperatureSensorMenu.get(), TemperatureSensorMenu.Screen::new);
     }
 }

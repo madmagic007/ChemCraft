@@ -1,17 +1,152 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,powered=false,redstone_mode=ignored": {
       "model": "chemcraft:block/motor",
       "y": 270
     },
-    "facing=north": {
+    "facing=east,powered=false,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/motor",
+      "y": 270
+    },
+    "facing=east,powered=false,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/motor",
+      "y": 270
+    },
+    "facing=east,powered=false,redstone_mode=when_high": {
+      "model": "chemcraft:block/motor",
+      "y": 270
+    },
+    "facing=east,powered=false,redstone_mode=when_low": {
+      "model": "chemcraft:block/motor",
+      "y": 270
+    },
+    "facing=east,powered=true,redstone_mode=ignored": {
+      "model": "chemcraft:block/motor",
+      "y": 270
+    },
+    "facing=east,powered=true,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/motor",
+      "y": 270
+    },
+    "facing=east,powered=true,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/motor",
+      "y": 270
+    },
+    "facing=east,powered=true,redstone_mode=when_high": {
+      "model": "chemcraft:block/motor",
+      "y": 270
+    },
+    "facing=east,powered=true,redstone_mode=when_low": {
+      "model": "chemcraft:block/motor",
+      "y": 270
+    },
+    "facing=north,powered=false,redstone_mode=ignored": {
       "model": "chemcraft:block/motor",
       "y": 180
     },
-    "facing=south": {
+    "facing=north,powered=false,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/motor",
+      "y": 180
+    },
+    "facing=north,powered=false,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/motor",
+      "y": 180
+    },
+    "facing=north,powered=false,redstone_mode=when_high": {
+      "model": "chemcraft:block/motor",
+      "y": 180
+    },
+    "facing=north,powered=false,redstone_mode=when_low": {
+      "model": "chemcraft:block/motor",
+      "y": 180
+    },
+    "facing=north,powered=true,redstone_mode=ignored": {
+      "model": "chemcraft:block/motor",
+      "y": 180
+    },
+    "facing=north,powered=true,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/motor",
+      "y": 180
+    },
+    "facing=north,powered=true,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/motor",
+      "y": 180
+    },
+    "facing=north,powered=true,redstone_mode=when_high": {
+      "model": "chemcraft:block/motor",
+      "y": 180
+    },
+    "facing=north,powered=true,redstone_mode=when_low": {
+      "model": "chemcraft:block/motor",
+      "y": 180
+    },
+    "facing=south,powered=false,redstone_mode=ignored": {
       "model": "chemcraft:block/motor"
     },
-    "facing=west": {
+    "facing=south,powered=false,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/motor"
+    },
+    "facing=south,powered=false,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/motor"
+    },
+    "facing=south,powered=false,redstone_mode=when_high": {
+      "model": "chemcraft:block/motor"
+    },
+    "facing=south,powered=false,redstone_mode=when_low": {
+      "model": "chemcraft:block/motor"
+    },
+    "facing=south,powered=true,redstone_mode=ignored": {
+      "model": "chemcraft:block/motor"
+    },
+    "facing=south,powered=true,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/motor"
+    },
+    "facing=south,powered=true,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/motor"
+    },
+    "facing=south,powered=true,redstone_mode=when_high": {
+      "model": "chemcraft:block/motor"
+    },
+    "facing=south,powered=true,redstone_mode=when_low": {
+      "model": "chemcraft:block/motor"
+    },
+    "facing=west,powered=false,redstone_mode=ignored": {
+      "model": "chemcraft:block/motor",
+      "y": 90
+    },
+    "facing=west,powered=false,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/motor",
+      "y": 90
+    },
+    "facing=west,powered=false,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/motor",
+      "y": 90
+    },
+    "facing=west,powered=false,redstone_mode=when_high": {
+      "model": "chemcraft:block/motor",
+      "y": 90
+    },
+    "facing=west,powered=false,redstone_mode=when_low": {
+      "model": "chemcraft:block/motor",
+      "y": 90
+    },
+    "facing=west,powered=true,redstone_mode=ignored": {
+      "model": "chemcraft:block/motor",
+      "y": 90
+    },
+    "facing=west,powered=true,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/motor",
+      "y": 90
+    },
+    "facing=west,powered=true,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/motor",
+      "y": 90
+    },
+    "facing=west,powered=true,redstone_mode=when_high": {
+      "model": "chemcraft:block/motor",
+      "y": 90
+    },
+    "facing=west,powered=true,redstone_mode=when_low": {
       "model": "chemcraft:block/motor",
       "y": 90
     }

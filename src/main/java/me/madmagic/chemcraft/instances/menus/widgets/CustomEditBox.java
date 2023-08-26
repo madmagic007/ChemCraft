@@ -16,7 +16,7 @@ public class CustomEditBox extends EditBox {
     private String lastValue = "";
     private Supplier<?> lateValueSup;
     private String lastSupValue = "";
-    private int maxValue = 0;
+    private int maxValue = Integer.MAX_VALUE;
     private Consumer<Integer> onValueChanged;
 
     public CustomEditBox(Font pFont, int pX, int pY, int pWidth, int pHeight) {

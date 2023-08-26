@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-22T23:01:43.4474174	Tags for minecraft:block mod id chemcraft
+// 1.20.1	2023-08-26T16:59:17.0921827	Tags for minecraft:block mod id chemcraft
 b53e6e11d98324243882bb16e23ae041caa559a0 data/forge/tags/blocks/ores.json
 b53e6e11d98324243882bb16e23ae041caa559a0 data/forge/tags/blocks/ores/fluorite.json
-3b69c3816eea76b0e78ba18d0d3116965bf2e076 data/minecraft/tags/blocks/mineable/pickaxe.json
+5830652f607f456c4e910c66604c00438faa3cb7 data/minecraft/tags/blocks/mineable/pickaxe.json

@@ -2,7 +2,7 @@ package me.madmagic.chemcraft.instances.menus.widgets.base;
 
 import net.minecraft.client.gui.GuiGraphics;
 
-public abstract class VerticalGradientWidget<T extends VerticalGradientWidget<T>> extends CustomWidget<VerticalGradientWidget<T>> {
+public abstract class VerticalGradientWidget<T extends VerticalGradientWidget<T>> extends CustomWidget<T> {
 
     private final int colorFrom, colorTo;
     protected final int max;

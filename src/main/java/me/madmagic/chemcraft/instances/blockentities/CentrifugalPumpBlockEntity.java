@@ -79,8 +79,8 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
     }
 
     @Override
-    public void updateFromNetworking(int value) {
-        flowRate = value;
+    public void updateFromNetworking(int... values) {
+        flowRate = values[0];
     }
 
     public PipeLine getSuckPipeline() {
@@ -118,9 +118,10 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
     }
 
     private boolean hasWorkingMotor() {
+        if (!hasMotor()) return false;
+
         MotorBlockEntity motorEnt = getMotorEnt();
-        return (hasMotor() &&
-                motorEnt.hasEnoughEnergy(flowRate / powerUsageFactor) &&
+        return (motorEnt.hasEnoughEnergy(flowRate / powerUsageFactor) &&
                 !motorEnt.isPowered(motorEnt.getBlockState())
         );
     }
