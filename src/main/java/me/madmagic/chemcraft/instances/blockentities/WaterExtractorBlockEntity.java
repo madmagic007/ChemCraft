@@ -64,7 +64,7 @@ public class WaterExtractorBlockEntity extends BaseBlockEntity implements IFluid
     public double extract(BlockPos pipePos, Direction pipeDir, double amount, List<Fluid> extractTo) {
         if (!isInWater) return 0;
 
-        extractTo.add(new Fluid("water", amount, 37));
+        extractTo.add(new Fluid("water", amount, 25));
         return amount;
     }
 

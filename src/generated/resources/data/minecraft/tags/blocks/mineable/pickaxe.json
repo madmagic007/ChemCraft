@@ -10,6 +10,7 @@
     "chemcraft:air_cooler",
     "chemcraft:level_sensor",
     "chemcraft:temperature_sensor",
+    "chemcraft:sensor_receiver",
     "chemcraft:fluorite_ore",
     "chemcraft:glass_wool",
     "chemcraft:teflon_coated_iron_block"

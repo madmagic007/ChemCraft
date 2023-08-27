@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-26T16:59:17.0931784	Loot Tables
+// 1.20.1	2023-08-27T17:14:51.0600989	Loot Tables
 c60c9b76cbc1a5831079a3bf3385cdc66777b6ed data/chemcraft/loot_tables/blocks/air_cooler.json
 f5b03fd4172ca0797272a857247a98b6e544fd47 data/chemcraft/loot_tables/blocks/centrifugal_pump.json
 2ea5a16ae89c7ea68557810b64ee0edeb3c699be data/chemcraft/loot_tables/blocks/fluorite_ore.json
@@ -7,6 +7,7 @@ f5b03fd4172ca0797272a857247a98b6e544fd47 data/chemcraft/loot_tables/blocks/centr
 97d4a7fc6459dd0f0479203185c83f54a67ef015 data/chemcraft/loot_tables/blocks/level_sensor.json
 20efd4c4cd1eeffcbd2d8ee7cfad08d3ea14bc95 data/chemcraft/loot_tables/blocks/motor.json
 16110f4b378177df872b6410f695667bb1a9d53f data/chemcraft/loot_tables/blocks/pipe.json
+a185ba99445465988baf1abe515af182cbc93657 data/chemcraft/loot_tables/blocks/sensor_receiver.json
 20bf0ed8598dce9718e17cfbcf0be58d50590d3a data/chemcraft/loot_tables/blocks/tank_controller.json
 b469810f87a9b0819e0e73adec543fe3fff14777 data/chemcraft/loot_tables/blocks/teflon_coated_iron_block.json
 a687cef9f865480768b12ae9e8f6b4ebca0397f7 data/chemcraft/loot_tables/blocks/teflon_coater.json

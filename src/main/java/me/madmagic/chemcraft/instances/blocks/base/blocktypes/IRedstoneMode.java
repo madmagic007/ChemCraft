@@ -64,5 +64,17 @@ public interface IRedstoneMode {
         public boolean isSptWhenHigh() {
             return this.equals(SPT_WHEN_HIGH);
         }
+
+        public boolean matchesRedstoneSignalIgnoringSPT(int signal) {
+            return isWhenLow() && signal == 0 ||
+                    isWhenHigh() && signal == 15
+                    || isIgnored();
+        }
+
+        public boolean matchesRedstoneSignal(int signal) {
+             return matchesRedstoneSignalIgnoringSPT(signal) ||
+                isSptWhenHigh() && signal != 0 ||
+                    isSptWhenLow() && signal != 15;
+        }
     }
 }

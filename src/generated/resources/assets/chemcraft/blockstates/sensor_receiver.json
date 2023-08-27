@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "chemcraft:block/sensor_receiver",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "chemcraft:block/sensor_receiver",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "chemcraft:block/sensor_receiver"
+    },
+    "facing=west": {
+      "model": "chemcraft:block/sensor_receiver",
+      "y": 90
+    }
+  }
+}

@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-26T16:59:17.0911851	Item Models: chemcraft
+// 1.20.1	2023-08-27T17:14:51.0581051	Item Models: chemcraft
 fed79b395a4b535cf52fc411b2c2b384ba828c2f assets/chemcraft/models/item/air_cooler.json
 303dafc725ed5262ff7ca1346feebedb6dddf013 assets/chemcraft/models/item/centrifugal_pump.json
 f44ba9cab3c300dd77d3e5f0ba4f80df4e2735ac assets/chemcraft/models/item/chemists_manual.json
@@ -7,6 +7,7 @@ f44ba9cab3c300dd77d3e5f0ba4f80df4e2735ac assets/chemcraft/models/item/chemists_m
 49d34747258197ae00820fb06a064d58eafed00a assets/chemcraft/models/item/motor.json
 23d81023caf6d042aa9205c95d246f0b6d604c04 assets/chemcraft/models/item/pipe.json
 0835355cc01459ba7feec3a8f1bd5c8102da4f6f assets/chemcraft/models/item/pipe_wrench.json
+de1b4e6d40249d9574005c83c6129580eddffeb4 assets/chemcraft/models/item/sensor_receiver.json
 a43ac2a572e17575efc4d2a58991f3a5d11f4a91 assets/chemcraft/models/item/tank_controller.json
 3b3d8a62ad7aace6c90b8386efbdf0591214dd0f assets/chemcraft/models/item/teflon_coated_iron_ingot.json
 d102fed3f4c0a4c23d4eb8d07a9f89a77f1c2124 assets/chemcraft/models/item/teflon_coater.json

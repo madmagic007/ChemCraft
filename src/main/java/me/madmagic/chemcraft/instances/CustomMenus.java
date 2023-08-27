@@ -20,7 +20,7 @@ public class CustomMenus {
     public static final RegistryObject<MenuType<TeflonCoaterMenu>> teflonCoaterMenu = register("teflon_coater", TeflonCoaterMenu::new);
     public static final RegistryObject<MenuType<MotorMenu>> motorMenu = register("motor", MotorMenu::new);
     public static final RegistryObject<MenuType<AirCoolerMenu>> airCoolerMenu = register("air_cooler", AirCoolerMenu::new);
-    public static final RegistryObject<MenuType<TemperatureSensorMenu>> temperatureSensorMenu = register("temperature_sensor", TemperatureSensorMenu::new);
+    public static final RegistryObject<MenuType<SensorMenu>> sensorMenu = register("sensor", SensorMenu::new);
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> register(String name, IContainerFactory<T> factory) {
         return menus.register(name + "_menu", () -> IForgeMenuType.create(factory));
@@ -35,6 +35,6 @@ public class CustomMenus {
         MenuScreens.register(centrifugalPumpMenu.get(), CentrifugalPumpMenu.Screen::new);
         MenuScreens.register(motorMenu.get(), MotorMenu.Screen::new);
         MenuScreens.register(airCoolerMenu.get(), AirCoolerMenu.Screen::new);
-        MenuScreens.register(temperatureSensorMenu.get(), TemperatureSensorMenu.Screen::new);
+        MenuScreens.register(sensorMenu.get(), SensorMenu.Screen::new);
     }
 }

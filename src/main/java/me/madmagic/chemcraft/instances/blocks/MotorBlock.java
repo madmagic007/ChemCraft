@@ -30,7 +30,8 @@ public class MotorBlock extends BaseBlock implements AutoEntityTickerBlock, IRot
     private static final VoxelShape shape = Stream.of(
             Block.box(7, 7, 0, 9, 9, 3),
             Block.box(2, 0, 3, 14, 4, 13),
-            Block.box(4, 4, 3, 12, 12, 15)
+            Block.box(4, 4, 3, 12, 12, 15),
+            Block.box(5, 12, 5, 11, 16, 11)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public MotorBlock() {

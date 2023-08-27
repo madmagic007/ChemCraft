@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "chemcraft:block/level_sensor",
-		"particle": "chemcraft:block/level_sensor"
+		"0": "chemcraft:block/sensor_receiver",
+		"particle": "chemcraft:block/sensor_receiver"
 	},
 	"elements": [
 		{

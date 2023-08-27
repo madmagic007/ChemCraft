@@ -1,77 +1,17 @@
 {
   "variants": {
-    "facing=east,redstone_mode=ignored": {
+    "facing=east": {
       "model": "chemcraft:block/temperature_sensor",
       "y": 270
     },
-    "facing=east,redstone_mode=spt_when_high": {
-      "model": "chemcraft:block/temperature_sensor",
-      "y": 270
-    },
-    "facing=east,redstone_mode=spt_when_low": {
-      "model": "chemcraft:block/temperature_sensor",
-      "y": 270
-    },
-    "facing=east,redstone_mode=when_high": {
-      "model": "chemcraft:block/temperature_sensor",
-      "y": 270
-    },
-    "facing=east,redstone_mode=when_low": {
-      "model": "chemcraft:block/temperature_sensor",
-      "y": 270
-    },
-    "facing=north,redstone_mode=ignored": {
+    "facing=north": {
       "model": "chemcraft:block/temperature_sensor",
       "y": 180
     },
-    "facing=north,redstone_mode=spt_when_high": {
-      "model": "chemcraft:block/temperature_sensor",
-      "y": 180
-    },
-    "facing=north,redstone_mode=spt_when_low": {
-      "model": "chemcraft:block/temperature_sensor",
-      "y": 180
-    },
-    "facing=north,redstone_mode=when_high": {
-      "model": "chemcraft:block/temperature_sensor",
-      "y": 180
-    },
-    "facing=north,redstone_mode=when_low": {
-      "model": "chemcraft:block/temperature_sensor",
-      "y": 180
-    },
-    "facing=south,redstone_mode=ignored": {
+    "facing=south": {
       "model": "chemcraft:block/temperature_sensor"
     },
-    "facing=south,redstone_mode=spt_when_high": {
-      "model": "chemcraft:block/temperature_sensor"
-    },
-    "facing=south,redstone_mode=spt_when_low": {
-      "model": "chemcraft:block/temperature_sensor"
-    },
-    "facing=south,redstone_mode=when_high": {
-      "model": "chemcraft:block/temperature_sensor"
-    },
-    "facing=south,redstone_mode=when_low": {
-      "model": "chemcraft:block/temperature_sensor"
-    },
-    "facing=west,redstone_mode=ignored": {
-      "model": "chemcraft:block/temperature_sensor",
-      "y": 90
-    },
-    "facing=west,redstone_mode=spt_when_high": {
-      "model": "chemcraft:block/temperature_sensor",
-      "y": 90
-    },
-    "facing=west,redstone_mode=spt_when_low": {
-      "model": "chemcraft:block/temperature_sensor",
-      "y": 90
-    },
-    "facing=west,redstone_mode=when_high": {
-      "model": "chemcraft:block/temperature_sensor",
-      "y": 90
-    },
-    "facing=west,redstone_mode=when_low": {
+    "facing=west": {
       "model": "chemcraft:block/temperature_sensor",
       "y": 90
     }

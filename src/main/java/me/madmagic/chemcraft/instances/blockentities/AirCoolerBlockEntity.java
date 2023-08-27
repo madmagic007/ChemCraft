@@ -37,9 +37,9 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
     private static final int airTemp = 25;
     public static final int powerFactor = 3;
 
-    private boolean usePower = false;
     private boolean active = false;
     private int coolingSpt = 15;
+    private double actualCooling = coolingSpt;
 
     public AirCoolerBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(CustomBlockEntities.airCooler.get(), pPos, pBlockState, 1000);
@@ -82,9 +82,20 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
 
     @Override
     public void tick() {
+        RedstoneMode mode = getRedstoneMode(getBlockState());
+        int redstoneLevel = getRedstoneLevel(getBlockState());
+        boolean matches = mode.matchesRedstoneSignal(redstoneLevel);
+
         int energyUsage = coolingSpt * powerFactor;
 
-        if (hasEnoughEnergy(energyUsage) && usePower) {
+        actualCooling = switch (mode.matchesRedstoneSignalIgnoringSPT(redstoneLevel) ? RedstoneMode.IGNORED : mode) {
+            case IGNORED -> coolingSpt;
+            case SPT_WHEN_HIGH -> GeneralUtil.mapValue(redstoneLevel, 15, coolingSpt);
+            case SPT_WHEN_LOW -> GeneralUtil.mapValue(15 - redstoneLevel, 15, coolingSpt);
+            default -> 0;
+        };
+
+        if (hasEnoughEnergy(energyUsage) && actualCooling != 0 && matches) {
             useEnergy(energyUsage);
 
             if (!active) {
@@ -99,21 +110,8 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
 
     @Override
     public void receive(BlockPos pipePos, Direction pipeDir, List<Fluid> fluids, double amount) {
-        RedstoneMode mode = getRedstoneMode(getBlockState());
-        int redstoneLevel = getRedstoneLevel(getBlockState());
-        boolean isSame = redstoneLevel == 0 && mode.isWhenLow() || redstoneLevel > 0 && mode.isWhenHigh();
-
-        double spt = switch (isSame ? RedstoneMode.IGNORED : mode) {
-            case IGNORED -> coolingSpt;
-            case SPT_WHEN_HIGH -> GeneralUtil.mapValue(redstoneLevel, 15, coolingSpt);
-            case SPT_WHEN_LOW -> GeneralUtil.mapValue(15 - redstoneLevel, 15, coolingSpt);
-            default -> 0;
-        };
-
-        usePower = spt != 0;
-
-        if (active && usePower) fluids.forEach(fluid -> {
-            fluid.temperature = Math.max(airTemp, fluid.temperature - spt);
+        if (active) fluids.forEach(fluid -> {
+            fluid.temperature = Math.max(airTemp, fluid.temperature - actualCooling);
         });
 
         BlockPos coldPipePos = worldPosition.relative(pipeDir.getOpposite());

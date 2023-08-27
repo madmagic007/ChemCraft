@@ -2,8 +2,12 @@ package me.madmagic.chemcraft.instances;
 
 import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.datagen.*;
+import me.madmagic.chemcraft.instances.blockentities.sensors.LevelSensorBlockEntity;
+import me.madmagic.chemcraft.instances.blockentities.sensors.SensorReceiverBlockEntity;
+import me.madmagic.chemcraft.instances.blockentities.sensors.TemperatureSensorBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.*;
 import me.madmagic.chemcraft.instances.blocks.base.BaseNineCraftingBlock;
+import me.madmagic.chemcraft.instances.blocks.base.BaseSensorBlock;
 import me.madmagic.chemcraft.instances.blocks.ores.FluoriteOre;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -37,8 +41,9 @@ public class CustomBlocks {
     public static final RegistryObject<Block> airCoolerBlock = customModelNoVariant("air_cooler", AirCoolerBlock::new);
 
     //controlling related
-    public static final RegistryObject<Block> levelController = rotateAbleCustomModel("level_sensor", LevelSensorBlock::new);
-    public static final RegistryObject<Block> temperatureSensor = rotateAbleCustomModel("temperature_sensor", TemperatureSensorBlock::new);
+    public static final RegistryObject<Block> levelSensor = BaseSensorBlock.registerSensorBlock("level_sensor", LevelSensorBlockEntity::new);
+    public static final RegistryObject<Block> temperatureSensor = BaseSensorBlock.registerSensorBlock("temperature_sensor", TemperatureSensorBlockEntity::new);
+    public static final RegistryObject<Block> sensorReceiver = BaseSensorBlock.registerSensorBlock("sensor_receiver", SensorReceiverBlockEntity::new);
 
     //ores
     public static final RegistryObject<Block> fluorite_ore = ore("fluorite_ore", FluoriteOre::new, CustomItems.fluorite);
@@ -69,7 +74,7 @@ public class CustomBlocks {
         return blockReg;
     }
 
-    private static RegistryObject<Block> rotateAbleCustomModel(String name, Supplier<Block> blockSup) {
+    public static RegistryObject<Block> rotateAbleCustomModel(String name, Supplier<Block> blockSup) {
         RegistryObject<Block> blockReg = registerBlock(name, blockSup);
         CustomLootTableProvider.addDropSelf(blockReg);
         CustomItemModelProvider.addSpecialBlockItem(blockReg);

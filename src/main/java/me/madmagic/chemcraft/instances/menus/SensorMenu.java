@@ -1,7 +1,7 @@
 package me.madmagic.chemcraft.instances.menus;
 
 import me.madmagic.chemcraft.instances.CustomMenus;
-import me.madmagic.chemcraft.instances.blockentities.TemperatureSensorBlockEntity;
+import me.madmagic.chemcraft.instances.blockentities.sensors.BaseSensorBlockEntity;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenu;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenuScreen;
 import me.madmagic.chemcraft.instances.menus.widgets.CustomLabel;
@@ -16,19 +16,19 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-public class TemperatureSensorMenu extends BaseMenu<TemperatureSensorBlockEntity> {
+public class SensorMenu extends BaseMenu<BaseSensorBlockEntity> {
 
-    public TemperatureSensorMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
+    public SensorMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         this(id, getEnt(inv, extraData), new SimpleContainerData(2));
     }
 
-    public TemperatureSensorMenu(int id, BlockEntity ent, ContainerData data) {
-        super(id, CustomMenus.temperatureSensorMenu.get(), ent, data);
+    public SensorMenu(int id, BlockEntity ent, ContainerData data) {
+        super(id, CustomMenus.sensorMenu.get(), ent, data);
     }
 
-    public static class Screen extends BaseMenuScreen<TemperatureSensorMenu> {
+    public static class Screen extends BaseMenuScreen<SensorMenu> {
 
-        public Screen(TemperatureSensorMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+        public Screen(SensorMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
             super(pMenu, pPlayerInventory, pTitle, ScreenHelper.noInv, 176, 86);
         }
 
@@ -37,10 +37,10 @@ public class TemperatureSensorMenu extends BaseMenu<TemperatureSensorBlockEntity
             super.init();
 
             CustomLabel label1 = screenHelper.addString(titleLabelX, screenHelper.halfImageHeight - 20,
-                    "Emit redstone signal 0 at temp.: ", 1f);
+                    String.format("Emit redstone signal 0 at %s.: ", menu.entity.getLabelToolTip()), 1f);
 
             CustomLabel label2 = screenHelper.addString(titleLabelX, screenHelper.halfImageHeight + 12,
-                    "Emit redstone signal 15 at temp.: ", 1f);
+                    String.format("Emit redstone signal 15 at %s.: ", menu.entity.getLabelToolTip()), 1f);
 
             addRenderableWidget(
                     screenHelper.createEditorBox(screenHelper.imageWidth - 30,
@@ -49,6 +49,7 @@ public class TemperatureSensorMenu extends BaseMenu<TemperatureSensorBlockEntity
                             .setMaxCharLength(3)
                             .setOnValueChanged(val -> NetworkSender.sendToServer(new UpdateEntMessage(menu.entity.getBlockPos(), val, menu.data.get(1))))
                             .setValue(() -> menu.data.get(0))
+                            .setTooltip(String.format("%s for redstone signal 0", menu.entity.getEditToolTip()))
                             .centerHorizontally(screenHelper)
             );
 
@@ -59,6 +60,7 @@ public class TemperatureSensorMenu extends BaseMenu<TemperatureSensorBlockEntity
                             .setMaxCharLength(3)
                             .setOnValueChanged(val -> NetworkSender.sendToServer(new UpdateEntMessage(menu.entity.getBlockPos(), menu.data.get(0), val)))
                             .setValue(() -> menu.data.get(1))
+                            .setTooltip(String.format("%s for redstone signal 15", menu.entity.getEditToolTip()))
                             .centerHorizontally(screenHelper)
             );
         }

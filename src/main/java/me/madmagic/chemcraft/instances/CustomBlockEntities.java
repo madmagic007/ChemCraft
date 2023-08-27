@@ -2,6 +2,9 @@ package me.madmagic.chemcraft.instances;
 
 import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.blockentities.*;
+import me.madmagic.chemcraft.instances.blockentities.sensors.LevelSensorBlockEntity;
+import me.madmagic.chemcraft.instances.blockentities.sensors.SensorReceiverBlockEntity;
+import me.madmagic.chemcraft.instances.blockentities.sensors.TemperatureSensorBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -21,6 +24,8 @@ public class CustomBlockEntities {
     public static final RegistryObject<BlockEntityType<BlockEntity>> fluoriteCoater = register(TeflonCoaterBlockEntity::new, CustomBlocks.fluoriteCoater);
     public static final RegistryObject<BlockEntityType<BlockEntity>> airCooler = register(AirCoolerBlockEntity::new, CustomBlocks.airCoolerBlock);
     public static final RegistryObject<BlockEntityType<BlockEntity>> temperatureSensor = register(TemperatureSensorBlockEntity::new, CustomBlocks.temperatureSensor);
+    public static final RegistryObject<BlockEntityType<BlockEntity>> levelSensor = register(LevelSensorBlockEntity::new, CustomBlocks.levelSensor);
+    public static final RegistryObject<BlockEntityType<BlockEntity>> sensorReceiver = register(SensorReceiverBlockEntity::new, CustomBlocks.sensorReceiver);
 
     private static RegistryObject<BlockEntityType<BlockEntity>> register(BlockEntityType.BlockEntitySupplier<BlockEntity> sup, RegistryObject<Block> blockReg) {
         String name = blockReg.getId().getPath();
