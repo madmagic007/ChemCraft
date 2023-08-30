@@ -18,4 +18,9 @@ public class CustomItemSlot extends SlotItemHandler {
     public boolean mayPlace(@NotNull ItemStack stack) {
         return template.mayPlace(stack, false);
     }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+    }
 }

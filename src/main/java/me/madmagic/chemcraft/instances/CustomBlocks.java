@@ -7,7 +7,7 @@ import me.madmagic.chemcraft.instances.blockentities.sensors.SensorReceiverBlock
 import me.madmagic.chemcraft.instances.blockentities.sensors.TemperatureSensorBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.*;
 import me.madmagic.chemcraft.instances.blocks.base.BaseNineCraftingBlock;
-import me.madmagic.chemcraft.instances.blocks.base.BaseSensorBlock;
+import me.madmagic.chemcraft.instances.blocks.BaseSensorBlock;
 import me.madmagic.chemcraft.instances.blocks.ores.FluoriteOre;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

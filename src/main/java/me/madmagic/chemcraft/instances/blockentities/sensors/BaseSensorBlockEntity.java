@@ -14,9 +14,9 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public abstract class BaseSensorBlockEntity extends BaseBlockEntity implements IRotateAble, MenuProvider, INetworkUpdateAble {
 
-    private int valForRedstone0;
-    private int valForRedstone15;
-    public int lastOutputted = 0;
+    protected int valForRedstone0 = 0;
+    protected int valForRedstone15 = 100;
+    private int lastOutputted = 0;
 
     public BaseSensorBlockEntity(BlockEntityType<?> entityType, BlockPos pPos, BlockState pBlockState) {
         super(entityType, pPos, pBlockState);
@@ -25,8 +25,14 @@ public abstract class BaseSensorBlockEntity extends BaseBlockEntity implements I
     @Override
     public void tick() {
         int curSig = getRedstoneSignalOutput();
-        if (curSig != lastOutputted)
+        if (curSig != lastOutputted) {
+            lastOutputted = curSig;
             level.updateNeighborsAt(getBlockPos(), getBlockState().getBlock());
+
+            BlockPos connectedPos = getBlockPos().relative(getFacing(getBlockState()));
+            BlockState connectedState = level.getBlockState(connectedPos);
+            level.updateNeighborsAt(connectedPos, connectedState.getBlock());
+        }
     }
 
     public int getRedstoneSignalOutput() {

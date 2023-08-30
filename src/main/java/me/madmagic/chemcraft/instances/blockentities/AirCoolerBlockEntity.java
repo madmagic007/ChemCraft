@@ -84,7 +84,6 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
     public void tick() {
         RedstoneMode mode = getRedstoneMode(getBlockState());
         int redstoneLevel = getRedstoneLevel(getBlockState());
-        boolean matches = mode.matchesRedstoneSignal(redstoneLevel);
 
         int energyUsage = coolingSpt * powerFactor;
 
@@ -95,14 +94,14 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
             default -> 0;
         };
 
-        if (hasEnoughEnergy(energyUsage) && actualCooling != 0 && matches) {
+        if (hasEnoughEnergy(energyUsage) && actualCooling != 0) {
             useEnergy(energyUsage);
 
             if (!active) {
                 active = true;
                 level.setBlockAndUpdate(worldPosition, setActive(getBlockState(), true));
             }
-        } else if (active) {
+        } else if (active || actualCooling == 0) {
             active = false;
             level.setBlockAndUpdate(worldPosition, setActive(getBlockState(), false));
         }

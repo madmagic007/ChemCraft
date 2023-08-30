@@ -1,6 +1,5 @@
 package me.madmagic.chemcraft.instances.blockentities.base;
 
-import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.menus.base.CustomItemSlotTemplate;
 import me.madmagic.chemcraft.util.itemstorage.WrappedItemStackHandler;
 import net.minecraft.core.BlockPos;
@@ -70,7 +69,6 @@ public abstract class BaseEnergyItemStorageBlockEntity extends BaseEnergyStorage
     public void loadFromNBT(CompoundTag nbt) {
         super.loadFromNBT(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("chemcraft.inventory"));
-        ChemCraft.info(itemHandler.getStackInSlot(2).getDisplayName());
     }
 
     @Override

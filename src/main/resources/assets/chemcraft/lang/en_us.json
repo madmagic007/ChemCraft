@@ -19,5 +19,6 @@
   "block.chemcraft.air_cooler": "Air Cooler",
   "block.chemcraft.level_sensor": "Level Sensor",
   "block.chemcraft.temperature_sensor": "Temperature Sensor",
+  "block.chemcraft.sensor_receiver": "Sensor Receiver",
   "block.chemcraft.fluorite_ore": "Fluorite Ore"
 }

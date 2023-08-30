@@ -1,8 +1,10 @@
 package me.madmagic.chemcraft.instances.blockentities.sensors;
 
+import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
-import me.madmagic.chemcraft.instances.blockentities.base.BaseBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
+import me.madmagic.chemcraft.instances.menus.SensorReceiverMenu;
+import me.madmagic.chemcraft.util.fluids.IFluidContainer;
 import me.madmagic.chemcraft.util.networking.INetworkUpdateAble;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -11,41 +13,54 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class SensorReceiverBlockEntity extends BaseBlockEntity implements IRotateAble, MenuProvider, INetworkUpdateAble {
+public class SensorReceiverBlockEntity extends BaseSensorBlockEntity implements IRotateAble, MenuProvider, INetworkUpdateAble {
 
-    public int lastOutputted = 0;
+    public BlockPos sourcePos;
 
     public SensorReceiverBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(CustomBlockEntities.sensorReceiver.get(), pPos, pBlockState);
     }
 
-    @Override
-    public void tick() {
-        int curSig = getRedstoneSignalOutput();
-        if (curSig != lastOutputted)
-            level.updateNeighborsAt(getBlockPos(), getBlockState().getBlock());
-    }
-
     public int getRedstoneSignalOutput() {
-//        BlockEntity ent = level.getBlockEntity(getBlockPos().relative(getFacing(getBlockState())));
-//        if (!(ent instanceof IFluidContainer container)) return 0;
-//
-//        int range = valForRedstone15 - valForRedstone0;
-//        double mappedValue = GeneralUtil.mapValue(getValueForSignalCalculation(container) - valForRedstone0, range, 15);
-//        return (int) Math.round(Math.max(0, Math.min(mappedValue, 15)));
+        if (sourcePos == null) return 0;
+
+        BlockEntity entAtPos = level.getBlockEntity(sourcePos);
+        if (entAtPos instanceof BaseSensorBlockEntity sensor) return sensor.getRedstoneSignalOutput();
+        else {
+            ChemCraft.info("changed");
+            sourcePos = null;
+
+            setChanged();
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
+        }
 
         return 0;
     }
 
     @Override
+    public void tick() {
+        super.tick();
+    }
+
+    @Override
     public void loadFromNBT(CompoundTag nbt) {
+        ChemCraft.info(nbt);
+        String str = nbt.getString("sourcePos");
+        if (!str.isEmpty()) sourcePos = BlockPos.of(Long.parseLong(str));
+        else sourcePos = null; //very important
     }
 
     @Override
     public void saveToNBT(CompoundTag nbt) {
+        if (sourcePos != null)
+            nbt.putString("sourcePos", String.valueOf(sourcePos.asLong()));
+        else
+            nbt.putString("sourcePos", ""); //why oh why do i need this
     }
 
     @Override
@@ -56,33 +71,34 @@ public class SensorReceiverBlockEntity extends BaseBlockEntity implements IRotat
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
+        return new SensorReceiverMenu(pContainerId, this);
+    }
+
+    @Override
+    protected double getValueForSignalCalculation(IFluidContainer container) {
+        return 0;
+    }
+
+    @Override
+    public String getLabelToolTip() {
         return null;
     }
 
-//    @Override
-//    protected int getDataCount() {
-//        return 2;
-//    }
-//
-//    @Override
-//    protected int getDataValue(int index) {
-//        if (index == 0) return valForRedstone0;
-//        return valForRedstone15;
-//    }
-//
-//    @Override
-//    protected void setDataValue(int index, int value) {
-//        if (index == 0) valForRedstone0 = value;
-//        valForRedstone15 = value;
-//    }
+    @Override
+    public String getEditToolTip() {
+        return null;
+    }
 
-//    @Override
-//    public void updateFromNetworking(int... values) {
-//        valForRedstone0 = values[0];
-//        valForRedstone15 = values[1];
-//        setChanged();
-//    }
+    @Override
+    protected int getDataCount() {
+        return 0;
+    }
 
-//    public abstract String getLabelToolTip();
-//    public abstract String getEditToolTip();
+    @Override
+    protected void setDataValue(int index, int value) {}
+
+    @Override
+    protected int getDataValue(int index) {
+        return 0;
+    }
 }

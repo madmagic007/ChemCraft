@@ -62,10 +62,11 @@ public class BaseBlock extends Block {
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (pLevel.isClientSide) return InteractionResult.PASS;
-
         BlockEntity entity = pLevel.getBlockEntity(pPos);
-        if (!(entity instanceof MenuProvider ent)) return InteractionResult.FAIL;
+        if (!(entity instanceof MenuProvider ent))
+            return InteractionResult.FAIL;
+        else if (pLevel.isClientSide)
+            return InteractionResult.SUCCESS;
 
         NetworkHooks.openScreen((ServerPlayer) pPlayer, ent, pPos);
 
