@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "chemcraft:crude_oil_extractor"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "chemcraft:blocks/crude_oil_extractor"
+}

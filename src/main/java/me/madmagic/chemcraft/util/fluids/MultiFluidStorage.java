@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public abstract class MultiFluidStorage {
+public class MultiFluidStorage {
 
     public double capacity;
     public double temperature = 25;
@@ -101,6 +101,7 @@ public abstract class MultiFluidStorage {
 
     public void saveToNBT(CompoundTag nbt) {
         CompoundTag fluidsTag = new CompoundTag();
+        fluidsTag.putInt("capacity", (int) capacity);
 
         fluids.forEach(fluid -> {
             CompoundTag fluidTag = new CompoundTag();
@@ -115,6 +116,7 @@ public abstract class MultiFluidStorage {
 
     public void loadFromNBT(CompoundTag nbt) {
         CompoundTag fluidsTag = (CompoundTag) nbt.get("chemcraft.fluids");
+        capacity = fluidsTag.getInt("capacity");
         fluidsTag.getAllKeys().forEach(fluidName -> {
             CompoundTag fluidTag = fluidsTag.getCompound(fluidName);
 

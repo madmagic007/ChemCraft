@@ -19,7 +19,7 @@ public class RedstoneModeWidget extends CustomWidget<RedstoneModeWidget> {
     private final BlockEntity entity;
 
     public RedstoneModeWidget(int x, int y, int width, IRedstoneMode entity, IRedstoneMode.RedstoneMode defaultMode) {
-        super(x, y, width, 16, ScreenHelper.buttonBlank);
+        super(x, y, width, width, ScreenHelper.buttonBlank);
         this.entity = (BlockEntity) entity;
         mode = defaultMode;
         setToolTips(mode.toolTip);
@@ -53,9 +53,8 @@ public class RedstoneModeWidget extends CustomWidget<RedstoneModeWidget> {
     private static final ResourceLocation sptWhenLow = ScreenHelper.getTexture("spt_when_low");
 
     @Override
-    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
-        pGuiGraphics.blit(
+    public void customRender(GuiGraphics guiGraphics, int x, int y) {
+        guiGraphics.blit(
                 switch (mode) {
                     case WHEN_HIGH -> whenHigh;
                     case WHEN_LOW -> whenLow;
@@ -63,5 +62,6 @@ public class RedstoneModeWidget extends CustomWidget<RedstoneModeWidget> {
                     case SPT_WHEN_LOW -> sptWhenLow;
                     default -> barrier;
                 }, x + 3, y + 3, 0, 0, 0, width - 6, height - 6, width - 6, height - 6);
+
     }
 }

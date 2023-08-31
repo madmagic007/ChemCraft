@@ -23,9 +23,9 @@ public interface IRedstoneMode {
     }
 
     enum RedstoneMode implements StringRepresentable {
-        IGNORED("ignored", "Ignored"),
-        WHEN_HIGH("when_high", "Active when high"),
-        WHEN_LOW("when_low", "Active when low"),
+        IGNORED("ignored", "Redstone Ignored"),
+        WHEN_HIGH("when_high", "Active when redstone high"),
+        WHEN_LOW("when_low", "Active when redstone low"),
         SPT_WHEN_HIGH("spt_when_high", "Setpoint when redstone level 15"),
         SPT_WHEN_LOW("spt_when_low", "Setpoint when redstone level 0");
 

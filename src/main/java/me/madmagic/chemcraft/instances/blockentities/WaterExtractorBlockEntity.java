@@ -81,7 +81,7 @@ public class WaterExtractorBlockEntity extends BaseBlockEntity implements IFluid
     };
 
     @Override
-    public MultiFluidStorage getFluidStorage() {
+    public MultiFluidStorage getFluidStorage(BlockPos pipePos, Direction pipeDir) {
         return fluidStorage;
     }
 }

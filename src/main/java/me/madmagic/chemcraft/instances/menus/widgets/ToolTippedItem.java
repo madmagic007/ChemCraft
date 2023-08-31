@@ -37,11 +37,11 @@ public class ToolTippedItem extends CustomWidget<ToolTippedItem> {
     }
 
     @Override
-    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        checkHovered(pMouseX, pMouseY);
-        pGuiGraphics.renderItem(itemStack, x, y);
+    public void customRender(GuiGraphics guiGraphics, int x, int y) {
+        guiGraphics.renderItem(itemStack, x, y);
 
-        if (overlay != null)
-            pGuiGraphics.blit(overlay, x + 4, y + 4, 200, 0, 0, 10, 10, 10, 10);
+        if (overlay != null) {
+            guiGraphics.blit(overlay, x + 4, y + 4, 200, 0, 0, 10, 10, 10, 10);
+        }
     }
 }

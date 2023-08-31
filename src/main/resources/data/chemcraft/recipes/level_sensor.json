@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": {
+      "item": "chemcraft:axle"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "G": {
+      "item": "chemcraft:glass_wool_sheet"
+    }
+  },
+  "pattern": [
+    "GRG",
+    " A ",
+    " B "
+  ],
+  "result": {
+    "item": "chemcraft:level_sensor"
+  }
+}

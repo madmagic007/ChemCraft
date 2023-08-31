@@ -26,6 +26,8 @@ public class CustomBlockEntities {
     public static final RegistryObject<BlockEntityType<BlockEntity>> temperatureSensor = register(TemperatureSensorBlockEntity::new, CustomBlocks.temperatureSensor);
     public static final RegistryObject<BlockEntityType<BlockEntity>> levelSensor = register(LevelSensorBlockEntity::new, CustomBlocks.levelSensor);
     public static final RegistryObject<BlockEntityType<BlockEntity>> sensorReceiver = register(SensorReceiverBlockEntity::new, CustomBlocks.sensorReceiver);
+    public static final RegistryObject<BlockEntityType<BlockEntity>> crudeOilExtractor = register(CrudeOilExtractorBlockEntity::new, CustomBlocks.crudeOilExtractor);
+    public static final RegistryObject<BlockEntityType<BlockEntity>> crudeOilRefiner = register(CrudeOilRefinerBlockEntity::new, CustomBlocks.crudeOilRefiner);
 
     private static RegistryObject<BlockEntityType<BlockEntity>> register(BlockEntityType.BlockEntitySupplier<BlockEntity> sup, RegistryObject<Block> blockReg) {
         String name = blockReg.getId().getPath();

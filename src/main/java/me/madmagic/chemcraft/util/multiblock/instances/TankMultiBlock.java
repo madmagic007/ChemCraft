@@ -3,7 +3,7 @@ package me.madmagic.chemcraft.util.multiblock.instances;
 import me.madmagic.chemcraft.instances.blockentities.TankControllerBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.InsulatedBlock;
 import me.madmagic.chemcraft.instances.blocks.TankControllerBlock;
-import me.madmagic.chemcraft.util.fluids.IFluidContainer;
+import me.madmagic.chemcraft.util.multiblock.MultiBlockStructure;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -21,12 +21,12 @@ public class TankMultiBlock extends MultiBlockStructure {
         super.created(isExisting);
 
         BlockEntity entity = level.getBlockEntity(masterPos);
-        if (!(entity instanceof IFluidContainer container)) return;
-        container.getFluidStorage().capacity = allBlocks.size() * TankControllerBlockEntity.capacityPerTank;
+        if (!(entity instanceof TankControllerBlockEntity tank)) return;
+        tank.setCapacity(allBlocks.size() * TankControllerBlockEntity.capacityPerTank);
     }
 
     @Override
-    protected boolean validate() {
+    public boolean validate() {
         AABB baseDim = dimAtLevel(blocks.firstKey());
         AABB topDim = dimAtLevel(blocks.lastKey());
 

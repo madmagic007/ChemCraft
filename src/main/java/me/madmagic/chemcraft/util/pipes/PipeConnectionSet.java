@@ -31,11 +31,11 @@ public class PipeConnectionSet implements IFluidContainer {
     }
 
     public double getStored() {
-        return container.getFluidStorage().getStored();
+        return container.getFluidStorage(pipePos, pipeToBlock.getOpposite()).getStored();
     }
 
     public double getSpaceLeft() {
-        return container.getFluidStorage().getSpaceLeft();
+        return container.getFluidStorage(pipePos, pipeToBlock.getOpposite()).getSpaceLeft();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class PipeConnectionSet implements IFluidContainer {
     }
 
     @Override
-    public MultiFluidStorage getFluidStorage() {
-        return container.getFluidStorage();
+    public MultiFluidStorage getFluidStorage(BlockPos pipePos, Direction pipeDir) {
+        return container.getFluidStorage(pipePos, pipeDir);
     }
 }

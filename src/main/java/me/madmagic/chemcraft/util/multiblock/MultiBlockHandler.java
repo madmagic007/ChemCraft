@@ -1,18 +1,16 @@
 package me.madmagic.chemcraft.util.multiblock;
 
-import me.madmagic.chemcraft.util.multiblock.instances.MultiBlockStructure;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MultiBlockHandler {
 
-    public static final BooleanProperty property = BooleanProperty.create("is_multi_block");
+
     public static final List<MultiBlockStructure> multiBlocks = new ArrayList<>();
 
     public static void add(MultiBlockStructure structure, boolean isExisting) {

@@ -10,6 +10,7 @@ public record FluidType(String name, int boilingPoint,
     public enum SolventType {
         ORGANIC,
         WATER,
-        BOTH
+        BOTH,
+        GAS
     }
 }

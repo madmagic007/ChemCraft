@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": {
+      "item": "chemcraft:axle"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "G": {
+      "item": "chemcraft:glass_wool_sheet"
+    }
+  },
+  "pattern": [
+    "GRG",
+    " A ",
+    " C "
+  ],
+  "result": {
+    "item": "chemcraft:temperature_sensor"
+  }
+}

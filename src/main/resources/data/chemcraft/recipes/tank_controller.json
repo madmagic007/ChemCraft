@@ -7,12 +7,15 @@
     },
     "B": {
       "item": "minecraft:bucket"
+    },
+    "G": {
+      "item": "chemcraft:glass_wool_sheet"
     }
   },
   "pattern": [
-    "III",
+    "GIG",
     "IBI",
-    "III"
+    "GIG"
   ],
   "result": {
     "item": "chemcraft:tank_controller"

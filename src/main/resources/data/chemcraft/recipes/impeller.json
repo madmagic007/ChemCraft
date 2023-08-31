@@ -10,9 +10,9 @@
     }
   },
   "pattern": [
-    " I ",
-    "IAI",
-    " I "
+    "I I",
+    " A ",
+    "I I"
   ],
   "result": {
     "item": "chemcraft:impeller"

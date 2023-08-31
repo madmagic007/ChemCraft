@@ -48,6 +48,7 @@ public class BaseBlock extends Block {
         ifActivateAble(a -> registerDefaultState(a.setActive(defaultBlockState(),false)));
         ifRedstonePowerAble(p -> registerDefaultState(p.setPowered(defaultBlockState(), false)));
         ifHasRedstonePowerLevel(r -> registerDefaultState(r.setPowerLevel(defaultBlockState(), 0)));
+        ifMultiBlockComponent(m -> registerDefaultState(m.setIsMultiBlock(defaultBlockState(), false)));
     }
 
     public BaseBlock(Properties pProperties, VoxelShape shape) {
@@ -65,7 +66,7 @@ public class BaseBlock extends Block {
         BlockEntity entity = pLevel.getBlockEntity(pPos);
         if (!(entity instanceof MenuProvider ent))
             return InteractionResult.FAIL;
-        else if (pLevel.isClientSide)
+        if (pLevel.isClientSide)
             return InteractionResult.SUCCESS;
 
         NetworkHooks.openScreen((ServerPlayer) pPlayer, ent, pPos);
@@ -113,6 +114,7 @@ public class BaseBlock extends Block {
         ifHasRedstonePowerLevel(r -> r.addRedstonePowerAbleState(pBuilder));
         ifActivateAble(a -> a.addActivateAbleState(pBuilder));
         ifRedstoneMode(r -> r.addModeState(pBuilder));
+        ifMultiBlockComponent(m -> m.addMultiblockState(pBuilder));
     }
 
     @Nullable
@@ -175,27 +177,23 @@ public class BaseBlock extends Block {
     }
     //endregion
 
-    //region activateable
     private void ifActivateAble(Consumer<IActivateAble> consumer) {
         if (this instanceof IActivateAble a) consumer.accept(a);
     }
-    //endregion
 
-    //region redstone powereable
     private void ifRedstonePowerAble(Consumer<IRedstonePowerAble> consumer) {
         if (this instanceof IRedstonePowerAble powerAble) consumer.accept(powerAble);
     }
-    //endregion
 
-    //region redstone power level
     private void ifHasRedstonePowerLevel(Consumer<IHasRedstonePowerLevel> consumer) {
         if (this instanceof IHasRedstonePowerLevel powerAble) consumer.accept(powerAble);
     }
-    //endregion
 
-    //region redstone mode
     private void ifRedstoneMode(Consumer<IRedstoneMode> consumer) {
         if (this instanceof IRedstoneMode r) consumer.accept(r);
     }
-    //endregion
+
+    private void ifMultiBlockComponent(Consumer<IMultiBlockComponent> consumer) {
+        if (this instanceof IMultiBlockComponent m) consumer.accept(m);
+    }
 }

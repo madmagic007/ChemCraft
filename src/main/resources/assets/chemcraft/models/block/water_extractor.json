@@ -3,7 +3,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"2": "chemcraft:block/water_extractor_texture",
-		"particle": "minecraft:block/iron_block"
+		"particle": "block/iron_block"
 	},
 	"elements": [
 		{

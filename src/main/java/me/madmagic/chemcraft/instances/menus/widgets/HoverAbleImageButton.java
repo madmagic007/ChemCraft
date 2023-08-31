@@ -17,10 +17,8 @@ public class HoverAbleImageButton extends CustomWidget<HoverAbleImageButton> {
     }
 
     @Override
-    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        if (checkHovered(pMouseX, pMouseY)) texture = hoveredTexture;
+    public void customRender(GuiGraphics guiGraphics, int x, int y) {
+        if (isHovered) texture = hoveredTexture;
         else texture = originalTexture;
-
-        super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
     }
 }

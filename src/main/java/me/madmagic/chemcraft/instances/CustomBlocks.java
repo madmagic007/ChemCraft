@@ -7,7 +7,6 @@ import me.madmagic.chemcraft.instances.blockentities.sensors.SensorReceiverBlock
 import me.madmagic.chemcraft.instances.blockentities.sensors.TemperatureSensorBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.*;
 import me.madmagic.chemcraft.instances.blocks.base.BaseNineCraftingBlock;
-import me.madmagic.chemcraft.instances.blocks.BaseSensorBlock;
 import me.madmagic.chemcraft.instances.blocks.ores.FluoriteOre;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -34,9 +33,12 @@ public class CustomBlocks {
     public static final RegistryObject<Block> centrifugalPump = rotateAbleCustomModel("centrifugal_pump", CentrifugalPumpBlock::new);
     public static final RegistryObject<Block> motor = rotateAbleCustomModel("motor", MotorBlock::new);
     public static final RegistryObject<Block> waterExtractor = customModel("water_extractor", WaterExtractorBlock::new);
+    public static final RegistryObject<Block> crudeOilExtractor = customModel("crude_oil_extractor", CrudeOilExtractorBlock::new);
 
     //process apparatus
     public static final RegistryObject<Block> tankController = customModel("tank_controller", TankControllerBlock::new);
+    public static final RegistryObject<Block> crudeOilRefiner = customModel("crude_oil_refiner", CrudeOilRefinerBlock::new);
+    public static final RegistryObject<Block> sieve_plate = customModel("sieve_plate", SievePlateBlock::new);
     public static final RegistryObject<Block> insulatedBlock = basicBlock("insulated_block", InsulatedBlock::new);
     public static final RegistryObject<Block> airCoolerBlock = customModelNoVariant("air_cooler", AirCoolerBlock::new);
 

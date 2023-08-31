@@ -44,7 +44,7 @@ public class TankControllerBlockEntity extends BaseBlockEntity implements IFluid
     }
 
     @Override
-    public MultiFluidStorage getFluidStorage() {
+    public MultiFluidStorage getFluidStorage(BlockPos pipePos, Direction pipeDir) {
         return fluidStorage;
     }
 
@@ -55,6 +55,7 @@ public class TankControllerBlockEntity extends BaseBlockEntity implements IFluid
     public void onLoad() {
         super.onLoad();
         BlockPos pos = getBlockPos();
+        BlockState state = level.getBlockState(pos);
         if (!level.isClientSide && !MultiBlockHandler.isValidMultiBlock(pos, level))
             new TankMultiBlock(pos, level).check(true);
     }
@@ -63,5 +64,9 @@ public class TankControllerBlockEntity extends BaseBlockEntity implements IFluid
     public void onChunkUnloaded() {
         super.onChunkUnloaded();
         MultiBlockHandler.remove(getBlockPos(), level, true);
+    }
+
+    public void setCapacity(int i) {
+        fluidStorage.capacity = i;
     }
 }

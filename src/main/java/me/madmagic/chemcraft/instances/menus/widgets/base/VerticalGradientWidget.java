@@ -19,10 +19,9 @@ public abstract class VerticalGradientWidget<T extends VerticalGradientWidget<T>
     protected abstract int getValue();
 
     @Override
-    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        checkHovered(pMouseX, pMouseY);
+    public void customRender(GuiGraphics guiGraphics, int x, int y) {
         int scaledValue = (int) (height * (getValue() / (float) max));
-        pGuiGraphics.fillGradient(
+        guiGraphics.fillGradient(
                 x, y + (height - scaledValue),
                 x + width, y + height,
                 colorFrom, colorTo

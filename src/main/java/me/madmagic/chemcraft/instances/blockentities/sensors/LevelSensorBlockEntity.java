@@ -3,6 +3,7 @@ package me.madmagic.chemcraft.instances.blockentities.sensors;
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.menus.SensorMenu;
 import me.madmagic.chemcraft.util.fluids.IFluidContainer;
+import me.madmagic.chemcraft.util.fluids.MultiFluidStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -29,8 +30,9 @@ public class LevelSensorBlockEntity extends BaseSensorBlockEntity {
 
     @Override
     protected double getValueForSignalCalculation(IFluidContainer container) {
-        double capacity = container.getFluidStorage().capacity;
-        double stored = container.getFluidStorage().getStored();
+        MultiFluidStorage storage = container.getFluidStorage(worldPosition, getFacing(getBlockState()));
+        double capacity = storage.capacity;
+        double stored = storage.getStored();
         return (stored / capacity) * 100;
     }
 

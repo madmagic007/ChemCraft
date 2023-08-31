@@ -1,7 +1,7 @@
-package me.madmagic.chemcraft.util.multiblock.instances;
+package me.madmagic.chemcraft.util.multiblock;
 
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IMultiBlockComponent;
 import me.madmagic.chemcraft.util.ConnectionHandler;
-import me.madmagic.chemcraft.util.multiblock.MultiBlockHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AirBlock;
@@ -48,7 +48,10 @@ public abstract class MultiBlockStructure {
     public void created(boolean isExisting) {
         allBlocks.forEach(pos -> {
             BlockState state = level.getBlockState(pos);
-            state = state.setValue(MultiBlockHandler.property, true);
+
+            if (!(state.getBlock() instanceof IMultiBlockComponent component)) return;
+            state = component.setIsMultiBlock(state, true);
+
             level.setBlockAndUpdate(pos, state);
         });
     }
@@ -59,16 +62,16 @@ public abstract class MultiBlockStructure {
         allBlocks.forEach(pos -> {
             BlockState state = level.getBlockState(pos);
 
-            if (!state.hasProperty(MultiBlockHandler.property)) return;
+            if (!(state.getBlock() instanceof IMultiBlockComponent component)) return;
+            state = component.setIsMultiBlock(state, false);
 
-            state = state.setValue(MultiBlockHandler.property, false);
             level.setBlockAndUpdate(pos, state);
         });
     }
 
     public BlockEntity getBlockEntity() {
         BlockState state = level.getBlockState(masterPos);
-        if (!state.hasProperty(MultiBlockHandler.property)) return null;
+        if (!state.hasProperty(IMultiBlockComponent.property)) return null;
         return level.getBlockEntity(masterPos);
     }
 
@@ -133,7 +136,12 @@ public abstract class MultiBlockStructure {
         return collected.size() == originalDim.size();
     }
 
-    abstract boolean validate();
+    @SafeVarargs
+    protected final boolean isCenterFilled(AABB dim, Class<? extends Block>... validBlocks) {
+        return isFilled(dim.deflate(1, 0, 1), validBlocks);
+    }
+
+    public abstract boolean validate();
 
     public boolean check(boolean isExisting) {
         if (validate()) {

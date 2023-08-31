@@ -2,20 +2,27 @@ package me.madmagic.chemcraft.util.fluids;
 
 import java.util.HashMap;
 import java.util.Map;
+import static me.madmagic.chemcraft.util.fluids.FluidType.SolventType;
 
 public class FluidHandler {
 
     public static Map<String, FluidType> fluidTypes = new HashMap<>();
 
     static {
-        new FluidType("Water", 100, FluidType.SolventType.WATER).register();
-        new FluidType("Ethanol", 78, FluidType.SolventType.WATER).register();
-        new FluidType("Methanol", 65, FluidType.SolventType.WATER).register();
+        new FluidType("water", 100, SolventType.WATER).register();
+        new FluidType("ethanol", 78, SolventType.WATER).register();
+        new FluidType("methanol", 65, SolventType.WATER).register();
 
-        new FluidType("Benzene", 80, FluidType.SolventType.ORGANIC).register();
-        new FluidType("Toluene", 111, FluidType.SolventType.ORGANIC).register();
+        new FluidType("crude_oil", Integer.MAX_VALUE, SolventType.ORGANIC).register();
+        new FluidType("naphta", 120, SolventType.ORGANIC).register();
+        new FluidType("fuel_oil", 370, SolventType.ORGANIC).register();
 
-        new FluidType("Acetone", 56, FluidType.SolventType.BOTH).register();
+        new FluidType("benzene", 80, SolventType.ORGANIC).register();
+        new FluidType("toluene", 111, SolventType.ORGANIC).register();
+
+        new FluidType("acetone", 56, SolventType.BOTH).register();
+
+        new FluidType("waste_gas", -50, SolventType.GAS).register();
     }
 
     public static FluidType getFluidByName(String name) {

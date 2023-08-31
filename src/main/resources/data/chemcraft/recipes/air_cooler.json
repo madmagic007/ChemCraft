@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {
+      "item": "chemcraft:pipe"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "I": {
+      "item": "chemcraft:teflon_coated_iron_ingot"
+    },
+    "F": {
+      "item": "chemcraft:fan"
+    },
+    "G": {
+      "item": "chemcraft:glass_wool_sheet"
+    }
+  },
+  "pattern": [
+    "III",
+    "PCP",
+    "GFG"
+  ],
+  "result": {
+    "item": "chemcraft:air_cooler"
+  }
+}

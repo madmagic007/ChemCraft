@@ -38,6 +38,7 @@ public class CustomItems {
     public static final RegistryObject<Item> teflonCoatedIronIngot = registerCraftingOnlyItem("teflon_coated_iron_ingot");
     public static final RegistryObject<Item> axle = registerCraftingOnlyCustomModelItem("axle");
     public static final RegistryObject<Item> impeller = registerCraftingOnlyCustomModelItem("impeller");
+    public static final RegistryObject<Item> fan = registerCraftingOnlyItem("fan");
 
     //creative tabs
     private static final DeferredRegister<CreativeModeTab> customTabs = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ChemCraft.modId);

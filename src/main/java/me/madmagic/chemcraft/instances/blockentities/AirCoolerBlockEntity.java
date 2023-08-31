@@ -146,7 +146,7 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
     }
 
     @Override
-    public MultiFluidStorage getFluidStorage() {
+    public MultiFluidStorage getFluidStorage(BlockPos pipePos, Direction pipeDir) {
         return fluidStorage;
     }
 

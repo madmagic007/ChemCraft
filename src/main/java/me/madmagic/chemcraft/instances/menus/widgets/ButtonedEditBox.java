@@ -63,9 +63,9 @@ public class ButtonedEditBox extends CustomWidget<ButtonedEditBox> {
     }
 
     @Override
-    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        btnUp.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
-        btnDown.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+    public void customRender(GuiGraphics guiGraphics, int x, int y) {
+        btnUp.customRender(guiGraphics, x, y);
+        btnDown.customRender(guiGraphics, x, y);
     }
 
     @Override

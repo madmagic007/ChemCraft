@@ -17,6 +17,7 @@ public class CustomWidget<T extends CustomWidget<T>> implements Renderable, IToo
     protected ResourceLocation texture;
     protected int x;
     protected int y;
+    protected float scale = 1f;
     public int width;
     public int height;
     protected boolean isHovered;
@@ -49,6 +50,13 @@ public class CustomWidget<T extends CustomWidget<T>> implements Renderable, IToo
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public T setScale(float scale) {
+        this.scale = scale;
+        width = (int) (width * scale);
+        height = (int) (height * scale);
+        return (T) this;
     }
 
     public T centerHorizontally(ScreenHelper screenHelper) {
@@ -119,14 +127,37 @@ public class CustomWidget<T extends CustomWidget<T>> implements Renderable, IToo
         return true;
     }
 
-    protected boolean checkHovered(int mouseX, int mouseY) {
-        isHovered = MouseUtil.isMouseOver(mouseX, mouseY, x, y, width, height);
-        return isHovered;
+    protected boolean checkHovered(int mouseX, int mouseY, float renderX, float renderY) {
+        return isHovered = MouseUtil.isMouseOver(mouseX, mouseY, renderX, renderY, width, height);
     }
 
     @Override
-    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        checkHovered(pMouseX, pMouseY);
-        pGuiGraphics.blit(texture, x, y, 0, 0, 0, width, height, width, height);
+    public final void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+        checkHovered(pMouseX, pMouseY, x, y);
+
+        int renderX = x;
+        int renderY = y;
+
+        if (lateCenter) {
+            renderX -= width / 2;
+        }
+
+        if (scale != 1) { // only scale when necessary
+            pGuiGraphics.pose().pushPose();
+            pGuiGraphics.pose().scale(scale, scale, scale);
+            float fact = 1 / scale;
+
+            renderX = (int) (renderX * fact);
+            renderY = (int) (renderY * fact);
+        }
+
+        if (texture != null) {
+            pGuiGraphics.blit(texture, renderX, renderY, 0, 0, 0, (int) (width / scale), (int) (height / scale), (int) (width / scale), (int) (height / scale));
+        }
+        customRender(pGuiGraphics, renderX, renderY);
+
+        if (scale != 1) pGuiGraphics.pose().popPose();
     }
+
+    public void customRender(GuiGraphics guiGraphics, int x, int y) {};
 }

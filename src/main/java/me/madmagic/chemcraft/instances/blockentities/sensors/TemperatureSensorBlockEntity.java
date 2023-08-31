@@ -29,7 +29,7 @@ public class TemperatureSensorBlockEntity extends BaseSensorBlockEntity {
 
     @Override
     protected double getValueForSignalCalculation(IFluidContainer container) {
-        return container.getFluidStorage().temperature;
+        return container.getFluidStorage(worldPosition, getFacing(getBlockState())).temperature;
     }
 
     @Override

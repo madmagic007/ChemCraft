@@ -11,5 +11,5 @@ public interface IFluidContainer {
 
     double extract(BlockPos pipePos, Direction pipeDir, double amount, List<Fluid> extractTo);
 
-    MultiFluidStorage getFluidStorage();
+    MultiFluidStorage getFluidStorage(BlockPos pipePos, Direction pipeDir);
 }
