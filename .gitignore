@@ -23,7 +23,7 @@ run
 run-data
 lib
 logs
-generated/resources/.cache
+.cache
 
 # Files from Forge MDK
 forge*changelog.txt
