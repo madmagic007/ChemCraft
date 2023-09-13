@@ -22,6 +22,7 @@ build
 run
 run-data
 lib
+logs
 
 # Files from Forge MDK
 forge*changelog.txt
