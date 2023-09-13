@@ -44,9 +44,9 @@ public class PipesPage extends Page {
     }
 
     private final Supplier<CraftingVisual> pipeVisual = () -> new CraftingVisual(CustomItems.blockItems.get("pipe").get(),
-            Items.AIR, CustomItems.glassWoolSheet.get(), Items.AIR,
+            Items.AIR, CustomItems.insulationSheet.get(), Items.AIR,
             CustomItems.teflonCoatedIronIngot.get(), CustomItems.teflonCoatedIronIngot.get(), CustomItems.teflonCoatedIronIngot.get(),
-            Items.AIR, CustomItems.glassWoolSheet.get(), Items.AIR
+            Items.AIR, CustomItems.insulationSheet.get(), Items.AIR
     );
 
     private final Supplier<CraftingVisual> wrenchVisual = () -> new CraftingVisual(CustomItems.pipeWrench.get(),

@@ -34,7 +34,7 @@ public class CustomItems {
     public static final RegistryObject<Item> fluorite = register("fluorite_piece", BaseItem::new);
 
     //mainly for crafting
-    public static final RegistryObject<Item> glassWoolSheet = items.register("glass_wool_sheet", BaseItem::new);
+    public static final RegistryObject<Item> insulationSheet = items.register("insulation_sheet", BaseItem::new);
     public static final RegistryObject<Item> teflonCoatedIronIngot = registerCraftingOnlyItem("teflon_coated_iron_ingot");
     public static final RegistryObject<Item> axle = registerCraftingOnlyCustomModelItem("axle");
     public static final RegistryObject<Item> impeller = registerCraftingOnlyCustomModelItem("impeller");

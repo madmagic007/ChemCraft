@@ -44,7 +44,7 @@ public class PumpingPage extends Page {
     }
 
     private final Supplier<CraftingVisual> pumpVisual = () -> new CraftingVisual(CustomItems.blockItems.get("centrifugal_pump").get(),
-            CustomItems.glassWoolSheet.get(), CustomItems.blockItems.get("pipe").get(), CustomItems.glassWoolSheet.get(),
+            CustomItems.insulationSheet.get(), CustomItems.blockItems.get("pipe").get(), CustomItems.insulationSheet.get(),
             CustomItems.blockItems.get("pipe").get(), CustomItems.impeller.get(), CustomItems.axle.get(),
             CustomItems.teflonCoatedIronIngot.get(), CustomItems.teflonCoatedIronIngot.get(), CustomItems.teflonCoatedIronIngot.get()
     );

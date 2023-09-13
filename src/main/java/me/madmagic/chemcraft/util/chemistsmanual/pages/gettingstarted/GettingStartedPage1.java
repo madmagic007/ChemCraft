@@ -38,8 +38,8 @@ public class GettingStartedPage1 extends Page {
 
     private final Supplier<CraftingVisual> visual = () -> new CraftingVisual(
             CustomItems.blockItems.get("teflon_coater").get(),
-            CustomItems.glassWoolSheet.get(), Items.IRON_INGOT,  CustomItems.glassWoolSheet.get(),
+            CustomItems.insulationSheet.get(), Items.IRON_INGOT,  CustomItems.insulationSheet.get(),
             Items.IRON_INGOT, CustomItems.fluorite.get(), Items.IRON_INGOT,
-            CustomItems.glassWoolSheet.get(), Items.IRON_INGOT,  CustomItems.glassWoolSheet.get()
+            CustomItems.insulationSheet.get(), Items.IRON_INGOT,  CustomItems.insulationSheet.get()
     );
 }

@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 public class MotorBlockEntity extends BaseEnergyStorageBlockEntity implements MenuProvider, IRedstonePowerAble, IRotateAble, IRedstoneMode {
 
     public MotorBlockEntity(BlockPos pos, BlockState state) {
-        super(CustomBlockEntities.motor.get(), pos, state, 10000, 1000);
+        super(CustomBlockEntities.motor.get(), pos, state, 10000, 200);
     }
 
     @Override

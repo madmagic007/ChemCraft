@@ -55,7 +55,7 @@ public class DisplacementHandler {
 
     public static void feed(PipeLine pipeLine, List<Fluid> fluids) {
         double remainingDestinatingSets = pipeLine.sets.size();
-        double totalFluid = MultiFluidStorage.getStored(fluids);
+        double totalFluid = FluidHandler.getStored(fluids);
 
         for (PipeConnectionSet set : pipeLine.sets) {
             double avg = totalFluid / remainingDestinatingSets;

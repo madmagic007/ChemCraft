@@ -6,16 +6,17 @@
     "chemcraft:motor",
     "chemcraft:water_extractor",
     "chemcraft:crude_oil_extractor",
-    "chemcraft:tank_controller",
-    "chemcraft:crude_oil_refiner",
+    "chemcraft:tank",
+    "chemcraft:distillery",
     "chemcraft:sieve_plate",
     "chemcraft:insulated_block",
     "chemcraft:air_cooler",
+    "chemcraft:electric_heater",
     "chemcraft:level_sensor",
     "chemcraft:temperature_sensor",
     "chemcraft:sensor_receiver",
     "chemcraft:fluorite_ore",
-    "chemcraft:glass_wool",
+    "chemcraft:block_of_insulation",
     "chemcraft:teflon_coated_iron_block"
   ]
 }

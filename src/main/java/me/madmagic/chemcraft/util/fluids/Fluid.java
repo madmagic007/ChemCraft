@@ -1,5 +1,8 @@
 package me.madmagic.chemcraft.util.fluids;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Fluid {
 
     public final String name;
@@ -11,20 +14,46 @@ public class Fluid {
         this.temperature = temperature;
     }
 
-    public double extract(double amount) {
+    public Fluid split(double amount) {
         double extractAble = Math.min(amount, this.amount);
         this.amount -= extractAble;
-        return extractAble;
+        return new Fluid(name, extractAble, temperature);
     }
 
-    public void mergeWith(Fluid other) {
-        if (!other.name.equals(name)) return;
+    public boolean mergeWith(Fluid other) {
+        if (!other.name.equals(name)) return false;
 
+        //temperature = FluidHandler.calculateTemperature(amount, temperature, other.amount, other.temperature);
         amount += other.amount;
-        temperature = FluidHandler.calculateTemperature(amount, temperature, other.amount, other.temperature);
+        return true;
     }
 
     public double getAmount() {
         return amount;
+    }
+
+    public FluidType getFluidType() {
+        return FluidHandler.getFluidByName(name);
+    }
+
+    public double getBoilingPoint() {
+        return getFluidType().boilingPoint;
+    }
+
+    public List<Fluid> checkDecompose() {
+        List<Fluid> fluids = new LinkedList<>();
+
+        List<String> names = getFluidType().shouldDecompose.apply(this);
+        double amountPer = amount / names.size();
+
+        for (String fluidName : names) {
+            fluids.add(new Fluid(fluidName, amountPer, temperature));
+        }
+        return fluids;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%sl %s at %s°C", amount, name, temperature);
     }
 }

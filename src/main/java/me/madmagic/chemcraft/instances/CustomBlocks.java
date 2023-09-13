@@ -36,11 +36,12 @@ public class CustomBlocks {
     public static final RegistryObject<Block> crudeOilExtractor = customModel("crude_oil_extractor", CrudeOilExtractorBlock::new);
 
     //process apparatus
-    public static final RegistryObject<Block> tankController = customModel("tank_controller", TankControllerBlock::new);
-    public static final RegistryObject<Block> crudeOilRefiner = customModel("crude_oil_refiner", CrudeOilRefinerBlock::new);
-    public static final RegistryObject<Block> sieve_plate = customModel("sieve_plate", SievePlateBlock::new);
+    public static final RegistryObject<Block> tank = customModel("tank", TankBlock::new);
+    public static final RegistryObject<Block> distillery = customModel("distillery", DistilleryBlock::new);
+    public static final RegistryObject<Block> sievePlate = customModel("sieve_plate", SievePlateBlock::new);
     public static final RegistryObject<Block> insulatedBlock = basicBlock("insulated_block", InsulatedBlock::new);
-    public static final RegistryObject<Block> airCoolerBlock = customModelNoVariant("air_cooler", AirCoolerBlock::new);
+    public static final RegistryObject<Block> airCooler = customModelNoVariant("air_cooler", AirCoolerBlock::new);
+    public static final RegistryObject<Block> electricHeater = customModelNoVariant("electric_heater", ElectricHeaterBlock::new);
 
     //controlling related
     public static final RegistryObject<Block> levelSensor = BaseSensorBlock.registerSensorBlock("level_sensor", LevelSensorBlockEntity::new);
@@ -51,7 +52,7 @@ public class CustomBlocks {
     public static final RegistryObject<Block> fluorite_ore = ore("fluorite_ore", FluoriteOre::new, CustomItems.fluorite);
 
     //mainly for crafting
-    public static final RegistryObject<Block> glassWool = basicBlock("glass_wool", () -> new BaseNineCraftingBlock(BlockBehaviour.Properties.copy(Blocks.YELLOW_WOOL), CustomItems.glassWoolSheet));
+    public static final RegistryObject<Block> insulationBlock = basicBlock("block_of_insulation", () -> new BaseNineCraftingBlock(BlockBehaviour.Properties.copy(Blocks.YELLOW_WOOL), CustomItems.insulationSheet));
     public static final RegistryObject<Block> teflonCoatedIronBlock = basicBlock("teflon_coated_iron_block", () -> new BaseNineCraftingBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK), CustomItems.teflonCoatedIronIngot));
 
     private static RegistryObject<Block> basicBlock(String name, Supplier<Block> blockSup) {

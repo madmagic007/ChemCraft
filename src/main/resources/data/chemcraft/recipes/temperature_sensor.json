@@ -12,7 +12,7 @@
       "item": "minecraft:redstone"
     },
     "G": {
-      "item": "chemcraft:glass_wool_sheet"
+      "item": "chemcraft:insulation_sheet"
     }
   },
   "pattern": [

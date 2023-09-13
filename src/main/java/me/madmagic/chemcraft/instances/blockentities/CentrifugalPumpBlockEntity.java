@@ -33,7 +33,7 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
     public static final int maxFlowRate = 50000;
     public int flowRate = 25000;
     private final double tickFactor = 1. / 60. / 60. / 20.;
-    public static final int powerUsageFactor = 200;
+    public static final int powerUsageFactor = 400;
     private final ContainerData data;
 
     public CentrifugalPumpBlockEntity(BlockPos pos, BlockState state) {

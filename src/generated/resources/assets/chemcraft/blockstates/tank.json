@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chemcraft:block/tank"
+    }
+  }
+}

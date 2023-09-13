@@ -74,8 +74,8 @@ public abstract class BaseEnergyStorageBlockEntity extends BaseBlockEntity {
         return energyStorage.getEnergyStored() > wanted;
     }
 
-    public void useEnergy(int wanted) {
-        energyStorage.extractEnergy(wanted, false);
+    public boolean useEnergy(int wanted) {
+        return energyStorage.extractEnergy(wanted, false) == wanted;
     }
 
     protected void energyChanged(int energy) {}

@@ -19,15 +19,16 @@ public class CustomBlockEntities {
 
     public static final RegistryObject<BlockEntityType<BlockEntity>> motor = register(MotorBlockEntity::new, CustomBlocks.motor);
     public static final RegistryObject<BlockEntityType<BlockEntity>> centrifugalPump = register(CentrifugalPumpBlockEntity::new, CustomBlocks.centrifugalPump);
-    public static final RegistryObject<BlockEntityType<BlockEntity>> tankController = register(TankControllerBlockEntity::new, CustomBlocks.tankController);
+    public static final RegistryObject<BlockEntityType<BlockEntity>> tank = register(TankBlockEntity::new, CustomBlocks.tank);
     public static final RegistryObject<BlockEntityType<BlockEntity>> waterExtractor = register(WaterExtractorBlockEntity::new, CustomBlocks.waterExtractor);
     public static final RegistryObject<BlockEntityType<BlockEntity>> fluoriteCoater = register(TeflonCoaterBlockEntity::new, CustomBlocks.fluoriteCoater);
-    public static final RegistryObject<BlockEntityType<BlockEntity>> airCooler = register(AirCoolerBlockEntity::new, CustomBlocks.airCoolerBlock);
+    public static final RegistryObject<BlockEntityType<BlockEntity>> airCooler = register(AirCoolerBlockEntity::new, CustomBlocks.airCooler);
     public static final RegistryObject<BlockEntityType<BlockEntity>> temperatureSensor = register(TemperatureSensorBlockEntity::new, CustomBlocks.temperatureSensor);
     public static final RegistryObject<BlockEntityType<BlockEntity>> levelSensor = register(LevelSensorBlockEntity::new, CustomBlocks.levelSensor);
     public static final RegistryObject<BlockEntityType<BlockEntity>> sensorReceiver = register(SensorReceiverBlockEntity::new, CustomBlocks.sensorReceiver);
     public static final RegistryObject<BlockEntityType<BlockEntity>> crudeOilExtractor = register(CrudeOilExtractorBlockEntity::new, CustomBlocks.crudeOilExtractor);
-    public static final RegistryObject<BlockEntityType<BlockEntity>> crudeOilRefiner = register(CrudeOilRefinerBlockEntity::new, CustomBlocks.crudeOilRefiner);
+    public static final RegistryObject<BlockEntityType<BlockEntity>> distillery = register(DistilleryBlockEntity::new, CustomBlocks.distillery);
+    public static final RegistryObject<BlockEntityType<BlockEntity>> electricHeater = register(ElectricHeaterBlockEntity::new, CustomBlocks.electricHeater);
 
     private static RegistryObject<BlockEntityType<BlockEntity>> register(BlockEntityType.BlockEntitySupplier<BlockEntity> sup, RegistryObject<Block> blockReg) {
         String name = blockReg.getId().getPath();

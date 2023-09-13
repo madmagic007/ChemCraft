@@ -1,8 +1,8 @@
 package me.madmagic.chemcraft.util.multiblock.instances;
 
-import me.madmagic.chemcraft.instances.blockentities.TankControllerBlockEntity;
+import me.madmagic.chemcraft.instances.blockentities.TankBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.InsulatedBlock;
-import me.madmagic.chemcraft.instances.blocks.TankControllerBlock;
+import me.madmagic.chemcraft.instances.blocks.TankBlock;
 import me.madmagic.chemcraft.util.multiblock.MultiBlockStructure;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -21,8 +21,8 @@ public class TankMultiBlock extends MultiBlockStructure {
         super.created(isExisting);
 
         BlockEntity entity = level.getBlockEntity(masterPos);
-        if (!(entity instanceof TankControllerBlockEntity tank)) return;
-        tank.setCapacity(allBlocks.size() * TankControllerBlockEntity.capacityPerTank);
+        if (!(entity instanceof TankBlockEntity tank)) return;
+        tank.setCapacity(allBlocks.size() * TankBlockEntity.capacityPerTank);
     }
 
     @Override
@@ -40,6 +40,6 @@ public class TankMultiBlock extends MultiBlockStructure {
 
         AABB combined = new AABB(baseDim.minX, baseDim.minY, baseDim.minZ, topDim.maxX, topDim.maxY, topDim.maxZ);
 
-        return isSquare(combined, false) && isFilled(combined, TankControllerBlock.class, InsulatedBlock.class);
+        return isSquare(combined, false) && isFilled(combined, TankBlock.class, InsulatedBlock.class);
     }
 }

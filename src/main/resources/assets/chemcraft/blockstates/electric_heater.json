@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "chemcraft:block/electric_heater",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "chemcraft:block/electric_heater"
+    },
+    "facing=south": {
+      "model": "chemcraft:block/electric_heater",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "chemcraft:block/electric_heater",
+      "y": 270
+    }
+  }
+}

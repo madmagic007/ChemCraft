@@ -95,9 +95,12 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
         };
 
         if (hasEnoughEnergy(energyUsage) && actualCooling != 0) {
-            useEnergy(energyUsage);
+            if (useEnergy(energyUsage)) {
+                actualCooling = 0;
+                active = false;
+            }
 
-            if (!active) {
+            if (!active && actualCooling != 0) {
                 active = true;
                 level.setBlockAndUpdate(worldPosition, setActive(getBlockState(), true));
             }

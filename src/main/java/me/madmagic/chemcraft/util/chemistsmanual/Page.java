@@ -64,8 +64,8 @@ public abstract class Page {
 
     //common visuals
     protected final Supplier<CraftingVisual> insulatedBlockVisual = () -> new CraftingVisual(CustomItems.blockItems.get("insulated_block").get(),
-            Items.AIR, CustomItems.glassWoolSheet.get(), Items.AIR,
-            CustomItems.glassWoolSheet.get(), CustomItems.blockItems.get("teflon_coated_iron_block").get(), CustomItems.glassWoolSheet.get(),
-            Items.AIR, CustomItems.glassWoolSheet.get(), Items.AIR
+            Items.AIR, CustomItems.insulationSheet.get(), Items.AIR,
+            CustomItems.insulationSheet.get(), CustomItems.blockItems.get("teflon_coated_iron_block").get(), CustomItems.insulationSheet.get(),
+            Items.AIR, CustomItems.insulationSheet.get(), Items.AIR
     );
 }

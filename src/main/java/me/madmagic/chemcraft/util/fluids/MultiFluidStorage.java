@@ -2,54 +2,38 @@ package me.madmagic.chemcraft.util.fluids;
 
 import net.minecraft.nbt.CompoundTag;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MultiFluidStorage {
 
     public double capacity;
-    public double temperature = 25;
-    public final List<Fluid> fluids = new ArrayList<>();
+    public double temperature = Double.NaN;
+    public final LinkedList<Fluid> fluids = new LinkedList<>();
 
     public MultiFluidStorage(double capacity) {
         this.capacity = capacity;
     }
 
-    public void add(List<Fluid> fluids, double desiredAmount) {
-        double totalFluidsAmount = getStored(fluids);
-        double amount = Math.min(getSpaceLeft(), Math.min(totalFluidsAmount, desiredAmount));
-        fluids.sort(Comparator.comparingDouble(Fluid::getAmount).reversed());
+    public double add(List<Fluid> fluids) {
+        return add(fluids, FluidHandler.getStored(fluids));
+    }
 
-        for (Fluid fluid : fluids) {
-            double fluidFactor = fluid.amount / totalFluidsAmount;
-            double fluidAmount = amount * fluidFactor;
+    public double add(List<Fluid> fluids, double desiredAmount) {
+        double maxAmount = Math.min(getSpaceLeft(), desiredAmount);
+        double transferred = FluidHandler.transferTo(fluids, this.fluids, maxAmount);
 
-            mergeFluid(fluid.name, fluidAmount, fluid.temperature);
-        }
+        temperature = FluidHandler.getTemperature(this.fluids);
+        return transferred;
     }
 
     public double extract(double desiredAmount, List<Fluid> extractTo) {
-        double totalExtracted = 0;
+        double maxAmount = Math.min(getStored(), desiredAmount);
+        return FluidHandler.transferTo(this.fluids, extractTo, maxAmount);
+    }
 
-        List<Fluid> extractFrom = new ArrayList<>();
-        double amount = Math.min(desiredAmount, calculateFluidAvailable(extractFrom));
-        double remainingFluids = extractFrom.size();
-
-        for (Fluid fluid : extractFrom) {
-            double avg = amount / remainingFluids;
-
-            double extracted = fluid.extract(avg);
-            if (extracted == 0) continue;
-
-            extractTo.add(new Fluid(fluid.name, extracted, fluid.temperature));
-
-            amount -= extracted;
-            totalExtracted += extracted;
-
-            remainingFluids --;
-        }
-        return totalExtracted;
+    public double getSpaceLeft() {
+        return capacity - getStored();
     }
 
     public double getStored() {
@@ -64,39 +48,9 @@ public class MultiFluidStorage {
         return count;
     }
 
-    public double getSpaceLeft() {
-        return capacity - getStored();
-    }
-
-    private double calculateFluidAvailable(List<Fluid> emptyMap) {
-        double fluidAvailable = 0;
-        for (Fluid fluid : fluids) {
-
-            double available = fluid.amount;
-            if (available > 0) emptyMap.add(fluid);
-
-            fluidAvailable += available;
-        }
-
-        emptyMap.sort(Comparator.comparingDouble(Fluid::getAmount));
-
-        return fluidAvailable;
-    }
-
-    private void mergeFluid(String name, double amount, double temperature) {
-        if (Double.isNaN(amount)) return;
-
-        double newTemperature = FluidHandler.calculateTemperature(getStored(), this.temperature, amount, temperature);
-        this.temperature = newTemperature;
-
-        for (Fluid fluid : fluids) {
-            if (fluid.name.equals(name)) {
-                fluid.amount += amount;
-                fluid.temperature = newTemperature;
-                return;
-            }
-        }
-        fluids.add(new Fluid(name, amount, newTemperature));
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
+        fluids.forEach(fluid -> fluid.temperature = temperature);
     }
 
     public void saveToNBT(CompoundTag nbt) {
@@ -128,5 +82,10 @@ public class MultiFluidStorage {
 
             fluids.add(fluid);
         });
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%sl stored, %s types", getStored(), fluids.size());
     }
 }
