@@ -42,13 +42,13 @@ public class Fluid {
 
     public List<Fluid> checkDecompose() {
         List<Fluid> fluids = new LinkedList<>();
+        FluidType type = getFluidType();
 
-        List<String> names = getFluidType().shouldDecompose.apply(this);
-        double amountPer = amount / names.size();
-
-        for (String fluidName : names) {
-            fluids.add(new Fluid(fluidName, amountPer, temperature));
+        if (type.decomposePredicate != null  && type.decomposePredicate.test(this)) {
+            List<Fluid> fromFunc = getFluidType().decomposeFunc.apply(this);
+            if (fromFunc != null) fluids.addAll(fromFunc);
         }
+
         return fluids;
     }
 

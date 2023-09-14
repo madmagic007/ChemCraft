@@ -29,7 +29,7 @@ public class MotorMenu extends BaseMenu<MotorBlockEntity> {
     }
 
     public MotorMenu(int id, BlockEntity ent, ContainerData data) {
-        super(id, CustomMenus.motorMenu.get(), ent, data);
+        super(id, CustomMenus.motor.get(), ent, data);
     }
 
     public static class Screen extends BaseMenuScreen<MotorMenu> {

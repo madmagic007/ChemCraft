@@ -1,6 +1,7 @@
 package me.madmagic.chemcraft.instances.menus.base;
 
 import me.madmagic.chemcraft.instances.blockentities.base.BaseEnergyItemStorageBlockEntity;
+import me.madmagic.chemcraft.instances.blockentities.base.BaseItemStorageBlockEntity;
 import me.madmagic.chemcraft.util.GeneralUtil;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -10,6 +11,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+
+import java.util.List;
 
 public abstract class BaseMenu<T extends BlockEntity> extends AbstractContainerMenu {
 
@@ -25,7 +28,13 @@ public abstract class BaseMenu<T extends BlockEntity> extends AbstractContainerM
         addPlayerInventory(inventory);
 
         entity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            GeneralUtil.forEachIndexed(((BaseEnergyItemStorageBlockEntity) entity).slotTemplates, (template, index) ->
+            List<CustomItemSlotTemplate> slotTemplates;
+
+            if (entity instanceof BaseItemStorageBlockEntity storage) slotTemplates = storage.slotTemplates;
+            else if (entity instanceof BaseEnergyItemStorageBlockEntity storage) slotTemplates = storage.slotTemplates;
+            else return;
+
+            GeneralUtil.forEachIndexed(slotTemplates, (template, index) ->
                     addSlot(new CustomItemSlot(handler, template, index))
             );
         });
@@ -94,8 +103,9 @@ public abstract class BaseMenu<T extends BlockEntity> extends AbstractContainerM
 
         int progress = data.get(1);
         int maxProgress = data.get(2);
+        if (maxProgress == 0) return 0;
 
-        return progress * maxScale / maxProgress + 1;
+        return progress * maxScale / maxProgress;
     }
 
     @Override

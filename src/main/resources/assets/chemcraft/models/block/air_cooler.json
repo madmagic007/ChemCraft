@@ -3,8 +3,8 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "chemcraft:block/grille",
-		"1": "chemcraft:block/exchanger_cold",
-		"2": "chemcraft:block/exchanger_hot",
+		"1": "chemcraft:block/exchanger_hot",
+		"2": "chemcraft:block/exchanger_cold",
 		"3": "chemcraft:block/fan_off",
 		"4": "chemcraft:block/insulated_block",
 		"particle": "chemcraft:block/grille"

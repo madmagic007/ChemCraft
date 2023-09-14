@@ -7,8 +7,8 @@
     "north": "chemcraft:block/electric_heater",
     "south": "chemcraft:block/electric_heater",
 
-    "east": "chemcraft:block/exchanger_hot",
-    "west": "chemcraft:block/exchanger_cold",
+    "west": "chemcraft:block/exchanger_hot",
+    "east": "chemcraft:block/exchanger_cold",
 
     "particle": "chemcraft:block/insulated_block"
   }

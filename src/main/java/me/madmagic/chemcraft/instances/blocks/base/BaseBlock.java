@@ -2,6 +2,7 @@ package me.madmagic.chemcraft.instances.blocks.base;
 
 import me.madmagic.chemcraft.instances.blockentities.base.BaseBlockEntity;
 import me.madmagic.chemcraft.instances.blockentities.base.BaseEnergyItemStorageBlockEntity;
+import me.madmagic.chemcraft.instances.blockentities.base.BaseItemStorageBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -88,6 +89,7 @@ public class BaseBlock extends Block {
             stack.addTagElement("BlockEntityTag", nbt);
 
             if (blockEnt instanceof BaseEnergyItemStorageBlockEntity itemEnt) itemEnt.dropContents();
+            if (blockEnt instanceof BaseItemStorageBlockEntity itemEnt) itemEnt.dropContents();
 
             return List.of(stack);
         } catch (Exception ignored) {

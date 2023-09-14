@@ -12,6 +12,7 @@
     "chemcraft:insulated_block",
     "chemcraft:air_cooler",
     "chemcraft:electric_heater",
+    "chemcraft:furnace_heater",
     "chemcraft:level_sensor",
     "chemcraft:temperature_sensor",
     "chemcraft:sensor_receiver",

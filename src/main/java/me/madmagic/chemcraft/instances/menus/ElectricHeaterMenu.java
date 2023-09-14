@@ -25,7 +25,7 @@ public class ElectricHeaterMenu extends BaseMenu<ElectricHeaterBlockEntity> {
     }
 
     public ElectricHeaterMenu(int id, BlockEntity ent, ContainerData data) {
-        super(id, CustomMenus.electricHeaterMenu.get(), ent, data);
+        super(id, CustomMenus.electricHeater.get(), ent, data);
     }
 
     public static class Screen extends BaseMenuScreen<ElectricHeaterMenu> {

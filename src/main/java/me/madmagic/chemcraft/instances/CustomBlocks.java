@@ -42,6 +42,7 @@ public class CustomBlocks {
     public static final RegistryObject<Block> insulatedBlock = basicBlock("insulated_block", InsulatedBlock::new);
     public static final RegistryObject<Block> airCooler = customModelNoVariant("air_cooler", AirCoolerBlock::new);
     public static final RegistryObject<Block> electricHeater = customModelNoVariant("electric_heater", ElectricHeaterBlock::new);
+    public static final RegistryObject<Block> furnaceHeater = customModelNoVariant("furnace_heater", FurnaceHEater::new);
 
     //controlling related
     public static final RegistryObject<Block> levelSensor = BaseSensorBlock.registerSensorBlock("level_sensor", LevelSensorBlockEntity::new);

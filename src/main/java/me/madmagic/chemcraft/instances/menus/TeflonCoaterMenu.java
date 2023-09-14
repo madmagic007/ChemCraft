@@ -29,7 +29,7 @@ public class TeflonCoaterMenu extends BaseMenu<TeflonCoaterBlockEntity> {
     }
 
     public TeflonCoaterMenu(int id, Inventory inv, BlockEntity ent, ContainerData data) {
-        super(id, inv, CustomMenus.teflonCoaterMenu.get(), ent, 5, data);
+        super(id, inv, CustomMenus.teflonCoater.get(), ent, 5, data);
     }
 
     public static class Screen extends BaseMenuScreen<TeflonCoaterMenu> {
@@ -61,7 +61,7 @@ public class TeflonCoaterMenu extends BaseMenu<TeflonCoaterBlockEntity> {
 
             if (menu.isCrafting()) {
                 int progress = menu.getScaledProgress(14);
-                pGuiGraphics.blit(texture, topPos + 84, leftPos + 36, 176, 0, 8, progress);
+                pGuiGraphics.blit(texture, leftPos + 84, topPos + 36, 176, 0, 8, progress);
             }
         }
 

@@ -25,7 +25,7 @@ public class AirCoolerMenu extends BaseMenu<AirCoolerBlockEntity> {
     }
 
     public AirCoolerMenu(int id, BlockEntity ent, ContainerData data) {
-        super(id, CustomMenus.airCoolerMenu.get(), ent, data);
+        super(id, CustomMenus.airCooler.get(), ent, data);
     }
 
     public static class Screen extends BaseMenuScreen<AirCoolerMenu> {

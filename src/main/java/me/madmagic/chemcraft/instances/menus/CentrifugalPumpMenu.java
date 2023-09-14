@@ -26,7 +26,7 @@ public class CentrifugalPumpMenu extends BaseMenu<CentrifugalPumpBlockEntity> {
     }
 
     public CentrifugalPumpMenu(int id, BlockEntity ent, ContainerData data) {
-        super(id, CustomMenus.centrifugalPumpMenu.get(), ent, data);
+        super(id, CustomMenus.centrifugalPump.get(), ent, data);
     }
 
     public static class Screen extends BaseMenuScreen<CentrifugalPumpMenu> {

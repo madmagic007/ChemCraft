@@ -10,20 +10,15 @@ public class FluidHandler {
 
     static {
         new FluidType("water", 100, SolventType.WATER)
-                .setDecomposition(fluid -> {
-                    if (fluid.temperature >= 100) return Arrays.asList("steam");
-                    return new ArrayList<>();
-                })
+                .decomposeInto(fluid -> fluid.temperature > 100, fluid ->
+                    new Fluid("steam", fluid.amount * 22.4, fluid.temperature)
+                )
                 .register();
         new FluidType("ethanol", 78, SolventType.WATER).register();
         new FluidType("methanol", 65, SolventType.WATER).register();
 
         new FluidType("crude_oil", Integer.MAX_VALUE, SolventType.ORGANIC)
-                .setDecomposition(fluid -> {
-                    if (fluid.temperature >= 400)
-                        return Arrays.asList("naptha", "fuel_oil");
-                    return new ArrayList<>();
-                })
+                .decomposesInto(fluid -> fluid.temperature > 400, "naptha", "naptha", "fuel_oil")
                 .register();
         new FluidType("naphta", 120, SolventType.ORGANIC).register();
         new FluidType("fuel_oil", 370, SolventType.ORGANIC).register();
@@ -33,7 +28,11 @@ public class FluidHandler {
 
         new FluidType("acetone", 56, SolventType.BOTH).register();
 
-        new FluidType("steam", Integer.MAX_VALUE, SolventType.GAS).register();
+        new FluidType("steam", Integer.MAX_VALUE, SolventType.GAS)
+                .decomposeInto(fluid -> fluid.temperature < 100, fluid ->
+                        new Fluid("water", fluid.amount / 22.4, fluid.temperature)
+                )
+                .register();
     }
 
     public static FluidType getFluidByName(String name) {

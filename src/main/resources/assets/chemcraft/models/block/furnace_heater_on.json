@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/orientable",
   "textures": {
-    "front": "chemcraft:block/teflon_coater_front",
+    "front": "chemcraft:block/furnace_heater_front_on",
     "side": "chemcraft:block/machine_side",
     "top": "chemcraft:block/teflon_coated_iron_block",
     "bottom": "chemcraft:block/insulated_block",

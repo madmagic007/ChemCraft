@@ -1,33 +1,33 @@
 {
   "variants": {
     "facing=east,active=false": {
-      "model": "chemcraft:block/air_cooler",
+      "model": "chemcraft:block/furnace_heater",
       "y": 270
     },
     "facing=east,active=true": {
-      "model": "chemcraft:block/air_cooler_on",
+      "model": "chemcraft:block/furnace_heater_on",
       "y": 270
     },
     "facing=north,active=false": {
-      "model": "chemcraft:block/air_cooler",
+      "model": "chemcraft:block/furnace_heater",
       "y": 180
     },
     "facing=north,active=true": {
-      "model": "chemcraft:block/air_cooler_on",
+      "model": "chemcraft:block/furnace_heater_on",
       "y": 180
     },
     "facing=south,active=false": {
-      "model": "chemcraft:block/air_cooler"
+      "model": "chemcraft:block/furnace_heater"
     },
     "facing=south,active=true": {
-      "model": "chemcraft:block/air_cooler_on"
+      "model": "chemcraft:block/furnace_heater_on"
     },
     "facing=west,active=false": {
-      "model": "chemcraft:block/air_cooler",
+      "model": "chemcraft:block/furnace_heater",
       "y": 90
     },
     "facing=west,active=true": {
-      "model": "chemcraft:block/air_cooler_on",
+      "model": "chemcraft:block/furnace_heater_on",
       "y": 90
     }
   }

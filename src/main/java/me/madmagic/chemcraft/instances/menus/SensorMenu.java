@@ -23,7 +23,7 @@ public class SensorMenu extends BaseMenu<BaseSensorBlockEntity> {
     }
 
     public SensorMenu(int id, BlockEntity ent, ContainerData data) {
-        super(id, CustomMenus.sensorMenu.get(), ent, data);
+        super(id, CustomMenus.sensor.get(), ent, data);
     }
 
     public static class Screen extends BaseMenuScreen<SensorMenu> {

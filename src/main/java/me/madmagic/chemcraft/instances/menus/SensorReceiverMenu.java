@@ -27,7 +27,7 @@ public class SensorReceiverMenu extends BaseMenu<SensorReceiverBlockEntity> {
     }
 
     public SensorReceiverMenu(int id, BlockEntity ent) {
-        super(id, CustomMenus.sensorReceiverMenu.get(), ent);
+        super(id, CustomMenus.sensorReceiver.get(), ent);
     }
 
     public static class Screen extends BaseMenuScreen<SensorReceiverMenu> {
