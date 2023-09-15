@@ -5,7 +5,9 @@ import me.madmagic.chemcraft.instances.blockentities.base.BaseItemStorageBlockEn
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IActivateAble;
 import me.madmagic.chemcraft.instances.menus.FurnaceHeaterMenu;
 import me.madmagic.chemcraft.instances.menus.base.CustomItemSlotTemplate;
+import me.madmagic.chemcraft.util.fluids.*;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
@@ -18,9 +20,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.LinkedList;
 import java.util.List;
 
-public class FurnaceHeaterBlockEntity extends BaseItemStorageBlockEntity implements MenuProvider, IActivateAble {
+public class FurnaceHeaterBlockEntity extends BaseItemStorageBlockEntity implements MenuProvider, IActivateAble, IFluidContainer {
 
     public int currentTick = 0;
     public int burnTimeForItem = 0;
@@ -43,6 +46,8 @@ public class FurnaceHeaterBlockEntity extends BaseItemStorageBlockEntity impleme
         return ForgeHooks.getBurnTime(stack, RecipeType.SMELTING);
     }
 
+    private final MultiFluidStorage fluidStorage = new MultiFluidStorage(1000);
+
     @Override
     public void tick() {
         if (burnTimeForItem > 0) {
@@ -64,10 +69,38 @@ public class FurnaceHeaterBlockEntity extends BaseItemStorageBlockEntity impleme
             burnTimeForItem = burnTime;
             itemHandler.extractItem(0, 1, false);
 
-            ;
+
             level.setBlockAndUpdate(worldPosition, setActive(getBlockState(), true));
             setChanged();
         }
+
+        if (burnTimeForItem > 0 && fluidStorage.temperature < 500) fluidStorage.setTemperature(fluidStorage.temperature + 0.5);
+    }
+
+    @Override
+    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount) {
+        if (burnTimeForItem > 0) fluids.forEach(fluid -> {
+            double delta = (200 - (100 * amount / 0.695));
+            if (delta < 0) delta = 0;
+            fluid.temperature += delta;
+        });
+
+        FluidHandler.transferTo(fluidStorage.fluids, fluids);
+        DisplacementHandler.tryFeed(worldPosition, pipeDir.getOpposite(), level, fluids, FluidHandler.getStored(fluids));
+
+        //store excess to self
+        fluidStorage.add(fluids);
+        System.out.println();
+    }
+
+    @Override
+    public double extract(BlockPos pipePos, Direction pipeDir, double amount, LinkedList<Fluid> extractTo) {
+        return fluidStorage.extract(amount, extractTo);
+    }
+
+    @Override
+    public MultiFluidStorage getFluidStorage(BlockPos pipePos, Direction pipeDir) {
+        return fluidStorage;
     }
 
     @Override
@@ -95,6 +128,7 @@ public class FurnaceHeaterBlockEntity extends BaseItemStorageBlockEntity impleme
     public void saveToNBT(CompoundTag nbt) {
         super.saveToNBT(nbt);
 
+        fluidStorage.saveToNBT(nbt);
         nbt.putInt("chemcraft.current_tick", currentTick);
         nbt.putInt("chemcraft.time_for_item", burnTimeForItem);
     }
@@ -103,6 +137,7 @@ public class FurnaceHeaterBlockEntity extends BaseItemStorageBlockEntity impleme
     public void loadFromNBT(CompoundTag nbt) {
         super.loadFromNBT(nbt);
 
+        fluidStorage.loadFromNBT(nbt);
         currentTick = nbt.getInt("chemcraft.current_tick");
         burnTimeForItem = nbt.getInt("chemcraft.time_for_item");
     }

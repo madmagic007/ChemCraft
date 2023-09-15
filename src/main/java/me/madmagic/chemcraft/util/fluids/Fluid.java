@@ -25,6 +25,7 @@ public class Fluid {
 
         //temperature = FluidHandler.calculateTemperature(amount, temperature, other.amount, other.temperature);
         amount += other.amount;
+        other.amount = 0;
         return true;
     }
 
@@ -40,11 +41,11 @@ public class Fluid {
         return getFluidType().boilingPoint;
     }
 
-    public List<Fluid> checkDecompose() {
-        List<Fluid> fluids = new LinkedList<>();
+    public LinkedList<Fluid> checkDecompose() {
+        LinkedList<Fluid> fluids = new LinkedList<>();
         FluidType type = getFluidType();
 
-        if (type.decomposePredicate != null  && type.decomposePredicate.test(this)) {
+        if (type != null && type.decomposePredicate != null  && type.decomposePredicate.test(this)) {
             List<Fluid> fromFunc = getFluidType().decomposeFunc.apply(this);
             if (fromFunc != null) fluids.addAll(fromFunc);
         }

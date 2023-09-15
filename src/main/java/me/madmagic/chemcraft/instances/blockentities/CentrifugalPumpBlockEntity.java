@@ -26,7 +26,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.List;
+import java.util.LinkedList;
 
 public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuProvider, INetworkUpdateAble, IRotateAble {
 
@@ -135,7 +135,7 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
 
         double toExtract = Math.min(flowRate * tickFactor, Math.min(fluidAvailable, availableSpace));
 
-        List<Fluid> extracted = DisplacementHandler.extract(availableOrigin, toExtract);
+        LinkedList<Fluid> extracted = DisplacementHandler.extract(availableOrigin, toExtract);
 
         DisplacementHandler.feed(availableDestination, extracted);
         getMotorEnt().useEnergy(flowRate / powerUsageFactor);

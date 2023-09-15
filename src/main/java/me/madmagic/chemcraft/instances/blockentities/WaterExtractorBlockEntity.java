@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 
-import java.util.List;
+import java.util.LinkedList;
 
 public class WaterExtractorBlockEntity extends BaseBlockEntity implements IFluidContainer {
     private boolean isInWater = false;
@@ -58,10 +58,10 @@ public class WaterExtractorBlockEntity extends BaseBlockEntity implements IFluid
 
 
     @Override
-    public void receive(BlockPos pipePos, Direction pipeDir, List<Fluid> fluids, double amount) {}
+    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount) {}
 
     @Override
-    public double extract(BlockPos pipePos, Direction pipeDir, double amount, List<Fluid> extractTo) {
+    public double extract(BlockPos pipePos, Direction pipeDir, double amount, LinkedList<Fluid> extractTo) {
         if (!isInWater) return 0;
 
         extractTo.add(new Fluid("water", amount, 25));

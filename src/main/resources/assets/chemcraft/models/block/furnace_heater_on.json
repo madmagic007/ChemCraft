@@ -1,10 +1,15 @@
 {
-  "parent": "minecraft:block/orientable",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "front": "chemcraft:block/furnace_heater_front_on",
-    "side": "chemcraft:block/machine_side",
-    "top": "chemcraft:block/teflon_coated_iron_block",
-    "bottom": "chemcraft:block/insulated_block",
+    "north": "chemcraft:block/furnace_heater_front_on",
+    "south": "chemcraft:block/machine_side",
+
+    "east": "chemcraft:block/machine_cold",
+    "west": "chemcraft:block/machine_hot",
+
+    "up": "chemcraft:block/teflon_coated_iron_block",
+    "down": "chemcraft:block/insulated_block",
+
     "particle": "chemcraft:block/machine_side"
   }
 }

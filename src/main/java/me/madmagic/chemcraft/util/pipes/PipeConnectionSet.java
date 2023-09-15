@@ -8,7 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.List;
+import java.util.LinkedList;
 
 public class PipeConnectionSet implements IFluidContainer {
 
@@ -39,12 +39,12 @@ public class PipeConnectionSet implements IFluidContainer {
     }
 
     @Override
-    public void receive(BlockPos pipePos, Direction pipeDir, List<Fluid> fluids, double amount) {
+    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount) {
         container.receive(pipePos, pipeDir, fluids, amount);
     }
 
     @Override
-    public double extract(BlockPos pipePos, Direction pipeDir, double amount, List<Fluid> extractTo) {
+    public double extract(BlockPos pipePos, Direction pipeDir, double amount, LinkedList<Fluid> extractTo) {
         return container.extract(pipePos, pipeDir, amount, extractTo);
     }
 

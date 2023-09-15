@@ -2,7 +2,6 @@ package me.madmagic.chemcraft.util.fluids;
 
 import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.List;
 
 public class VaporHelper {
 
@@ -52,8 +51,8 @@ public class VaporHelper {
         return fraction;
     }
 
-    public List<Fluid> getVapor(double evaporateAmount) {
-        List<Fluid> vapor = new LinkedList<>();
+    public LinkedList<Fluid> getVapor(double evaporateAmount) {
+        LinkedList<Fluid> vapor = new LinkedList<>();
 
         double mixtureBP = getMixtureBP();
         if (FluidHandler.getTemperature(fluids) < mixtureBP) return vapor;
@@ -80,10 +79,10 @@ public class VaporHelper {
         return fractionThatBoilsAtTemp;
     }
 
-    public List<Fluid> getDownFall(double downFallAmount) {
+    public LinkedList<Fluid> getDownFall(double downFallAmount) {
         double fractionThatBoilsAtTemp = getFractionThatBoilsAtTemp();
 
-        List<Fluid> downFall = new LinkedList<>();
+        LinkedList<Fluid> downFall = new LinkedList<>();
         downFall.add(mostVolatile.split(downFallAmount * fractionThatBoilsAtTemp));
         downFall.add(leastVolatile.split(downFallAmount * (1 - fractionThatBoilsAtTemp)));
         FluidHandler.clearEmptyFluids(downFall);

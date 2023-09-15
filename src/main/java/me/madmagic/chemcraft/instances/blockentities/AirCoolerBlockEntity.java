@@ -2,22 +2,16 @@ package me.madmagic.chemcraft.instances.blockentities;
 
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.blockentities.base.BaseEnergyStorageBlockEntity;
-import me.madmagic.chemcraft.instances.blocks.PipeBlock;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IActivateAble;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IHasRedstonePowerLevel;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRedstoneMode;
 import me.madmagic.chemcraft.instances.menus.AirCoolerMenu;
-import me.madmagic.chemcraft.util.ConnectionHandler;
 import me.madmagic.chemcraft.util.GeneralUtil;
 import me.madmagic.chemcraft.util.fluids.DisplacementHandler;
 import me.madmagic.chemcraft.util.fluids.Fluid;
 import me.madmagic.chemcraft.util.fluids.IFluidContainer;
 import me.madmagic.chemcraft.util.fluids.MultiFluidStorage;
 import me.madmagic.chemcraft.util.networking.INetworkUpdateAble;
-import me.madmagic.chemcraft.util.pipes.IPipeConnectable;
-import me.madmagic.chemcraft.util.pipes.PipeConnectionHandler;
-import me.madmagic.chemcraft.util.pipes.PipeLine;
-import me.madmagic.chemcraft.util.pipes.PipelineHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -29,7 +23,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
+import java.util.LinkedList;
 
 public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implements MenuProvider, IFluidContainer, INetworkUpdateAble, IActivateAble, IHasRedstonePowerLevel, IRedstoneMode {
 
@@ -111,40 +105,16 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
     }
 
     @Override
-    public void receive(BlockPos pipePos, Direction pipeDir, List<Fluid> fluids, double amount) {
+    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount) {
         if (active) fluids.forEach(fluid -> {
             fluid.temperature = Math.max(airTemp, fluid.temperature - actualCooling);
         });
 
-        BlockPos coldPipePos = worldPosition.relative(pipeDir.getOpposite());
-        BlockState pipeState = level.getBlockState(coldPipePos);
-
-        if (!ConnectionHandler.isStateOfType(pipeState, PipeBlock.class) ||
-                PipeConnectionHandler.isDirDisconnected(pipeState, pipeDir.getOpposite())) {
-            fluidStorage.add(fluids, amount);
-            return;
-        }
-
-        PipeLine pipeLine = PipelineHandler.findPipeline(coldPipePos, level, IPipeConnectable.PipeConnectionType.INPUT);
-
-        if (!pipeLine.hasContainers()) {
-            fluidStorage.add(fluids, amount);
-            return;
-        }
-
-        PipeLine destinationLine = new PipeLine();
-        amount = Math.min(amount, DisplacementHandler.calculateSpaceAvailable(pipeLine, destinationLine));
-
-        if (amount <= 0) {
-            fluidStorage.add(fluids, amount);
-            return;
-        }
-
-        DisplacementHandler.feed(destinationLine, fluids);
+        if (!DisplacementHandler.tryFeed(worldPosition, pipeDir.getOpposite(), level, fluids, amount)) fluidStorage.add(fluids, amount);
     }
 
     @Override
-    public double extract(BlockPos pipePos, Direction pipeDir, double amount, List<Fluid> extractTo) {
+    public double extract(BlockPos pipePos, Direction pipeDir, double amount, LinkedList<Fluid> extractTo) {
         return fluidStorage.extract(amount, extractTo);
     }
 

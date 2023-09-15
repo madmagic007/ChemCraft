@@ -1,6 +1,9 @@
 package me.madmagic.chemcraft.util.fluids;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import static me.madmagic.chemcraft.util.fluids.FluidType.SolventType;
 
@@ -10,9 +13,7 @@ public class FluidHandler {
 
     static {
         new FluidType("water", 100, SolventType.WATER)
-                .decomposeInto(fluid -> fluid.temperature > 100, fluid ->
-                    new Fluid("steam", fluid.amount * 22.4, fluid.temperature)
-                )
+                .decomposesInto(fluid -> fluid.temperature > 100, "steam")
                 .register();
         new FluidType("ethanol", 78, SolventType.WATER).register();
         new FluidType("methanol", 65, SolventType.WATER).register();
@@ -29,9 +30,7 @@ public class FluidHandler {
         new FluidType("acetone", 56, SolventType.BOTH).register();
 
         new FluidType("steam", Integer.MAX_VALUE, SolventType.GAS)
-                .decomposeInto(fluid -> fluid.temperature < 100, fluid ->
-                        new Fluid("water", fluid.amount / 22.4, fluid.temperature)
-                )
+                .decomposesInto(fluid -> fluid.temperature < 100, "water")
                 .register();
     }
 
@@ -57,7 +56,13 @@ public class FluidHandler {
         return temp;
     }
 
-    public static double transferTo(List<Fluid> source, List<Fluid> destination, double amount) {
+    public static double transferTo(LinkedList<Fluid> source, LinkedList<Fluid> destination) {
+        return transferTo(source, destination, getStored(source));
+    }
+
+    public static double transferTo(LinkedList<Fluid> source, LinkedList<Fluid> destination, double amount) {
+        checkFluids(source);
+
         double amountInSource = getStored(source);
         amount = Math.min(amount, amountInSource);
         if (amount <= 0) return 0;
@@ -68,11 +73,13 @@ public class FluidHandler {
             double ratio = fluid.getAmount() / amountInSource;
             double amountToTransfer = ratio * amount;
 
-            addFluid(fluid.split(amountToTransfer), destination);
+            transferTo(fluid.split(amountToTransfer), destination);
+            actualTransferred += amountToTransfer;
         }
 
         clearEmptyFluids(source);
         clearEmptyFluids(destination);
+        checkFluids(destination);
 
         return actualTransferred;
     }
@@ -85,8 +92,12 @@ public class FluidHandler {
         return count;
     }
 
-    public static void addFluid(Fluid fluid, List<Fluid> addTo) {
+    private static void transferTo(Fluid fluid, List<Fluid> addTo) {
         if (fluid.amount <= 0) return;
+
+        double storedAmount = FluidHandler.getStored(addTo);
+        double storedTemp = FluidHandler.getTemperature(addTo);
+        double newTemp = FluidHandler.calculateTemperature(storedAmount, storedTemp, fluid.amount, fluid.temperature);
 
         boolean foundFluid = false;
         for (Fluid listFluid : addTo)
@@ -95,30 +106,32 @@ public class FluidHandler {
                 break;
             }
 
-        double stored = FluidHandler.getStored(addTo);
-        double soredTemp = FluidHandler.getTemperature(addTo);
-        double newTemp = FluidHandler.calculateTemperature(stored, soredTemp, fluid.amount, fluid.temperature);
-
-        if (!foundFluid) addTo.add(fluid);
+        if (!foundFluid) addTo.add(fluid.split(fluid.amount));
 
         addTo.forEach(f -> f.temperature = newTemp);
     }
 
-    public static void clearEmptyFluids(List<Fluid> toClear) {
+    public static void clearEmptyFluids(LinkedList<Fluid> toClear) {
         toClear.removeIf(fluid -> fluid.amount < 0.01);
     }
 
     public static void checkFluids(LinkedList<Fluid> fluids) {
+        LinkedList<Fluid> decomposeProducts = new LinkedList<>();
+
         fluids.removeIf(fluid -> {
             FluidType type = fluid.getFluidType();
 
+            LinkedList<Fluid> currentDecompose = fluid.checkDecompose();
+            if (!currentDecompose.isEmpty()) {
+                decomposeProducts.addAll(currentDecompose);
+                return true;
+            }
+
             if (fluid.temperature > type.boilingPoint) fluid.temperature = type.boilingPoint;
-
-            List<Fluid> decompose = fluid.checkDecompose();
-            if (decompose.isEmpty()) return false;
-
-            fluids.addAll(decompose);
-            return true;
+            return false;
         });
+
+        if (!decomposeProducts.isEmpty())
+            transferTo(decomposeProducts, fluids);
     }
 }

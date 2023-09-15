@@ -1,12 +1,12 @@
 package me.madmagic.chemcraft.util.fluids;
 
-import me.madmagic.chemcraft.util.pipes.PipeConnectionSet;
-import me.madmagic.chemcraft.util.pipes.PipeLine;
+import me.madmagic.chemcraft.util.pipes.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DisplacementHandler {
 
@@ -36,16 +36,16 @@ public class DisplacementHandler {
         return spaceAvailable;
     }
 
-    public static List<Fluid> extract(PipeLine origins, double amount) {
-        List<Fluid> extractedFluids = new ArrayList<>();
+    public static LinkedList<Fluid> extract(PipeLine origins, double amount) {
+        LinkedList<Fluid> extractedFluids = new LinkedList<>();
         double remainingContainers = origins.sets.size();
 
         for (PipeConnectionSet set : origins.sets) {
             double avg = amount / remainingContainers;
 
-            List<Fluid> tankExtract = new ArrayList<>();
+            LinkedList<Fluid> tankExtract = new LinkedList<>();
             double extracted = set.extract(set.pipePos, set.pipeToBlock.getOpposite(), avg, tankExtract);
-            extractedFluids = mergeLists(extractedFluids, tankExtract);
+            FluidHandler.transferTo(tankExtract, extractedFluids, extracted);
 
             amount -= extracted;
             remainingContainers --;
@@ -53,7 +53,7 @@ public class DisplacementHandler {
         return extractedFluids;
     }
 
-    public static void feed(PipeLine pipeLine, List<Fluid> fluids) {
+    public static void feed(PipeLine pipeLine, LinkedList<Fluid> fluids) {
         double remainingDestinatingSets = pipeLine.sets.size();
         double totalFluid = FluidHandler.getStored(fluids);
 
@@ -66,22 +66,21 @@ public class DisplacementHandler {
         }
     }
 
-    private static List<Fluid> mergeLists(List<Fluid> a, List<Fluid> b) {
-        Map<String, Fluid> map = new HashMap<>();
+    public static boolean tryFeed(BlockPos sourcePos, Direction pipeDir, Level level, LinkedList<Fluid> fluids, double amount) {
+        BlockPos startPipePos = sourcePos.relative(pipeDir);
 
-        a.forEach(fluid -> map.put(fluid.name, fluid));
-        b.forEach(fluid -> {
-            Fluid existingFluid = map.get(fluid.name);
+        PipeLine pipeLine = PipelineHandler.findPipeline(startPipePos, level, IPipeConnectable.PipeConnectionType.INPUT);
+        if (!pipeLine.hasContainers()) return false;
 
-            if (existingFluid == null) map.put(fluid.name, fluid);
-            else {
-                existingFluid.mergeWith(fluid);
-                map.put(existingFluid.name, existingFluid);
-            }
-        });
+        BlockState pipeState = level.getBlockState(startPipePos);
+        if (PipeConnectionHandler.isDirDisconnected(pipeState, pipeDir.getOpposite())) return false;
 
-        List<Fluid> fluids = new ArrayList<>();
-        map.forEach((name, fluid) -> fluids.add(fluid));
-        return fluids;
+        PipeLine destinationLine = new PipeLine();
+        amount = Math.min(amount, DisplacementHandler.calculateSpaceAvailable(pipeLine, destinationLine));
+
+        if (amount <= 0) return false;
+
+        feed(destinationLine, fluids);
+        return true;
     }
 }

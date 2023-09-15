@@ -15,11 +15,11 @@ public class MultiFluidStorage {
         this.capacity = capacity;
     }
 
-    public double add(List<Fluid> fluids) {
+    public double add(LinkedList<Fluid> fluids) {
         return add(fluids, FluidHandler.getStored(fluids));
     }
 
-    public double add(List<Fluid> fluids, double desiredAmount) {
+    public double add(LinkedList<Fluid> fluids, double desiredAmount) {
         double maxAmount = Math.min(getSpaceLeft(), desiredAmount);
         double transferred = FluidHandler.transferTo(fluids, this.fluids, maxAmount);
 
@@ -27,7 +27,7 @@ public class MultiFluidStorage {
         return transferred;
     }
 
-    public double extract(double desiredAmount, List<Fluid> extractTo) {
+    public double extract(double desiredAmount, LinkedList<Fluid> extractTo) {
         double maxAmount = Math.min(getStored(), desiredAmount);
         return FluidHandler.transferTo(this.fluids, extractTo, maxAmount);
     }
@@ -51,12 +51,14 @@ public class MultiFluidStorage {
     public void setTemperature(double temperature) {
         this.temperature = temperature;
         fluids.forEach(fluid -> fluid.temperature = temperature);
+        FluidHandler.checkFluids(fluids);
     }
 
     public void saveToNBT(CompoundTag nbt) {
-        CompoundTag fluidsTag = new CompoundTag();
-        fluidsTag.putInt("capacity", (int) capacity);
+        CompoundTag storageTag = new CompoundTag();
+        storageTag.putInt("capacity", (int) capacity);
 
+        CompoundTag fluidsTag = new CompoundTag();
         fluids.forEach(fluid -> {
             CompoundTag fluidTag = new CompoundTag();
             fluidTag.putDouble("amount", (int) Math.round(fluid.amount));
@@ -64,13 +66,16 @@ public class MultiFluidStorage {
 
             fluidsTag.put(fluid.name, fluidTag);
         });
+        storageTag.put("fluids", fluidsTag);
 
-        nbt.put("chemcraft.fluids", fluidsTag);
+        nbt.put("chemcraft.fluidstorage", storageTag);
     }
 
     public void loadFromNBT(CompoundTag nbt) {
-        CompoundTag fluidsTag = (CompoundTag) nbt.get("chemcraft.fluids");
-        capacity = fluidsTag.getInt("capacity");
+        CompoundTag storageTag = (CompoundTag) nbt.get("chemcraft.fluidstorage");
+        capacity = storageTag.getInt("capacity");
+
+        CompoundTag fluidsTag = storageTag.getCompound("fluids");
         fluidsTag.getAllKeys().forEach(fluidName -> {
             CompoundTag fluidTag = fluidsTag.getCompound(fluidName);
 

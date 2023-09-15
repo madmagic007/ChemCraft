@@ -11,7 +11,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.List;
+import java.util.LinkedList;
 import java.util.TreeMap;
 
 public class DistilleryBlockEntity extends BaseBlockEntity implements IFluidContainer {
@@ -41,18 +41,18 @@ public class DistilleryBlockEntity extends BaseBlockEntity implements IFluidCont
     }
 
     @Override
-    public void receive(BlockPos pipePos, Direction pipeDir, List<Fluid> fluids, double amount) {
+    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount) {
         if (pipePos.getY() - 1 == fluidStorages.lastKey()) pipePos = pipePos.relative(Direction.DOWN);
         insert(pipePos.getY(), fluids);
     }
 
     @Override
-    public double extract(BlockPos pipePos, Direction pipeDir, double amount, List<Fluid> extractTo) {
+    public double extract(BlockPos pipePos, Direction pipeDir, double amount, LinkedList<Fluid> extractTo) {
         if (pipePos.getY() + 1 == fluidStorages.firstKey()) pipePos = pipePos.relative(Direction.UP);
         return getFluidStorage(pipePos, pipeDir).extract(amount, extractTo);
     }
 
-    private void insert(int atY, List<Fluid> fluids) {
+    private void insert(int atY, LinkedList<Fluid> fluids) {
         fluidStorages.get(atY).add(fluids);
 
         double spaceLeft = FluidHandler.getStored(fluids);
@@ -79,7 +79,7 @@ public class DistilleryBlockEntity extends BaseBlockEntity implements IFluidCont
             //evaporate up
             if (atY != fluidStorages.lastKey()) {
                 double evaporateAmount = Math.min(fluidAmount, storage.capacity) * evaporateFactor;
-                List<Fluid> vapor = vh.getVapor(evaporateAmount);
+                LinkedList<Fluid> vapor = vh.getVapor(evaporateAmount);
                 if (!vapor.isEmpty()) insert(atY + 1, vapor);
             }
 
@@ -87,7 +87,7 @@ public class DistilleryBlockEntity extends BaseBlockEntity implements IFluidCont
             if (atY == fluidStorages.firstKey()) return;
             double stored = storage.getStored();
             double downFallAmount = Math.min(stored, storage.capacity) * downFallFactor;
-            List<Fluid> downStream = vh.getDownFall(downFallAmount);
+            LinkedList<Fluid> downStream = vh.getDownFall(downFallAmount);
             if (!downStream.isEmpty()) insert(atY - 1, downStream);
         });
 

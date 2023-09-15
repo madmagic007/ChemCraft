@@ -10,7 +10,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.List;
+import java.util.LinkedList;
 
 public class CrudeOilExtractorBlockEntity extends BaseBlockEntity implements IFluidContainer {
 
@@ -28,10 +28,10 @@ public class CrudeOilExtractorBlockEntity extends BaseBlockEntity implements IFl
     public void tick() {}
 
     @Override
-    public void receive(BlockPos pipePos, Direction pipeDir, List<Fluid> fluids, double amount) {}
+    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount) {}
 
     @Override
-    public double extract(BlockPos pipePos, Direction pipeDir, double amount, List<Fluid> extractTo) {
+    public double extract(BlockPos pipePos, Direction pipeDir, double amount, LinkedList<Fluid> extractTo) {
 
         extractTo.add(new Fluid("crude_oil", amount, 25));
         return amount;

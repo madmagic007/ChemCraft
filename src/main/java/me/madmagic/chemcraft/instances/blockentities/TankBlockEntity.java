@@ -12,7 +12,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.List;
+import java.util.LinkedList;
 
 public class TankBlockEntity extends BaseBlockEntity implements IFluidContainer {
 
@@ -34,12 +34,12 @@ public class TankBlockEntity extends BaseBlockEntity implements IFluidContainer 
     public final MultiFluidStorage fluidStorage = new MultiFluidStorage(capacityPerTank) {};
 
     @Override
-    public void receive(BlockPos pipePos, Direction pipeDir, List<Fluid> fluids, double amount) {
+    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount) {
         fluidStorage.add(fluids, amount);
     }
 
     @Override
-    public double extract(BlockPos pipePos, Direction pipeDir, double amount, List<Fluid> extractTo) {
+    public double extract(BlockPos pipePos, Direction pipeDir, double amount, LinkedList<Fluid> extractTo) {
         return fluidStorage.extract(amount, extractTo);
     }
 
@@ -55,7 +55,6 @@ public class TankBlockEntity extends BaseBlockEntity implements IFluidContainer 
     public void onLoad() {
         super.onLoad();
         BlockPos pos = getBlockPos();
-        BlockState state = level.getBlockState(pos);
         if (!level.isClientSide && !MultiBlockHandler.isValidMultiBlock(pos, level))
             new TankMultiBlock(pos, level).check(true);
     }
