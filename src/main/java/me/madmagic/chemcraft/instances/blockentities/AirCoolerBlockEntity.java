@@ -7,10 +7,7 @@ import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IHasRedstonePowerL
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRedstoneMode;
 import me.madmagic.chemcraft.instances.menus.AirCoolerMenu;
 import me.madmagic.chemcraft.util.GeneralUtil;
-import me.madmagic.chemcraft.util.fluids.DisplacementHandler;
-import me.madmagic.chemcraft.util.fluids.Fluid;
-import me.madmagic.chemcraft.util.fluids.IFluidContainer;
-import me.madmagic.chemcraft.util.fluids.MultiFluidStorage;
+import me.madmagic.chemcraft.util.fluids.*;
 import me.madmagic.chemcraft.util.networking.INetworkUpdateAble;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -102,6 +99,10 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
             active = false;
             level.setBlockAndUpdate(worldPosition, setActive(getBlockState(), false));
         }
+
+        if (active) fluidStorage.fluids.forEach(fluid -> {
+            fluid.temperature = Math.max(airTemp, fluid.temperature - actualCooling / 20);
+        });
     }
 
     @Override
@@ -110,7 +111,11 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
             fluid.temperature = Math.max(airTemp, fluid.temperature - actualCooling);
         });
 
-        if (!DisplacementHandler.tryFeed(worldPosition, pipeDir.getOpposite(), level, fluids, amount)) fluidStorage.add(fluids, amount);
+        FluidHandler.transferTo(fluidStorage.fluids, fluids);
+        DisplacementHandler.tryFeed(worldPosition, pipeDir.getOpposite(), level, fluids, FluidHandler.getStored(fluids));
+
+        //store excess to self
+        fluidStorage.add(fluids);
     }
 
     @Override

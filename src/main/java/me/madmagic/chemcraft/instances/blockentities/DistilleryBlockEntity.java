@@ -11,7 +11,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.TreeMap;
 
 public class DistilleryBlockEntity extends BaseBlockEntity implements IFluidContainer {
@@ -62,6 +64,11 @@ public class DistilleryBlockEntity extends BaseBlockEntity implements IFluidCont
     @Override
     public MultiFluidStorage getFluidStorage(BlockPos pipePos, Direction pipeDir) {
         return fluidStorages.getOrDefault(pipePos.getY(), new MultiFluidStorage(0));
+    }
+
+    @Override
+    public List<MultiFluidStorage> getFluidStorages() {
+        return new ArrayList<>(fluidStorages.values());
     }
 
     @Override

@@ -7,6 +7,7 @@
   "item.chemcraft.axle": "Axle",
   "item.chemcraft.fan": "Fan",
   "item.chemcraft.chemists_manual": "Chemists Manual",
+  "item.chemcraft.probe": "Probe",
 
   "block.chemcraft.pipe": "Pipe",
   "block.chemcraft.motor": "Motor",
@@ -23,6 +24,8 @@
   "block.chemcraft.sensor_receiver": "Sensor Receiver",
   "block.chemcraft.distillery": "Distillery",
   "block.chemcraft.sieve_plate": "Sieve plate",
+  "block.chemcraft.crude_oil_extractor": "Crude oil Extractor",
   "block.chemcraft.electric_heater": "Electric Heater",
+  "block.chemcraft.furnace_heater": "Furnace Heater",
   "block.chemcraft.fluorite_ore": "Fluorite Ore"
 }
