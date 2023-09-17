@@ -9,6 +9,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class PipeConnectionSet implements IFluidContainer {
 
@@ -51,5 +52,10 @@ public class PipeConnectionSet implements IFluidContainer {
     @Override
     public MultiFluidStorage getFluidStorage(BlockPos pipePos, Direction pipeDir) {
         return container.getFluidStorage(pipePos, pipeDir);
+    }
+
+    @Override
+    public List<MultiFluidStorage> getFluidStorages() {
+        return null;
     }
 }

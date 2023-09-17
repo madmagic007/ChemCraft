@@ -4,6 +4,7 @@ import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.datagen.CustomItemModelProvider;
 import me.madmagic.chemcraft.instances.items.ChemistsManual;
 import me.madmagic.chemcraft.instances.items.PipeWrenchItem;
+import me.madmagic.chemcraft.instances.items.ProbeItem;
 import me.madmagic.chemcraft.instances.items.base.BaseItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -29,6 +30,7 @@ public class CustomItems {
     //tools
     public static final RegistryObject<Item> pipeWrench = register("pipe_wrench", PipeWrenchItem::new);
     public static final RegistryObject<Item> chemistsManual = register("chemists_manual", ChemistsManual::new);
+    public static final RegistryObject<Item> probe = register("probe", ProbeItem::new);
 
     //reagents
     public static final RegistryObject<Item> fluorite = register("fluorite_piece", BaseItem::new);

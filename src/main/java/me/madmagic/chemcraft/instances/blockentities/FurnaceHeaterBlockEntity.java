@@ -90,7 +90,6 @@ public class FurnaceHeaterBlockEntity extends BaseItemStorageBlockEntity impleme
 
         //store excess to self
         fluidStorage.add(fluids);
-        System.out.println();
     }
 
     @Override

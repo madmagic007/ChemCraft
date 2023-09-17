@@ -1,12 +1,6 @@
 package me.madmagic.chemcraft.instances.items;
 
-import net.minecraft.world.item.Item;
+import me.madmagic.chemcraft.instances.items.base.BaseItem;
 
-public class PipeWrenchItem extends Item {
-
-    public PipeWrenchItem() {
-        super(
-                new Item.Properties()
-        );
-    }
+public class PipeWrenchItem extends BaseItem {
 }
