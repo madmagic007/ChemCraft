@@ -1,0 +1,18 @@
+{
+  "methane": {
+    "boilingPoint": -162,
+    "solubilityType": "gas"
+  },
+  "ethane": {
+    "boilingPoint": -89,
+    "solubilityType": "gas"
+  },
+  "propane": {
+    "boilingPoint": -42,
+    "solubilityType": "gas"
+  },
+  "butane": {
+    "boilingPoint": -1,
+    "solubilityType": "gas"
+  }
+}

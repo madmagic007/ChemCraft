@@ -1,0 +1,13 @@
+{
+  "requiredTemperature": 200,
+  "catalyst": {
+    "activated_carbon_catalyst": 1
+  },
+  "input": {
+    "naptha": 1
+  },
+  "output": {
+    "light_cracked_naptha": 1,
+    "heavy_cracked_naptha": 1
+  }
+}

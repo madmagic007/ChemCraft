@@ -1,0 +1,10 @@
+{
+  "type": "decompose",
+  "maxTemperature": 100,
+  "input": {
+    "steam": 1
+  },
+  "output": {
+    "water": 1
+  }
+}

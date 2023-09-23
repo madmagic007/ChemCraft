@@ -1,0 +1,17 @@
+{
+  "name": "Fluid Storage",
+  "icon": "chemcraft:tank",
+  "category": "chemcraft:fluids",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A valid tank multiblock must have a square base of any dimension (eg: 2x2, 5x5) made of insulated blocks.$(br2)The multiblock can be any height, each layer must be the same size as the base and no air blocks in the center. $(br2)One of the blocks must be the tank block. Right click this with a wrench to finish the tank."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "chemcraft:tank",
+      "text": "If valid, pipes will now allow connections to the tank. You can extract and insert from any where.$(br2)The capacity is the total amount of blocks x 1000l. So a 3x4x3 structure has a capacity of 48000l."
+    }
+  ]
+}

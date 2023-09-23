@@ -1,0 +1,9 @@
+{
+  "water": {
+    "boilingPoint": 100,
+    "solubilityType": "water"
+  },
+  "steam": {
+    "solubilityType": "gas"
+  }
+}

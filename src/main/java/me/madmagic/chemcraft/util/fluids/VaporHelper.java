@@ -14,7 +14,7 @@ public class VaporHelper {
         this.fluids = fluids;
         fluids.sort(Comparator.comparingDouble(Fluid::getBoilingPoint));
 
-        //if (fluids.isEmpty()) return;
+        //if (crude_products.json.isEmpty()) return;
         mostVolatile = fluids.getFirst();
         leastVolatile = fluids.getLast();
     }

@@ -1,0 +1,18 @@
+{
+  "benzene": {
+    "boilingPoint": 80,
+    "solubilityType": "organic"
+  },
+  "toluene": {
+    "boilingPoint": 111,
+    "solubilityType": "organic"
+  },
+  "xylene": {
+    "boilingPoint": 139,
+    "solubilityType": "organic"
+  },
+  "ethylbenzene": {
+    "boilingPoint": 136,
+    "solubilityType": "organic"
+  }
+}

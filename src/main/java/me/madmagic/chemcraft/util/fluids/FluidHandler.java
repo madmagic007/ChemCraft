@@ -5,34 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static me.madmagic.chemcraft.util.fluids.FluidType.SolventType;
-
 public class FluidHandler {
 
     public static Map<String, FluidType> fluidTypes = new HashMap<>();
-
-    static {
-        new FluidType("water", 100, SolventType.WATER)
-                .decomposesInto(fluid -> fluid.temperature > 100, "steam")
-                .register();
-        new FluidType("ethanol", 78, SolventType.WATER).register();
-        new FluidType("methanol", 65, SolventType.WATER).register();
-
-        new FluidType("crude_oil", Integer.MAX_VALUE, SolventType.ORGANIC)
-                .decomposesInto(fluid -> fluid.temperature > 400, "naptha", "naptha", "fuel_oil")
-                .register();
-        new FluidType("naphta", 120, SolventType.ORGANIC).register();
-        new FluidType("fuel_oil", 370, SolventType.ORGANIC).register();
-
-        new FluidType("benzene", 80, SolventType.ORGANIC).register();
-        new FluidType("toluene", 111, SolventType.ORGANIC).register();
-
-        new FluidType("acetone", 56, SolventType.BOTH).register();
-
-        new FluidType("steam", Integer.MAX_VALUE, SolventType.GAS)
-                .decomposesInto(fluid -> fluid.temperature < 100, "water")
-                .register();
-    }
 
     public static FluidType getFluidByName(String name) {
         return fluidTypes.get(name.toLowerCase());
@@ -127,7 +102,7 @@ public class FluidHandler {
                 return true;
             }
 
-            if (fluid.temperature > type.boilingPoint) fluid.temperature = type.boilingPoint;
+            if (fluid.temperature > type.boilingPoint()) fluid.temperature = type.boilingPoint();
             return false;
         });
 

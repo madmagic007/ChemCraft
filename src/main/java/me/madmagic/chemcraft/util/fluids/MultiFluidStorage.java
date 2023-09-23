@@ -66,7 +66,7 @@ public class MultiFluidStorage {
 
             fluidsTag.put(fluid.name, fluidTag);
         });
-        storageTag.put("fluids", fluidsTag);
+        storageTag.put("crude_products.json", fluidsTag);
 
         nbt.put("chemcraft.fluidstorage", storageTag);
     }
@@ -75,7 +75,7 @@ public class MultiFluidStorage {
         CompoundTag storageTag = (CompoundTag) nbt.get("chemcraft.fluidstorage");
         capacity = storageTag.getInt("capacity");
 
-        CompoundTag fluidsTag = storageTag.getCompound("fluids");
+        CompoundTag fluidsTag = storageTag.getCompound("crude_products.json");
         fluidsTag.getAllKeys().forEach(fluidName -> {
             CompoundTag fluidTag = fluidsTag.getCompound(fluidName);
 

@@ -1,0 +1,16 @@
+{
+  "name": "Insulated Block",
+  "icon": "chemcraft:insulated_block",
+  "category": "chemcraft:getting_started",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Insulated block will be the most used block next to pipes. All multiblock apparatus will be made of this block, defined by one apparatus specific block. More on that in the pages about the specific apparatus."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "chemcraft:insulated_block"
+    }
+  ]
+}

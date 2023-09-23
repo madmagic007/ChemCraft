@@ -1,0 +1,13 @@
+{
+  "requiredTemperature": 100,
+  "catalyst": {
+    "iron_catalyst": 1
+  },
+  "input": {
+    "light_cracked_naptha": 1
+  },
+  "output": {
+    "light_gasses": 1,
+    "heavy_gasses": 1
+  }
+}

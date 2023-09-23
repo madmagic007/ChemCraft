@@ -1,0 +1,13 @@
+{
+  "requiredTemperature": 130,
+  "catalyst": {
+    "activated_carbon_catalyst": 1
+  },
+  "input": {
+    "light_aromatics": 1
+  },
+  "output": {
+    "benzene": 1,
+    "toluene": 1
+  }
+}

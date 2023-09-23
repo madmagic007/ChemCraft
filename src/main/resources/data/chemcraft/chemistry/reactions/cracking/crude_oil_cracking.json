@@ -1,0 +1,11 @@
+{
+  "type": "decompose",
+  "requiredTemperature": 250,
+  "input": {
+    "crude_oil": 1
+  },
+  "output": {
+    "naptha": 2,
+    "fuel_oil": 1
+  }
+}

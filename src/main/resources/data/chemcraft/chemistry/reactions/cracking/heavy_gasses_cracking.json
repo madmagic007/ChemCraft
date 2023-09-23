@@ -1,0 +1,13 @@
+{
+  "requiredTemperature": 60,
+  "catalyst": {
+    "activated_carbon_catalyst": 1
+  },
+  "input": {
+    "heavy_gasses": 1
+  },
+  "output": {
+    "propane": 1,
+    "butane": 1
+  }
+}

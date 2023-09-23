@@ -1,0 +1,13 @@
+{
+  "requiredTemperature": 40,
+  "catalyst": {
+    "activated_carbon_catalyst": 1
+  },
+  "input": {
+    "light_gasses": 1
+  },
+  "output": {
+    "methane": 1,
+    "ethane": 1
+  }
+}

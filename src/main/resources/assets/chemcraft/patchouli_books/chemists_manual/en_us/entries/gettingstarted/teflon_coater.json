@@ -1,0 +1,16 @@
+{
+  "name": "Teflon Coater",
+  "icon": "chemcraft:teflon_coater",
+  "category": "chemcraft:getting_started",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The teflon coater is the starter way to chemically coat iron that can withstand the corrosive chemicals. It can take both iron ingots and blocks, combined with coal and fluorite it will apply the teflon coating. Calcium is produced as a side product in the form of bones.$(br2)Items can be inserted and extracted with hoppers or item pipes."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "chemcraft:teflon_coater",
+      "text": "The teflon coater is rather inefficient, it's slow and consumes a lot of energy.$(br)Soon you will be able to make a chemical plant that can coat iron with teflon much more efficiently."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Chemists Manual",
+  "title": "ChemCraft",
+  "subtitle": "All inclusive manual",
+  "landing_text": "Chemcraft aims to provide a close to realistic experience of real life process chemistry in Minecraft.$(br2)A + B + Time will no longer be C, but instead you will need to take in account real factors like temperature, both physical and chemical properties of fluids and gasses.",
+  "creative_tab": "chemcraft:chemcraft",
+  "use_resource_pack": true,
+  "book_texture": "patchouli:textures/gui/book_gray.png",
+  "show_progress": false
+}

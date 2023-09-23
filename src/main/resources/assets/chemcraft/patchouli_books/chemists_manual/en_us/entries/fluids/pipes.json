@@ -1,0 +1,16 @@
+{
+  "name": "Pipes",
+  "icon": "chemcraft:pipe",
+  "category": "chemcraft:fluids",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Pipes will automatically connect to anything they can connect to. A centrifugal pump is the only factor that provides displacement and the direction of the displacement.$(br2)The pipe wrench is used to break or re-connect pipe connections, preventing undesired flow paths and therefore different lines to be placed next to each other.$(br)Right click with the wrench on the side of the pipe you wish to (dis/re)connect."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "chemcraft:pipe",
+      "recipe2": "chemcraft:pipe_wrench"
+    }
+  ]
+}

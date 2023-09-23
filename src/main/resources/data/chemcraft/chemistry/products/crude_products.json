@@ -1,0 +1,37 @@
+{
+  "crude_oil": {
+    "solubilityType": "organic"
+  },
+  "naptha": {
+    "boilingPoint": 160,
+    "solubilityType": "organic"
+  },
+  "fuel_oil": {
+    "boilingPoint": 200,
+    "solubilityType": "organic"
+  },
+  "light_cracked_naptha": {
+    "boilingPoint": 80,
+    "solubilityType": "organic"
+  },
+  "heavy_cracked_naptha": {
+    "boilingPoint": 150,
+    "solubilityType": "organic"
+  },
+  "light_gasses": {
+    "boilingPoint": 30,
+    "solubilityType": "gas"
+  },
+  "heavy_gasses": {
+    "boilingPoint": 50,
+    "solubilityType": "gas"
+  },
+  "light_aromatics": {
+    "boilingPoint": 110,
+    "solubilityType": "organic"
+  },
+  "heavy_aromatics": {
+    "boilingPoint": 130,
+    "solubilityType": "organic"
+  }
+}

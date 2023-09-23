@@ -1,0 +1,13 @@
+{
+  "requiredTemperature": 170,
+  "catalyst": {
+    "iron_catalyst": 2
+  },
+  "input": {
+    "heavy_cracked_naptha": 1
+  },
+  "output": {
+    "light_aromatics": 1,
+    "heavy_aromatics": 1
+  }
+}

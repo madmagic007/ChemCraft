@@ -1,0 +1,13 @@
+{
+  "requiredTemperature": 140,
+  "catalyst": {
+    "activated_carbon_catalyst": 1
+  },
+  "input": {
+    "heavy_aromatics": 1
+  },
+  "output": {
+    "xylene": 1,
+    "ethylbenzene": 1
+  }
+}

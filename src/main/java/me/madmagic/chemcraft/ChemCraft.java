@@ -5,8 +5,11 @@ import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.CustomBlocks;
 import me.madmagic.chemcraft.instances.CustomItems;
 import me.madmagic.chemcraft.instances.CustomMenus;
+import me.madmagic.chemcraft.util.reloaders.ChemicalRecipeRegisterer;
+import me.madmagic.chemcraft.util.reloaders.FluidRegisterer;
 import me.madmagic.chemcraft.util.networking.NetworkSender;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -53,12 +56,18 @@ public class ChemCraft {
         NetworkSender.defineMessages();
     }
 
-    @Mod.EventBusSubscriber(modid = ChemCraft.modId, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class ClientEvents {
+    @Mod.EventBusSubscriber(modid = ChemCraft.modId, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    public static class Events {
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             CustomMenus.setupScreens();
+        }
+
+        @SubscribeEvent
+        public static void addReloadListener(AddReloadListenerEvent event) {
+            event.addListener(new FluidRegisterer());
+            event.addListener(new ChemicalRecipeRegisterer());
         }
     }
 }

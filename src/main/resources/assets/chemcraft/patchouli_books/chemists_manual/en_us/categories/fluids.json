@@ -1,0 +1,6 @@
+{
+  "name": "Fluids",
+  "description": "ChemCraft makes use of a custom fluid system that is incompatible with any other fluid system. Using any type of other fluid pipes or storage tanks will not work.",
+  "icon": "chemcraft:pipe",
+  "sortnum": 1
+}

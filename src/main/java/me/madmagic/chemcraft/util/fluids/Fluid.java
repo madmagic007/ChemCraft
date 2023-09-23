@@ -1,7 +1,6 @@
 package me.madmagic.chemcraft.util.fluids;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class Fluid {
 
@@ -38,17 +37,17 @@ public class Fluid {
     }
 
     public double getBoilingPoint() {
-        return getFluidType().boilingPoint;
+        return getFluidType().boilingPoint();
     }
 
     public LinkedList<Fluid> checkDecompose() {
         LinkedList<Fluid> fluids = new LinkedList<>();
-        FluidType type = getFluidType();
+        /*FluidType type = getFluidType();
 
         if (type != null && type.decomposePredicate != null  && type.decomposePredicate.test(this)) {
             List<Fluid> fromFunc = getFluidType().decomposeFunc.apply(this);
             if (fromFunc != null) fluids.addAll(fromFunc);
-        }
+        }*/
 
         return fluids;
     }

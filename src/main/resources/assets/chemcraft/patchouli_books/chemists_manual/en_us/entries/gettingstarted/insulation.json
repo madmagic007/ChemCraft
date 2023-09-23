@@ -1,0 +1,16 @@
+{
+  "name": "Insulation",
+  "icon": "chemcraft:insulation_sheet",
+  "category": "chemcraft:getting_started",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Insulation is a key aspect to chemical plants. Everything is covered with it, from pipelines to all apparatus. This way heat loss is prevented as well as protection from the environment."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "chemcraft:block_of_insulation_main",
+      "recipe2": "minecraft:insulation_sheet"
+    }
+  ]
+}
