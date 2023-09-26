@@ -6,11 +6,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "A centrifugal pump is required to displace products from any apparatus that holds fluids to another. It's currently not possible to put 2 pumps in series, parallel pumping to increase flow rate is possible.$(br2)A motor must be present behind the pump for it to work. The motor can accept any type of power from the top."
+      "text": "A centrifugal pump is required to move fluids from any fluid apparatus to another.$(br2)A motor must be present behind the pump for it to work. The motor can accept any type of power from the top.$(br2)The pump has a flow rate of 50000 l/h. Multiple pumps in parallel will increase the flow rate, chaining in series is currently not supported."
     },
     {
       "type": "patchouli:text",
-      "text": "The front of the pump is the \"suck\" side where it will suck liquids from all connected apparatus evenly. The top is the \"press\" side and will move the fluids to all apparatus that are connected here.$(br2)When an apparatus holds multiple fluids, it's seen as a mixture, so they will all be moved evenly in proportion.$(br2)The pump has a menu to set desired flowrate (0 - 50000) l/h."
+      "text": "The front of the pump is the \"suck\" side where it will suck liquids from all connected apparatus evenly. The top is the \"press\" side and will move the fluids to all apparatus that are connected to here.$(br2)When an apparatus holds multiple fluids, it's seen as a mixture, so they will all be moved evenly in proportion.$(br2)The motor is redstone toggleable, the sensor receiver can be used directly on the motor."
     },
     {
       "type": "patchouli:text",

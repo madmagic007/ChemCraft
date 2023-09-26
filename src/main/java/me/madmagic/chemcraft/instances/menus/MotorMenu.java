@@ -2,7 +2,6 @@ package me.madmagic.chemcraft.instances.menus;
 
 import me.madmagic.chemcraft.instances.CustomItems;
 import me.madmagic.chemcraft.instances.CustomMenus;
-import me.madmagic.chemcraft.instances.blockentities.CentrifugalPumpBlockEntity;
 import me.madmagic.chemcraft.instances.blockentities.MotorBlockEntity;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenu;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenuScreen;
@@ -49,13 +48,10 @@ public class MotorMenu extends BaseMenu<MotorBlockEntity> {
             pumpDisplay = screenHelper.addItem(4, imageHeight - 20, CustomItems.blockItems.get("centrifugal_pump").get(), pumpDetected ? "Pump Detected" : "Pump Not Detected");
             if (!pumpDetected) pumpDisplay.setOverLay(ScreenHelper.cross);
 
-            new CustomLabel(titleLabelX, titleLabelY + 23, "Put behind a centrifugal pump").setScale(.8f).addTo(screenHelper);
-            new CustomLabel(titleLabelX, titleLabelY + 33, "Accepts any power from the top").setScale(.8f).addTo(screenHelper);
-            new CustomLabel(titleLabelX, titleLabelY + 43, "Uses (flowrate of the pump) / " + CentrifugalPumpBlockEntity.powerUsageFactor + " FE/t").setScale(.6f).addTo(screenHelper);
+            new CustomLabel(titleLabelX, titleLabelY + 33, "Uses 100 FE/").setScale(.8f).addTo(screenHelper);
 
             new RedstoneModeWidget(pumpDisplay.getX() - screenHelper.x + 20, pumpDisplay.getY() - screenHelper.y,
-                    16, menu.entity, menu.entity.getRedstoneMode(menu.entity.getBlockState()),
-                    List.of(IGNORED, WHEN_HIGH, WHEN_LOW))
+                    16, menu.entity, List.of(IGNORED, WHEN_HIGH, WHEN_LOW))
                     .addTo(screenHelper);
         }
 

@@ -34,7 +34,7 @@ import java.util.function.BiFunction;
 
 public class BaseSensorBlock extends BaseBlock implements AutoEntityTickerBlock, IRotateAble {
 
-    public static final VoxelShape shape = Block.box(5, 5, -4, 11, 11, 16);
+    public static final VoxelShape shape = Block.box(5, 5, -6, 11, 11, 16);
 
     private final BiFunction<BlockPos, BlockState, BlockEntity> entitySupplier;
 
@@ -80,55 +80,65 @@ public class BaseSensorBlock extends BaseBlock implements AutoEntityTickerBlock,
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (pLevel.isClientSide) return InteractionResult.SUCCESS;
 
-        ItemStack itemInHand = pPlayer.getItemInHand(pHand);
-        if (!(itemInHand.getItem() instanceof PipeWrenchItem)) return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-
+        Component msg = Component.literal("Failed to set sensor source.");
         BaseBlockEntity sensor = (BaseBlockEntity) pLevel.getBlockEntity(pPos);
+        ItemStack itemInHand = pPlayer.getItemInHand(pHand);
 
         CompoundTag itemNBT = itemInHand.getTag();
         if (itemNBT == null) itemNBT = new CompoundTag();
-
         CompoundTag locTag = itemNBT.getCompound("setPos");
-        Component msg = Component.literal("Failed to set sensor source.");
 
-        if (locTag.isEmpty() || (!locTag.isEmpty() && !(sensor instanceof SensorReceiverBlockEntity))) {
-            locTag = new CompoundTag();
-            int x = pPos.getX();
-            int y = pPos.getY();
-            int z = pPos.getZ();
-
-            locTag.putInt("x", x);
-            locTag.putInt("y", y);
-            locTag.putInt("z", z);
-
-            msg = Component.literal(String.format("Selected %s at (%s, %s, %s)",
-                    ((MenuProvider) sensor).getDisplayName().getString(), x, y, z));
-
-            itemNBT.put("setPos", locTag);
-        } else if (!locTag.isEmpty() && sensor instanceof SensorReceiverBlockEntity sensorReceiverEnt) {
-            int x = locTag.getInt("x");
-            int y = locTag.getInt("y");
-            int z = locTag.getInt("z");
-            BlockPos pos = new BlockPos(x, y, z);
-            MenuProvider menuEnt = (MenuProvider) pLevel.getBlockEntity(pos);
-
-            if (pos.equals(pPos)) {
-                msg = Component.literal("Cant set self as a source.");
-            } else {
-
-                msg = Component.literal(String.format("Sucesfully set source to %s at (%s, %s, %s)",
-                        menuEnt.getDisplayName().getString(), x, y, z));
-
-                sensorReceiverEnt.sourcePos = pos;
-                pLevel.scheduleTick(pPos, this, 0);
-
-                sensor.setChanged();
+        if (itemInHand.isEmpty()) {
+            if (pPlayer.isCrouching() && sensor instanceof SensorReceiverBlockEntity sensorReceiverEnt) {
+                msg = Component.literal(String.format("Removed source sensor"));
+                sensorReceiverEnt.sourcePos = null;
+                //sensor.setChanged();
                 pLevel.sendBlockUpdated(pPos, pState, pState, Block.UPDATE_ALL);
-
-                itemNBT.remove("setPos");
-
             }
+            else
+                return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+        } else if (itemInHand.getItem() instanceof PipeWrenchItem) {
+            if (locTag.isEmpty() || (!locTag.isEmpty() && !(sensor instanceof SensorReceiverBlockEntity))) {
+                locTag = new CompoundTag();
+                int x = pPos.getX();
+                int y = pPos.getY();
+                int z = pPos.getZ();
+
+                locTag.putInt("x", x);
+                locTag.putInt("y", y);
+                locTag.putInt("z", z);
+
+                msg = Component.literal(String.format("Selected %s at (%s, %s, %s)",
+                        ((MenuProvider) sensor).getDisplayName().getString(), x, y, z));
+
+                itemNBT.put("setPos", locTag);
+            } else if (sensor instanceof SensorReceiverBlockEntity sensorReceiverEnt) {
+
+                int x = locTag.getInt("x");
+                int y = locTag.getInt("y");
+                int z = locTag.getInt("z");
+                BlockPos pos = new BlockPos(x, y, z);
+                MenuProvider menuEnt = (MenuProvider) pLevel.getBlockEntity(pos);
+
+                if (pos.equals(pPos)) {
+                    msg = Component.literal("Cant set self as a source.");
+                } else {
+                    msg = Component.literal(String.format("Sucesfully set source to %s at (%s, %s, %s)",
+                            menuEnt.getDisplayName().getString(), x, y, z));
+
+                    sensorReceiverEnt.sourcePos = pos;
+                    pLevel.scheduleTick(pPos, this, 0);
+
+                    //sensor.setChanged();
+                    pLevel.sendBlockUpdated(pPos, pState, pState, Block.UPDATE_ALL);
+
+                    itemNBT.remove("setPos");
+
+                }
+            }
+
         }
+
 
         itemInHand.setTag(itemNBT);
         pPlayer.displayClientMessage(msg, false);

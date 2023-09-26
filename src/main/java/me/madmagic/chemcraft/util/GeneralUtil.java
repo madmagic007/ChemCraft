@@ -35,7 +35,12 @@ public class GeneralUtil {
     }
 
     public static double mapValue(double factorValue, double factorMax, double theMax) {
+       return mapValue(factorValue, factorMax, 0, theMax);
+    }
+
+    public static double mapValue(double factorValue, double factorMax, double theMin, double theMax) {
         double theFactor = factorValue / factorMax;
-        return theMax * theFactor;
+        double range = theMax - theMin;
+        return theMin + range * theFactor;
     }
 }

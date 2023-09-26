@@ -5,7 +5,6 @@ import me.madmagic.chemcraft.instances.blockentities.base.BaseBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.MotorBlock;
 import me.madmagic.chemcraft.instances.blocks.PipeBlock;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
-import me.madmagic.chemcraft.instances.menus.CentrifugalPumpMenu;
 import me.madmagic.chemcraft.util.ConnectionHandler;
 import me.madmagic.chemcraft.util.GeneralUtil;
 import me.madmagic.chemcraft.util.fluids.DisplacementHandler;
@@ -18,44 +17,16 @@ import me.madmagic.chemcraft.util.pipes.PipelineHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.LinkedList;
 
-public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuProvider, INetworkUpdateAble, IRotateAble {
+public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements INetworkUpdateAble, IRotateAble {
 
-    public static final int maxFlowRate = 50000;
-    public int flowRate = 25000;
-    private final double tickFactor = 1. / 60. / 60. / 20.;
-    public static final int powerUsageFactor = 400;
-    private final ContainerData data;
+    public int flowRate = 50000;
 
     public CentrifugalPumpBlockEntity(BlockPos pos, BlockState state) {
         super(CustomBlockEntities.centrifugalPump.get(), pos, state);
-
-        data = new ContainerData() {
-            @Override
-            public int get(int pIndex) {
-                if (pIndex == 0) return flowRate;
-                return 0;
-            }
-
-            @Override
-            public void set(int pIndex, int pValue) {
-                if (pIndex == 0) flowRate = pValue;
-            }
-
-            @Override
-            public int getCount() {
-                return 1;
-            }
-        };
     }
 
     @Override
@@ -66,21 +37,6 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
     @Override
     public void saveToNBT(CompoundTag nbt) {
         nbt.putInt("chemcraft.flowrate", flowRate);
-    }
-
-    @Override
-    public Component getDisplayName() {
-        return Component.literal("Centrifugal Pump");
-    }
-
-    @Override
-    public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-        return new CentrifugalPumpMenu(pContainerId, this, data);
-    }
-
-    @Override
-    public void updateFromNetworking(int... values) {
-        flowRate = values[0];
     }
 
     public PipeLine getSuckPipeline() {
@@ -121,7 +77,7 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
         if (!hasMotor()) return false;
 
         MotorBlockEntity motorEnt = getMotorEnt();
-        return (motorEnt.hasEnoughEnergy(flowRate / powerUsageFactor) &&
+        return (motorEnt.hasEnoughEnergy(100) &&
                 !motorEnt.isPowered(motorEnt.getBlockState())
         );
     }
@@ -133,12 +89,12 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements MenuP
         PipeLine availableDestination = new PipeLine();
         double availableSpace = DisplacementHandler.calculateSpaceAvailable(destination, availableDestination);
 
-        double toExtract = Math.min(flowRate * tickFactor, Math.min(fluidAvailable, availableSpace));
+        double toExtract = Math.min(flowRate * DisplacementHandler.tickFactor, Math.min(fluidAvailable, availableSpace));
 
         LinkedList<Fluid> extracted = DisplacementHandler.extract(availableOrigin, toExtract);
 
         DisplacementHandler.feed(availableDestination, extracted);
-        getMotorEnt().useEnergy(flowRate / powerUsageFactor);
+        getMotorEnt().useEnergy(100);
     }
 
     @Override

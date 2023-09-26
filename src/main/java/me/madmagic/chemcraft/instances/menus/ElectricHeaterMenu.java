@@ -61,8 +61,7 @@ public class ElectricHeaterMenu extends BaseMenu<ElectricHeaterBlockEntity> {
                     .addTo(screenHelper)
                     .centerHorizontally(screenHelper);
 
-            new RedstoneModeWidget(4, imageHeight - 35, 16, menu.entity,
-                    menu.entity.getRedstoneMode(menu.entity.getBlockState()))
+            new RedstoneModeWidget(4, imageHeight - 35, 16, menu.entity)
                     .addTo(screenHelper);
         }
 

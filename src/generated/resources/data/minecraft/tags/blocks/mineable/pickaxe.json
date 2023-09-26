@@ -1,6 +1,7 @@
 {
   "values": [
     "chemcraft:pipe",
+    "chemcraft:valve",
     "chemcraft:teflon_coater",
     "chemcraft:centrifugal_pump",
     "chemcraft:motor",

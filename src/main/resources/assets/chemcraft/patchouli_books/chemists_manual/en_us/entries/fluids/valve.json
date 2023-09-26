@@ -1,0 +1,17 @@
+{
+  "name": "Valve",
+  "icon": "chemcraft:valve",
+  "category": "chemcraft:fluids",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To limit the rate of flow, a valve can be used. The valve has an interface to select a flow rate from 0 to 50000 l/h, 50000 is the default value.$(br2)When pumps are used in parallel to one valve, the valve still allows at most a flow rate of 50000 l/h, redirecting the remaining flow to any other apparatus without valves, if present."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "chemcraft:valve",
+      "text": "The valve's flow rate setting is redstone controllable, the sensor receiver can be used directly on the valve."
+    }
+  ]
+}

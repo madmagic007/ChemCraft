@@ -25,6 +25,7 @@ public class CustomBlocks {
 
     //pipe related
     public static final RegistryObject<Block> pipe = customModelNoVariant("pipe", PipeBlock::new);
+    public static final RegistryObject<Block> valve = rotateAbleCustomModel("valve", ValveBlock::new);
 
     //process machines
     public static final RegistryObject<Block> fluoriteCoater = rotateAbleCustomModel("teflon_coater", TeflonCoaterBlock::new);

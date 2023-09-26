@@ -3,13 +3,13 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "chemcraft:fluorite_piece"
+      "item": "chemcraft:pipe"
     },
     {
-      "item": "minecraft:book"
+      "item": "chemcraft:axle"
     }
   ],
   "result": {
-    "item": "patchouli:guide_book"
+    "item": "chemcraft:valve"
   }
 }

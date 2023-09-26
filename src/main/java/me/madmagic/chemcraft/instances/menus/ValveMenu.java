@@ -1,7 +1,7 @@
 package me.madmagic.chemcraft.instances.menus;
 
 import me.madmagic.chemcraft.instances.CustomMenus;
-import me.madmagic.chemcraft.instances.blockentities.AirCoolerBlockEntity;
+import me.madmagic.chemcraft.instances.blockentities.ValveBlockEntity;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenu;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenuScreen;
 import me.madmagic.chemcraft.instances.menus.widgets.ButtonedEditBox;
@@ -18,50 +18,42 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-public class AirCoolerMenu extends BaseMenu<AirCoolerBlockEntity> {
+public class ValveMenu extends BaseMenu<ValveBlockEntity> {
 
-    public AirCoolerMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, getEnt(inv, extraData), new SimpleContainerData(2));
+    public ValveMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
+        this(id, getEnt(inv, extraData), new SimpleContainerData(1));
     }
 
-    public AirCoolerMenu(int id, BlockEntity ent, ContainerData data) {
-        super(id, CustomMenus.airCooler.get(), ent, data);
+    public ValveMenu(int id, BlockEntity ent, ContainerData data) {
+        super(id, CustomMenus.valve.get(), ent, data);
     }
 
-    public static class Screen extends BaseMenuScreen<AirCoolerMenu> {
+    public static class Screen extends BaseMenuScreen<ValveMenu> {
 
-        public Screen(AirCoolerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
-            super(pMenu, pPlayerInventory, pTitle, ScreenHelper.noInvPower, 176, 86);
+        public Screen(ValveMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+            super(pMenu, pPlayerInventory, pTitle, ScreenHelper.noInv, 176, 86);
         }
 
         @Override
         protected void init() {
             super.init();
 
-            screenHelper.addContainerDataVerticalWidget(159, 17, 8, 52, "Energy", "FE", menu.data, 0, menu.entity.getEnergyStorage().getMaxEnergyStored(), 0xb51500, 0x600b00);
-
-            ButtonedEditBox editBox = new ButtonedEditBox(0, 0, AirCoolerBlockEntity.maxCoolingSpt, 1, screenHelper,
-                    () -> menu.data.get(1),
+            ButtonedEditBox editBox = new ButtonedEditBox(0, 0, ValveBlockEntity.maxSetting, 1000, screenHelper,
+                    () -> menu.data.get(0),
                     newVal -> NetworkSender.sendToServer(new UpdateEntMessage(menu.entity.getBlockPos(), newVal))
             ).addTo(screenHelper).center(screenHelper);
 
             addRenderableWidget(
                     editBox.getEditBox()
-                            .setTooltip("Cooling (°C)")
-                            .setMaxCharLength(2)
+                            .setTooltip("Max flow (l/hr)")
+                            .setMaxCharLength(5)
             );
 
-            new CustomLabel(0, editBox.getY() - screenHelper.y - 2, "Cooling:")
+            new CustomLabel(0, editBox.getY() - screenHelper.y - 2, "Max flow:")
                     .addTo(screenHelper)
                     .centerHorizontally(screenHelper);
 
-            new CustomLabel(0, imageHeight - 14, "")
-                    .lateCenter()
-                    .setValue(() -> "Power Consumption: " + menu.data.get(1) * AirCoolerBlockEntity.powerFactor + " FE/t")
-                    .addTo(screenHelper)
-                    .centerHorizontally(screenHelper);
-
-            new RedstoneModeWidget(4, imageHeight - 35, 16, menu.entity)
+            new RedstoneModeWidget(4, imageHeight - 20,16, menu.entity)
                     .addTo(screenHelper);
         }
 

@@ -57,17 +57,22 @@ public class ChemCraft {
     }
 
     @Mod.EventBusSubscriber(modid = ChemCraft.modId, bus = Mod.EventBusSubscriber.Bus.FORGE)
-    public static class Events {
-
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            CustomMenus.setupScreens();
-        }
+    public static class ForgeEvents {
 
         @SubscribeEvent
         public static void addReloadListener(AddReloadListenerEvent event) {
             event.addListener(new FluidRegisterer());
             event.addListener(new ChemicalRecipeRegisterer());
+        }
+    }
+
+
+    @Mod.EventBusSubscriber(modid = ChemCraft.modId, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ModEvents {
+
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            CustomMenus.setupScreens();
         }
     }
 }

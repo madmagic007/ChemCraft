@@ -1,0 +1,16 @@
+{
+  "name": "Level Sensor",
+  "icon": "chemcraft:level_sensor",
+  "category": "chemcraft:sensors",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The level sensor can be placed on any fluid apparatus and will emit a redstone signal depending on the fluid level (in percentage) present in the apparatus. You can control the redstone signal behaviour in the GUI. It is also possible to reverse the signal behaviour by switching the min and max values around."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "chemcraft:level_sensor",
+      "text": "$(#ff0000)$(l)Tip:$()$(br)If you set the min and max to the same value, the sensor will only emit a signal if the level exceeds the given percentage, this can for example be used to stop pumps if a tank is filled."
+    }
+  ]
+}

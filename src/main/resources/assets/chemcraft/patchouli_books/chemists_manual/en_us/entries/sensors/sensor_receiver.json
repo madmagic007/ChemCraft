@@ -1,0 +1,17 @@
+{
+  "name": "Sensor Receiver",
+  "icon": "chemcraft:sensor_receiver",
+  "category": "chemcraft:sensors",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The sensor receiver can be used to receive the redstone signal emitted by another sensor wirelessly over distances. It is possible to chain multiple receivers in case you want one specific sensor to emit its value to multiple devices."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "chemcraft:sensor_receiver",
+      "text": "To link to a source sensor, right click the sensor you wish to connect to with the wrench, then right click the receiver.$(br)To remove the connection, crouch right click with an empty hand."
+    }
+  ]
+}

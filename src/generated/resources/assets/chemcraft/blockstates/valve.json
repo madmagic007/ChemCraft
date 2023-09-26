@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=west": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    }
+  }
+}

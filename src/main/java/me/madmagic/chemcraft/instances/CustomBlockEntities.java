@@ -30,6 +30,7 @@ public class CustomBlockEntities {
     public static final RegistryObject<BlockEntityType<BlockEntity>> distillery = register(DistilleryBlockEntity::new, CustomBlocks.distillery);
     public static final RegistryObject<BlockEntityType<BlockEntity>> electricHeater = register(ElectricHeaterBlockEntity::new, CustomBlocks.electricHeater);
     public static final RegistryObject<BlockEntityType<BlockEntity>> furnaceHeater = register(FurnaceHeaterBlockEntity::new, CustomBlocks.furnaceHeater);
+    public static final RegistryObject<BlockEntityType<BlockEntity>> valve = register(ValveBlockEntity::new, CustomBlocks.valve);
 
     private static RegistryObject<BlockEntityType<BlockEntity>> register(BlockEntityType.BlockEntitySupplier<BlockEntity> sup, RegistryObject<Block> blockReg) {
         String name = blockReg.getId().getPath();

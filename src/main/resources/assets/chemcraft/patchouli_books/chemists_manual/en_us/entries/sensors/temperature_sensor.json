@@ -1,0 +1,17 @@
+{
+  "name": "Temperature Sensor",
+  "icon": "chemcraft:temperature_sensor",
+  "category": "chemcraft:sensors",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The temperature sensor can be placed on any fluid apparatus and will emit a redstone signal depending on the temperature of the fluids in the apparatus. You can control the redstone signal behaviour in the GUI. It is also possible to reverse the signal behaviour by switching the min and max values around."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "chemcraft:temperature_sensor",
+      "text": "$(#ff0000)$(l)Tip:$()$(br)If you set the min and max to the same value, the sensor will only emit a signal if the temperature exceeds the given value."
+    }
+  ]
+}

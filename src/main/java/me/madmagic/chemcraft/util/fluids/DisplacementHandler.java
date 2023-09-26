@@ -10,6 +10,8 @@ import java.util.*;
 
 public class DisplacementHandler {
 
+    public static final double tickFactor = 1. / 60. / 60. / 20.;
+
     public static double calculateFluidAvailable(PipeLine origin, PipeLine emptyPipeline) {
         double fluidAvailable = 0;
         for (PipeConnectionSet set : origin.sets) {

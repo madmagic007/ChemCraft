@@ -87,7 +87,7 @@ public class FluidHandler {
     }
 
     public static void clearEmptyFluids(LinkedList<Fluid> toClear) {
-        toClear.removeIf(fluid -> fluid.amount < 0.01);
+        toClear.removeIf(fluid -> fluid.amount < 0.00001);
     }
 
     public static void checkFluids(LinkedList<Fluid> fluids) {

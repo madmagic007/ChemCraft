@@ -32,7 +32,6 @@ public class SensorReceiverBlockEntity extends BaseSensorBlockEntity implements 
         BlockEntity entAtPos = level.getBlockEntity(sourcePos);
         if (entAtPos instanceof BaseSensorBlockEntity sensor) return sensor.getRedstoneSignalOutput();
         else {
-            ChemCraft.info("changed");
             sourcePos = null;
 
             setChanged();

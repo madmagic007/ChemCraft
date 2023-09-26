@@ -18,15 +18,15 @@ public class RedstoneModeWidget extends CustomWidget<RedstoneModeWidget> {
     private List<IRedstoneMode.RedstoneMode> allowedModes = List.of(IRedstoneMode.RedstoneMode.values());
     private final BlockEntity entity;
 
-    public RedstoneModeWidget(int x, int y, int width, IRedstoneMode entity, IRedstoneMode.RedstoneMode defaultMode) {
+    public RedstoneModeWidget(int x, int y, int width, IRedstoneMode entity) {
         super(x, y, width, width, ScreenHelper.buttonBlank);
         this.entity = (BlockEntity) entity;
-        mode = defaultMode;
+        mode = entity.getRedstoneMode(this.entity.getBlockState());
         setToolTips(mode.toolTip);
     }
 
-    public RedstoneModeWidget(int x, int y, int width, IRedstoneMode entity, IRedstoneMode.RedstoneMode defaultMode, List<IRedstoneMode.RedstoneMode> allowedModes) {
-        this(x, y, width, entity, defaultMode);
+    public RedstoneModeWidget(int x, int y, int width, IRedstoneMode entity, List<IRedstoneMode.RedstoneMode> allowedModes) {
+        this(x, y, width, entity);
         this.allowedModes = allowedModes;
     }
 

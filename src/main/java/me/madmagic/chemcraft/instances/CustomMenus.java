@@ -16,14 +16,14 @@ public class CustomMenus {
 
     private static final DeferredRegister<MenuType<?>> menus = DeferredRegister.create(ForgeRegistries.MENU_TYPES, ChemCraft.modId);
 
-    public static final RegistryObject<MenuType<CentrifugalPumpMenu>> centrifugalPump = register("centrifugal_pump", CentrifugalPumpMenu::new);
+    public static final RegistryObject<MenuType<ValveMenu>> valve = register("valve", ValveMenu::new);
     public static final RegistryObject<MenuType<TeflonCoaterMenu>> teflonCoater = register("teflon_coater", TeflonCoaterMenu::new);
     public static final RegistryObject<MenuType<MotorMenu>> motor = register("motor", MotorMenu::new);
     public static final RegistryObject<MenuType<AirCoolerMenu>> airCooler = register("air_cooler", AirCoolerMenu::new);
     public static final RegistryObject<MenuType<SensorMenu>> sensor = register("sensor", SensorMenu::new);
     public static final RegistryObject<MenuType<SensorReceiverMenu>> sensorReceiver = register("sensor_receiver", SensorReceiverMenu::new);
     public static final RegistryObject<MenuType<ElectricHeaterMenu>> electricHeater = register("electric_heater", ElectricHeaterMenu::new);
-    public static final RegistryObject<MenuType<FurnaceHeaterMenu>> furnaceHeater = register("coal_powered_heater", FurnaceHeaterMenu::new);
+    public static final RegistryObject<MenuType<FurnaceHeaterMenu>> furnaceHeater = register("furnace_heater", FurnaceHeaterMenu::new);
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> register(String name, IContainerFactory<T> factory) {
         return menus.register(name + "_menu", () -> IForgeMenuType.create(factory));
@@ -35,7 +35,7 @@ public class CustomMenus {
 
     public static void setupScreens() {
         MenuScreens.register(teflonCoater.get(), TeflonCoaterMenu.Screen::new);
-        MenuScreens.register(centrifugalPump.get(), CentrifugalPumpMenu.Screen::new);
+        MenuScreens.register(valve.get(), ValveMenu.Screen::new);
         MenuScreens.register(motor.get(), MotorMenu.Screen::new);
         MenuScreens.register(airCooler.get(), AirCoolerMenu.Screen::new);
         MenuScreens.register(sensor.get(), SensorMenu.Screen::new);
