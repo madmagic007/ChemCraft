@@ -29,7 +29,7 @@ public class ProbeItem extends BaseItem {
         if (entity instanceof IFluidContainer fluidContainer) {
             List<MultiFluidStorage> storages = fluidContainer.getFluidStorages();
 
-            if (storages.isEmpty()) msg.append(" contains no crude_products.json.");
+            if (storages.isEmpty()) msg.append(" contains no fluids.");
             else {
                 msg.append(" contains the following:\n");
 

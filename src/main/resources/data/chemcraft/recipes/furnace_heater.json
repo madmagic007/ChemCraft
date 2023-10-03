@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {
+      "item": "chemcraft:pipe"
+    },
+    "C": {
+      "item": "minecraft:coal"
+    },
+    "I": {
+      "item": "chemcraft:teflon_coated_iron_ingot"
+    },
+    "G": {
+      "item": "chemcraft:insulation_sheet"
+    }
+  },
+  "pattern": [
+    "GIG",
+    "PCP",
+    "GIG"
+  ],
+  "result": {
+    "item": "chemcraft:furnace_heater"
+  }
+}

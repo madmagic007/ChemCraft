@@ -74,7 +74,8 @@ public class FurnaceHeaterBlockEntity extends BaseItemStorageBlockEntity impleme
             setChanged();
         }
 
-        if (burnTimeForItem > 0 && fluidStorage.temperature < 500) fluidStorage.setTemperature(fluidStorage.temperature + 0.5);
+        if (burnTimeForItem > 0 && fluidStorage.temperature < 500)
+            fluidStorage.setTemperature(fluidStorage.temperature + 0.5);
     }
 
     @Override

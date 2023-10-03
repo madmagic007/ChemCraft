@@ -1,0 +1,17 @@
+{
+  "name": "Furnace Heater",
+  "icon": "chemcraft:furnace_heater",
+  "category": "chemcraft:temperature",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The furnace heater is a very efficient heater, but burnable fuel is required. There is no heating setpoint configurable, the heating is dependant on the rate of flow. At 50000 l/h, this is 100°C. Lower flowrates will heat up more.$(br2)The furnace heater has a cold (input) and hot (output) side, it is important that fluids respect this flow path."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "chemcraft:furnace_heater",
+      "text": "The block does not need power, but any type of solid fuel such as coal or lava buckets can be used.$(br2)The furnace heater will pass fluids through, meaning it's not necessary to have a pump extract fluids from this block. It's also possible to chain heaters in series."
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "name": "Temperature Sensor",
   "icon": "chemcraft:temperature_sensor",
-  "category": "chemcraft:sensors",
+  "category": "chemcraft:sensors_redstone",
   "sortnum": 1,
   "pages": [
     {

@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.GsonHelper;
@@ -17,8 +16,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 
 public abstract class BasePreparableReloadListener<T> extends SimplePreparableReloadListener<HashSet<JsonElement>> {
 
@@ -35,8 +32,6 @@ public abstract class BasePreparableReloadListener<T> extends SimplePreparableRe
     @Override
     protected HashSet<JsonElement> prepare(ResourceManager pResourceManager, ProfilerFiller pProfiler) {
         HashSet<JsonElement> set = new HashSet<>();
-
-        Map<ResourceLocation, List<Resource>> nameSpaces = pResourceManager.listResourceStacks(path, e -> true);
 
         pResourceManager.listResources(path, this::isJson).forEach((loc, resource) -> {
             try (InputStream inputStream = resource.open();

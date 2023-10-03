@@ -1,6 +1,5 @@
 package me.madmagic.chemcraft.instances.blockentities.sensors;
 
-import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import me.madmagic.chemcraft.instances.menus.SensorReceiverMenu;
@@ -48,7 +47,7 @@ public class SensorReceiverBlockEntity extends BaseSensorBlockEntity implements 
 
     @Override
     public void loadFromNBT(CompoundTag nbt) {
-        ChemCraft.info(nbt);
+        super.loadFromNBT(nbt);
         String str = nbt.getString("sourcePos");
         if (!str.isEmpty()) sourcePos = BlockPos.of(Long.parseLong(str));
         else sourcePos = null; //very important
@@ -56,6 +55,7 @@ public class SensorReceiverBlockEntity extends BaseSensorBlockEntity implements 
 
     @Override
     public void saveToNBT(CompoundTag nbt) {
+        super.saveToNBT(nbt);
         if (sourcePos != null)
             nbt.putString("sourcePos", String.valueOf(sourcePos.asLong()));
         else

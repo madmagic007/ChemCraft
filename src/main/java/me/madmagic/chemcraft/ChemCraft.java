@@ -5,7 +5,7 @@ import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.CustomBlocks;
 import me.madmagic.chemcraft.instances.CustomItems;
 import me.madmagic.chemcraft.instances.CustomMenus;
-import me.madmagic.chemcraft.util.reloaders.ChemicalRecipeRegisterer;
+import me.madmagic.chemcraft.util.reloaders.ChemicalReactionRegisterer;
 import me.madmagic.chemcraft.util.reloaders.FluidRegisterer;
 import me.madmagic.chemcraft.util.networking.NetworkSender;
 import net.minecraftforge.common.MinecraftForge;
@@ -62,7 +62,7 @@ public class ChemCraft {
         @SubscribeEvent
         public static void addReloadListener(AddReloadListenerEvent event) {
             event.addListener(new FluidRegisterer());
-            event.addListener(new ChemicalRecipeRegisterer());
+            event.addListener(new ChemicalReactionRegisterer());
         }
     }
 

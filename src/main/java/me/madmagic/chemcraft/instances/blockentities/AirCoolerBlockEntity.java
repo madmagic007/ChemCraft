@@ -131,12 +131,14 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
     @Override
     public void saveToNBT(CompoundTag nbt) {
         fluidStorage.saveToNBT(nbt);
+        nbt.putInt("chemcraft.setpoint", coolingSpt);
         super.saveToNBT(nbt);
     }
 
     @Override
     public void loadFromNBT(CompoundTag nbt) {
         fluidStorage.loadFromNBT(nbt);
+        coolingSpt = nbt.getInt("chemcraft.setpoint"); //todo please dont forget to test this
         super.loadFromNBT(nbt);
     }
 }

@@ -26,8 +26,8 @@ public class ElectricHeaterBlockEntity extends BaseEnergyStorageBlockEntity impl
     public static int maxHeatingSPT = 50;
     public static final int powerFactor = 4;
 
-    private int heatingSPT = 25;
-    private double actualHeating = heatingSPT;
+    private int heatingSpt = 25;
+    private double actualHeating = heatingSpt;
 
     public ElectricHeaterBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(CustomBlockEntities.electricHeater.get(), pPos, pBlockState, 1000, 250);
@@ -46,18 +46,18 @@ public class ElectricHeaterBlockEntity extends BaseEnergyStorageBlockEntity impl
 
     @Override
     public void updateFromNetworking(int... values) {
-        heatingSPT = values[0];
+        heatingSpt = values[0];
     }
 
     @Override
     protected int getDataValue(int index) {
-        if (index == 1) return heatingSPT;
+        if (index == 1) return heatingSpt;
         return super.getDataValue(index);
     }
 
     @Override
     protected void setDataValue(int index, int value) {
-        if (index == 1) heatingSPT = value;
+        if (index == 1) heatingSpt = value;
         else super.setDataValue(index, value);
     }
 
@@ -73,12 +73,12 @@ public class ElectricHeaterBlockEntity extends BaseEnergyStorageBlockEntity impl
         RedstoneMode mode = getRedstoneMode(getBlockState());
         int redstoneLevel = getRedstoneLevel(getBlockState());
 
-        int energyUsage = heatingSPT * powerFactor;
+        int energyUsage = heatingSpt * powerFactor;
 
         actualHeating = switch (mode.matchesRedstoneSignalIgnoringSPT(redstoneLevel) ? RedstoneMode.IGNORED : mode) {
-            case IGNORED -> heatingSPT;
-            case SPT_WHEN_HIGH -> GeneralUtil.mapValue(redstoneLevel, 15, heatingSPT);
-            case SPT_WHEN_LOW -> GeneralUtil.mapValue(15 - redstoneLevel, 15, heatingSPT);
+            case IGNORED -> heatingSpt;
+            case SPT_WHEN_HIGH -> GeneralUtil.mapValue(redstoneLevel, 15, heatingSpt);
+            case SPT_WHEN_LOW -> GeneralUtil.mapValue(15 - redstoneLevel, 15, heatingSpt);
             default -> 0;
         };
 
@@ -87,9 +87,7 @@ public class ElectricHeaterBlockEntity extends BaseEnergyStorageBlockEntity impl
         }
         else actualHeating = 0;
 
-        if (actualHeating > 0) fluidStorage.fluids.forEach(fluid -> {
-            fluid.temperature = Math.max(actualHeating, fluid.temperature + actualHeating / 20);
-        });
+        if (actualHeating > 0 && fluidStorage.temperature < 500) fluidStorage.setTemperature(Math.max(actualHeating, fluidStorage.temperature + actualHeating / 20));
     }
 
     @Override
@@ -118,12 +116,14 @@ public class ElectricHeaterBlockEntity extends BaseEnergyStorageBlockEntity impl
     @Override
     public void saveToNBT(CompoundTag nbt) {
         fluidStorage.saveToNBT(nbt);
+        nbt.putInt("chemcraft.setpoint", heatingSpt);
         super.saveToNBT(nbt);
     }
 
     @Override
     public void loadFromNBT(CompoundTag nbt) {
         fluidStorage.loadFromNBT(nbt);
+        heatingSpt = nbt.getInt("chemcraft.setpoint");
         super.loadFromNBT(nbt);
     }
 }

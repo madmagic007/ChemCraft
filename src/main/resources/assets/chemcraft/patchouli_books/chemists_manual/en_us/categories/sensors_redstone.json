@@ -1,5 +1,5 @@
 {
-  "name": "Sensors",
+  "name": "Sensors and Redstone Control",
   "description": "Sensors allow for plant automation. Stopping pumps if an apparatus is nearly full, changing the temperature setting of a heater/cooler based on the output temperature, all possible with sensors.",
   "icon": "chemcraft:sensor_receiver",
   "sortnum": 2

@@ -1,5 +1,6 @@
 package me.madmagic.chemcraft.util.fluids;
 
+import me.madmagic.chemcraft.util.reactions.ChemicalReactionHandler;
 import net.minecraft.nbt.CompoundTag;
 
 import java.util.LinkedList;
@@ -20,8 +21,10 @@ public class MultiFluidStorage {
     }
 
     public double add(LinkedList<Fluid> fluids, double desiredAmount) {
+        System.out.println();
         double maxAmount = Math.min(getSpaceLeft(), desiredAmount);
         double transferred = FluidHandler.transferTo(fluids, this.fluids, maxAmount);
+        ChemicalReactionHandler.tryReactFluids(this.fluids);
 
         temperature = FluidHandler.getTemperature(this.fluids);
         return transferred;
@@ -51,7 +54,7 @@ public class MultiFluidStorage {
     public void setTemperature(double temperature) {
         this.temperature = temperature;
         fluids.forEach(fluid -> fluid.temperature = temperature);
-        FluidHandler.checkFluids(fluids);
+        ChemicalReactionHandler.tryReactFluids(fluids);
     }
 
     public void saveToNBT(CompoundTag nbt) {
@@ -66,7 +69,7 @@ public class MultiFluidStorage {
 
             fluidsTag.put(fluid.name, fluidTag);
         });
-        storageTag.put("crude_products.json", fluidsTag);
+        storageTag.put("fluids", fluidsTag);
 
         nbt.put("chemcraft.fluidstorage", storageTag);
     }
@@ -75,7 +78,9 @@ public class MultiFluidStorage {
         CompoundTag storageTag = (CompoundTag) nbt.get("chemcraft.fluidstorage");
         capacity = storageTag.getInt("capacity");
 
-        CompoundTag fluidsTag = storageTag.getCompound("crude_products.json");
+        CompoundTag fluidsTag = storageTag.getCompound("fluids");
+
+        LinkedList<Fluid> fluids = new LinkedList<>();
         fluidsTag.getAllKeys().forEach(fluidName -> {
             CompoundTag fluidTag = fluidsTag.getCompound(fluidName);
 
@@ -85,8 +90,10 @@ public class MultiFluidStorage {
                     fluidTag.getDouble("temperature")
             );
 
-            fluids.add(fluid);
+            FluidHandler.transferTo(fluid, fluids);
         });
+
+        add(fluids);
     }
 
     @Override

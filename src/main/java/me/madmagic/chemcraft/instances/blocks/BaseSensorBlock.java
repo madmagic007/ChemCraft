@@ -88,15 +88,11 @@ public class BaseSensorBlock extends BaseBlock implements AutoEntityTickerBlock,
         if (itemNBT == null) itemNBT = new CompoundTag();
         CompoundTag locTag = itemNBT.getCompound("setPos");
 
-        if (itemInHand.isEmpty()) {
-            if (pPlayer.isCrouching() && sensor instanceof SensorReceiverBlockEntity sensorReceiverEnt) {
-                msg = Component.literal(String.format("Removed source sensor"));
-                sensorReceiverEnt.sourcePos = null;
-                //sensor.setChanged();
-                pLevel.sendBlockUpdated(pPos, pState, pState, Block.UPDATE_ALL);
-            }
-            else
-                return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+        if (itemInHand.isEmpty() && pPlayer.isCrouching() && sensor instanceof SensorReceiverBlockEntity sensorReceiverEnt) {
+            msg = Component.literal(String.format("Removed source sensor"));
+            sensorReceiverEnt.sourcePos = null;
+            pLevel.sendBlockUpdated(pPos, pState, pState, Block.UPDATE_ALL);
+            sensor.setChanged();
         } else if (itemInHand.getItem() instanceof PipeWrenchItem) {
             if (locTag.isEmpty() || (!locTag.isEmpty() && !(sensor instanceof SensorReceiverBlockEntity))) {
                 locTag = new CompoundTag();
@@ -129,16 +125,14 @@ public class BaseSensorBlock extends BaseBlock implements AutoEntityTickerBlock,
                     sensorReceiverEnt.sourcePos = pos;
                     pLevel.scheduleTick(pPos, this, 0);
 
-                    //sensor.setChanged();
                     pLevel.sendBlockUpdated(pPos, pState, pState, Block.UPDATE_ALL);
+                    sensor.setChanged();
 
                     itemNBT.remove("setPos");
-
                 }
             }
-
-        }
-
+        } else
+            return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
 
         itemInHand.setTag(itemNBT);
         pPlayer.displayClientMessage(msg, false);

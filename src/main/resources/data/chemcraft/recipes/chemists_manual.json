@@ -1,6 +1,5 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
+  "type": "patchouli:shapeless_book_recipe",
   "ingredients": [
     {
       "item": "chemcraft:fluorite_piece"
@@ -9,7 +8,5 @@
       "item": "minecraft:book"
     }
   ],
-  "result": {
-    "item": "patchouli:guide_book"
-  }
+  "book": "chemcraft:chemists_manual"
 }

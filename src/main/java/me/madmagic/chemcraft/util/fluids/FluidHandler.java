@@ -14,12 +14,12 @@ public class FluidHandler {
     }
 
     public static double calculateTemperature(double amtA, double tempA, double amtB, double tempB) {
-        if (amtA == 0) return tempB;
-       return (amtA * tempA + amtB * tempB) / (amtA + amtB);
+        if (amtA == 0 || Double.isNaN(tempA)) return tempB;
+        return Fluid.roundNumber(amtA * tempA + amtB * tempB) / (amtA + amtB);
     }
 
-    public static double getTemperature(List<Fluid> fluids) {
-        if (fluids.isEmpty()) return 25;
+    public static double getTemperature(LinkedList<Fluid> fluids) {
+        if (fluids.isEmpty()) return Double.NaN;
 
         Fluid a = fluids.get(0);
         double temp = a.temperature;
@@ -28,7 +28,7 @@ public class FluidHandler {
         for (Fluid fluid : fluids) {
             temp = calculateTemperature(amount, temp, fluid.amount, fluid.temperature);
         }
-        return temp;
+        return Fluid.roundNumber(temp);
     }
 
     public static double transferTo(LinkedList<Fluid> source, LinkedList<Fluid> destination) {
@@ -36,7 +36,7 @@ public class FluidHandler {
     }
 
     public static double transferTo(LinkedList<Fluid> source, LinkedList<Fluid> destination, double amount) {
-        checkFluids(source);
+        clearEmptyFluids(source);
 
         double amountInSource = getStored(source);
         amount = Math.min(amount, amountInSource);
@@ -52,22 +52,13 @@ public class FluidHandler {
             actualTransferred += amountToTransfer;
         }
 
-        clearEmptyFluids(source);
         clearEmptyFluids(destination);
-        checkFluids(destination);
+        clearEmptyFluids(source);
 
         return actualTransferred;
     }
 
-    public static double getStored(List<Fluid> fluids) {
-        double count = 0;
-        for (Fluid fluid : fluids) {
-            count += fluid.amount;
-        }
-        return count;
-    }
-
-    private static void transferTo(Fluid fluid, List<Fluid> addTo) {
+    public static void transferTo(Fluid fluid, LinkedList<Fluid> addTo) {
         if (fluid.amount <= 0) return;
 
         double storedAmount = FluidHandler.getStored(addTo);
@@ -84,29 +75,27 @@ public class FluidHandler {
         if (!foundFluid) addTo.add(fluid.split(fluid.amount));
 
         addTo.forEach(f -> f.temperature = newTemp);
+
+        clearEmptyFluids(addTo);
+    }
+
+    public static void removeFrom(String name, double amount, LinkedList<Fluid> fluids) {
+        fluids.forEach(fluid -> {
+            if (fluid.name.equals(name) && fluid.amount >= amount)
+                fluid.split(amount);
+        });
+        clearEmptyFluids(fluids);
+    }
+
+    public static double getStored(List<Fluid> fluids) {
+        double count = 0;
+        for (Fluid fluid : fluids) {
+            count += fluid.amount;
+        }
+        return count;
     }
 
     public static void clearEmptyFluids(LinkedList<Fluid> toClear) {
         toClear.removeIf(fluid -> fluid.amount < 0.00001);
-    }
-
-    public static void checkFluids(LinkedList<Fluid> fluids) {
-        LinkedList<Fluid> decomposeProducts = new LinkedList<>();
-
-        fluids.removeIf(fluid -> {
-            FluidType type = fluid.getFluidType();
-
-            LinkedList<Fluid> currentDecompose = fluid.checkDecompose();
-            if (!currentDecompose.isEmpty()) {
-                decomposeProducts.addAll(currentDecompose);
-                return true;
-            }
-
-            if (fluid.temperature > type.boilingPoint()) fluid.temperature = type.boilingPoint();
-            return false;
-        });
-
-        if (!decomposeProducts.isEmpty())
-            transferTo(decomposeProducts, fluids);
     }
 }

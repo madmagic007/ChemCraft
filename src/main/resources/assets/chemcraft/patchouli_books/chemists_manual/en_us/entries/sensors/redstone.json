@@ -1,0 +1,20 @@
+{
+  "name": "Redstone Control",
+  "icon": "minecraft:redstone",
+  "category": "chemcraft:sensors_redstone",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Many things can be controlled by redstone. You can choose out of the following:$(br2)$(l)Ignored:$()$(br)Redstone signals have no impact on the functionality of the device.$(br2)$(l)Active when high:$()$(br)The device will only work if a redstone signal of at least 1 is provided."
+    },
+      {
+        "type": "patchouli:text",
+        "text": "$(br2)$(l)Active when low:$()$(br)The device will only work if no redstone signal is provided.$(br2)$(l)Setpoint when level 15:$()$(br)This mode will change the actual output of the device closer to the set value, the closer the redstone signal gets to level 15. Only available for devices that have a selectable setpoint."
+      },
+    {
+      "type": "patchouli:text",
+      "text": "$(br2)$(l)Setpoint when level 0:$()$(br)Same like the previous except for when redstone signal gets closer to 0."
+    }
+  ]
+}

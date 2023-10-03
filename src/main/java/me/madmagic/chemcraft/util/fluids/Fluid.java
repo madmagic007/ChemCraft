@@ -1,16 +1,18 @@
 package me.madmagic.chemcraft.util.fluids;
 
-import java.util.LinkedList;
+import java.text.DecimalFormat;
 
 public class Fluid {
 
     public final String name;
     public double amount, temperature;
 
+    private static DecimalFormat decimalFormat = new DecimalFormat("#.######");
+
     public Fluid(String name, double amount, double temperature) {
         this.name = name;
-        this.amount = amount;
-        this.temperature = temperature;
+        this.amount = roundNumber(amount);
+        this.temperature = roundNumber(temperature);
     }
 
     public Fluid split(double amount) {
@@ -40,20 +42,16 @@ public class Fluid {
         return getFluidType().boilingPoint();
     }
 
-    public LinkedList<Fluid> checkDecompose() {
-        LinkedList<Fluid> fluids = new LinkedList<>();
-        /*FluidType type = getFluidType();
-
-        if (type != null && type.decomposePredicate != null  && type.decomposePredicate.test(this)) {
-            List<Fluid> fromFunc = getFluidType().decomposeFunc.apply(this);
-            if (fromFunc != null) fluids.addAll(fromFunc);
-        }*/
-
-        return fluids;
+    public static double roundNumber(double number) {
+        try {
+            return Double.parseDouble(decimalFormat.format(number));
+        } catch (Exception ignored) {
+            return number; //THIS WILL NEVER HAPPEN BUT I STILL NEED IT
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("%sl %s at %s°C", amount, name, temperature);
+        return String.format("%sl %s at %s°C", decimalFormat.format(amount), name, decimalFormat.format(temperature));
     }
 }

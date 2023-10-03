@@ -1,5 +1,5 @@
 {
-  "type": "decompose",
+  "type": "any",
   "maxTemperature": 100,
   "input": {
     "steam": 1

@@ -1,0 +1,21 @@
+{
+  "name": "Air Cooler",
+  "icon": "chemcraft:air_cooler",
+  "category": "chemcraft:temperature",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The air cooler is not very efficient, each cooler can cool fluids down at most 25°C and cannot cool fluids below 25°C.$(br2)The cooling setpoint is configurable in the GUI and is redstone controllable, the sensor receiver can be placed directly on this block.$(br2)The block can accept power from any non fluid side."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The air cooler has a hot (input) and cold (output) side, it is important that fluids respect this flow path.$(br2)The air cooler will pass fluids through, meaning it's not necessary to have a pump extract fluids from this block. It's also possible to chain coolers in series.$(br2)$(#ff0000)$(l)Plant design challenge:$()$(br)It makes most sense for air coolers to be placed at the very top of the plant, try building your plant this way."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "chemcraft:air_cooler",
+      "recipe2": "chemcraft:fan"
+    }
+  ]
+}

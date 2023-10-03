@@ -1,10 +1,10 @@
 {
-  "type": "decompose",
+  "type": "any",
   "requiredTemperature": 100,
   "input": {
     "water": 1
   },
   "output": {
-    "steam": 1,
+    "steam": 1
   }
 }

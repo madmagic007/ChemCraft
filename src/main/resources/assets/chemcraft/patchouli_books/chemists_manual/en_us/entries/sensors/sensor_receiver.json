@@ -1,7 +1,7 @@
 {
   "name": "Sensor Receiver",
   "icon": "chemcraft:sensor_receiver",
-  "category": "chemcraft:sensors",
+  "category": "chemcraft:sensors_redstone",
   "sortnum": 2,
   "pages": [
     {

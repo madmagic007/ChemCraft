@@ -1,0 +1,17 @@
+{
+  "name": "Electric Heater",
+  "icon": "chemcraft:electric_heater",
+  "category": "chemcraft:temperature",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The electric heater is not very efficient, each heater can heat up fluids at most 50°C.$(br2)The heating setpoint is configurable in the GUI and is redstone controllable, the sensor receiver can be placed directly on this block.$(br2)The electric heater has a cold (input) and hot (output) side, it is important that fluids respect this flow path."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "chemcraft:electric_heater",
+      "text": "The block can accept power from any non fluid side.$(br2)The electric heater will pass fluids through, meaning it's not necessary to have a pump extract fluids from this block. It's also possible to chain heaters in series."
+    }
+  ]
+}

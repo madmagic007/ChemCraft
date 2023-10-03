@@ -1,7 +1,7 @@
 {
   "name": "Level Sensor",
   "icon": "chemcraft:level_sensor",
-  "category": "chemcraft:sensors",
+  "category": "chemcraft:sensors_redstone",
   "pages": [
     {
       "type": "patchouli:text",
