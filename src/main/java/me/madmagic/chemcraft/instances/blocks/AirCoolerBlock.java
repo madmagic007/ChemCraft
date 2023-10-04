@@ -7,7 +7,6 @@ import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IActivateAble;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IHasRedstonePowerLevel;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRedstoneMode;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
-import me.madmagic.chemcraft.util.DirectionUtil;
 import me.madmagic.chemcraft.util.pipes.IPipeConnectable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -45,7 +44,7 @@ public class AirCoolerBlock extends BaseBlock implements AutoEntityTickerBlock, 
     public PipeConnectionType connectionType(BlockState state, Direction direction) {
         if (direction.getAxis().isVertical()) return PipeConnectionType.NONE;
 
-        return switch (DirectionUtil.facingToRelative(getFacing(state), direction)) {
+        return switch (getRelativeDirFromAbsolute(state, direction)) {
             case WEST -> PipeConnectionType.INPUT;
             case EAST -> PipeConnectionType.OUTPUT;
             default -> PipeConnectionType.NONE;
@@ -57,6 +56,6 @@ public class AirCoolerBlock extends BaseBlock implements AutoEntityTickerBlock, 
     @Override
     public boolean canConnectRedstone(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction direction) {
         if (direction == null) return false;
-        return validRedstoneSides.contains(DirectionUtil.facingToRelative(getFacing(state), direction));
+        return validRedstoneSides.contains(getRelativeDirFromAbsolute(state, direction));
     }
 }

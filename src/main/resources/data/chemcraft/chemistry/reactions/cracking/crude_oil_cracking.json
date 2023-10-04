@@ -2,7 +2,7 @@
   "type": "any",
   "requiredTemperature": 250,
   "input": {
-    "crude_oil": 1
+    "crude_oil": 3
   },
   "output": {
     "naptha": 2,

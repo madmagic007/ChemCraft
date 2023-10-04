@@ -4,7 +4,7 @@
     "activated_carbon_catalyst": 1
   },
   "input": {
-    "light_gasses": 1
+    "light_gasses": 2
   },
   "output": {
     "methane": 1,

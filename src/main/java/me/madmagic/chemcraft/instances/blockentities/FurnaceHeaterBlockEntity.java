@@ -3,6 +3,7 @@ package me.madmagic.chemcraft.instances.blockentities;
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.blockentities.base.BaseItemStorageBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IActivateAble;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import me.madmagic.chemcraft.instances.menus.FurnaceHeaterMenu;
 import me.madmagic.chemcraft.instances.menus.base.CustomItemSlotTemplate;
 import me.madmagic.chemcraft.util.fluids.*;
@@ -23,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FurnaceHeaterBlockEntity extends BaseItemStorageBlockEntity implements MenuProvider, IActivateAble, IFluidContainer {
+public class FurnaceHeaterBlockEntity extends BaseItemStorageBlockEntity implements MenuProvider, IActivateAble, IFluidContainer, IRotateAble {
 
     public int currentTick = 0;
     public int burnTimeForItem = 0;
@@ -76,6 +77,9 @@ public class FurnaceHeaterBlockEntity extends BaseItemStorageBlockEntity impleme
 
         if (burnTimeForItem > 0 && fluidStorage.temperature < 500)
             fluidStorage.setTemperature(fluidStorage.temperature + 0.5);
+
+        Direction absoluteOutputDir = getAbsoluteDirFromRelative(getBlockState(), Direction.EAST);
+        DisplacementHandler.tryFeed(worldPosition, absoluteOutputDir, level, fluidStorage.fluids, 0.1);
     }
 
     @Override

@@ -1,13 +1,6 @@
-import me.madmagic.chemcraft.util.fluids.Fluid;
-import me.madmagic.chemcraft.util.reactions.ChemicalReaction;
-
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
 public class Test {
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         LinkedList<Fluid> a = new LinkedList<>();
         a.add(new Fluid("a", 70, 100));
         a.add(new Fluid("b", 30, 100));
@@ -19,5 +12,5 @@ public class Test {
 
         LinkedList<Fluid> output = reaction.tryReact(a);
         System.out.println(output);
-    }
+    }*/
 }

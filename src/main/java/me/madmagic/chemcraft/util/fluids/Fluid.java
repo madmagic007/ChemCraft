@@ -8,6 +8,7 @@ public class Fluid {
     public double amount, temperature;
 
     private static DecimalFormat decimalFormat = new DecimalFormat("#.######");
+    private static DecimalFormat decimalFormatShort = new DecimalFormat("#.##");
 
     public Fluid(String name, double amount, double temperature) {
         this.name = name;
@@ -52,6 +53,6 @@ public class Fluid {
 
     @Override
     public String toString() {
-        return String.format("%sl %s at %s°C", decimalFormat.format(amount), name, decimalFormat.format(temperature));
+        return String.format("%sl %s at %s°C", decimalFormatShort.format(amount), name, decimalFormatShort.format(temperature));
     }
 }

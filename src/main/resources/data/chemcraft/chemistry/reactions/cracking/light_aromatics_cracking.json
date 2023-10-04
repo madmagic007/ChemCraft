@@ -4,7 +4,7 @@
     "activated_carbon_catalyst": 1
   },
   "input": {
-    "light_aromatics": 1
+    "light_aromatics": 2
   },
   "output": {
     "benzene": 1,

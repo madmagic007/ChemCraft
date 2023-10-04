@@ -21,7 +21,6 @@ public class MultiFluidStorage {
     }
 
     public double add(LinkedList<Fluid> fluids, double desiredAmount) {
-        System.out.println();
         double maxAmount = Math.min(getSpaceLeft(), desiredAmount);
         double transferred = FluidHandler.transferTo(fluids, this.fluids, maxAmount);
         ChemicalReactionHandler.tryReactFluids(this.fluids);

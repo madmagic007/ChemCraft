@@ -4,6 +4,7 @@ import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.blockentities.base.BaseEnergyStorageBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IHasRedstonePowerLevel;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRedstoneMode;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import me.madmagic.chemcraft.instances.menus.ElectricHeaterMenu;
 import me.madmagic.chemcraft.util.GeneralUtil;
 import me.madmagic.chemcraft.util.fluids.*;
@@ -21,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedList;
 
-public class ElectricHeaterBlockEntity extends BaseEnergyStorageBlockEntity implements MenuProvider, IFluidContainer, INetworkUpdateAble, IHasRedstonePowerLevel, IRedstoneMode {
+public class ElectricHeaterBlockEntity extends BaseEnergyStorageBlockEntity implements MenuProvider, IFluidContainer, INetworkUpdateAble, IHasRedstonePowerLevel, IRedstoneMode, IRotateAble {
 
     public static int maxHeatingSPT = 50;
     public static final int powerFactor = 4;
@@ -88,6 +89,9 @@ public class ElectricHeaterBlockEntity extends BaseEnergyStorageBlockEntity impl
         else actualHeating = 0;
 
         if (actualHeating > 0 && fluidStorage.temperature < 500) fluidStorage.setTemperature(Math.max(actualHeating, fluidStorage.temperature + actualHeating / 20));
+
+        //Direction outputRelative = DirectionUtil.facingToRelative(getFacing(getBlockState()), Direction.EAST);
+        //DisplacementHandler.tryFeed(worldPosition, outputRelative, level, fluidStorage.fluids, 0.1);
     }
 
     @Override

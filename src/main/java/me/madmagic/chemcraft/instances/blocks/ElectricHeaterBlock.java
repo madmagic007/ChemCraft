@@ -6,7 +6,6 @@ import me.madmagic.chemcraft.instances.blocks.base.BaseBlock;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IHasRedstonePowerLevel;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRedstoneMode;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
-import me.madmagic.chemcraft.util.DirectionUtil;
 import me.madmagic.chemcraft.util.pipes.IPipeConnectable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,7 +33,7 @@ public class ElectricHeaterBlock extends BaseBlock implements AutoEntityTickerBl
     public IPipeConnectable.PipeConnectionType connectionType(BlockState state, Direction direction) {
         if (direction.getAxis().isVertical()) return IPipeConnectable.PipeConnectionType.NONE;
 
-        return switch (DirectionUtil.facingToRelative(getFacing(state), direction)) {
+        return switch (getRelativeDirFromAbsolute(state, direction)) {
             case WEST -> IPipeConnectable.PipeConnectionType.INPUT;
             case EAST -> IPipeConnectable.PipeConnectionType.OUTPUT;
             default -> IPipeConnectable.PipeConnectionType.NONE;
@@ -46,6 +45,6 @@ public class ElectricHeaterBlock extends BaseBlock implements AutoEntityTickerBl
     @Override
     public boolean canConnectRedstone(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction direction) {
         if (direction == null) return false;
-        return validRedstoneSides.contains(DirectionUtil.facingToRelative(getFacing(state), direction));
+        return validRedstoneSides.contains(getRelativeDirFromAbsolute(state, direction));
     }
 }

@@ -4,7 +4,7 @@
     "activated_carbon_catalyst": 1
   },
   "input": {
-    "naptha": 1
+    "naptha": 2
   },
   "output": {
     "light_cracked_naptha": 1,

@@ -78,7 +78,7 @@ public class ValveBlockEntity extends BaseBlockEntity implements IFluidContainer
         flowSetting = values[0];
     }
 
-    private void updateStorageCapacity() {
+    private double getConvertedFactor() {
         RedstoneMode mode = getRedstoneMode(getBlockState());
         int redstoneLevel = getRedstoneLevel(getBlockState());
 
@@ -89,18 +89,19 @@ public class ValveBlockEntity extends BaseBlockEntity implements IFluidContainer
             default -> 0;
         };
 
-        storage.capacity = actualFlowSetting * DisplacementHandler.tickFactor;
+        return actualFlowSetting * DisplacementHandler.tickFactor;
     }
 
     private Direction toFeedToDir;
 
     @Override
     public void tick() {
-        if (toFeedToDir == null) return;
-        DisplacementHandler.tryFeed(worldPosition, toFeedToDir, level, storage.fluids, storage.getStored());
-        if (storage.getStored() == 0) toFeedToDir = null;
+        double factor = getConvertedFactor();
+        storage.capacity = factor;
 
-        updateStorageCapacity();
+        if (toFeedToDir == null) return;
+        DisplacementHandler.tryFeed(worldPosition, toFeedToDir, level, storage.fluids, factor);
+        if (storage.getStored() == 0) toFeedToDir = null;
     }
 
     private final MultiFluidStorage storage = new MultiFluidStorage(1);

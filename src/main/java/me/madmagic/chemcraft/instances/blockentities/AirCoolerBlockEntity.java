@@ -5,6 +5,7 @@ import me.madmagic.chemcraft.instances.blockentities.base.BaseEnergyStorageBlock
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IActivateAble;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IHasRedstonePowerLevel;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRedstoneMode;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import me.madmagic.chemcraft.instances.menus.AirCoolerMenu;
 import me.madmagic.chemcraft.util.GeneralUtil;
 import me.madmagic.chemcraft.util.fluids.*;
@@ -22,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedList;
 
-public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implements MenuProvider, IFluidContainer, INetworkUpdateAble, IActivateAble, IHasRedstonePowerLevel, IRedstoneMode {
+public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implements MenuProvider, IFluidContainer, INetworkUpdateAble, IActivateAble, IHasRedstonePowerLevel, IRedstoneMode, IRotateAble {
 
     public static int maxCoolingSpt = 25;
     private static final int airTemp = 25;
@@ -103,6 +104,9 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
         if (active) fluidStorage.fluids.forEach(fluid -> {
             fluid.temperature = Math.max(airTemp, fluid.temperature - actualCooling / 20);
         });
+
+        Direction absoluteOutputDir = getAbsoluteDirFromRelative(getBlockState(), Direction.EAST);
+        DisplacementHandler.tryFeed(worldPosition, absoluteOutputDir, level, fluidStorage.fluids, 0.1);
     }
 
     @Override

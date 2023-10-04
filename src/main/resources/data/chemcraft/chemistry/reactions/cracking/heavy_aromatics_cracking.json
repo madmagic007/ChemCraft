@@ -4,7 +4,7 @@
     "activated_carbon_catalyst": 1
   },
   "input": {
-    "heavy_aromatics": 1
+    "heavy_aromatics": 2
   },
   "output": {
     "xylene": 1,

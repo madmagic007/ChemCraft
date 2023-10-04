@@ -72,6 +72,6 @@ public class MotorBlock extends BaseBlock implements AutoEntityTickerBlock, IRot
 
     @Override
     public boolean canConnectRedstone(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction direction) {
-        return direction.getAxis().isHorizontal();
+        return direction != null && direction.getAxis().isHorizontal();
     }
 }
