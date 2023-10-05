@@ -1,0 +1,33 @@
+{
+  "name": "Distillation",
+  "icon": "chemcraft:distillery",
+  "category": "chemcraft:process_apparatus",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(#ff0000)$(l)Imprtant:$()$(br)Currently a distillation with more than 2 products is not possible, make sure at most 2 different fluids are present in a column or it will break.$(br2)Distillation is the way to separate fluids from each other, when separation by difference in solubility is not possible. This entry assumes you have a understanding of the concept of distillation and functionality of a continuous distillation tower."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The distillation tower is a multiblock structure 3x7x3 in size will cover most fluids. Wider allows for more flow, larger differences in boiling points might need a taller tower. Each layer should be made out of insulated blocks, the bottom and top layers must be solid, every layer in between must have the center be the 'sieve plate' block (for a 5x5 column this would be 3x3). The second to top layer must be hollow. One block on the bottom must be the distillery block."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Right click with the wrench to validate the structure. Feed the fluid mixture into the side of the column, the height it is inserted at is determined by the composition. The top and bottom layers are for cooling/heating, and product to be distilled is not meant to be inserted here. If there is a larger share of highest boiler, it should be inserted closer to the bottom and vice versa. For more optimal and efficient distillation, aim for the feed temperature to roughly match the proportional combined boiling point of the mixture."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The tower has an internal re-boiler and reflux. Feed heating/cooling medium in the top/bottom layers, use a pump to extract from the layers. Aim for the temperature to match that of the highest and lowest boiling compounds, this is a requirement for distillation.$(br2)It is possible to use external re-boilers and reflux, make sure to feed them into the correct layer, not the very top or bottom layers."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Make sure to balance the feed and extraction of products. Like real towers, they take a little while to run optimally, the first few seconds after starting the column, there wont be full distillation and there might be impure product present for a short period.$(br2)$(#ff0000)$(l)Note:$()$(br)Distillation towers don't follow real Txy diagrams but are simulated. a 3x7x3 tower will be sufficient for the vast majority of fluids."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "chemcraft:distillery",
+      "recipe2": "chemcraft:sieve_plate"
+    }
+  ]
+}

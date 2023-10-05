@@ -18,8 +18,8 @@ import java.util.TreeMap;
 
 public class DistilleryBlockEntity extends BaseBlockEntity implements IFluidContainer {
 
-    private int plateCount;
-    private double bottomTemp, topTemp;
+    private double bottomTemp = 200;
+    private double topTemp = 160;
     public final TreeMap<Integer, MultiFluidStorage> fluidStorages = new TreeMap<>();
 
     private static final double evaporateFactor = 0.04;
@@ -30,8 +30,6 @@ public class DistilleryBlockEntity extends BaseBlockEntity implements IFluidCont
     }
 
     public void createFluidStorages(int bottomY, int height, int size) {
-        plateCount = height - 2;
-
         int capacity = size * 1000;
         int topY = bottomY + height - 1;
 

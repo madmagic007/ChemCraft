@@ -2,7 +2,6 @@
   "name": "Air Cooler",
   "icon": "chemcraft:air_cooler",
   "category": "chemcraft:temperature",
-  "sortnum": 0,
   "pages": [
     {
       "type": "patchouli:text",

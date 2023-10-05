@@ -1,3 +1,5 @@
+import net.minecraft.core.Direction;
+
 public class Test {
 
    /* public static void main(String[] args) {
@@ -13,4 +15,32 @@ public class Test {
         LinkedList<Fluid> output = reaction.tryReact(a);
         System.out.println(output);
     }*/
+
+    public static void main(String[] args) {
+        for (Direction facing : Direction.values()) {
+            if (!facing.getAxis().isHorizontal()) continue;
+
+            for (Direction abs : Direction.values()) {
+                if (!abs.getAxis().isHorizontal()) continue;
+
+                Direction relative = getRelativeDirFromAbsolute(facing, abs);
+                Direction newAbs = getAbsoluteDirFromRelative(facing, relative);
+
+                if (newAbs != abs) System.out.println(facing + " " + abs + " " + relative + " " + newAbs);
+            }
+        }
+    }
+
+    private static Direction getAbsoluteDirFromRelative(Direction facing, Direction relative) {
+        int val = (facing.get2DDataValue() + relative.get2DDataValue() - 2);
+        if (val < 0) val += 4;
+        if (val > 3) val -= 4;
+        return Direction.from2DDataValue(val);
+    }
+
+    private static Direction getRelativeDirFromAbsolute(Direction facing, Direction absolute) {
+        int val = (absolute.get2DDataValue() - facing.get2DDataValue() + 2);
+        if (val < 0) val += 4;
+        return Direction.from2DDataValue(val);
+    }
 }

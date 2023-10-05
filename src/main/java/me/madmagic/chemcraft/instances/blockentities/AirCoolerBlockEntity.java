@@ -10,6 +10,7 @@ import me.madmagic.chemcraft.instances.menus.AirCoolerMenu;
 import me.madmagic.chemcraft.util.GeneralUtil;
 import me.madmagic.chemcraft.util.fluids.*;
 import me.madmagic.chemcraft.util.networking.INetworkUpdateAble;
+import me.madmagic.chemcraft.util.reactions.ChemicalReactionHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -87,7 +88,7 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
         };
 
         if (hasEnoughEnergy(energyUsage) && actualCooling != 0) {
-            if (useEnergy(energyUsage)) {
+            if (!useEnergy(energyUsage)) {
                 actualCooling = 0;
                 active = false;
             }
@@ -114,6 +115,7 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
         if (active) fluids.forEach(fluid -> {
             fluid.temperature = Math.max(airTemp, fluid.temperature - actualCooling);
         });
+        ChemicalReactionHandler.tryReactFluids(fluids);
 
         FluidHandler.transferTo(fluidStorage.fluids, fluids);
         DisplacementHandler.tryFeed(worldPosition, pipeDir.getOpposite(), level, fluids, FluidHandler.getStored(fluids));

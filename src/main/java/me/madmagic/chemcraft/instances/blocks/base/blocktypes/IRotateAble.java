@@ -19,14 +19,16 @@ public interface IRotateAble {
     }
 
     default Direction getAbsoluteDirFromRelative(BlockState state, Direction relative) {
-        Direction facing = getFacing(state);
-        return Direction.from2DDataValue(
-                (facing.get2DDataValue() + relative.get2DDataValue()) % 4);
+        int val = getFacing(state).get2DDataValue() + relative.get2DDataValue() - 2;
+        if (val < 0) val += 4;
+        if (val > 3) val -= 4;
+        return Direction.from2DDataValue(val);
     }
 
     default Direction getRelativeDirFromAbsolute(BlockState state, Direction absolute) {
-        Direction facing = getFacing(state);
-        return Direction.from2DDataValue(
-                (absolute.get2DDataValue() - facing.get2DDataValue() + 4) % 4);
+        int val = (absolute.get2DDataValue() - getFacing(state).get2DDataValue() + 2);
+        if (val < 0) val += 4;
+
+        return Direction.from2DDataValue(val);
     }
 }

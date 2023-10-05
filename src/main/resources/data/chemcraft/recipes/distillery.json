@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {
+      "item": "chemcraft:sieve_plate"
+    },
+    "I": {
+      "item": "chemcraft:teflon_coated_iron_ingot"
+    },
+    "G": {
+      "item": "chemcraft:insulation_sheet"
+    }
+  },
+  "pattern": [
+    "GIG",
+    "ISI",
+    "GIG"
+  ],
+  "result": {
+    "item": "chemcraft:distillery"
+  }
+}

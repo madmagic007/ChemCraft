@@ -7,6 +7,7 @@ import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import me.madmagic.chemcraft.instances.menus.FurnaceHeaterMenu;
 import me.madmagic.chemcraft.instances.menus.base.CustomItemSlotTemplate;
 import me.madmagic.chemcraft.util.fluids.*;
+import me.madmagic.chemcraft.util.reactions.ChemicalReactionHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -89,6 +90,7 @@ public class FurnaceHeaterBlockEntity extends BaseItemStorageBlockEntity impleme
             if (delta < 0) delta = 0;
             fluid.temperature += delta;
         });
+        ChemicalReactionHandler.tryReactFluids(fluids);
 
         FluidHandler.transferTo(fluidStorage.fluids, fluids);
         DisplacementHandler.tryFeed(worldPosition, pipeDir.getOpposite(), level, fluids, FluidHandler.getStored(fluids));

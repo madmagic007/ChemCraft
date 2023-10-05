@@ -1,6 +1,6 @@
 {
-  "name": "Temperature",
-  "description": "Temperature of fluids is an important factor in chemistry. Certain reactions can only happen at a certain temperature, but often it's also important to make sure fluids don't exceed a certain temperature. Chemcraft provides plenty ways of manipulating temperature.",
+  "name": "Manipulating Temperature",
+  "description": "Temperature of fluids is an important factor in chemistry, distillation, reactions,.. Chemcraft provides plenty ways of manipulating temperature.",
   "icon": "chemcraft:air_cooler",
   "sortnum": 3
 }

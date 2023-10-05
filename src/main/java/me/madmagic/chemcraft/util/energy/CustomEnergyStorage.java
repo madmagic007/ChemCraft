@@ -23,7 +23,7 @@ public abstract class CustomEnergyStorage extends EnergyStorage {
 
         if (energy != 0) energyChanged(energy);
 
-        return energy;
+        return maxExtract;
     }
 
     public void setEnergyStored(int energy) {

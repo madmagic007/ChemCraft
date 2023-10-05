@@ -1,0 +1,16 @@
+{
+  "name": "Water Extractor",
+  "icon": "chemcraft:water_extractor",
+  "category": "chemcraft:process_apparatus",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Water is used for many things, a reagent, solvent or simply for medium of heat transfer. The only way to get water in the process system is with the water extractor.$(br2)When placed in an infinite water source (must be submerged and at least 2 source blocks next to it), pumps can be used to extract water fom the pipe connection at the top."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "chemcraft:water_extractor",
+      "text": "The water will be atmospheric temperature of 25°C, there is no limit to how many pumps can extract from one extractor."
+    }
+  ]
+}

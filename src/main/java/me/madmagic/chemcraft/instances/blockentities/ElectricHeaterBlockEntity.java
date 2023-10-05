@@ -9,6 +9,7 @@ import me.madmagic.chemcraft.instances.menus.ElectricHeaterMenu;
 import me.madmagic.chemcraft.util.GeneralUtil;
 import me.madmagic.chemcraft.util.fluids.*;
 import me.madmagic.chemcraft.util.networking.INetworkUpdateAble;
+import me.madmagic.chemcraft.util.reactions.ChemicalReactionHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -90,8 +91,8 @@ public class ElectricHeaterBlockEntity extends BaseEnergyStorageBlockEntity impl
 
         if (actualHeating > 0 && fluidStorage.temperature < 500) fluidStorage.setTemperature(Math.max(actualHeating, fluidStorage.temperature + actualHeating / 20));
 
-        //Direction outputRelative = DirectionUtil.facingToRelative(getFacing(getBlockState()), Direction.EAST);
-        //DisplacementHandler.tryFeed(worldPosition, outputRelative, level, fluidStorage.fluids, 0.1);
+        Direction outputRelative = getAbsoluteDirFromRelative(getBlockState(), Direction.EAST);
+        DisplacementHandler.tryFeed(worldPosition, outputRelative, level, fluidStorage.fluids, 0.1);
     }
 
     @Override
@@ -99,6 +100,7 @@ public class ElectricHeaterBlockEntity extends BaseEnergyStorageBlockEntity impl
         if (actualHeating != 0) fluids.forEach(fluid -> {
             fluid.temperature += actualHeating;
         });
+        ChemicalReactionHandler.tryReactFluids(fluids);
 
         FluidHandler.transferTo(fluidStorage.fluids, fluids);
         DisplacementHandler.tryFeed(worldPosition, pipeDir.getOpposite(), level, fluids, FluidHandler.getStored(fluids));
