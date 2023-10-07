@@ -1,6 +1,5 @@
 package me.madmagic.chemcraft.util.pipes;
 
-import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -20,6 +19,8 @@ public class PipeShapes {
         put(Direction.UP, Block.box(4, 7, 4, 12, 16, 12));
         put(Direction.DOWN, Block.box(4, 0, 4, 12, 9, 12));
     }};
+
+    private static final VoxelShape disconnected = Block.box(6, 6, 6, 10, 10, 10);
 
     public static VoxelShape get(Direction... directions) {
         List<VoxelShape> shapes = new ArrayList<>();
@@ -51,16 +52,7 @@ public class PipeShapes {
             if (PipeConnectionHandler.isDirConnected(state, direction)) connectedDirections.add(direction);
         }
 
-        if (connectedDirections.isEmpty()) {
-            switch (state.getValue(IRotateAble.facing)) {
-                case WEST:
-                case EAST:
-                    return get(Direction.NORTH, Direction.SOUTH);
-                case NORTH:
-                case SOUTH:
-                    return get(Direction.WEST, Direction.EAST);
-            }
-        }
+        if (connectedDirections.isEmpty()) return disconnected;
 
         return get(connectedDirections);
     }

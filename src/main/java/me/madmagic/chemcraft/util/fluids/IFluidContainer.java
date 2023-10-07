@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IFluidContainer {
 
-    void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount);
+    void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids);
 
     double extract(BlockPos pipePos, Direction pipeDir, double amount, LinkedList<Fluid> extractTo);
 

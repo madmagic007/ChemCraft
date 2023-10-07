@@ -106,12 +106,13 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
             fluid.temperature = Math.max(airTemp, fluid.temperature - actualCooling / 20);
         });
 
+        if (fluidStorage.getStored() == 0) return;
         Direction absoluteOutputDir = getAbsoluteDirFromRelative(getBlockState(), Direction.EAST);
         DisplacementHandler.tryFeed(worldPosition, absoluteOutputDir, level, fluidStorage.fluids, 0.1);
     }
 
     @Override
-    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount) {
+    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids) {
         if (active) fluids.forEach(fluid -> {
             fluid.temperature = Math.max(airTemp, fluid.temperature - actualCooling);
         });

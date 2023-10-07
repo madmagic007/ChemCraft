@@ -1,12 +1,8 @@
 package me.madmagic.chemcraft.instances.blocks;
 
 import me.madmagic.chemcraft.instances.blocks.base.BaseBlock;
-import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import me.madmagic.chemcraft.instances.items.PipeWrenchItem;
-import me.madmagic.chemcraft.util.pipes.IPipeConnectable;
-import me.madmagic.chemcraft.util.pipes.PipeConnectionHandler;
-import me.madmagic.chemcraft.util.pipes.PipeShapes;
-import me.madmagic.chemcraft.util.pipes.PipeWrenchHandler;
+import me.madmagic.chemcraft.util.pipes.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -26,7 +22,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class PipeBlock extends BaseBlock implements IPipeConnectable, IRotateAble {
+import java.util.concurrent.atomic.AtomicReference;
+
+public class PipeBlock extends BaseBlock implements IPipeConnectable {
 
     public PipeBlock() {
         super(
@@ -35,11 +33,15 @@ public class PipeBlock extends BaseBlock implements IPipeConnectable, IRotateAbl
                         .dynamicShape()
                         .forceSolidOn()
         );
+        AtomicReference<BlockState> state = new AtomicReference<>(this.stateDefinition.any());
+        PipeConnectionHandler.connectionProperties.values().forEach(property ->
+                state.set(state.get().setValue(property, PipeConnection.NONE)));
+        registerDefaultState(state.get());
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        BlockState state = super.getStateForPlacement(context);
+        BlockState state = defaultBlockState();
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
 
@@ -47,13 +49,13 @@ public class PipeBlock extends BaseBlock implements IPipeConnectable, IRotateAbl
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        super.createBlockStateDefinition(pBuilder);
-        PipeConnectionHandler.connectionProperties.values().forEach(pBuilder::add);
-    }
-    @Override
     public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
         return PipeConnectionHandler.updateConnectionStateAtDir(pState, pNeighborState, pDirection);
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        PipeConnectionHandler.connectionProperties.values().forEach(pBuilder::add);
     }
 
     @Override

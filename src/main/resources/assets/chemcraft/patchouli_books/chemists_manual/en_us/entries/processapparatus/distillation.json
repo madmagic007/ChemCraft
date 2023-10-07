@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(#ff0000)$(l)Imprtant:$()$(br)Currently a distillation with more than 2 products is not possible, make sure at most 2 different fluids are present in a column or it will break.$(br2)Distillation is the way to separate fluids from each other, when separation by difference in solubility is not possible. This entry assumes you have a understanding of the concept of distillation and functionality of a continuous distillation tower."
+      "text": "$(#ff0000)$(l)Important:$()$(br)Currently a distillation with more than 2 products is not possible, make sure at most 2 different fluids are present in a column or it will break.$(br2)Distillation is the way to separate fluids from each other, when separation by difference in solubility is not possible. This entry assumes you have a understanding of the concept of distillation and functionality of a continuous distillation tower."
     },
     {
       "type": "patchouli:text",

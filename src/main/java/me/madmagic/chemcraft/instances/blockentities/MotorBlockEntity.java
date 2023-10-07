@@ -52,5 +52,13 @@ public class MotorBlockEntity extends BaseEnergyStorageBlockEntity implements Me
     }
 
     @Override
+    public boolean hasEnoughEnergy(int wanted) {
+        RedstoneMode mode = getRedstoneMode(getBlockState());
+        boolean isRedstonePowered = isPowered(getBlockState());
+
+        return mode.matchesRedstoneSignal(isRedstonePowered ? 15 : 0) && super.hasEnoughEnergy(wanted);
+    }
+
+    @Override
     public void tick() {}
 }

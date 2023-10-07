@@ -60,26 +60,10 @@
         "south": "none|disconnected",
         "west": "none|disconnected",
         "up": "none|disconnected",
-        "down": "none|disconnected",
-        "facing": "north|south"
+        "down": "none|disconnected"
       },
       "apply": {
-        "model": "chemcraft:block/pipe"
-      }
-    },
-    {
-      "when": {
-        "north": "none|disconnected",
-        "east": "none|disconnected",
-        "south": "none|disconnected",
-        "west": "none|disconnected",
-        "up": "none|disconnected",
-        "down": "none|disconnected",
-        "facing": "east|west"
-      },
-      "apply": {
-        "model": "chemcraft:block/pipe",
-        "y": 90
+        "model": "chemcraft:block/pipe_disconnected"
       }
     }
   ]

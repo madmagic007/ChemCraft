@@ -5,11 +5,13 @@ import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.CustomBlocks;
 import me.madmagic.chemcraft.instances.CustomItems;
 import me.madmagic.chemcraft.instances.CustomMenus;
+import me.madmagic.chemcraft.instances.commands.BaseCommand;
 import me.madmagic.chemcraft.util.reloaders.ChemicalReactionRegisterer;
 import me.madmagic.chemcraft.util.reloaders.FluidRegisterer;
 import me.madmagic.chemcraft.util.networking.NetworkSender;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -63,6 +65,11 @@ public class ChemCraft {
         public static void addReloadListener(AddReloadListenerEvent event) {
             event.addListener(new FluidRegisterer());
             event.addListener(new ChemicalReactionRegisterer());
+        }
+
+        @SubscribeEvent
+        public static void onClientSetup(RegisterCommandsEvent event) {
+            BaseCommand.register(event.getDispatcher());
         }
     }
 

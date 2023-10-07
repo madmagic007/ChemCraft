@@ -58,7 +58,7 @@ public class WaterExtractorBlockEntity extends BaseBlockEntity implements IFluid
 
 
     @Override
-    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount) {}
+    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids) {}
 
     @Override
     public double extract(BlockPos pipePos, Direction pipeDir, double amount, LinkedList<Fluid> extractTo) {

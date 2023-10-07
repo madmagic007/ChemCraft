@@ -77,9 +77,7 @@ public class CentrifugalPumpBlockEntity extends BaseBlockEntity implements INetw
         if (!hasMotor()) return false;
 
         MotorBlockEntity motorEnt = getMotorEnt();
-        return (motorEnt.hasEnoughEnergy(100) &&
-                !motorEnt.isPowered(motorEnt.getBlockState())
-        );
+        return (motorEnt.hasEnoughEnergy(100));
     }
 
     private void performPump(PipeLine origin, PipeLine destination) {

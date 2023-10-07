@@ -107,7 +107,7 @@ public class ValveBlockEntity extends BaseBlockEntity implements IFluidContainer
     private final MultiFluidStorage storage = new MultiFluidStorage(1);
 
     @Override
-    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount) {
+    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids) {
         storage.add(fluids);
         toFeedToDir = pipeDir.getOpposite();
     }

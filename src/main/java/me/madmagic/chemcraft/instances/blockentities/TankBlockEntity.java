@@ -34,8 +34,8 @@ public class TankBlockEntity extends BaseBlockEntity implements IFluidContainer 
     public final MultiFluidStorage fluidStorage = new MultiFluidStorage(capacityPerTank) {};
 
     @Override
-    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount) {
-        fluidStorage.add(fluids, amount);
+    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids) {
+        fluidStorage.add(fluids);
     }
 
     @Override

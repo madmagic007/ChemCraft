@@ -1,6 +1,5 @@
 package me.madmagic.chemcraft.instances.menus;
 
-import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.CustomMenus;
 import me.madmagic.chemcraft.instances.blockentities.FurnaceHeaterBlockEntity;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenu;
@@ -39,8 +38,6 @@ public class FurnaceHeaterMenu extends BaseMenu<FurnaceHeaterBlockEntity> {
 
             if (menu.isCrafting()) {
                 int progress = menu.getScaledProgress(14);
-                if (progress == 0)
-                    ChemCraft.info(progress);
                 pGuiGraphics.blit(texture, leftPos + 80, topPos + 21 + progress, 176, progress, 14, 14);
             }
         }

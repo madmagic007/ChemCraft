@@ -40,8 +40,8 @@ public class PipeConnectionSet implements IFluidContainer {
     }
 
     @Override
-    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount) {
-        container.receive(pipePos, pipeDir, fluids, amount);
+    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids) {
+        container.receive(pipePos, pipeDir, fluids);
     }
 
     @Override

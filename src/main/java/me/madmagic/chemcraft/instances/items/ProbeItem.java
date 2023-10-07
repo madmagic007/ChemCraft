@@ -1,6 +1,5 @@
 package me.madmagic.chemcraft.instances.items;
 
-import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.items.base.BaseItem;
 import me.madmagic.chemcraft.util.GeneralUtil;
 import me.madmagic.chemcraft.util.fluids.IFluidContainer;
@@ -19,7 +18,6 @@ public class ProbeItem extends BaseItem {
     @Override
     public InteractionResult useOn(UseOnContext pContext) {
         BlockEntity entity = pContext.getLevel().getBlockEntity(pContext.getClickedPos());
-        ChemCraft.info(pContext.getClickedPos());
         if (entity == null) return InteractionResult.FAIL;
         if (pContext.getLevel().isClientSide) return InteractionResult.SUCCESS;
         MutableComponent msg = Component.empty()

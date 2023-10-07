@@ -14,12 +14,12 @@ public class FluidHandler {
     }
 
     public static double calculateTemperature(double amtA, double tempA, double amtB, double tempB) {
-        if (amtA == 0 || Double.isNaN(tempA)) return tempB;
-        return Fluid.roundNumber(amtA * tempA + amtB * tempB) / (amtA + amtB);
+        double temp = Fluid.roundNumber(amtA * tempA + amtB * tempB) / (amtA + amtB);
+        return !Double.isNaN(temp) ? temp : 25;
     }
 
     public static double getTemperature(LinkedList<Fluid> fluids) {
-        if (fluids.isEmpty()) return Double.NaN;
+        if (fluids.isEmpty()) return 25;
 
         Fluid a = fluids.get(0);
         double temp = a.temperature;

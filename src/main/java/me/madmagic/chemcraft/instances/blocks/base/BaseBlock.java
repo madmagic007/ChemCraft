@@ -77,7 +77,7 @@ public class BaseBlock extends Block {
 
     @Override
     public List<ItemStack> getDrops(BlockState pState, LootParams.Builder pParams) {
-        try { //first forced upon, useless try catch I wrote, achievement unlocked
+        try {
             BlockEntity ent = pParams.getParameter(LootContextParams.BLOCK_ENTITY);
             if (!(ent instanceof BaseBlockEntity blockEnt)) return super.getDrops(pState, pParams);
 
@@ -126,6 +126,10 @@ public class BaseBlock extends Block {
 
         ifRotateAble(r ->
                 state.set(state.get().setValue(IRotateAble.facing, pContext.getHorizontalDirection()))
+        );
+
+        ifRedstonePowerAble(r ->
+            state.set(r.setPowered(state.get(), pContext.getLevel().hasNeighborSignal(pContext.getClickedPos())))
         );
 
         return state.get();

@@ -1,9 +1,11 @@
 package me.madmagic.chemcraft.instances.blockentities.base;
 
 import me.madmagic.chemcraft.util.energy.CustomEnergyStorage;
+import me.madmagic.chemcraft.util.ChemCraftSaveData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -24,12 +26,7 @@ public abstract class BaseEnergyStorageBlockEntity extends BaseBlockEntity {
     public BaseEnergyStorageBlockEntity(BlockEntityType<?> pType, BlockPos pos, BlockState state, int energyCapacity, int energyTransferRate) {
         super(pType, pos, state);
 
-        energyStorage = new CustomEnergyStorage(energyCapacity, energyTransferRate) {
-            @Override
-            public void energyChanged(int energy) {
-                BaseEnergyStorageBlockEntity.this.energyChanged(energy);
-            }
-        };
+        energyStorage = new CustomEnergyStorage(energyCapacity, energyTransferRate);
     }
 
     @Override
@@ -71,14 +68,13 @@ public abstract class BaseEnergyStorageBlockEntity extends BaseBlockEntity {
     }
 
     public boolean hasEnoughEnergy(int wanted) {
-        return energyStorage.getEnergyStored() > wanted;
+        return energyStorage.hasEnoughEnergy(wanted, level);
     }
 
     public boolean useEnergy(int wanted) {
+        if (level instanceof ServerLevel sLevel && ChemCraftSaveData.getOrCreate(sLevel).isPowerUsageDisabled) return true;
         return energyStorage.extractEnergy(wanted, false) == wanted;
     }
-
-    protected void energyChanged(int energy) {}
 
     public CustomEnergyStorage getEnergyStorage() {
         return energyStorage;

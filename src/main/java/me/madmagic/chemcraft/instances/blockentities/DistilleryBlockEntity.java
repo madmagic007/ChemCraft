@@ -1,6 +1,5 @@
 package me.madmagic.chemcraft.instances.blockentities;
 
-import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.blockentities.base.BaseBlockEntity;
 import me.madmagic.chemcraft.util.fluids.*;
@@ -18,8 +17,9 @@ import java.util.TreeMap;
 
 public class DistilleryBlockEntity extends BaseBlockEntity implements IFluidContainer {
 
-    private double bottomTemp = 200;
-    private double topTemp = 160;
+    private MultiFluidStorage reBoiler;
+    private MultiFluidStorage topCondenser;
+    private int reBoilerY, topCondenserY;
     public final TreeMap<Integer, MultiFluidStorage> fluidStorages = new TreeMap<>();
 
     private static final double evaporateFactor = 0.04;
@@ -31,24 +31,44 @@ public class DistilleryBlockEntity extends BaseBlockEntity implements IFluidCont
 
     public void createFluidStorages(int bottomY, int height, int size) {
         int capacity = size * 1000;
-        int topY = bottomY + height - 1;
+        reBoilerY = bottomY;
+        topCondenserY = bottomY + height - 1;
 
-        for (int i = bottomY + 1; i < topY; i++) {
+        for (int i = bottomY + 1; i < topCondenserY; i++) {
             fluidStorages.put(i, new MultiFluidStorage(capacity));
         }
 
-        ChemCraft.info();
+        reBoiler = new MultiFluidStorage(capacity);
+        topCondenser = new MultiFluidStorage(capacity);
     }
 
     @Override
-    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount) {
-        if (pipePos.getY() - 1 == fluidStorages.lastKey()) pipePos = pipePos.relative(Direction.DOWN);
-        insert(pipePos.getY(), fluids);
+    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids) {
+        int y = pipePos.getY();
+        if (fluidStorages.containsKey(y)) insert(y, fluids);
+        else {
+            MultiFluidStorage heatStorage;
+            if (y == topCondenserY) heatStorage = topCondenser;
+            else if (y == reBoilerY) heatStorage = reBoiler;
+            else return;
+
+            MultiFluidStorage productStorage = fluidStorages.getOrDefault(y - 1, fluidStorages.getOrDefault(y + 1, null));
+            if (productStorage == null) return; //shouldn't happen, but just in case
+
+            heatStorage.add(fluids);
+
+            double newTemp = FluidHandler.calculateTemperature(
+                    heatStorage.getStored(), heatStorage.temperature,
+                    productStorage.getStored(), productStorage.temperature
+                    );
+
+            heatStorage.setTemperature(newTemp);
+            productStorage.setTemperature(newTemp);
+        }
     }
 
     @Override
     public double extract(BlockPos pipePos, Direction pipeDir, double amount, LinkedList<Fluid> extractTo) {
-        if (pipePos.getY() + 1 == fluidStorages.firstKey()) pipePos = pipePos.relative(Direction.UP);
         return getFluidStorage(pipePos, pipeDir).extract(amount, extractTo);
     }
 
@@ -61,20 +81,25 @@ public class DistilleryBlockEntity extends BaseBlockEntity implements IFluidCont
 
     @Override
     public MultiFluidStorage getFluidStorage(BlockPos pipePos, Direction pipeDir) {
-        return fluidStorages.getOrDefault(pipePos.getY(), new MultiFluidStorage(0));
+        int y = pipePos.getY();
+
+        if (y == topCondenserY) return topCondenser;
+        else if (y == reBoilerY) return reBoiler;
+        else return fluidStorages.getOrDefault(pipePos.getY(), new MultiFluidStorage(0));
     }
 
     @Override
     public List<MultiFluidStorage> getFluidStorages() {
-        return new ArrayList<>(fluidStorages.values());
+        List<MultiFluidStorage> storages = new ArrayList<>(fluidStorages.values());
+
+        storages.add(0, reBoiler);
+        storages.add(topCondenser);
+
+        return storages;
     }
 
     @Override
     public void tick() {
-        MultiFluidStorage bottomStorage = fluidStorages.firstEntry().getValue();
-        double bottomStored = bottomStorage.getStored();
-        if (bottomStored != 0) bottomStorage.setTemperature(bottomTemp);
-
         fluidStorages.forEach((atY, storage) -> {
             double fluidAmount = storage.getStored();
             if (fluidAmount <= 0) return;
@@ -95,10 +120,6 @@ public class DistilleryBlockEntity extends BaseBlockEntity implements IFluidCont
             LinkedList<Fluid> downStream = vh.getDownFall(downFallAmount);
             if (!downStream.isEmpty()) insert(atY - 1, downStream);
         });
-
-        MultiFluidStorage topStorage = fluidStorages.lastEntry().getValue();
-        double topStored = topStorage.getStored();
-        if (topStored != 0) topStorage.setTemperature(topTemp);
     }
 
     @Override

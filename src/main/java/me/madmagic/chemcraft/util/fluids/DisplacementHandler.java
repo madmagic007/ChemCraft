@@ -61,7 +61,11 @@ public class DisplacementHandler {
 
         for (PipeConnectionSet set : pipeLine.sets) {
             double avg = totalFluid / remainingDestinatingSets;
-            set.receive(set.pipePos, set.pipeToBlock.getOpposite(), fluids, avg);
+
+            LinkedList<Fluid> newList = new LinkedList<>();
+            FluidHandler.transferTo(fluids, newList, avg);
+
+            set.receive(set.pipePos, set.pipeToBlock.getOpposite(), newList);
 
             totalFluid -= avg;
             remainingDestinatingSets --;

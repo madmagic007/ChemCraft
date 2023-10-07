@@ -6,12 +6,14 @@ import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IActivateAble;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import me.madmagic.chemcraft.instances.menus.FurnaceHeaterMenu;
 import me.madmagic.chemcraft.instances.menus.base.CustomItemSlotTemplate;
+import me.madmagic.chemcraft.util.ChemCraftSaveData;
 import me.madmagic.chemcraft.util.fluids.*;
 import me.madmagic.chemcraft.util.reactions.ChemicalReactionHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -52,40 +54,50 @@ public class FurnaceHeaterBlockEntity extends BaseItemStorageBlockEntity impleme
 
     @Override
     public void tick() {
-        if (burnTimeForItem > 0) {
-            if (currentTick <= burnTimeForItem) currentTick++;
-            else {
-                burnTimeForItem = 0;
-                currentTick = 0;
+        boolean fuelUsageDisabled = ChemCraftSaveData.getOrCreate((ServerLevel) level).isFuelUsageDisabled;
 
-                level.setBlockAndUpdate(worldPosition, setActive(getBlockState(), false));
-            }
-            setChanged();
-        } else {
-            ItemStack stack = itemHandler.getStackInSlot(0);
-            if (stack.isEmpty()) return;
-
-            int burnTime = getBurnTime(stack);
-            if (burnTime < 0) return;
-
-            burnTimeForItem = burnTime;
-            itemHandler.extractItem(0, 1, false);
-
-
+        if (fuelUsageDisabled && !isActive(getBlockState())) {
             level.setBlockAndUpdate(worldPosition, setActive(getBlockState(), true));
-            setChanged();
         }
 
-        if (burnTimeForItem > 0 && fluidStorage.temperature < 500)
+        if (!fuelUsageDisabled) {
+            if (burnTimeForItem > 0) {
+                if (currentTick <= burnTimeForItem) currentTick++;
+                else {
+                    burnTimeForItem = 0;
+                    currentTick = 0;
+
+                    level.setBlockAndUpdate(worldPosition, setActive(getBlockState(), false));
+                }
+                setChanged();
+            } else {
+                ItemStack stack = itemHandler.getStackInSlot(0);
+                if (stack.isEmpty()) return;
+
+                int burnTime = getBurnTime(stack);
+                if (burnTime < 0) return;
+
+                burnTimeForItem = burnTime;
+                itemHandler.extractItem(0, 1, false);
+
+
+                level.setBlockAndUpdate(worldPosition, setActive(getBlockState(), true));
+                setChanged();
+            }
+        }
+
+        if (isActive(getBlockState()) && fluidStorage.temperature < 500)
             fluidStorage.setTemperature(fluidStorage.temperature + 0.5);
 
+        if (fluidStorage.getStored() == 0) return;
         Direction absoluteOutputDir = getAbsoluteDirFromRelative(getBlockState(), Direction.EAST);
         DisplacementHandler.tryFeed(worldPosition, absoluteOutputDir, level, fluidStorage.fluids, 0.1);
     }
 
     @Override
-    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount) {
-        if (burnTimeForItem > 0) fluids.forEach(fluid -> {
+    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids) {
+        double amount = FluidHandler.getStored(fluids);
+        if (isActive(getBlockState())) fluids.forEach(fluid -> {
             double delta = (200 - (100 * amount / 0.695));
             if (delta < 0) delta = 0;
             fluid.temperature += delta;

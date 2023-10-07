@@ -9,7 +9,7 @@ import java.util.List;
 public class MultiFluidStorage {
 
     public double capacity;
-    public double temperature = Double.NaN;
+    public double temperature = 25;
     public final LinkedList<Fluid> fluids = new LinkedList<>();
 
     public MultiFluidStorage(double capacity) {
@@ -17,11 +17,7 @@ public class MultiFluidStorage {
     }
 
     public double add(LinkedList<Fluid> fluids) {
-        return add(fluids, FluidHandler.getStored(fluids));
-    }
-
-    public double add(LinkedList<Fluid> fluids, double desiredAmount) {
-        double maxAmount = Math.min(getSpaceLeft(), desiredAmount);
+        double maxAmount = Math.min(getSpaceLeft(), FluidHandler.getStored(fluids));
         double transferred = FluidHandler.transferTo(fluids, this.fluids, maxAmount);
         ChemicalReactionHandler.tryReactFluids(this.fluids);
 

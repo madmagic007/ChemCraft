@@ -91,12 +91,13 @@ public class ElectricHeaterBlockEntity extends BaseEnergyStorageBlockEntity impl
 
         if (actualHeating > 0 && fluidStorage.temperature < 500) fluidStorage.setTemperature(Math.max(actualHeating, fluidStorage.temperature + actualHeating / 20));
 
+        if (fluidStorage.getStored() == 0) return;
         Direction outputRelative = getAbsoluteDirFromRelative(getBlockState(), Direction.EAST);
         DisplacementHandler.tryFeed(worldPosition, outputRelative, level, fluidStorage.fluids, 0.1);
     }
 
     @Override
-    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids, double amount) {
+    public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids) {
         if (actualHeating != 0) fluids.forEach(fluid -> {
             fluid.temperature += actualHeating;
         });
