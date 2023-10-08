@@ -28,7 +28,7 @@ public class PipeShapes {
             Stream<VoxelShape> shapeStream = list.stream()
                     .map(directionalShapes::get);
 
-            put(getIdForDirections(list), shapeStream.reduce(ShapeUtil::orUnoptimized).get().optimize());
+            put(getIdForDirections(list), shapeStream.reduce(ShapeUtil::orUnoptimized).orElseGet(() -> directionalShapes.get(list.get(0))).optimize());
         });
     }};
 
