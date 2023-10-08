@@ -1,5 +1,3 @@
-import me.madmagic.chemcraft.util.pipes.PipeShapes;
-
 public class Test {
 
    /* public static void main(String[] args) {
@@ -17,6 +15,5 @@ public class Test {
     }*/
 
     public static void main(String[] args) {
-        System.out.println(PipeShapes.possibleShapes());
     }
 }

@@ -54,7 +54,7 @@ public class PipeShapes {
         return shapeId;
     }
 
-    public static List<List<Direction>> possibleShapes() {
+    private static List<List<Direction>> possibleShapes() {
         List<List<Direction>> result = new ArrayList<>();
         List<Direction> currentCombination = new ArrayList<>();
         possibleShapesHelper(Direction.values(), 0, currentCombination, result);
