@@ -2,32 +2,41 @@ package me.madmagic.chemcraft.util;
 
 
 import net.minecraft.core.Direction;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ShapeUtil {
 
-    public static VoxelShape rotate(VoxelShape defaultShape, Direction to) {
-        final VoxelShape[] buffer = { defaultShape, Shapes.empty() };
+    public static VoxelShape rotateUnoptimized(VoxelShape defaultShape, Direction to) {
+        if (to == Direction.NORTH) return defaultShape;
 
-        final int times = (to.get2DDataValue() - Direction.NORTH.get2DDataValue() + 4) % 4;
-        for (int i = 0; i < times; i++) {
-            buffer[0].forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) ->
-                    buffer[1] = Shapes.or(buffer[1], Shapes.create(1 - maxZ, minY, minX, 1 - minZ, maxY, maxX)));
-            buffer[0] = buffer[1];
-            buffer[1] = Shapes.empty();
+        List<AABB> sourceBoxes = defaultShape.toAabbs();
+        VoxelShape rotatedShape = Shapes.empty();
+        int times = (to.get2DDataValue() - Direction.NORTH.get2DDataValue() + 4) % 4;
+        for (AABB box : sourceBoxes) {
+            for (int i = 0; i < times; i++) {
+                box = new AABB(1 - box.maxZ, box.minY, box.minX, 1 - box.minZ, box.maxY, box.maxX);
+            }
+            rotatedShape = orUnoptimized(rotatedShape, Shapes.create(box));
         }
 
-        return buffer[0];
+        return rotatedShape;
     }
 
     public static Map<Direction, VoxelShape> createRotatedShapesMap(VoxelShape defaultShape) {
         Map<Direction, VoxelShape> map = new HashMap<>();
         for (Direction direction : Direction.values())
-            map.put(direction, rotate(defaultShape, direction));
+            map.put(direction, rotateUnoptimized(defaultShape, direction).optimize());
         return map;
+    }
+
+    public static VoxelShape orUnoptimized(VoxelShape first, VoxelShape second) {
+        return Shapes.joinUnoptimized(first, second, BooleanOp.OR);
     }
 }

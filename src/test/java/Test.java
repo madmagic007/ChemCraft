@@ -1,4 +1,5 @@
-import me.madmagic.chemcraft.util.fluids.FluidHandler;
+import me.madmagic.chemcraft.util.pipes.PipeShapes;
+import net.minecraft.core.Direction;
 
 public class Test {
 
@@ -17,11 +18,6 @@ public class Test {
     }*/
 
     public static void main(String[] args) {
-       double amtA = 0;
-       double tempA = 25;
-       double amtB = 0.6;
-       double tempB = 100;
 
-        System.out.println(FluidHandler.calculateTemperature(amtA, tempA, amtB, tempB));
     }
 }
