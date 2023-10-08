@@ -24,7 +24,7 @@ public class PipeShapes {
     }};
 
     private static final Map<Integer, VoxelShape> pipeShapes = new HashMap<>() {{
-        PipeShapes.possibleShapes().forEach(list -> {
+        possibleShapes().forEach(list -> {
             Stream<VoxelShape> shapeStream = list.stream()
                     .map(directionalShapes::get);
 
