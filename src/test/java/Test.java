@@ -1,5 +1,4 @@
 import me.madmagic.chemcraft.util.pipes.PipeShapes;
-import net.minecraft.core.Direction;
 
 public class Test {
 
@@ -18,6 +17,6 @@ public class Test {
     }*/
 
     public static void main(String[] args) {
-
+        System.out.println(PipeShapes.possibleShapes());
     }
 }
