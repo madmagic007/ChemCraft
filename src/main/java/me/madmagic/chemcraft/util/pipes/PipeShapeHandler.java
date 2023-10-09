@@ -1,5 +1,8 @@
 package me.madmagic.chemcraft.util.pipes;
 
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import me.madmagic.chemcraft.util.DirectionUtil;
 import me.madmagic.chemcraft.util.ShapeUtil;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
@@ -12,15 +15,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class PipeShapes {
+public class PipeShapeHandler {
 
     private static final Map<Direction, VoxelShape> directionalShapes = new HashMap<>() {{
-        put(Direction.NORTH, Block.box(4, 4, 0, 12, 12, 9));
-        put(Direction.EAST, Block.box(7, 4, 4, 16, 12, 12));
-        put(Direction.SOUTH, Block.box(4, 4, 7, 12, 12, 16));
-        put(Direction.WEST, Block.box(0, 4, 4, 9, 12, 12));
-        put(Direction.UP, Block.box(4, 7, 4, 12, 16, 12));
-        put(Direction.DOWN, Block.box(4, 0, 4, 12, 9, 12));
+        put(Direction.NORTH, Block.box(4, 4, 0, 12, 12, 10));
+        put(Direction.EAST, Block.box(6, 4, 4, 16, 12, 12));
+        put(Direction.SOUTH, Block.box(4, 4, 6, 12, 12, 16));
+        put(Direction.WEST, Block.box(0, 4, 4, 10, 12, 12));
+        put(Direction.UP, Block.box(4, 6, 4, 12, 16, 12));
+        put(Direction.DOWN, Block.box(4, 0, 4, 12, 10, 12));
     }};
 
     private static final Map<Integer, VoxelShape> pipeShapes = new HashMap<>() {{
@@ -32,16 +35,21 @@ public class PipeShapes {
         });
     }};
 
+    private static final Object2IntMap<BlockState> stateToId = new Object2IntOpenHashMap<>();
+
     private static final VoxelShape disconnected = Block.box(6, 6, 6, 10, 10, 10);
 
     public static VoxelShape of(BlockState state) {
-        List<Direction> connectedDirections = new ArrayList<>();
+        int shapeId = stateToId.computeIfAbsent(state, s -> {
+            int id = 0;
+            for (Direction direction : DirectionUtil.directions) {
+                if (!PipeConnectionHandler.isDirConnected(state, direction)) continue;
+                id |= (1 << direction.get3DDataValue());
+            }
+            return id;
+        });
 
-        for (Direction direction : Direction.values()) {
-            if (PipeConnectionHandler.isDirConnected(state, direction)) connectedDirections.add(direction);
-        }
-
-        return pipeShapes.getOrDefault(getIdForDirections(connectedDirections), disconnected);
+        return pipeShapes.getOrDefault(shapeId, disconnected);
     }
 
     private static int getIdForDirections(List<Direction> dirs) {
@@ -57,7 +65,7 @@ public class PipeShapes {
     private static List<List<Direction>> possibleShapes() {
         List<List<Direction>> result = new ArrayList<>();
         List<Direction> currentCombination = new ArrayList<>();
-        possibleShapesHelper(Direction.values(), 0, currentCombination, result);
+        possibleShapesHelper(DirectionUtil.directions, 0, currentCombination, result);
         return result;
     }
 

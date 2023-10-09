@@ -19,7 +19,7 @@ public class ConnectionHandler {
     );
 
     public static Direction isTouching(BlockPos pos, Level level, Class<? extends Block> targetBlock) {
-        for (Direction dir : Direction.values()) {
+        for (Direction dir : DirectionUtil.directions) {
             BlockPos relativePos = pos.relative(dir);
             BlockState state = level.getBlockState(relativePos);
 
@@ -45,7 +45,7 @@ public class ConnectionHandler {
         while (!queue.isEmpty()) {
             BlockPos currentPos = queue.poll();
 
-            for (Direction direction : Direction.values()) {
+            DirectionUtil.forEach(direction -> {
                 BlockPos neighbor = currentPos.relative(direction);
                 BlockState neighborState = level.getBlockState(neighbor);
 
@@ -55,11 +55,11 @@ public class ConnectionHandler {
                     if (isStateOfType(neighborState, desiredBlock) && !foundBlocks.contains(neighbor)) isCorrect = true;
                 }
 
-                if (!isCorrect) continue;
+                if (!isCorrect) return;
 
                 queue.add(neighbor);
                 foundBlocks.add(neighbor);
-            }
+            });
         }
         return foundBlocks;
     }

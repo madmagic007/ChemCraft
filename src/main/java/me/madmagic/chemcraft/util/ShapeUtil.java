@@ -31,8 +31,9 @@ public class ShapeUtil {
 
     public static Map<Direction, VoxelShape> createRotatedShapesMap(VoxelShape defaultShape) {
         Map<Direction, VoxelShape> map = new HashMap<>();
-        for (Direction direction : Direction.values())
-            map.put(direction, rotateUnoptimized(defaultShape, direction).optimize());
+        DirectionUtil.forEach(direction ->
+            map.put(direction, rotateUnoptimized(defaultShape, direction).optimize())
+        );
         return map;
     }
 

@@ -2,28 +2,28 @@ package me.madmagic.chemcraft.util.pipes;
 
 import me.madmagic.chemcraft.instances.blocks.PipeBlock;
 import me.madmagic.chemcraft.util.ConnectionHandler;
+import me.madmagic.chemcraft.util.DirectionUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class PipeConnectionHandler {
 
-    public static final Map<Direction, EnumProperty<PipeConnection>> connectionProperties = new HashMap<>();
-    static {
-        for (Direction dir : Direction.values()) {
+    public static final Map<Direction, IntegerProperty> connectionProperties = new HashMap<>() {{
+        DirectionUtil.forEach(dir -> {
             String name = dir.getName().toLowerCase();
-            connectionProperties.put(dir, EnumProperty.create(name, PipeConnection.class));
-        }
-    }
+            put(dir, IntegerProperty.create(name, 0, 2));
+        });
+    }};
 
     public static BlockState updateAllConnectionStates(BlockState state, BlockPos pos, Level level) {
-        for (Direction direction : Direction.values()) {
+        for (Direction direction : DirectionUtil.directions) {
             BlockState thatState = level.getBlockState(pos.relative(direction));
             state = updateConnectionStateAtDir(state, thatState, direction);
         }
@@ -43,16 +43,22 @@ public class PipeConnectionHandler {
         return state;
     }
 
+    /*
+    0 none
+    1 connected
+    2 disconnected
+     */
+
     public static boolean isDirConnected(BlockState state, Direction direction) {
-        EnumProperty<PipeConnection> property = connectionProperties.get(direction);
+       IntegerProperty property = connectionProperties.get(direction);
         if (!state.hasProperty(property)) return false;
-        return state.getValue(property).isConnected();
+        return state.getValue(property) == 1;
     }
 
     public static boolean isDirDisconnected(BlockState state, Direction direction) {
-        EnumProperty<PipeConnection> property = connectionProperties.get(direction);
+        IntegerProperty property = connectionProperties.get(direction);
         if (!state.hasProperty(property)) return false;
-        return state.getValue(property).isDisconnected();
+        return state.getValue(property) == 2;
     }
 
     public static boolean canDirConnect(BlockState state, Direction dir) {
@@ -92,17 +98,17 @@ public class PipeConnectionHandler {
     }
 
     public static BlockState setConnected(BlockState state, Direction direction) {
-        EnumProperty<PipeConnection> property = connectionProperties.get(direction);
-        return state.setValue(property, PipeConnection.CONNECTED);
+        IntegerProperty property = connectionProperties.get(direction);
+        return state.setValue(property, 1);
     }
 
     public static BlockState setDisConnected(BlockState state, Direction direction) {
-        EnumProperty<PipeConnection> property = connectionProperties.get(direction);
-        return state.setValue(property, PipeConnection.DISCONNECTED);
+        IntegerProperty property = connectionProperties.get(direction);
+        return state.setValue(property, 2);
     }
 
     public static BlockState setNone(BlockState state, Direction direction) {
-        EnumProperty<PipeConnection> property = connectionProperties.get(direction);
-        return state.setValue(property, PipeConnection.NONE);
+        IntegerProperty property = connectionProperties.get(direction);
+        return state.setValue(property, 0);
     }
 }

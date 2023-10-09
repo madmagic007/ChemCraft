@@ -7,13 +7,12 @@ public class Fluid {
     public final String name;
     public double amount, temperature;
 
-    private static DecimalFormat decimalFormat = new DecimalFormat("#.######");
-    private static DecimalFormat decimalFormatShort = new DecimalFormat("#.##");
+    private static final DecimalFormat decimalFormatShort = new DecimalFormat("#.##");
 
     public Fluid(String name, double amount, double temperature) {
         this.name = name;
-        this.amount = roundNumber(amount);
-        this.temperature = roundNumber(temperature);
+        this.amount = amount;
+        this.temperature = temperature;
     }
 
     public Fluid split(double amount) {
@@ -43,13 +42,6 @@ public class Fluid {
         return getFluidType().boilingPoint();
     }
 
-    public static double roundNumber(double number) {
-        try {
-            return Double.parseDouble(decimalFormat.format(number));
-        } catch (Exception ignored) {
-            return number; //THIS WILL NEVER HAPPEN BUT I STILL NEED IT
-        }
-    }
 
     @Override
     public String toString() {

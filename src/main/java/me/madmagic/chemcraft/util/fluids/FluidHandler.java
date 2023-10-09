@@ -14,7 +14,7 @@ public class FluidHandler {
     }
 
     public static double calculateTemperature(double amtA, double tempA, double amtB, double tempB) {
-        double temp = Fluid.roundNumber(amtA * tempA + amtB * tempB) / (amtA + amtB);
+        double temp = (amtA * tempA + amtB * tempB) / (amtA + amtB);
         return !Double.isNaN(temp) ? temp : 25;
     }
 
@@ -28,7 +28,7 @@ public class FluidHandler {
         for (Fluid fluid : fluids) {
             temp = calculateTemperature(amount, temp, fluid.amount, fluid.temperature);
         }
-        return Fluid.roundNumber(temp);
+        return temp;
     }
 
     public static double transferTo(LinkedList<Fluid> source, LinkedList<Fluid> destination) {

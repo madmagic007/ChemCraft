@@ -1,8 +1,13 @@
 {
   "multipart": [
     {
+      "apply": {
+        "model": "chemcraft:block/pipe_disconnected"
+      }
+    },
+    {
       "when": {
-        "north": "connected"
+        "north": "1"
       },
       "apply": {
         "model": "chemcraft:block/pipe_segment"
@@ -10,7 +15,7 @@
     },
     {
       "when": {
-        "south": "connected"
+        "south": "1"
       },
       "apply": {
         "model": "chemcraft:block/pipe_segment",
@@ -19,7 +24,7 @@
     },
     {
       "when": {
-        "east": "connected"
+        "east": "1"
       },
       "apply": {
         "model": "chemcraft:block/pipe_segment",
@@ -28,7 +33,7 @@
     },
     {
       "when": {
-        "west": "connected"
+        "west": "1"
       },
       "apply": {
         "model": "chemcraft:block/pipe_segment",
@@ -37,7 +42,7 @@
     },
     {
       "when": {
-        "up": "connected"
+        "up": "1"
       },
       "apply": {
         "model": "chemcraft:block/pipe_segment",
@@ -46,24 +51,11 @@
     },
     {
       "when": {
-        "down": "connected"
+        "down": "1"
       },
       "apply": {
         "model": "chemcraft:block/pipe_segment",
         "x": 90
-      }
-    },
-    {
-      "when": {
-        "north": "none|disconnected",
-        "east": "none|disconnected",
-        "south": "none|disconnected",
-        "west": "none|disconnected",
-        "up": "none|disconnected",
-        "down": "none|disconnected"
-      },
-      "apply": {
-        "model": "chemcraft:block/pipe_disconnected"
       }
     }
   ]

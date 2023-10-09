@@ -1,5 +1,6 @@
 package me.madmagic.chemcraft.util.pipes;
 
+import me.madmagic.chemcraft.util.DirectionUtil;
 import me.madmagic.chemcraft.util.fluids.IFluidContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,20 +28,18 @@ public class PipelineHandler {
             BlockState currentState = level.getBlockState(currentPos);
 
             // Check all 6 directions around the current position
-            for (Direction direction : Direction.values()) {
-                BlockPos neighbor = currentPos.relative(direction);
-
+            DirectionUtil.forEach(direction -> { BlockPos neighbor = currentPos.relative(direction);
                 if (!PipeConnectionHandler.isDirConnected(currentState, direction) ||
                         !PipeConnectionHandler.isPipeAt(currentPos, level, direction) ||
-                        pipes.contains(neighbor)) continue;
+                        pipes.contains(neighbor)) return;
 
                 queue.add(neighbor);
                 pipes.add(neighbor);
-            }
+            });
         }
 
         for (BlockPos pos : pipes) {
-            for (Direction dir : Direction.values()) {
+            DirectionUtil.forEach(dir -> {
                 BlockPos neighborPos = pos.relative(dir);
 
                 if (isDesiredPos(pos, level, dir, connectionType)) {
@@ -50,7 +49,7 @@ public class PipelineHandler {
                         pipeline.addSet(new PipeConnectionSet(pos, neighborPos, dir, container, level));
                     }
                 }
-            }
+            });
         }
 
         return pipeline;
