@@ -116,7 +116,7 @@ public class AirCoolerBlockEntity extends BaseEnergyStorageBlockEntity implement
         if (active) fluids.forEach(fluid -> {
             fluid.temperature = Math.max(airTemp, fluid.temperature - actualCooling);
         });
-        ChemicalReactionHandler.tryReactFluids(fluids);
+        ChemicalReactionHandler.tryReact(fluids);
 
         FluidHandler.transferTo(fluidStorage.fluids, fluids);
         DisplacementHandler.tryFeed(worldPosition, pipeDir.getOpposite(), level, fluids, FluidHandler.getStored(fluids));

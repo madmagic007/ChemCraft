@@ -101,7 +101,7 @@ public class ElectricHeaterBlockEntity extends BaseEnergyStorageBlockEntity impl
         if (actualHeating != 0) fluids.forEach(fluid -> {
             fluid.temperature += actualHeating;
         });
-        ChemicalReactionHandler.tryReactFluids(fluids);
+        ChemicalReactionHandler.tryReact(fluids);
 
         FluidHandler.transferTo(fluidStorage.fluids, fluids);
         DisplacementHandler.tryFeed(worldPosition, pipeDir.getOpposite(), level, fluids, FluidHandler.getStored(fluids));

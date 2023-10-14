@@ -6,9 +6,9 @@ import me.madmagic.chemcraft.instances.CustomBlocks;
 import me.madmagic.chemcraft.instances.CustomItems;
 import me.madmagic.chemcraft.instances.CustomMenus;
 import me.madmagic.chemcraft.instances.commands.BaseCommand;
+import me.madmagic.chemcraft.util.networking.NetworkSender;
 import me.madmagic.chemcraft.util.reloaders.ChemicalReactionRegisterer;
 import me.madmagic.chemcraft.util.reloaders.FluidRegisterer;
-import me.madmagic.chemcraft.util.networking.NetworkSender;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -42,6 +42,7 @@ public class ChemCraft {
     }
 
     public ChemCraft() {
+        System.out.println("chemcraft init");
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         CustomItems.register(eventBus);

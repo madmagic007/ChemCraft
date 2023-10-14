@@ -14,13 +14,13 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReactorMultiBlock extends MultiBlockStructure {
 
-    private List<ChemicalReaction.ReactionCatalyst> foundCatalysts = new ArrayList<>();
+    private HashSet<ChemicalReaction.ReactionCatalyst> foundCatalysts = new HashSet<>();
 
     public ReactorMultiBlock(BlockPos masterPos, Level level) {
         super(masterPos, level);
@@ -33,7 +33,7 @@ public class ReactorMultiBlock extends MultiBlockStructure {
 
         BlockEntity entity = level.getBlockEntity(masterPos);
         if (!(entity instanceof ReactorBlockEntity reactorBlockEntity)) return;
-        reactorBlockEntity.multiBlockCreated(allBlocks.size(), new ArrayList<>()); //TODO don't forget to populate the list
+        reactorBlockEntity.multiBlockCreated(allBlocks.size(), new HashSet<>()); //TODO don't forget to populate the list
     }
 
     @Override
@@ -65,7 +65,7 @@ public class ReactorMultiBlock extends MultiBlockStructure {
                                 state.getBlock().equals(catalystBlock)
                             ).count()
                     );
-                }).collect(Collectors.toList());
+                }).collect(Collectors.toCollection(HashSet::new));
 
         return isSquare(combined, false) && isFilled(combined, ReactorBlock.class, InsulatedBlock.class, CatalystBlock.class);
     }

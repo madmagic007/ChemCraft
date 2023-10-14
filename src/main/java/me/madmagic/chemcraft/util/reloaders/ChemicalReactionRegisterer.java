@@ -22,15 +22,15 @@ public class ChemicalReactionRegisterer extends BasePreparableReloadListener<Che
 
     @Override
     protected void removeAllElements() {
-        ChemicalReactionHandler.reactorReaction.clear();
-        ChemicalReactionHandler.anyReaction.clear();
+        ChemicalReactionHandler.reactorReactions.clear();
+        ChemicalReactionHandler.anyReactions.clear();
     }
 
     @Override
     protected void registerElement(ChemicalReaction element) {
         if (element.type().equals(ChemicalReaction.ReactionType.ANY))
-            ChemicalReactionHandler.anyReaction.add(element);
+            ChemicalReactionHandler.anyReactions.add(element);
         else
-            ChemicalReactionHandler.reactorReaction.add(element);
+            ChemicalReactionHandler.reactorReactions.add(element);
     }
 }

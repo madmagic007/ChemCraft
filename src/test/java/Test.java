@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Test {
 
    /* public static void main(String[] args) {
@@ -15,5 +17,9 @@ public class Test {
     }*/
 
     public static void main(String[] args) {
+        List<String> a = List.of();
+        List<String> b = List.of();
+
+        System.out.println(b.containsAll(a));
     }
 }

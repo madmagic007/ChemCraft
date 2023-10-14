@@ -12,8 +12,9 @@ public class FluidRegisterer extends BasePreparableReloadListener<Map<String, Fl
 
     private static final StringRepresentable.EnumCodec<FluidType.SolubilityType> solventTypeCodec = StringRepresentable.fromEnum(FluidType.SolubilityType::values);
     private static final Codec<FluidType> fluidTypeCodec = RecordCodecBuilder.create(instance -> instance.group(
-        Codec.INT.optionalFieldOf("boilingPoint", Integer.MAX_VALUE).forGetter(FluidType::boilingPoint),
-        solventTypeCodec.optionalFieldOf("solubilityType", FluidType.SolubilityType.WATER).forGetter(FluidType::solubilityType)
+            Codec.STRING.fieldOf("name").forGetter(FluidType::name),
+            Codec.INT.optionalFieldOf("boilingPoint", Integer.MAX_VALUE).forGetter(FluidType::boilingPoint),
+            solventTypeCodec.optionalFieldOf("solubilityType", FluidType.SolubilityType.WATER).forGetter(FluidType::solubilityType)
     ).apply(instance, FluidType::new));
 
     private static final Codec<Map<String, FluidType>> codec = Codec.unboundedMap(Codec.STRING, fluidTypeCodec);
@@ -29,6 +30,7 @@ public class FluidRegisterer extends BasePreparableReloadListener<Map<String, Fl
 
     @Override
     protected void registerElement(Map<String, FluidType> element) {
+        System.out.println("registering fluid type");
         FluidHandler.fluidTypes.putAll(element);
     }
 }

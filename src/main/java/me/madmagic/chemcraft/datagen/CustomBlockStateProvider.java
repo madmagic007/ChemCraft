@@ -32,6 +32,7 @@ public class CustomBlockStateProvider extends BlockStateProvider {
         rotatableRegs.add(blockReg);
     }
     private final ExistingFileHelper exFileHelper;
+
     public CustomBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, ChemCraft.modId, exFileHelper);
         this.exFileHelper = exFileHelper;

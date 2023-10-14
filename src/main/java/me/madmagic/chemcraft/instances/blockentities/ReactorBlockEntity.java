@@ -8,24 +8,26 @@ import me.madmagic.chemcraft.util.fluids.MultiFluidStorage;
 import me.madmagic.chemcraft.util.multiblock.MultiBlockHandler;
 import me.madmagic.chemcraft.util.multiblock.instances.ReactorMultiBlock;
 import me.madmagic.chemcraft.util.reactions.ChemicalReaction;
+import me.madmagic.chemcraft.util.reactions.ChemicalReactionHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ReactorBlockEntity extends BaseBlockEntity implements IFluidContainer {
 
     private final MultiFluidStorage storage = new MultiFluidStorage(0);
-    private List<ChemicalReaction.ReactionCatalyst> catalysts;
+    private HashSet<ChemicalReaction.ReactionCatalyst> catalysts;
 
     public ReactorBlockEntity(BlockPos pos, BlockState state) {
         super(CustomBlockEntities.reactor.get(), pos, state);
     }
 
-    public void multiBlockCreated(int size, List<ChemicalReaction.ReactionCatalyst> catalysts) {
+    public void multiBlockCreated(int size, HashSet<ChemicalReaction.ReactionCatalyst> catalysts) {
         storage.capacity = size * 1000;
         this.catalysts = catalysts;
     }
@@ -33,6 +35,7 @@ public class ReactorBlockEntity extends BaseBlockEntity implements IFluidContain
     @Override
     public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids) {
         storage.add(fluids);
+        ChemicalReactionHandler.tryReact(fluids, catalysts);
     }
 
     @Override

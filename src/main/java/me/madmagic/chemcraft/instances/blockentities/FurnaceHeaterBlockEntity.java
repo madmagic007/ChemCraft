@@ -102,7 +102,7 @@ public class FurnaceHeaterBlockEntity extends BaseItemStorageBlockEntity impleme
             if (delta < 0) delta = 0;
             fluid.temperature += delta;
         });
-        ChemicalReactionHandler.tryReactFluids(fluids);
+        ChemicalReactionHandler.tryReact(fluids);
 
         FluidHandler.transferTo(fluidStorage.fluids, fluids);
         DisplacementHandler.tryFeed(worldPosition, pipeDir.getOpposite(), level, fluids, FluidHandler.getStored(fluids));

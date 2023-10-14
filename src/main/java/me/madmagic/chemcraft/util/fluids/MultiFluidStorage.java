@@ -19,7 +19,7 @@ public class MultiFluidStorage {
     public double add(LinkedList<Fluid> fluids) {
         double maxAmount = Math.min(getSpaceLeft(), FluidHandler.getStored(fluids));
         double transferred = FluidHandler.transferTo(fluids, this.fluids, maxAmount);
-        ChemicalReactionHandler.tryReactFluids(this.fluids);
+        ChemicalReactionHandler.tryReact(this.fluids);
 
         temperature = FluidHandler.getTemperature(this.fluids);
         return transferred;
@@ -49,7 +49,7 @@ public class MultiFluidStorage {
     public void setTemperature(double temperature) {
         this.temperature = temperature;
         fluids.forEach(fluid -> fluid.temperature = temperature);
-        ChemicalReactionHandler.tryReactFluids(fluids);
+        ChemicalReactionHandler.tryReact(fluids);
     }
 
     public void saveToNBT(CompoundTag nbt) {

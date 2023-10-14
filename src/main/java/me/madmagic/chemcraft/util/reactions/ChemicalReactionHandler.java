@@ -8,12 +8,19 @@ import java.util.LinkedList;
 
 public class ChemicalReactionHandler {
 
-    public static final HashSet<ChemicalReaction> anyReaction = new HashSet<>();
-    public static final HashSet<ChemicalReaction> reactorReaction = new HashSet<>();
+    public static final HashSet<ChemicalReaction> anyReactions = new HashSet<>();
+    public static final HashSet<ChemicalReaction> reactorReactions = new HashSet<>();
 
-    public static void tryReactFluids(LinkedList<Fluid> fluids) {
-        anyReaction.forEach(reaction -> {
+    public static void tryReact(LinkedList<Fluid> fluids) {
+        anyReactions.forEach(reaction -> {
             LinkedList<Fluid> output = reaction.tryReact(fluids);
+            FluidHandler.transferTo(output, fluids);
+        });
+    }
+
+    public static void tryReact(LinkedList<Fluid> fluids, HashSet<ChemicalReaction.ReactionCatalyst> catalyst) {
+        reactorReactions.forEach(reaction -> {
+            LinkedList<Fluid> output = reaction.tryReact(fluids, catalyst);
             FluidHandler.transferTo(output, fluids);
         });
     }

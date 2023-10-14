@@ -7,11 +7,10 @@ import me.madmagic.chemcraft.util.fluids.Fluid;
 import me.madmagic.chemcraft.util.fluids.FluidHandler;
 import net.minecraft.util.StringRepresentable;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 
-public record ChemicalReaction(ReactionType type, int minTemp, int maxTemp, List<ReactionCatalyst> catalysts, List<ReactionProduct> inputs, List<ReactionProduct> outputs) {
+public record ChemicalReaction(ReactionType type, int minTemp, int maxTemp, HashSet<ReactionCatalyst> catalysts, HashSet<ReactionProduct> inputs, HashSet<ReactionProduct> outputs) {
 
     private boolean isTemperatureInRange(double temp) {
         return temp >= minTemp && temp <= maxTemp;
@@ -55,12 +54,17 @@ public record ChemicalReaction(ReactionType type, int minTemp, int maxTemp, List
         return output;
     }
 
+    public LinkedList<Fluid> tryReact(LinkedList<Fluid> fluids, HashSet<ChemicalReaction.ReactionCatalyst> catalysts) {
+        if (!this.catalysts.containsAll(catalysts)) new LinkedList<>();
+        return tryReact(fluids);
+    }
+
     public record ReactionProduct(String name, double amount) {
 
-        public static final Codec<List<ReactionProduct>> codec = Codec.unboundedMap(Codec.STRING, Codec.INT).flatComapMap(map -> {
-            List<ReactionProduct> list = new LinkedList<>();
-            map.forEach((name, amt) -> list.add(new ReactionProduct(name, amt)));
-            return list;
+        public static final Codec<HashSet<ReactionProduct>> codec = Codec.unboundedMap(Codec.STRING, Codec.INT).flatComapMap(map -> {
+            HashSet<ReactionProduct> set = new HashSet<>();
+            map.forEach((name, amt) -> set.add(new ReactionProduct(name, amt)));
+            return set;
         }, from -> DataResult.error(() -> ""));
 
         public Fluid toFluid(double temp, double factor) {
@@ -71,26 +75,29 @@ public record ChemicalReaction(ReactionType type, int minTemp, int maxTemp, List
     public static class ReactionCatalyst {
 
         private final String blockName;
-        private int amount;
+        private final int amount;
 
         public ReactionCatalyst(String blockName, int amount) {
             this.blockName = blockName;
             this.amount = amount;
         }
 
-        public void increment() {
-            amount++;
-        }
-
         public boolean equals(String name) {
             return this.blockName.equals(name);
         }
 
-        public static final RecordCodecBuilder<ChemicalReaction, List<ReactionCatalyst>> codec = Codec.unboundedMap(Codec.STRING, Codec.INT).flatComapMap(map -> {
-            List<ReactionCatalyst> list = new LinkedList<>();
-            map.forEach((name, amt) -> list.add(new ReactionCatalyst(name, amt)));
-            return list;
-        }, from -> DataResult.error(() -> "")).optionalFieldOf("catalyst", Collections.emptyList()).forGetter(ChemicalReaction::catalysts);
+        @Override
+        public int hashCode() {
+            int result = blockName != null ? blockName.hashCode() : 0;
+            result = 31 * result + amount;
+            return result;
+        }
+
+        public static final RecordCodecBuilder<ChemicalReaction, HashSet<ReactionCatalyst>> codec = Codec.unboundedMap(Codec.STRING, Codec.INT).flatComapMap(map -> {
+            HashSet<ReactionCatalyst> set = new HashSet<>();
+            map.forEach((name, amt) -> set.add(new ReactionCatalyst(name, amt)));
+            return set;
+        }, from -> DataResult.error(() -> "")).optionalFieldOf("catalyst", new HashSet<>()).forGetter(ChemicalReaction::catalysts);
     }
 
     public enum ReactionType implements StringRepresentable {
