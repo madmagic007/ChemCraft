@@ -35,10 +35,7 @@ public class CentrifugalPumpBlock extends BaseBlock implements AutoEntityTickerB
 
     public CentrifugalPumpBlock() {
         super(
-                BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
-                        .noOcclusion()
-                        .forceSolidOn()
-                        .dynamicShape(),
+                BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK),
                 ShapeUtil.createRotatedShapesMap(shape)
         );
     }

@@ -26,10 +26,7 @@ public class AirCoolerBlock extends BaseBlock implements AutoEntityTickerBlock, 
 
     public AirCoolerBlock() {
         super(
-                Properties.copy(Blocks.IRON_BLOCK)
-                        .dynamicShape()
-                        .forceSolidOn()
-                        .noOcclusion(),
+                Properties.copy(Blocks.IRON_BLOCK),
                 shape
         );
     }

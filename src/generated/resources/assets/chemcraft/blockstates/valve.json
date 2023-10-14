@@ -1,17 +1,1202 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,power=0,redstone_mode=ignored": {
       "model": "chemcraft:block/valve",
       "y": 270
     },
-    "facing=north": {
+    "facing=east,power=0,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=0,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=0,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=0,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=1,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=1,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=1,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=1,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=1,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=10,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=10,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=10,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=10,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=10,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=11,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=11,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=11,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=11,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=11,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=12,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=12,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=12,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=12,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=12,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=13,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=13,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=13,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=13,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=13,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=14,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=14,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=14,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=14,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=14,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=15,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=15,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=15,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=15,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=15,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=2,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=2,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=2,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=2,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=2,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=3,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=3,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=3,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=3,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=3,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=4,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=4,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=4,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=4,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=4,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=5,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=5,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=5,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=5,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=5,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=6,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=6,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=6,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=6,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=6,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=7,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=7,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=7,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=7,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=7,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=8,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=8,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=8,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=8,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=8,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=9,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=9,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=9,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=9,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=east,power=9,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 270
+    },
+    "facing=north,power=0,redstone_mode=ignored": {
       "model": "chemcraft:block/valve",
       "y": 180
     },
-    "facing=south": {
+    "facing=north,power=0,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=0,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=0,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=0,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=1,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=1,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=1,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=1,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=1,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=10,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=10,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=10,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=10,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=10,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=11,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=11,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=11,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=11,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=11,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=12,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=12,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=12,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=12,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=12,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=13,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=13,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=13,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=13,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=13,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=14,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=14,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=14,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=14,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=14,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=15,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=15,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=15,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=15,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=15,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=2,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=2,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=2,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=2,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=2,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=3,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=3,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=3,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=3,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=3,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=4,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=4,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=4,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=4,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=4,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=5,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=5,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=5,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=5,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=5,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=6,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=6,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=6,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=6,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=6,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=7,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=7,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=7,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=7,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=7,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=8,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=8,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=8,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=8,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=8,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=9,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=9,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=9,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=9,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=north,power=9,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 180
+    },
+    "facing=south,power=0,redstone_mode=ignored": {
       "model": "chemcraft:block/valve"
     },
-    "facing=west": {
+    "facing=south,power=0,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=0,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=0,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=0,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=1,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=1,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=1,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=1,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=1,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=10,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=10,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=10,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=10,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=10,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=11,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=11,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=11,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=11,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=11,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=12,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=12,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=12,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=12,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=12,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=13,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=13,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=13,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=13,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=13,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=14,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=14,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=14,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=14,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=14,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=15,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=15,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=15,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=15,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=15,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=2,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=2,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=2,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=2,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=2,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=3,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=3,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=3,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=3,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=3,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=4,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=4,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=4,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=4,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=4,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=5,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=5,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=5,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=5,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=5,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=6,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=6,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=6,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=6,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=6,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=7,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=7,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=7,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=7,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=7,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=8,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=8,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=8,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=8,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=8,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=9,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=9,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=9,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=9,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=south,power=9,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve"
+    },
+    "facing=west,power=0,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=0,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=0,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=0,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=0,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=1,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=1,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=1,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=1,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=1,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=10,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=10,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=10,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=10,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=10,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=11,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=11,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=11,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=11,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=11,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=12,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=12,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=12,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=12,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=12,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=13,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=13,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=13,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=13,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=13,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=14,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=14,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=14,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=14,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=14,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=15,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=15,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=15,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=15,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=15,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=2,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=2,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=2,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=2,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=2,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=3,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=3,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=3,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=3,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=3,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=4,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=4,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=4,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=4,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=4,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=5,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=5,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=5,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=5,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=5,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=6,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=6,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=6,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=6,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=6,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=7,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=7,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=7,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=7,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=7,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=8,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=8,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=8,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=8,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=8,redstone_mode=when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=9,redstone_mode=ignored": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=9,redstone_mode=spt_when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=9,redstone_mode=spt_when_low": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=9,redstone_mode=when_high": {
+      "model": "chemcraft:block/valve",
+      "y": 90
+    },
+    "facing=west,power=9,redstone_mode=when_low": {
       "model": "chemcraft:block/valve",
       "y": 90
     }

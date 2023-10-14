@@ -2,6 +2,8 @@ package me.madmagic.chemcraft.instances;
 
 import me.madmagic.chemcraft.ChemCraft;
 import me.madmagic.chemcraft.instances.blockentities.*;
+import me.madmagic.chemcraft.instances.blockentities.machines.CatalystRefinerBlockEntity;
+import me.madmagic.chemcraft.instances.blockentities.machines.TeflonCoaterBlockEntity;
 import me.madmagic.chemcraft.instances.blockentities.sensors.LevelSensorBlockEntity;
 import me.madmagic.chemcraft.instances.blockentities.sensors.SensorReceiverBlockEntity;
 import me.madmagic.chemcraft.instances.blockentities.sensors.TemperatureSensorBlockEntity;
@@ -28,9 +30,12 @@ public class CustomBlockEntities {
     public static final RegistryObject<BlockEntityType<BlockEntity>> sensorReceiver = register(SensorReceiverBlockEntity::new, CustomBlocks.sensorReceiver);
     public static final RegistryObject<BlockEntityType<BlockEntity>> crudeOilExtractor = register(CrudeOilExtractorBlockEntity::new, CustomBlocks.crudeOilExtractor);
     public static final RegistryObject<BlockEntityType<BlockEntity>> distillery = register(DistilleryBlockEntity::new, CustomBlocks.distillery);
+    public static final RegistryObject<BlockEntityType<BlockEntity>> reactor = register(ReactorBlockEntity::new, CustomBlocks.reactor);
     public static final RegistryObject<BlockEntityType<BlockEntity>> electricHeater = register(ElectricHeaterBlockEntity::new, CustomBlocks.electricHeater);
     public static final RegistryObject<BlockEntityType<BlockEntity>> furnaceHeater = register(FurnaceHeaterBlockEntity::new, CustomBlocks.furnaceHeater);
     public static final RegistryObject<BlockEntityType<BlockEntity>> valve = register(ValveBlockEntity::new, CustomBlocks.valve);
+    public static final RegistryObject<BlockEntityType<BlockEntity>> catalystRefiner = register(CatalystRefinerBlockEntity::new, CustomBlocks.catalystRefiner);
+    public static final RegistryObject<BlockEntityType<BlockEntity>> burnerHead = register(BurnerHeadBlockEntity::new, CustomBlocks.burnerHead);
 
     private static RegistryObject<BlockEntityType<BlockEntity>> register(BlockEntityType.BlockEntitySupplier<BlockEntity> sup, RegistryObject<Block> blockReg) {
         String name = blockReg.getId().getPath();

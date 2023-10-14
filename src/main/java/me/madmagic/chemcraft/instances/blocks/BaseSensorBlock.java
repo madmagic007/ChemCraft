@@ -40,10 +40,7 @@ public class BaseSensorBlock extends BaseBlock implements AutoEntityTickerBlock,
 
     public BaseSensorBlock(BiFunction<BlockPos, BlockState, BlockEntity> entitySupplier) {
         super(
-                BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
-                        .noOcclusion()
-                        .dynamicShape()
-                        .forceSolidOn(),
+                BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK),
                 ShapeUtil.createRotatedShapesMap(shape)
         );
         this.entitySupplier = entitySupplier;

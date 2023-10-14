@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {
+      "item": "chemcraft:sieve_plate"
+    },
+    "C": {
+      "item": "minecraft:coal_block"
+    },
+    "G": {
+      "item": "chemcraft:insulation_sheet"
+    }
+  },
+  "pattern": [
+    "GIG",
+    "ICI",
+    "GIG"
+  ],
+  "result": {
+    "item": "chemcraft:catalyst_refiner"
+  }
+}

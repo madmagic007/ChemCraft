@@ -71,12 +71,13 @@ dependencies {
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
 
+    implementation "malte0811:BlockModelSplitter:2.0.1"
+
     implementation fg.deobf("pipez:pipez:1")
     implementation fg.deobf("jei:jei:1")
     implementation fg.deobf("titanium:titanium:1")
     implementation fg.deobf("if:if:1")
     implementation fg.deobf("spark:spark:1")
-    implementation fg.deobf("cw:cw:1")
 }
 
 tasks.named('processResources', ProcessResources).configure {

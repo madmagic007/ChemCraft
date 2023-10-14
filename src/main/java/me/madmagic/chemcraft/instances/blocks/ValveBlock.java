@@ -7,7 +7,6 @@ import me.madmagic.chemcraft.instances.blocks.base.BaseBlock;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IHasRedstonePowerLevel;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRedstoneMode;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
-import me.madmagic.chemcraft.util.GeneralUtil;
 import me.madmagic.chemcraft.util.ShapeUtil;
 import me.madmagic.chemcraft.util.pipes.IPipeConnectable;
 import net.minecraft.core.BlockPos;
@@ -30,9 +29,11 @@ public class ValveBlock extends BaseBlock implements IPipeConnectable, IRotateAb
 
     @Override
     public PipeConnectionType connectionType(BlockState state, Direction direction) {
-        Direction relativeDir = getRelativeDirFromAbsolute(state, direction);
-        if (GeneralUtil.isAny(relativeDir, Direction.WEST, Direction.EAST)) return PipeConnectionType.BOTH;
-        return PipeConnectionType.NONE;
+        return switch (getRelativeDirFromAbsolute(state, direction)) {
+            case EAST -> PipeConnectionType.OUTPUT;
+            case WEST -> PipeConnectionType.INPUT;
+            default -> PipeConnectionType.NONE;
+        };
     }
 
     @Nullable

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": {
+      "item": "chemcraft:teflon_coated_iron_ingot"
+    },
+    "A": {
+      "item": "chemcraft:activated_carbon_catalyst"
+    },
+    "G": {
+      "item": "chemcraft:insulation_sheet"
+    }
+  },
+  "pattern": [
+    "GIG",
+    "IAI",
+    "GIG"
+  ],
+  "result": {
+    "item": "chemcraft:reactor"
+  }
+}

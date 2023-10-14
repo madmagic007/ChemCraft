@@ -31,10 +31,7 @@ public class WaterExtractorBlock extends BaseBlock implements AutoEntityTickerBl
 
     public WaterExtractorBlock() {
         super(
-                BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
-                        .noOcclusion()
-                        .dynamicShape()
-                        .forceSolidOn(),
+                BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK),
                 shape
         );
         registerDefaultState(defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));

@@ -12,10 +12,7 @@ public class SievePlateBlock extends BaseBlock {
 
     public SievePlateBlock() {
         super(
-                BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
-                .noOcclusion()
-                .forceSolidOn()
-                .dynamicShape(),
+                BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK),
                 shape);
     }
 }

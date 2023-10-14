@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {
+      "item": "chemcraft:pipe"
+    },
+    "I": {
+      "item": "chemcraft:teflon_coated_iron_ingot"
+    },
+    "F": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "G": {
+      "item": "chemcraft:insulation_sheet"
+    }
+  },
+  "pattern": [
+    "I I",
+    "IFI",
+    "GPG"
+  ],
+  "result": {
+    "item": "chemcraft:burner_head"
+  }
+}

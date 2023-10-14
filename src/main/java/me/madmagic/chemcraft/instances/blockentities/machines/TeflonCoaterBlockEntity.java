@@ -1,4 +1,4 @@
-package me.madmagic.chemcraft.instances.blockentities;
+package me.madmagic.chemcraft.instances.blockentities.machines;
 
 import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.CustomItems;
@@ -57,6 +57,7 @@ public class TeflonCoaterBlockEntity extends BaseEnergyItemStorageBlockEntity im
     @Override
     protected void setDataValue(int index, int value) {
         switch (index) {
+            case 1 -> progress = value;
             case 2 -> maxProgress = value;
             case 3 -> fluoriteCount = value;
             case 4 -> coalCount = value;
@@ -105,9 +106,10 @@ public class TeflonCoaterBlockEntity extends BaseEnergyItemStorageBlockEntity im
             lastWasValid = true;
             progress ++;
             useEnergy(powerConsumptionPerTick);
-            setChanged();
 
             if (progress >= maxProgress) coat();
+
+            setChanged();
         } else if (lastWasValid) {
             lastWasValid = false;
             progress = 0;
@@ -164,7 +166,6 @@ public class TeflonCoaterBlockEntity extends BaseEnergyItemStorageBlockEntity im
         fluoriteCount -= subtractCount;
 
         progress = 0;
-        setChanged();
     }
 
     private void checkItemStorageSlots() {

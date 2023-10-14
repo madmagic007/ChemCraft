@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chemcraft:block/activated_carbon_catalyst"
+    }
+  }
+}

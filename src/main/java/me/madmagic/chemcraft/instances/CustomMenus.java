@@ -24,6 +24,7 @@ public class CustomMenus {
     public static final RegistryObject<MenuType<SensorReceiverMenu>> sensorReceiver = register("sensor_receiver", SensorReceiverMenu::new);
     public static final RegistryObject<MenuType<ElectricHeaterMenu>> electricHeater = register("electric_heater", ElectricHeaterMenu::new);
     public static final RegistryObject<MenuType<FurnaceHeaterMenu>> furnaceHeater = register("furnace_heater", FurnaceHeaterMenu::new);
+    public static final RegistryObject<MenuType<CatalystRefinerMenu>> catalystRefiner = register("catalyst_refiner", CatalystRefinerMenu::new);
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> register(String name, IContainerFactory<T> factory) {
         return menus.register(name + "_menu", () -> IForgeMenuType.create(factory));
@@ -42,5 +43,6 @@ public class CustomMenus {
         MenuScreens.register(sensorReceiver.get(), SensorReceiverMenu.Screen::new);
         MenuScreens.register(electricHeater.get(), ElectricHeaterMenu.Screen::new);
         MenuScreens.register(furnaceHeater.get(), FurnaceHeaterMenu.Screen::new);
+        MenuScreens.register(catalystRefiner.get(), CatalystRefinerMenu.Screen::new);
     }
 }

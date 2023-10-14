@@ -10,6 +10,7 @@
   "item.chemcraft.probe": "Probe",
 
   "block.chemcraft.pipe": "Pipe",
+  "block.chemcraft.valve": "Valve",
   "block.chemcraft.motor": "Motor",
   "block.chemcraft.centrifugal_pump": "Centrifugal Pump",
   "block.chemcraft.tank": "Liquid Storage Tank",
@@ -27,5 +28,9 @@
   "block.chemcraft.crude_oil_extractor": "Crude oil Extractor",
   "block.chemcraft.electric_heater": "Electric Heater",
   "block.chemcraft.furnace_heater": "Furnace Heater",
+  "block.chemcraft.activated_carbon_catalyst": "Activated Carbon Catalyst",
+  "block.chemcraft.iron_catalyst": "Iron Catalyst",
+  "block.chemcraft.catalyst_refiner": "Catalyst Refiner",
+  "block.chemcraft.burner_head": "Burner Head",
   "block.chemcraft.fluorite_ore": "Fluorite Ore"
 }

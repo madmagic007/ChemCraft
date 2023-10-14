@@ -1,0 +1,16 @@
+{
+  "name": "Burning Fluids",
+  "icon": "chemcraft:burner_head",
+  "category": "chemcraft:fluids",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To get rid of waste gasses or fluids, the burner can be used to burn them. Connect a pipe to the connection on the bottom, feel free to build a flare tower however you like.$(br2)All fluids pumped into the burner head will be burnt or evaporated into the atmosphere unethically up to 200T/h."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "chemcraft:burner_head"
+    }
+  ]
+}

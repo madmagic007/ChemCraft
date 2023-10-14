@@ -36,10 +36,7 @@ public class MotorBlock extends BaseBlock implements AutoEntityTickerBlock, IRot
 
     public MotorBlock() {
         super(
-                BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
-                        .noOcclusion()
-                        .forceSolidOn()
-                        .dynamicShape(),
+                BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK),
                 ShapeUtil.createRotatedShapesMap(shape)
         );
     }

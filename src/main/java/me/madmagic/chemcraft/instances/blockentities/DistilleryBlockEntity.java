@@ -29,7 +29,7 @@ public class DistilleryBlockEntity extends BaseBlockEntity implements IFluidCont
         super(CustomBlockEntities.distillery.get(), pos, state);
     }
 
-    public void createFluidStorages(int bottomY, int height, int size) {
+    public void multiBlockCreated(int bottomY, int height, int size) {
         int capacity = size * 1000;
         reBoilerY = bottomY;
         topCondenserY = bottomY + height - 1;
@@ -57,13 +57,7 @@ public class DistilleryBlockEntity extends BaseBlockEntity implements IFluidCont
 
             heatStorage.add(fluids);
 
-            double newTemp = FluidHandler.calculateTemperature(
-                    heatStorage.getStored(), heatStorage.temperature,
-                    productStorage.getStored(), productStorage.temperature
-                    );
-
-            heatStorage.setTemperature(newTemp);
-            productStorage.setTemperature(newTemp);
+            handleTemps(productStorage, heatStorage);
         }
     }
 
@@ -77,6 +71,20 @@ public class DistilleryBlockEntity extends BaseBlockEntity implements IFluidCont
 
         double spaceLeft = FluidHandler.getStored(fluids);
         if (spaceLeft > 0 && atY != fluidStorages.firstKey()) insert(atY - 1, fluids);
+
+        MultiFluidStorage productStorage = fluidStorages.get(atY);
+        if (atY == fluidStorages.firstKey()) handleTemps(productStorage, reBoiler);
+        else if (atY == fluidStorages.lastKey()) handleTemps(productStorage, topCondenser);
+    }
+
+    private void handleTemps(MultiFluidStorage productStorage,  MultiFluidStorage heatStorage) {
+        double newTemp = FluidHandler.calculateTemperature(
+                heatStorage.getStored(), heatStorage.temperature,
+                productStorage.getStored(), productStorage.temperature
+        );
+
+        heatStorage.setTemperature(newTemp);
+        productStorage.setTemperature(newTemp);
     }
 
     @Override

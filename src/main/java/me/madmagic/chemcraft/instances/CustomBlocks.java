@@ -7,6 +7,9 @@ import me.madmagic.chemcraft.instances.blockentities.sensors.SensorReceiverBlock
 import me.madmagic.chemcraft.instances.blockentities.sensors.TemperatureSensorBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.*;
 import me.madmagic.chemcraft.instances.blocks.base.BaseNineCraftingBlock;
+import me.madmagic.chemcraft.instances.blocks.base.CatalystBlock;
+import me.madmagic.chemcraft.instances.blocks.machines.CatalystRefinerBlock;
+import me.madmagic.chemcraft.instances.blocks.machines.TeflonCoaterBlock;
 import me.madmagic.chemcraft.instances.blocks.ores.FluoriteOre;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -29,16 +32,19 @@ public class CustomBlocks {
 
     //process machines
     public static final RegistryObject<Block> fluoriteCoater = rotateAbleCustomModel("teflon_coater", TeflonCoaterBlock::new);
+    public static final RegistryObject<Block> catalystRefiner = rotateAbleCustomModel("catalyst_refiner", CatalystRefinerBlock::new);
 
     //fluid machines
     public static final RegistryObject<Block> centrifugalPump = rotateAbleCustomModel("centrifugal_pump", CentrifugalPumpBlock::new);
     public static final RegistryObject<Block> motor = rotateAbleCustomModel("motor", MotorBlock::new);
     public static final RegistryObject<Block> waterExtractor = customModel("water_extractor", WaterExtractorBlock::new);
     public static final RegistryObject<Block> crudeOilExtractor = customModel("crude_oil_extractor", CrudeOilExtractorBlock::new);
+    public static final RegistryObject<Block> burnerHead = customModel("burner_head", BurnerHeadBlock::new);
 
     //process apparatus
     public static final RegistryObject<Block> tank = customModel("tank", TankBlock::new);
     public static final RegistryObject<Block> distillery = customModel("distillery", DistilleryBlock::new);
+    public static final RegistryObject<Block> reactor = customModel("reactor", ReactorBlock::new);
     public static final RegistryObject<Block> sievePlate = customModel("sieve_plate", SievePlateBlock::new);
     public static final RegistryObject<Block> insulatedBlock = basicBlock("insulated_block", InsulatedBlock::new);
     public static final RegistryObject<Block> airCooler = customModelNoVariant("air_cooler", AirCoolerBlock::new);
@@ -56,6 +62,10 @@ public class CustomBlocks {
     //mainly for crafting
     public static final RegistryObject<Block> insulationBlock = basicBlock("block_of_insulation", () -> new BaseNineCraftingBlock(BlockBehaviour.Properties.copy(Blocks.YELLOW_WOOL), CustomItems.insulationSheet));
     public static final RegistryObject<Block> teflonCoatedIronBlock = basicBlock("teflon_coated_iron_block", () -> new BaseNineCraftingBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK), CustomItems.teflonCoatedIronIngot));
+
+    //catalysts
+    public static final RegistryObject<Block> activatedCarbon = catalyst("activated_carbon_catalyst", Blocks.COAL_BLOCK);
+    public static final RegistryObject<Block> ironCatalyst = catalyst("iron_catalyst", Blocks.IRON_BLOCK);
 
     private static RegistryObject<Block> basicBlock(String name, Supplier<Block> blockSup) {
         RegistryObject<Block> blockReg = registerBlock(name, blockSup);
@@ -93,6 +103,14 @@ public class CustomBlocks {
         CustomRecipeProvider.addSmeltingRecipe(blockReg, itemReg, name);
         CustomBlockStateProvider.addCubeAll(blockReg);
         CustomBlockTagProvider.addOre(name, blockReg);
+        return blockReg;
+    }
+
+    private static RegistryObject<Block> catalyst(String name, Block propertyCopy) {
+        RegistryObject<Block> blockReg = registerBlock(name, () ->
+                new CatalystBlock(propertyCopy));
+        CustomBlockStateProvider.addCubeAll(blockReg);
+        CustomLootTableProvider.addDropSelf(blockReg);
         return blockReg;
     }
 

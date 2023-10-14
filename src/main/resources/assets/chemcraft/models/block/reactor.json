@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "chemcraft:block/insulated_block",
+    "up": "chemcraft:block/insulated_block",
+
+    "north": "chemcraft:block/reactor",
+    "east": "chemcraft:block/reactor",
+    "south": "chemcraft:block/reactor",
+    "west": "chemcraft:block/reactor",
+
+    "particle": "chemcraft:block/insulated_block"
+  }
+}

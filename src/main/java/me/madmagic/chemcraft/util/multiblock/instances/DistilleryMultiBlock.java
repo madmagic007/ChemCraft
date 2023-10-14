@@ -25,11 +25,9 @@ public class DistilleryMultiBlock extends MultiBlockStructure {
         DistilleryBlockEntity ent = (DistilleryBlockEntity) level.getBlockEntity(masterPos);
         if (ent == null) return; //just incase...
 
-        int xSize = (int) dimAtLevel(blocks.firstKey()).deflate(1, 0, 1).getXsize() + 1;
-        ent.createFluidStorages(blocks.firstKey(), blocks.size(), (int) Math.pow(xSize, 2));
+        int xSize = (int) Math.sqrt(blocks.firstEntry().getValue().size());
+        ent.multiBlockCreated(blocks.firstKey(), blocks.size(), (int) Math.pow(xSize, 2));
         ent.setChanged();
-
-        //calling latest will cause nbt to save
     }
 
     @Override
@@ -51,8 +49,7 @@ public class DistilleryMultiBlock extends MultiBlockStructure {
 
         for (int level : blocks.keySet()) {
             AABB dim = dimAtLevel(level);
-            if (!isSquare(dim, false) ||
-                    !isSame(bottomDim, dim)) return false;
+            if (!isSame(bottomDim, dim)) return false;
 
             if (GeneralUtil.isAny(level, bottomLevel, lastToTopLevel, topLevel)) continue;
             if (!isCenterFilled(dim, SievePlateBlock.class)) return false;

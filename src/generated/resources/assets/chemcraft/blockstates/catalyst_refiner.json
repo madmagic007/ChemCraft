@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "chemcraft:block/catalyst_refiner",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "chemcraft:block/catalyst_refiner",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "chemcraft:block/catalyst_refiner"
+    },
+    "facing=west": {
+      "model": "chemcraft:block/catalyst_refiner",
+      "y": 90
+    }
+  }
+}

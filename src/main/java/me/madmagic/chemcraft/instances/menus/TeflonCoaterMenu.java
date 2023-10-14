@@ -2,7 +2,7 @@ package me.madmagic.chemcraft.instances.menus;
 
 import me.madmagic.chemcraft.instances.CustomItems;
 import me.madmagic.chemcraft.instances.CustomMenus;
-import me.madmagic.chemcraft.instances.blockentities.TeflonCoaterBlockEntity;
+import me.madmagic.chemcraft.instances.blockentities.machines.TeflonCoaterBlockEntity;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenu;
 import me.madmagic.chemcraft.instances.menus.base.BaseMenuScreen;
 import me.madmagic.chemcraft.instances.menus.widgets.ToolTippedItem;

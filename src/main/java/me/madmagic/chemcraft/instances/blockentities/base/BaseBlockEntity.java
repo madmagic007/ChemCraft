@@ -47,8 +47,13 @@ public abstract class BaseBlockEntity extends BlockEntity {
     }
 
 
-    public abstract void loadFromNBT(CompoundTag nbt);
-    public abstract void saveToNBT(CompoundTag nbt);
+    public void loadFromNBT(CompoundTag nbt) {
+
+    }
+
+    public void saveToNBT(CompoundTag nbt) {
+
+    }
 
     @Override
     public void load(CompoundTag nbt) {
@@ -75,5 +80,7 @@ public abstract class BaseBlockEntity extends BlockEntity {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
-    public abstract void tick();
+    public void tick() {
+
+    }
 }

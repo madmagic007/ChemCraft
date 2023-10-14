@@ -4,6 +4,7 @@ import me.madmagic.chemcraft.instances.CustomBlockEntities;
 import me.madmagic.chemcraft.instances.blockentities.base.BaseBlockEntity;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IHasRedstonePowerLevel;
 import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRedstoneMode;
+import me.madmagic.chemcraft.instances.blocks.base.blocktypes.IRotateAble;
 import me.madmagic.chemcraft.instances.menus.ValveMenu;
 import me.madmagic.chemcraft.util.GeneralUtil;
 import me.madmagic.chemcraft.util.fluids.DisplacementHandler;
@@ -24,7 +25,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.LinkedList;
 
-public class ValveBlockEntity extends BaseBlockEntity implements IFluidContainer, INetworkUpdateAble, MenuProvider, IRedstoneMode, IHasRedstonePowerLevel {
+public class ValveBlockEntity extends BaseBlockEntity implements IFluidContainer, INetworkUpdateAble, MenuProvider, IRedstoneMode, IHasRedstonePowerLevel, IRotateAble {
 
     public static final int maxSetting = 50000;
     public int flowSetting = maxSetting;
@@ -92,16 +93,13 @@ public class ValveBlockEntity extends BaseBlockEntity implements IFluidContainer
         return actualFlowSetting * DisplacementHandler.tickFactor;
     }
 
-    private Direction toFeedToDir;
-
     @Override
     public void tick() {
         double factor = getConvertedFactor();
         storage.capacity = factor;
 
-        if (toFeedToDir == null) return;
-        DisplacementHandler.tryFeed(worldPosition, toFeedToDir, level, storage.fluids, factor);
-        if (storage.getStored() == 0) toFeedToDir = null;
+        if (storage.getStored() == 0) return;
+        DisplacementHandler.tryFeed(worldPosition, getAbsoluteDirFromRelative(getBlockState(), Direction.EAST), level, storage.fluids, factor);
     }
 
     private final MultiFluidStorage storage = new MultiFluidStorage(1);
@@ -109,7 +107,6 @@ public class ValveBlockEntity extends BaseBlockEntity implements IFluidContainer
     @Override
     public void receive(BlockPos pipePos, Direction pipeDir, LinkedList<Fluid> fluids) {
         storage.add(fluids);
-        toFeedToDir = pipeDir.getOpposite();
     }
 
     @Override

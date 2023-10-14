@@ -49,7 +49,7 @@ public class DistilleryBlock extends BaseBlock implements IPipeConnectable, IMul
         if (pLevel.isClientSide) return InteractionResult.SUCCESS;
 
         if (!new DistilleryMultiBlock(pPos, pLevel).check(false)) {
-            Component msg = Component.literal("Invalid Crude Oil refinery structure");
+            Component msg = Component.literal("Invalid distillery structure");
             pPlayer.displayClientMessage(msg, false);
         }
 

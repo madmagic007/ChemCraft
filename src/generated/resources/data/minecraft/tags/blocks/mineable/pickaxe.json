@@ -3,12 +3,15 @@
     "chemcraft:pipe",
     "chemcraft:valve",
     "chemcraft:teflon_coater",
+    "chemcraft:catalyst_refiner",
     "chemcraft:centrifugal_pump",
     "chemcraft:motor",
     "chemcraft:water_extractor",
     "chemcraft:crude_oil_extractor",
+    "chemcraft:burner_head",
     "chemcraft:tank",
     "chemcraft:distillery",
+    "chemcraft:reactor",
     "chemcraft:sieve_plate",
     "chemcraft:insulated_block",
     "chemcraft:air_cooler",
@@ -19,6 +22,8 @@
     "chemcraft:sensor_receiver",
     "chemcraft:fluorite_ore",
     "chemcraft:block_of_insulation",
-    "chemcraft:teflon_coated_iron_block"
+    "chemcraft:teflon_coated_iron_block",
+    "chemcraft:activated_carbon_catalyst",
+    "chemcraft:iron_catalyst"
   ]
 }

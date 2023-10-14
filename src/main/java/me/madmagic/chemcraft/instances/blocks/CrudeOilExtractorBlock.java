@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 public class CrudeOilExtractorBlock extends BaseBlock implements IPipeConnectable, AutoEntityTickerBlock {
 
     public CrudeOilExtractorBlock() {
-        super(Properties.copy(CustomBlocks.waterExtractor.get()));
+        super(Properties.copy(CustomBlocks.waterExtractor.get()).noOcclusion());
     }
 
     @Override

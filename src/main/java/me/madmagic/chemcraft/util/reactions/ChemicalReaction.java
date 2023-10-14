@@ -68,7 +68,23 @@ public record ChemicalReaction(ReactionType type, int minTemp, int maxTemp, List
         }
     }
 
-    public record ReactionCatalyst(String blockName, double minAmount) {
+    public static class ReactionCatalyst {
+
+        private final String blockName;
+        private int amount;
+
+        public ReactionCatalyst(String blockName, int amount) {
+            this.blockName = blockName;
+            this.amount = amount;
+        }
+
+        public void increment() {
+            amount++;
+        }
+
+        public boolean equals(String name) {
+            return this.blockName.equals(name);
+        }
 
         public static final RecordCodecBuilder<ChemicalReaction, List<ReactionCatalyst>> codec = Codec.unboundedMap(Codec.STRING, Codec.INT).flatComapMap(map -> {
             List<ReactionCatalyst> list = new LinkedList<>();
