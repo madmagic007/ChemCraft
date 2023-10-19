@@ -44,8 +44,6 @@ public class ChemCraft {
     }
 
     public ChemCraft() {
-        DynAssetGenTest.test();
-
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         CustomItems.register(eventBus);

@@ -5,10 +5,12 @@ import com.google.gson.JsonElement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -16,6 +18,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
+import java.util.Map;
 
 public abstract class BasePreparableReloadListener<T> extends SimplePreparableReloadListener<HashSet<JsonElement>> {
 
@@ -33,7 +36,11 @@ public abstract class BasePreparableReloadListener<T> extends SimplePreparableRe
     protected HashSet<JsonElement> prepare(ResourceManager pResourceManager, ProfilerFiller pProfiler) {
         HashSet<JsonElement> set = new HashSet<>();
 
-        pResourceManager.listResources(path, this::isJson).forEach((loc, resource) -> {
+        boolean val = FMLEnvironment.dist.isClient();
+
+
+        Map<ResourceLocation, Resource> resourceLocationResourceMap = pResourceManager.listResources(path, this::isJson);
+        resourceLocationResourceMap.forEach((loc, resource) -> {
             try (InputStream inputStream = resource.open();
                 Reader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
                 JsonElement json = GsonHelper.fromJson(GSON, reader, JsonElement.class);

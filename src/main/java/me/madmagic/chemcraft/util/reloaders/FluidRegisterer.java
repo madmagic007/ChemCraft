@@ -2,7 +2,6 @@ package me.madmagic.chemcraft.util.reloaders;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import me.madmagic.chemcraft.util.patchoulibookgen.PatchouliBookGen;
 import me.madmagic.chemcraft.util.fluids.FluidHandler;
 import me.madmagic.chemcraft.util.fluids.FluidType;
 import net.minecraft.util.StringRepresentable;
@@ -31,7 +30,5 @@ public class FluidRegisterer extends BasePreparableReloadListener<Map<String, Fl
     @Override
     protected void registerElement(Map<String, FluidType> element) {
         FluidHandler.fluidTypes.putAll(element);
-
-        element.forEach(PatchouliBookGen::addFluidType);
     }
 }
