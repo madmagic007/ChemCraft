@@ -63,6 +63,7 @@ repositories {
     }
 
     maven { url 'https://maven.blamejared.com' }
+    maven { url "https://maven.lukebemish.dev/releases/" }
 }
 
 dependencies {
@@ -71,7 +72,7 @@ dependencies {
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
 
-    implementation "malte0811:BlockModelSplitter:2.0.1"
+    implementation fg.deobf('dev.lukebemish.dynamicassetgenerator:dynamicassetgenerator-forge-1.20.1:4.2.1')
 
     implementation fg.deobf("pipez:pipez:1")
     implementation fg.deobf("jei:jei:1")

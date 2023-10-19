@@ -2,7 +2,7 @@ package me.madmagic.chemcraft.util.fluids;
 
 import net.minecraft.util.StringRepresentable;
 
-public record FluidType(String name, int boilingPoint,
+public record FluidType(int boilingPoint,
                         SolubilityType solubilityType) {
 
     public enum SolubilityType implements StringRepresentable {

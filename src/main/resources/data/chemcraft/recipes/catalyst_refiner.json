@@ -2,8 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": {
-      "item": "chemcraft:sieve_plate"
+    "I": {
+      "item": "chemcraft:teflon_coated_iron_ingot"
     },
     "C": {
       "item": "minecraft:coal_block"

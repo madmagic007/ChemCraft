@@ -6,6 +6,7 @@ import me.madmagic.chemcraft.instances.CustomBlocks;
 import me.madmagic.chemcraft.instances.CustomItems;
 import me.madmagic.chemcraft.instances.CustomMenus;
 import me.madmagic.chemcraft.instances.commands.BaseCommand;
+import me.madmagic.chemcraft.util.DynAssetGenTest;
 import me.madmagic.chemcraft.util.networking.NetworkSender;
 import me.madmagic.chemcraft.util.reloaders.ChemicalReactionRegisterer;
 import me.madmagic.chemcraft.util.reloaders.FluidRegisterer;
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 
 @Mod(ChemCraft.modId)
@@ -42,7 +44,8 @@ public class ChemCraft {
     }
 
     public ChemCraft() {
-        System.out.println("chemcraft init");
+        DynAssetGenTest.test();
+
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         CustomItems.register(eventBus);
@@ -53,6 +56,9 @@ public class ChemCraft {
         eventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
+
+        if (FMLEnvironment.dist.isClient())
+            DynAssetGenTest.test();
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

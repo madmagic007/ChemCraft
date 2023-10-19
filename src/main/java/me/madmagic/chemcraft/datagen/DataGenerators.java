@@ -29,6 +29,5 @@ public class DataGenerators {
         generator.addProvider(true, new CustomItemModelProvider(packOutput, existingFileHelper));
         generator.addProvider(true, customBlockTagProvider);
         generator.addProvider(true, new CustomItemTagProvider(packOutput, lookupProvider, customBlockTagProvider.contentsGetter(), existingFileHelper));
-        generator.addProvider(true, new PatchouilPageProvider(packOutput));
     }
 }

@@ -1,0 +1,6 @@
+{
+  "name": "All Fluids",
+  "description": "Listed here are all the fluids available.",
+  "icon": "chemcraft:gui/drop",
+  "sortnum": 4
+}
